@@ -1,30 +1,38 @@
-# Upgrade Guide
+# 升级导引
 
-- [Upgrading To 4.2 From 4.1](#upgrade-4.2)
-- [Upgrading To 4.1.29 From <= 4.1.x](#upgrade-4.1.29)
-- [Upgrading To 4.1.26 From <= 4.1.25](#upgrade-4.1.26)
-- [Upgrading To 4.1 From 4.0](#upgrade-4.1)
+- [从 4.2 升级到 4.3](#upgrade-4.3)
+- [从 4.1 升级到 4.2](#upgrade-4.2)
+- [从 4.1.x 升级到 4.1.29](#upgrade-4.1.29)
+- [从 4.1.25 升级到 4.1.26](#upgrade-4.1.26)
+- [从 4.0 升级至 4.1](#upgrade-4.1)
+
+<a name="upgrade-4.3"></a>
+## 从 4.2 升级到 4.3
+
+### Beanstalk Queuing
+
+Laravel 4.3 开始默认载入 `"pda/pheanstalk": "~3.0"` 取代 Laravel 4.2 `"pda/pheanstalk": "~2.1"`。
 
 <a name="upgrade-4.2"></a>
-## Upgrading To 4.2 From 4.1
+## 从 4.1 升级到 4.2
 
 ### PHP 5.4+
 
-Laravel 4.2 requires PHP 5.4.0 or greater.
+Laravel 4.2 需要 PHP 5.4.0 以上。
 
-### Encryption Defaults
+### 默认加密
 
-Add a new `cipher` option in your `app/config/app.php` configuration file. The value of this option should be `MCRYPT_RIJNDAEL_256`.
+增加一个新的 `cipher` 选项在您的 `app/config/app.php` 配置文件中。其选项值应为 `MCRYPT_RIJNDAEL_256`。
 
 	'cipher' => MCRYPT_RIJNDAEL_256
 
-This setting may be used to control the default cipher used by the Laravel encryption facilities.
+该设置可用于设定所使用的 Laravel 加密工具的默认加密方法。
 
-> **Note:** In Laravel 4.2, the default cipher is `MCRYPT_RIJNDAEL_128` (AES), which is considered to be the most secure cipher. Changing the cipher back to `MCRYPT_RIJNDAEL_256` is required to decrypt cookies/values that were encrypted in Laravel <= 4.1
+> **附注:** 在 Laravel 4.2，默认加密方法为`MCRYPT_RIJNDAEL_128` (AES), 被认为是最安全的加密. 必须将加密改回`MCRYPT_RIJNDAEL_256` 来解密在 Laravel <= 4.1 下加密的 cookies/values 
 
-### Soft Deleting Models Now Use Traits
+### 软删除模型现在改使用特性
 
-If you are using soft deleting models, the `softDeletes` property has been removed. You must now use the `SoftDeletingTrait` like so:
+如果您在模型下有使用软删除，现在 `softDeletes` 的属性已经被移除。您现在要使用 `SoftDeletingTrait` 如下：
 
 	use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
@@ -32,7 +40,7 @@ If you are using soft deleting models, the `softDeletes` property has been remov
 		use SoftDeletingTrait;
 	}
 
-You must also manually add the `deleted_at` column to your `dates` property:
+您一样必须手动增加 `deleted_at` 字段到您的 `dates` 属性中：
 
 	class User extends Eloquent {
 		use SoftDeletingTrait;
@@ -40,13 +48,13 @@ You must also manually add the `deleted_at` column to your `dates` property:
 		protected $dates = ['deleted_at'];
 	}
 
-The API for all soft delete operations remains the same.
+而所有软删除的 API 使用方式维持相同。
 
-> **Note:** The `SoftDeletingTrait` can not be applied on a base model. It must be used on an actual model class.
+> **附注:** `SoftDeletingTrait` 无法在基本模型下被使用。他只能在一个实际模型类中使用。
 
-### View / Pagination Environment Renamed
+### 视图 / 分页 / 环境 类改名
 
-If you are directly referencing the `Illuminate\View\Environment` class or `Illuminate\Pagination\Environment` class, update your code to reference `Illuminate\View\Factory` and `Illuminate\Pagination\Factory` instead. These two classes have been renamed to better reflect their function.
+如果您直接使用 `Illuminate\View\Environment` 或 `Illuminate\Pagination\Environment` 类，请更新您的代码将其改为参照 `Illuminate\View\Factory` 和 `Illuminate\Pagination\Factory`。改名后的这两个类更可以代表他们的功能。
 
 ### Additional Parameter On Pagination Presenter
 
@@ -54,31 +62,31 @@ If you are extending the `Illuminate\Pagination\Presenter` class, the abstract m
 
 	abstract public function getPageLinkWrapper($url, $page, $rel = null);
 
-### Iron.Io Queue Encryption
+### Iron.Io Queue 加密
 
-If you are using the Iron.io queue driver, you will need to add a new `encrypt` option to your queue configuration file:
+如果您使用 Iron.io queue 驱动，您将需要增加一个新的 `encrypt` 选项到您的 queue 配置文件中：
 
     'encrypt' => true
 
 <a name="upgrade-4.1.29"></a>
-## Upgrading To 4.1.29 From <= 4.1.x
+## 从 4.1.x 升级到 4.1.29
 
-Laravel 4.1.29 improves the column quoting for all database drivers. This protects your application from some mass assignment vulnerabilities when **not** using the `fillable` property on models. If you are using the `fillable` property on your models to protect against mass assignment, your application is not vulnerable. However, if you are using `guarded` and are passing a user controlled array into an "update" or "save" type function, you should upgrade to `4.1.29` immediately as your application may be at risk of mass assignment.
+Laravel 4.1.29 对于所有的数据库驱动加强了 column quoting 的部分。当您的模型中**没有**使用 `fillable` 属性，他保护您的应用程序不会受到 mass assignment 漏洞影响。如果您在模型中使用 `fillable` 属性来防范 mass assignment, 您的应用程序将不会有漏洞。如果您使用 `guarded` 且在 "更新" 或 "储存" 类型的函数中，传递了末端用户控制的数组，那您应该立即升级到 `4.1.29` 以避免 mass assignment 的风险。
 
-To upgrade to Laravel 4.1.29, simply `composer update`. No breaking changes are introduced in this release.
+升级到 Laravel 4.1.29，只要 `composer update` 即可。在这个发行版本中没有重大的更新。
 
 <a name="upgrade-4.1.26"></a>
-## Upgrading To 4.1.26 From <= 4.1.25
+## 从 4.1.25 升级到 4.1.26
 
-Laravel 4.1.26 introduces security improvements for "remember me" cookies. Before this update, if a remember cookie was hijacked by another malicious user, the cookie would remain valid for a long period of time, even after the true owner of the account reset their password, logged out, etc.
+Laravel 4.1.26 采用了争对 "记得我" cookies 的安全性更新。在此更新之前，如果一个记得我的 cookies 被恶意用户劫持，该 cookie 将还可以生存很长一段时间，即使真实用户重设密码或者登出亦同。
 
-This change requires the addition of a new `remember_token` column to your `users` (or equivalent) database table. After this change, a fresh token will be assigned to the user each time they login to your application. The token will also be refreshed when the user logs out of the application. The implications of this change are: if a "remember me" cookie is hijacked, simply logging out of the application will invalidate the cookie.
+此更动需要在您的 `users` (或者类似的) 的数据库表中增加一个额外的 `remember_token` 字段。在更新之后，当用户每次登入您的应用程序将会有一个全新的 token 将会被指派。这个 token 也会在用户登出应用程序后被更新。这个更新的影响为：如果一个"记得我"的 cookie 被劫持，只要用户登出应用程序将会废除该 cookie。
 
-### Upgrade Path
+### 升级路径
 
-First, add a new, nullable `remember_token` of VARCHAR(100), TEXT, or equivalent to your `users` table.
+首先，增加一个新的字段，可空值、属性为 VARCHAR(100)、TEXT 或同类型的字段 `remember_token` 到您的 `users` 数据库表中。
 
-Next, if you are using the Eloquent authentication driver, update your `User` class with the following three methods:
+然后，如果您使用 Eloquent 认证驱动，依照下面更新您的 `User` 类的三个方法：
 
 	public function getRememberToken()
 	{
@@ -95,11 +103,11 @@ Next, if you are using the Eloquent authentication driver, update your `User` cl
 		return 'remember_token';
 	}
 
-> **Note:** All existing "remember me" sessions will be invalidated by this change, so all users will be forced to re-authenticate with your application.
+> **附注:** 所有现存的 "记得我" sessions 在此更新后将会失效，所以应用程序的所有用户将会被迫重新登入。
 
-### Package Maintainers
+### 扩展包管理者
 
-Two new methods were added to the `Illuminate\Auth\UserProviderInterface` interface. Sample implementations may be found in the default drivers:
+两个新的方法被加入到 `Illuminate\Auth\UserProviderInterface` interface. 例子实现方式可以在默认驱动中找到:
 
 	public function retrieveByToken($identifier, $token);
 
@@ -108,65 +116,67 @@ Two new methods were added to the `Illuminate\Auth\UserProviderInterface` interf
 The `Illuminate\Auth\UserInterface` also received the three new methods described in the "Upgrade Path".
 
 <a name="upgrade-4.1"></a>
-## Upgrading To 4.1 From 4.0
+## 从 4.0 升级至 4.1
 
-### Upgrading Your Composer Dependency
+### 升级您的 Composer 相依性
 
-To upgrade your application to Laravel 4.1, change your `laravel/framework` version to `4.1.*` in your `composer.json` file.
+升级您的应用程序至 Laravel 4.1，将 `composer.json` 里的 `laravel/framework` 版本更改至 `4.1.*`。
 
-### Replacing Files
+### 文件置换
 
-Replace your `public/index.php` file with [this fresh copy from the repository](https://github.com/laravel/laravel/blob/master/public/index.php).
+将您的 `public/index.php` 置换成 [这个 repository 的干净版本](https://github.com/laravel/laravel/blob/master/public/index.php)。
 
-Replace your `artisan` file with [this fresh copy from the repository](https://github.com/laravel/laravel/blob/master/artisan).
+同样的，将您的 `artisan` 置换成 [这个 repository 的干净版本](https://github.com/laravel/laravel/blob/master/artisan)。
 
-### Adding Configuration Files & Options
+### 新增配置文件及选项
 
-Update your `aliases` and `providers` arrays in your `app/config/app.php` configuration file. The updated values for these arrays can be found [in this file](https://github.com/laravel/laravel/blob/master/app/config/app.php). Be sure to add your custom and package service providers / aliases back to the arrays.
+更新您在配置文件 `app/config/app.php` 里的 `aliases` 和 `providers` 数组。而更新的选项值可以在[这个文件](https://github.com/laravel/laravel/blob/master/app/config/app.php)中找到。请确定将您后来加入自定义和扩展包所需的 providers / aliases 加回数组中。
 
-Add the new `app/config/remote.php` file [from the repository](https://github.com/laravel/laravel/blob/master/app/config/remote.php).
+从 [这个 repository](https://github.com/laravel/laravel/blob/master/app/config/remote.php)增加 `app/config/remote.php` 文件。
 
-Add the new `expire_on_close` configuration option to your `app/config/session.php` file. The default value should be `false`.
+在您的 `app/config/session.php` 增加新的选项 `expire_on_close`。而默认值为 `false`。
 
-Add the new `failed` configuration section to your `app/config/queue.php` file. Here are the default values for the section:
+在您的 `app/config/queue.php` 文件里新增 `failed` 设定区块。以下为区块的默认值：
 
 	'failed' => array(
 		'database' => 'mysql', 'table' => 'failed_jobs',
 	),
 
-**(Optional)** Update the `pagination` configuration option in your `app/config/view.php` file to `pagination::slider-3`.
+**（非必要）** 在您的 `app/config/view.php` 里，将 `pagination` 设定选项更新为 `pagination::slider-3`。
 
-### Controller Updates
+### 更新控制器（Controllers）
 
-If `app/controllers/BaseController.php` has a `use` statement at the top, change `use Illuminate\Routing\Controllers\Controller;` to `use Illuminate\Routing\Controller;`.
+如果 `app/controllers/BaseController.php` 有 `use` 语句在最上面，将 `use Illuminate\Routing\Controllers\Controller;` 改为 `use Illuminate\Routing\Controller;`。
 
-### Password Reminders Updates
+### 更新密码提醒
 
-Password reminders have been overhauled for greater flexibility. You may examine the new stub controller by running the `php artisan auth:reminders-controller` Artisan command. You may also browse the [updated documentation](/docs/security#password-reminders-and-reset) and update your application accordingly.
+密码提醒功能已经大幅修正拥有更大的弹性。您可以执行 Artisan 命令 `php artisan auth:reminders-controller` 来检查新的存根控制器。您也可以浏览 [更新文档](/docs/security#password-reminders-and-reset) 然后相应的更新您的应用程序。
 
-Update your `app/lang/en/reminders.php` language file to match [this updated file](https://github.com/laravel/laravel/blob/master/app/lang/en/reminders.php).
+更新您的 `app/lang/en/reminders.php` 语系文件来符合[这个新版文件](https://github.com/laravel/laravel/blob/master/app/lang/en/reminders.php)。
 
-### Environment Detection Updates
+### 更新环境侦测
 
-For security reasons, URL domains may no longer be used to detect your application environment. These values are easily spoofable and allow attackers to modify the environment for a request. You should convert your environment detection to use machine host names (`hostname` command on Mac, Linux, and Windows).
+为了安全因素，不再使用网域网址来侦测辨别应用程序的环境。因为这些直很容易被伪造欺骗，继而让攻击者通过请求来达到变更环境。所以您必须改为使用机器的 hostname（在 Mac & Ubuntu 下执行 `hostname` 出来的值）
 
-### Simpler Log Files
+（译按：的确原有方式有安全性考量，但对于现行 VirtualHost 大量使用下，反而这样改会造成不便）
 
-Laravel now generates a single log file: `app/storage/logs/laravel.log`. However, you may still configure this behavior in your `app/start/global.php` file.
+### 更简单的日志文件
 
-### Removing Redirect Trailing Slash
+Laravel 目前只会产生单一的日志文件: `app/storage/logs/laravel.log`。然而，您还是可以通过设定您的 `app/start/global.php` 文件来更改他的行为。
 
-In your `bootstrap/start.php` file, remove the call to `$app->redirectIfTrailingSlash()`. This method is no longer needed as this functionality is now handled by the `.htaccess` file included with the framework.
+### 删除重定向结尾的斜线
 
-Next, replace your Apache `.htaccess` file with [this new one](https://github.com/laravel/laravel/blob/master/public/.htaccess) that handles trailing slashes.
+在您的 `bootstrap/start.php` 文件中，移除调用 `$app->redirectIfTrailingSlash()`。这个方法已不再需要了，因为之后将会改以框架内的 `.htaccess` 来处理。
 
-### Current Route Access
+然后，用[新版](https://github.com/laravel/laravel/blob/master/public/.htaccess)替换掉您 Apache 中的 `.htaccess` 文件，来处理结尾的斜线问题。
 
-The current route is now accessed via `Route::current()` instead of `Route::getCurrentRoute()`.
+### 取得目前路由
 
-### Composer Update
+取得目前路由的方法由 `Route::getCurrentRoute()` 改为 `Route::current()`。
 
-Once you have completed the changes above, you can run the `composer update` function to update your core application files! If you receive class load errors, try running the `update` command with the `--no-scripts` option enabled like so: `composer update --no-scripts`.
+### Composer 更新
+
+一旦您完成以上的更新，您可以执行 `composer update` 来更新应用程序的核心文件。如果有 class load 错误，请在 `update` 之后加上 `--no-scripts`，如: `composer update --no-scripts`。
 
 ### Wildcard Event Listeners
 

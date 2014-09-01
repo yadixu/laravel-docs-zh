@@ -1,83 +1,83 @@
-# Routing
+# 路由
 
-- [Basic Routing](#basic-routing)
-- [Route Parameters](#route-parameters)
-- [Route Filters](#route-filters)
-- [Named Routes](#named-routes)
-- [Route Groups](#route-groups)
-- [Sub-Domain Routing](#sub-domain-routing)
-- [Route Prefixing](#route-prefixing)
-- [Route Model Binding](#route-model-binding)
-- [Throwing 404 Errors](#throwing-404-errors)
-- [Routing To Controllers](#routing-to-controllers)
+- [基本路由](#basic-routing)
+- [路由参数](#route-parameters)
+- [路由筛选](#route-filters)
+- [路由命名](#named-routes)
+- [路由群组](#route-groups)
+- [子网域路由](#sub-domain-routing)
+- [前缀路由](#route-prefixing)
+- [路由模型绑定](#route-model-binding)
+- [404 错误](#throwing-404-errors)
+- [控制器路由](#routing-to-controllers)
 
 <a name="basic-routing"></a>
-## Basic Routing
+## 基本路由
 
-Most of the routes for your application will be defined in the `app/routes.php` file. The simplest Laravel routes consist of a URI and a Closure callback.
+应用程序大多数的路由都会被定义在 `app/routes.php` 中。最简单的一个路由是由一个 URI 和闭包回调(Closure callback)。
 
-#### Basic GET Route
+#### 基本 GET 路由
 
 	Route::get('/', function()
 	{
 		return 'Hello World';
 	});
 
-#### Basic POST Route
+#### 基本 POST 路由
 
 	Route::post('foo/bar', function()
 	{
 		return 'Hello World';
 	});
 
-#### Registering A Route For Multiple Verbs
+#### 在一个路由中注册多个动作
 
 	Route::match(array('GET', 'POST'), '/', function()
 	{
 		return 'Hello World';
 	});
 
-#### Registering A Route Responding To Any HTTP Verb
+#### 在一个路由中回应所有 HTTP 动作
 
 	Route::any('foo', function()
 	{
 		return 'Hello World';
 	});
 
-#### Forcing A Route To Be Served Over HTTPS
+#### 强制路由走 HTTPS
 
 	Route::get('foo', array('https', function()
 	{
 		return 'Must be over HTTPS';
 	}));
 
-Often, you will need to generate URLs to your routes, you may do so using the `URL::to` method:
+通常情况下，您需要产生 URLs 到您的路由上，您可以使用 `URL::to` 方法来达成：
 
 	$url = URL::to('foo');
 
 <a name="route-parameters"></a>
-## Route Parameters
+## 路由参数
 
 	Route::get('user/{id}', function($id)
 	{
 		return 'User '.$id;
 	});
 
-#### Optional Route Parameters
+#### 选用路由参数
 
 	Route::get('user/{name?}', function($name = null)
 	{
 		return $name;
 	});
 
-#### Optional Route Parameters With Defaults
+#### 带默认值的选用路由参数
 
 	Route::get('user/{name?}', function($name = 'John')
 	{
 		return $name;
 	});
 
-#### Regular Expression Route Constraints
+#### 正规表示式路由
 
 	Route::get('user/{name}', function($name)
 	{
@@ -91,9 +91,9 @@ Often, you will need to generate URLs to your routes, you may do so using the `U
 	})
 	->where('id', '[0-9]+');
 
-#### Passing An Array Of Wheres
+#### 传递数组使用 Where 筛选
 
-Of course, you may pass an array of constraints when necessary:
+当然，如果需要您可以传递限制条件的数组：
 
 	Route::get('user/{id}/{name}', function($id, $name)
 	{
@@ -101,9 +101,9 @@ Of course, you may pass an array of constraints when necessary:
 	})
 	->where(array('id' => '[0-9]+', 'name' => '[a-z]+'))
 
-#### Defining Global Patterns
+#### 定义全局样式
 
-If you would like a route parameter to always be constrained by a given regular expression, you may use the `pattern` method:
+如果您有常用的限制正规标示式样式，您可以使用 `pattern` 方法：
 
 	Route::pattern('id', '[0-9]+');
 
@@ -112,9 +112,9 @@ If you would like a route parameter to always be constrained by a given regular 
 		// Only called if {id} is numeric.
 	});
 
-#### Accessing A Route Parameter Value
+#### 获取路由参数值
 
-If you need to access a route parameter value outside of a route, you may use the `Route::input` method:
+如果您要在路由之外获取路由参数值，您可以使用 `Route::input` 方法：
 
 	Route::filter('foo', function()
 	{
@@ -125,11 +125,11 @@ If you need to access a route parameter value outside of a route, you may use th
 	});
 
 <a name="route-filters"></a>
-## Route Filters
+## 路由筛选器
 
-Route filters provide a convenient way of limiting access to a given route, which is useful for creating areas of your site which require authentication. There are several filters included in the Laravel framework, including an `auth` filter, an `auth.basic` filter, a `guest` filter, and a `csrf` filter. These are located in the `app/filters.php` file.
+路由筛选器提供一个便捷的方式对于一个给定的路由做出限制访问，这对于您的站点需要认证的情况下非常有用。在 Laravel 框架中包含了数个筛选器，如 `auth`, `auth.basic`, `guest` 和 `csrf` 筛选器。他们都放在 `app/filters.php` 中。
 
-#### Defining A Route Filter
+#### 定义一个路由筛选器
 
 	Route::filter('old', function()
 	{
@@ -139,34 +139,34 @@ Route filters provide a convenient way of limiting access to a given route, whic
 		}
 	});
 
-If the filter returns a response, that response is considered the response to the request and the route will not execute. Any `after` filters on the route are also cancelled.
+如果筛选器传回了回应，这个会应将会直接被视为该请求的回应，且路由将不会继续被执行，任何路由的 `after` 筛选器将直接被取消。
 
-#### Attaching A Filter To A Route
+#### 对路由加上筛选器
 
 	Route::get('user', array('before' => 'old', function()
 	{
 		return 'You are over 200 years old!';
 	}));
 
-#### Attaching A Filter To A Controller Action
+#### 对控制器动作加上筛选器
 
 	Route::get('user', array('before' => 'old', 'uses' => 'UserController@showProfile'));
 
-#### Attaching Multiple Filters To A Route
+#### 对单一路由加上多个筛选器
 
 	Route::get('user', array('before' => 'auth|old', function()
 	{
 		return 'You are authenticated and over 200 years old!';
 	}));
 
-#### Attaching Multiple Filters Via Array
+#### 通过数组加上多个筛选器
 
 	Route::get('user', array('before' => array('auth', 'old'), function()
 	{
 		return 'You are authenticated and over 200 years old!';
 	}));
 
-#### Specifying Filter Parameters
+#### 指定筛选器参数
 
 	Route::filter('age', function($route, $request, $value)
 	{
@@ -178,16 +178,16 @@ If the filter returns a response, that response is considered the response to th
 		return 'Hello World';
 	}));
 
-After filters receive a `$response` as the third argument passed to the filter:
+在筛选器接收到一个 `$response` 会被当成第三个参数传递进筛选器：
 
 	Route::filter('log', function($route, $request, $response)
 	{
 		//
 	});
 
-#### Pattern Based Filters
+#### 筛选器样式
 
-You may also specify that a filter applies to an entire set of routes based on their URI.
+您可以依据路由符合的 URI 来指定其筛选器：
 
 	Route::filter('admin', function()
 	{
@@ -196,21 +196,21 @@ You may also specify that a filter applies to an entire set of routes based on t
 
 	Route::when('admin/*', 'admin');
 
-In the example above, the `admin` filter would be applied to all routes beginning with `admin/`. The asterisk is used as a wildcard, and will match any combination of characters.
+在上面的例子中，`admin` 筛选器将会套用在所有以 `admin/` 开头的路由中。星号通常用作通配符，他会匹配任何的字串组合。
 
-You may also constrain pattern filters by HTTP verbs:
+您一样可以筛选指定的 HTTP 动作：
 
 	Route::when('admin/*', 'admin', array('post'));
 
-#### Filter Classes
+#### 筛选器类
 
-For advanced filtering, you may wish to use a class instead of a Closure. Since filter classes are resolved out of the application [IoC Container](/docs/ioc), you will be able to utilize dependency injection in these filters for greater testability.
+进阶的筛选，您可以使用类来取代闭包。因为所有的类都可以通过 [IoC Container](/docs/ioc) 来实例化, 你可以利用依赖注入来获取更高的可测试性.
 
-#### Registering A Class Based Filter
+#### 注册基于类的筛选器
 
 	Route::filter('foo', 'FooFilter');
 
-By default, the `filter` method on the `FooFilter` class will be called:
+默认下，`FooFilter` 类的 `filter` 方法将会被调用：
 
 	class FooFilter {
 
@@ -221,38 +221,38 @@ By default, the `filter` method on the `FooFilter` class will be called:
 
 	}
 
-If you do not wish to use the `filter` method, just specify another method:
+如果您不希望使用 `filter` 方法，只要指定其他方法即可：
 
 	Route::filter('foo', 'FooFilter@foo');
 
 <a name="named-routes"></a>
-## Named Routes
+## 路由命名
 
-Named routes make referring to routes when generating redirects or URLs more convenient. You may specify a name for a route like so:
+路由命名在产生重定向跳转与 URLs 至路由时更为方便。您可以指定一个名称给指定的路由：
 
 	Route::get('user/profile', array('as' => 'profile', function()
 	{
 		//
 	}));
 
-You may also specify route names for controller actions:
+您一样可以为控制器动作指定一个路由名称：
 
 	Route::get('user/profile', array('as' => 'profile', 'uses' => 'UserController@showProfile'));
 
-Now, you may use the route's name when generating URLs or redirects:
+现在您可以在产生 URLs 或重定向跳转时使用该路由名称：
 
 	$url = URL::route('profile');
 
 	$redirect = Redirect::route('profile');
 
-You may access the name of a route that is running via the `currentRouteName` method:
+您一样可以通过 `currentRouteName` 方法来取得正在执行中的路由名称：
 
 	$name = Route::currentRouteName();
 
 <a name="route-groups"></a>
-## Route Groups
+## 路由群组
 
-Sometimes you may need to apply filters to a group of routes. Instead of specifying the filter on each route, you may use a route group:
+有时候您需要套用筛选器到一个群组的路由上。不需要为每个路由去套用筛选器，您只需使用路由群组:
 
 	Route::group(array('before' => 'auth'), function()
 	{
@@ -267,7 +267,7 @@ Sometimes you may need to apply filters to a group of routes. Instead of specify
 		});
 	});
 
-You may also use the `namespace` parameter within your `group` array to specify all controllers within that group as being in a given namespace:
+您一样可以在 `group` 数组中使用 `namespace` 参数，指定在这 group 中的控制器都有一个共同的命名空间：
 
 	Route::group(array('namespace' => 'Admin'), function()
 	{
@@ -275,11 +275,11 @@ You may also use the `namespace` parameter within your `group` array to specify 
 	});
 
 <a name="sub-domain-routing"></a>
-## Sub-Domain Routing
+## 子网域路由
 
-Laravel routes are also able to handle wildcard sub-domains, and pass you wildcard parameters from the domain:
+Laravel 路由一样可以处理通配的子网域，并且从网域中传递您的通配符参数：
 
-#### Registering Sub-Domain Routes
+#### 注册子网域路由
 
 	Route::group(array('domain' => '{account}.myapp.com'), function()
 	{
@@ -292,9 +292,9 @@ Laravel routes are also able to handle wildcard sub-domains, and pass you wildca
 	});
 
 <a name="route-prefixing"></a>
-## Route Prefixing
+## 前缀路由
 
-A group of routes may be prefixed by using the `prefix` option in the attributes array of a group:
+群组路由可以通过群组的描述数组中使用 `prefix` 选项，将群组内的路由加上前缀：
 
 	Route::group(array('prefix' => 'admin'), function()
 	{
@@ -307,33 +307,33 @@ A group of routes may be prefixed by using the `prefix` option in the attributes
 	});
 
 <a name="route-model-binding"></a>
-## Route Model Binding
+## 路由模型绑定
 
-Model binding provides a convenient way to inject model instances into your routes. For example, instead of injecting a user's ID, you can inject the entire User model instance that matches the given ID. First, use the `Route::model` method to specify the model that should be used for a given parameter:
+模型绑定提供一个方便的方式将模型实体注入到您的路由中。例如，要注入一个用户 ID 您可以注入符合给定 ID 的整个用户模型实体。首先，使用 `Route::model` 方法可以指定作为参数的模型：
 
-#### Binding A Parameter To A Model
+#### 绑定参数至模型
 
 	Route::model('user', 'User');
 
-Next, define a route that contains a `{user}` parameter:
+接着，定义一个路由并包括一个 `{user}` 参数：
 
 	Route::get('profile/{user}', function(User $user)
 	{
 		//
 	});
 
-Since we have bound the `{user}` parameter to the `User` model, a `User` instance will be injected into the route. So, for example, a request to `profile/1` will inject the `User` instance which has an ID of 1.
+既然我们绑定了 `{user}` 参数到 `User` 模型，则 `User` 实体就会被注入到路由内。因此，假定有一个请求送至 `profile/1` 则会注入一个 ID 为 1 的 `User` 实体。
 
-> **Note:** If a matching model instance is not found in the database, a 404 error will be thrown.
+> **注意：** 假如在数据库内没有任何一个模型实体符合，则会抛出 404 错误。
 
-If you wish to specify your own "not found" behavior, you may pass a Closure as the third argument to the `model` method:
+假如您希望指定您自定义的「找不到」错误行为，您可以在 `model` 方法里的第三个参数指定一个 Closure：
 
 	Route::model('user', 'User', function()
 	{
 		throw new NotFoundHttpException;
 	});
 
-Sometimes you may wish to use your own resolver for route parameters. Simply use the `Route::bind` method:
+在某些情况下，您可能会希望可以使用您自定义的路由绑定方式。这时您可以使用 `Route::bind` 方法来达成：
 
 	Route::bind('user', function($value, $route)
 	{
@@ -341,19 +341,19 @@ Sometimes you may wish to use your own resolver for route parameters. Simply use
 	});
 
 <a name="throwing-404-errors"></a>
-## Throwing 404 Errors
+## 404 错误
 
-There are two ways to manually trigger a 404 error from a route. First, you may use the `App::abort` method:
+有两种方式可以在路由内手动触发 404 错误。第一种是调用 `App::abort` 方法：
 
 	App::abort(404);
 
-Second, you may throw an instance of `Symfony\Component\HttpKernel\Exception\NotFoundHttpException`.
+第二种，您可以抛出一个 `Symfony\Component\HttpKernel\Exception\NotFoundHttpException` 实体。
 
-More information on handling 404 exceptions and using custom responses for these errors may be found in the [errors](/docs/errors#handling-404-errors) section of the documentation.
+有关如何处理 404 异常状况和自定义回应的详细信息，可以参考 [错误](/docs/errors#handling-404-errors) 章节内的说明。
 
 <a name="routing-to-controllers"></a>
-## Routing To Controllers
+## 控制器路由
 
-Laravel allows you to not only route to Closures, but also to controller classes, and even allows the creation of [resource controllers](/docs/controllers#resource-controllers).
+Laravel 允许您不止可以路由至 Closures，也可以路由至控制器类，甚至可以路由至 [资源控制器](/docs/controllers#resource-controllers)。
 
-See the documentation on [Controllers](/docs/controllers) for more details.
+更多详细信息可参考 [控制器](/docs/controllers) 一节内的说明。

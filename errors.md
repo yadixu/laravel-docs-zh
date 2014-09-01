@@ -1,46 +1,46 @@
-# Errors & Logging
+# 错误与日志
 
-- [Configuration](#configuration)
-- [Handling Errors](#handling-errors)
-- [HTTP Exceptions](#http-exceptions)
-- [Handling 404 Errors](#handling-404-errors)
-- [Logging](#logging)
+- [配置文件](#configuration)
+- [错误处理](#handling-errors)
+- [HTTP异常](#http-exceptions)
+- [处理404错误](#handling-404-errors)
+- [日志](#logging)
 
 <a name="configuration"></a>
-## Configuration
+## 配置文件
 
-The logging handler for your application is registered in the `app/start/global.php` [start file](/docs/lifecycle#start-files). By default, the logger is configured to use a single log file; however, you may customize this behavior as needed. Since Laravel uses the popular [Monolog](https://github.com/Seldaek/monolog) logging library, you can take advantage of the variety of handlers that Monolog offers.
+日志处理程序注册在[开始配置文件](/docs/lifecycle#start-files) `app/start/global.php` 文件里面。日志默认储存在单一文件，您可以依照需求自定义。既然 Laravel 使用广为人用的 Monolog 日志，您可以利用很多 Monolog 提供的处理器程序。
 
-For example, if you wish to use daily log files instead of a single, large file, you can make the following change to your start file:
+例如，如果您想每天使用一个日志文件而不是使用单一的庞大文件，您可以照着下面的例子更改开始配置文件：
 
 	$logFile = 'laravel.log';
 
 	Log::useDailyFiles(storage_path().'/logs/'.$logFile);
 
-### Error Detail
+### 错误显示
 
-By default, error detail is enabled for your application. This means that when an error occurs you will be shown an error page with a detailed stack trace and error message. You may turn off error details by setting the `debug` option in your `app/config/app.php` file to `false`.
+错误显示默认为开启，意味着当错误发生时，将有错误页面显示详细的调用追踪和错误信息。您可以关掉错误显示的选项，把`app/config/app.php`里的`debug`选项改成`false`。
 
-> **Note:** It is strongly recommended that you turn off error detail in a production environment.
+> **注意：**强烈建议在 production 环境中关掉错误显示。
 
 <a name="handling-errors"></a>
-## Handling Errors
+## 错误处理
 
-By default, the `app/start/global.php` file contains an error handler for all exceptions:
+`app/start/global.php`里默认有一个处理所有异常的异常处理程序：
 
 	App::error(function(Exception $exception)
 	{
 		Log::error($exception);
 	});
 
-This is the most basic error handler. However, you may specify more handlers if needed. Handlers are called based on the type-hint of the Exception they handle. For example, you may create a handler that only handles `RuntimeException` instances:
+这是最基本的异常处理程序，然而您可以依照需求设定更多异常处理程序。异常处理程序会依照异常的类型提示( type-hint )被调用。例如，您可以创造一个只处理`RuntimeException`的异常处理程序：
 
 	App::error(function(RuntimeException $exception)
 	{
 		// Handle the exception...
 	});
 
-If an exception handler returns a response, that response will be sent to the browser and no other error handlers will be called:
+如果异常处理程序回传一个 response，response 会直接回传到浏览器，而其他异常处理程序将不会被调用：
 
 	App::error(function(InvalidUserException $exception)
 	{
@@ -49,36 +49,36 @@ If an exception handler returns a response, that response will be sent to the br
 		return 'Sorry! Something is wrong with this account!';
 	});
 
-To listen for PHP fatal errors, you may use the `App::fatal` method:
+为了监听 PHP fetal errors，您可以利用`App::fatal`方法：
 
 	App::fatal(function($exception)
 	{
 		//
 	});
 
-If you have several exception handlers, they should be defined from most generic to most specific. So, for example, a handler that handles all exceptions of type `Exception` should be defined before a custom exception type such as `Illuminate\Encryption\DecryptException`.
+如果您有很多异常处理程序，他们应该依照从最通用到最特定的顺序被定义。例如，一个对应处理类型为`Exception`的异常处理程序，应该被定义在一个对应处理自定义异常类型，如`Illuminate\Encryption\DecryptException`的异常处理程序之前。
 
-### Where To Place Error Handlers
+### 何处定义异常处理程序
 
-There is no default "home" for error handler registrations. Laravel offers you freedom in this area. One option is to define the handlers in your `start/global.php` file. In general, this is a convenient location to place any "bootstrapping" code. If that file is getting crowded, you could create an `app/errors.php` file, and `require` that file from your `start/global.php` script. A third option is to create a [service provider](/docs/ioc#service-providers) that registers the handlers. Again, there is no single "correct" answer. Choose a location that you are comfortable with.
+默认上没有注册异常处理程序的地方。Laravel 可以让您自由设定。选择之一是定义程序在 `start/global.php`中，一般来说，这是一个让您方便写入任何"bootstrapping" 代码的地方。如果文件变得很拥挤，可以建立一个 `app/errors.php`文件，并且在`start/global.php`中引入。第三个选择是建立 [service provider](/docs/ioc#service-providers) 以注册程序。再一次地，并没有正确的答案，选择一个让您觉得舒适的地方。
 
 <a name="http-exceptions"></a>
-## HTTP Exceptions
+## HTTP 异常处理
 
-Some exceptions describe HTTP error codes from the server. For example, this may be a "page not found" error (404), an "unauthorized error" (401) or even a developer generated 500 error. In order to return such a response, use the following:
+一些异常处理表示来自服务器的 HTTP 错误码，例如可能是「找不到页面」错误(404)，未授权错误(401)，或甚至是工程师导致的500错误。使用下列方法以回传这些回应：
 
 	App::abort(404);
 
-Optionally, you may provide a response:
+或是您可以选择提供一个回应：
 
 	App::abort(403, 'Unauthorized action.');
 
-This method may be used at any time during the request's lifecycle.
+您可以在请求回应的生命周期中任何时间点使用这个方法。
 
 <a name="handling-404-errors"></a>
-## Handling 404 Errors
+## 404错误处理
 
-You may register an error handler that handles all "404 Not Found" errors in your application, allowing you to easily return custom 404 error pages:
+您可以注册一个错误处理程序处理所有"404 Not Found"错误，让您可以简单的回传自定义的404错误页面。
 
 	App::missing(function($exception)
 	{
@@ -86,9 +86,9 @@ You may register an error handler that handles all "404 Not Found" errors in you
 	});
 
 <a name="logging"></a>
-## Logging
+## 日志
 
-The Laravel logging facilities provide a simple layer on top of the powerful [Monolog](http://github.com/seldaek/monolog) library. By default, Laravel is configured to create a single log file for your application, and this file is stored in `app/storage/logs/laravel.log`. You may write information to the log like so:
+Laravel 提供一个建立在强大的 [Monolog](http://github.com/seldaek/monolog) 上的日志工具。Laravel 默认设定在应用程序里建立单一日志文件，这个文件储存在`app/storage/logs/laravel.log`。	您可以像下面这样写入信息：
 
 	Log::info('This is some useful information.');
 
@@ -96,19 +96,19 @@ The Laravel logging facilities provide a simple layer on top of the powerful [Mo
 
 	Log::error('Something is really going wrong.');
 
-The logger provides the seven logging levels defined in [RFC 5424](http://tools.ietf.org/html/rfc5424): **debug**, **info**, **notice**, **warning**, **error**, **critical**, and **alert**.
+日志工具提供了七种定义在 [RFC 5424](http://tools.ietf.org/html/rfc5424) 的级别：**debug**, **info**, **notice**, **warning**, **error**, **critical**, and **alert**
 
-An array of contextual data may also be passed to the log methods:
+可以在传入上下文相关的数组到 log 的方法里：
 
 	Log::info('Log message', array('context' => 'Other helpful information'));
 
-Monolog has a variety of additional handlers you may use for logging. If needed, you may access the underlying Monolog instance being used by Laravel:
+Monolog 提供很多额外的方法可以记录。若有需要，您可以使用 Laravel 里使用的 Monolog 实例：
 
 	$monolog = Log::getMonolog();
 
-You may also register an event to catch all messages passed to the log:
+您可以注册事件捕捉所有传到日志的信息：
 
-#### Registering A Log Listener
+#### 注册日志监听程序
 
 	Log::listen(function($level, $message, $context)
 	{

@@ -1,138 +1,138 @@
-# Cache
+# 缓存
 
-- [Configuration](#configuration)
-- [Cache Usage](#cache-usage)
-- [Increments & Decrements](#increments-and-decrements)
-- [Cache Tags](#cache-tags)
-- [Database Cache](#database-cache)
+- [设定](#configuration)
+- [缓存用法](#cache-usage)
+- [递增与递减](#increments-and-decrements)
+- [缓存标签](#cache-tags)
+- [数据库缓存](#database-cache)
 
 <a name="configuration"></a>
-## Configuration
+## 设定
 
-Laravel provides a unified API for various caching systems. The cache configuration is located at `app/config/cache.php`. In this file you may specify which cache driver you would like used by default throughout your application. Laravel supports popular caching backends like [Memcached](http://memcached.org) and [Redis](http://redis.io) out of the box.
+Laravel 为各种不同的缓存系统提供一致的 API。 缓存配置文件位在 `app/config/cache.php`。 您可以在此为应用程序指定使用哪一种缓存系统，Laravel 支持各种常见的后端缓存系统，如 [Memcached](http://memcached.org) 和 [Redis](http://redis.io)。
 
-The cache configuration file also contains various other options, which are documented within the file, so make sure to read over these options. By default, Laravel is configured to use the `file` cache driver, which stores the serialized, cached objects in the filesystem. For larger applications, it is recommended that you use an in-memory cache such as Memcached or APC.
+缓存配置文件也包含多个其他选项，在文件里都有说明，所以请务必先阅读过。Laravel 默认使用 `文件` 缓存系统，该系统会储存序列化、缓存对象在文件系统中。在大型应用程序上，建议使用储存在内存内的缓存系统，如 Memcached 或 APC。
 
 <a name="cache-usage"></a>
-## Cache Usage
+## 缓存用法
 
-#### Storing An Item In The Cache
+#### 储存数据到缓存中
 
 	Cache::put('key', 'value', $minutes);
 
-#### Using Carbon Objects To Set Expire Time
+#### 使用 Carbon 对象设定缓存过期时间
 
 	$expiresAt = Carbon::now()->addMinutes(10);
 
 	Cache::put('key', 'value', $expiresAt);
 
-#### Storing An Item In The Cache If It Doesn't Exist
+#### 若是数据不存在，则将其存入缓存中
 
 	Cache::add('key', 'value', $minutes);
 
-The `add` method will return `true` if the item is actually **added** to the cache. Otherwise, the method will return `false`.
+当数据确实被**加入**缓存时，使用 `add` 方法将会回传 `true` 否则会回传 `false`。
 
-#### Checking For Existence In Cache
+#### 检查缓存是否存在
 
 	if (Cache::has('key'))
 	{
 		//
 	}
 
-#### Retrieving An Item From The Cache
+#### 从缓存中取得数据
 
 	$value = Cache::get('key');
 
-#### Retrieving An Item Or Returning A Default Value
+#### 取得数据或是回传默认值
 
 	$value = Cache::get('key', 'default');
 
 	$value = Cache::get('key', function() { return 'default'; });
 
-#### Storing An Item In The Cache Permanently
+#### 永久储存数据到缓存中
 
 	Cache::forever('key', 'value');
 
-Sometimes you may wish to retrieve an item from the cache, but also store a default value if the requested item doesn't exist. You may do this using the `Cache::remember` method:
+有时候您会希望从缓存中取得数据，而当此数据不存在时会储存默认值，您可以使用 `Cache::remember` 方法:
 
 	$value = Cache::remember('users', $minutes, function()
 	{
 		return DB::table('users')->get();
 	});
 
-You may also combine the `remember` and `forever` methods:
+您也可以结合 `remember` 和 `forever` 方法:
 
 	$value = Cache::rememberForever('users', function()
 	{
 		return DB::table('users')->get();
 	});
 
-Note that all items stored in the cache are serialized, so you are free to store any type of data.
+请注意所有储存在缓存中的数据皆会被序列化，所以您可以任意储存各种类型的数据和对象。
 
-#### Pulling An Item From The Cache
+#### 从缓存拉出数据
 
-If you need to retrieve an item from the cache and then delete it, you may use the `pull` method:
+如果您需要从缓存中取得数据后将它删除，您可以使用 `pull` 方法:
 
 	$value = Cache::pull('key');
 
-#### Removing An Item From The Cache
+#### 从缓存中删除数据
 
 	Cache::forget('key');
 
 <a name="increments-and-decrements"></a>
-## Increments & Decrements
+## 递增与递减
 
-All drivers except `file` and `database` support the `increment` and `decrement` operations:
+除了 `文件` 与 `数据库` 以外的缓存系统都支持 `递增` 和 `递减` 操作:
 
-#### Incrementing A Value
+#### 递增值
 
 	Cache::increment('key');
 
 	Cache::increment('key', $amount);
 
-#### Decrementing A Value
+#### 递减值
 
 	Cache::decrement('key');
 
 	Cache::decrement('key', $amount);
 
 <a name="cache-tags"></a>
-## Cache Tags
+## 缓存标签
 
-> **Note:** Cache tags are not supported when using the `file` or `database` cache drivers. Furthermore, when using multiple tags with caches that are stored "forever", performance will be best with a driver such as `memcached`, which automatically purges stale records.
+> **注意:** `文件` 或 `数据库` 这类缓存系统均不支持缓存标签. 此外, 使用带有 "forever" 的缓存标签时, 挑选 `memcached` 这类缓存系统将获得最好的性能, 它会自动清除过期的纪录。
 
-#### Accessing A Tagged Cache
+#### 获取缓存标签
 
-Cache tags allow you to tag related items in the cache, and then flush all caches tagged with a given name. To access a tagged cache, use the `tags` method.
+缓存标签允许您标记缓存内的相关数据，然后使用特定名称刷新所有缓存标签。要获取缓存标签可以使用 `tags` 方法。
 
-You may store a tagged cache by passing in an ordered list of tag names as arguments, or as an ordered array of tag names:
+您可以储存缓存标签，通过将有序列表当作参数传入，或者作为标签名称的有序数组:
 
 	Cache::tags('people', 'authors')->put('John', $john, $minutes);
 
 	Cache::tags(array('people', 'artists'))->put('Anne', $anne, $minutes);
 
-You may use any cache storage method in combination with tags, including `remember`, `forever`, and `rememberForever`. You may also access cached items from the tagged cache, as well as use the other cache methods such as `increment` and `decrement`.
+您可以结合使用各种缓存储存方法与标签，包含 `remember`, `forever` 和 `rememberForever`。您也可以从已标记的缓存中获取数据 ，以及使用其他缓存方法如 `increment` 和 `decrement`。
 
-#### Accessing Items In A Tagged Cache
+#### 从已标记的缓存中获取数据
 
-To access a tagged cache, pass the same ordered list of tags used to save it.
+要获取已标记的缓存，可传入相同的有序标签列表。
 
 	$anne = Cache::tags('people', 'artists')->get('Anne');
 
 	$john = Cache::tags(array('people', 'authors'))->get('John');
 
-You may flush all items tagged with a name or list of names. For example, this statement would remove all caches tagged with either `people`, `authors`, or both. So, both "Anne" and "John" would be removed from the cache:
+您可以刷新所有已标记的数据，使用指定名称或名称列表。例如，以下演示将会移除带有 `people` 或 `authors` 或者两者皆有的所有缓存标签，所以 "Anne" 和 "John" 皆会从缓存中被移除:
 
 	Cache::tags('people', 'authors')->flush();
 
-In contrast, this statement would remove only caches tagged with `authors`, so "John" would be removed, but not "Anne".
+相对而言，以下演示将只会移除带有 `authors` 的标签，所以 "John" 会被移除，但是 "Anne" 不会。
 
 	Cache::tags('authors')->flush();
 
 <a name="database-cache"></a>
-## Database Cache
+## 数据库缓存
 
-When using the `database` cache driver, you will need to setup a table to contain the cache items. You'll find an example `Schema` declaration for the table below:
+当使用 `数据库` 缓存系统时，您必须设定一张数据库表来储存缓存数据。数据库表的 `Schema` 定义例子如下:
 
 	Schema::create('cache', function($table)
 	{

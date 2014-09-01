@@ -1,36 +1,36 @@
-# Artisan CLI
+# Artisan 命令行工具
 
-- [Introduction](#introduction)
-- [Usage](#usage)
+- [简介](#introduction)
+- [用法](#usage)
 
 <a name="introduction"></a>
-## Introduction
+## 简介
 
-Artisan is the name of the command-line interface included with Laravel. It provides a number of helpful commands for your use while developing your application. It is driven by the powerful Symfony Console component.
-
+Artisan 是 Laravel 内建的命令行工具，它提供了一些有用的命令协助您开发，它是由强大的 Symfony Console 组件所驱动。
 <a name="usage"></a>
-## Usage
+## 用法
 
-#### Listing All Available Commands
+#### 列出所有可用的命令
 
-To view a list of all available Artisan commands, you may use the `list` command:
+要查看所有可用的 Artisan 命令，您可以使用 `list` 这个命令:
 
 	php artisan list
 
-#### Viewing The Help Screen For A Command
+#### 查看命令的使用指南
 
-Every command also includes a "help" screen which displays and describes the command's available arguments and options. To view a help screen, simply precede the name of the command with `help`:
+每一个命令都包含一个 "使用指南" ，它显示并描述这个命令能够接受哪些参数和选项。要进入使用指南只需要在命令名称前面加上 `help`即可:
+
 
 	php artisan help migrate
 
-#### Specifying The Configuration Environment
+#### 指定配置环境
 
-You may specify the configuration environment that should be used while running a command using the `--env` switch:
+您可以指定配置环境，只要在执行命令时加上 `--env` 即可切换所指定的配置环境:
 
 	php artisan migrate --env=local
 
-#### Displaying Your Current Laravel Version
+#### 查看目前的 Laravel 版本
 
-You may also view the current version of your Laravel installation using the `--version` option:
+使用 `--version` 选项，您可以查看目前所使用的 Laravel 版本:
 
 	php artisan --version

@@ -6,113 +6,114 @@
 <a name="laravel-4.2"></a>
 ## Laravel 4.2
 
-The full change list for this release by running the `php artisan changes` command from a 4.2 installation, or by [viewing the change file on Github](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json). These notes only cover the major enhancements and changes for the release.
+此发行版本的完整更新列表可以从一个 4.2 的完整安装下，执行 `php artisan changes` 命令，或者 [Github 上的更新纪录](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json)。此纪录仅含括主要的强化更新和此发行的更新部分。
 
-> **Note:** During the 4.2 release cycle, many small bug fixes and enhancements were incorporated into the various Laravel 4.1 point releases. So, be sure to check the change list for Laravel 4.1 as well!
+> **附注:** 在 4.2 发布周期间，许多小的BUG修正与功能强化被整并至各个 4.1 的子发行版本中。所以最好确认 Laravel 4.1 版本的更新列表。 
 
-### PHP 5.4 Requirement
+### PHP 5.4 需求
 
-Laravel 4.2 requires PHP 5.4 or greater. This upgraded PHP requirement allows us to use new PHP features such as traits to provide more expressive interfaces for tools like [Laravel Cashier](/docs/billing). PHP 5.4 also brings significant speed and performance improvements over PHP 5.3.
+Laravel 4.2 需要 PHP 5.4 以上的版本。此 PHP 更新版本让我们可以使用 PHP 的新功能：traits 来为如[Laravel 收银台](/docs/billing) 来提供更具表达力的接口。PHP 5.4 也比 PHP 5.3 带来显著的速度及性能提升。
 
 ### Laravel Forge
 
-Laravel Forge, a new web based application, provides a simple way to create and manage PHP servers on the cloud of your choice, including Linode, DigitalOcean, Rackspace, and Amazon EC2. Supporting automated Nginx configuration, SSH key access, Cron job automation, server monitoring via NewRelic & Papertrail, "Push To Deploy", Laravel queue worker configuration, and more, Forge provides the simplest and most affordable way to launch all of your Laravel applications.
+Larvel Forge，一个网页应用程序，提供一个简单的接口去建立管理您云端上的 PHP 服务器，如 Linode, DigitalOcean, Rackspace, 和 Amazon EC2。支持自动化 nginx 设定、SSH 金钥管理、Cron job 自动化、通过 NewRelic & Papertrail 服务器监控，"推送部署", Laravel queue worker 设定等等。Forge 提供最简单且更实惠的方式来部署所有您的 Laravel 应用程序。
 
-The default Laravel 4.2 installation's `app/config/database.php` configuration file is now configured for Forge usage by default, allowing for more convenient deployment of fresh applications onto the platform.
+默认 Laravel 4.2 的安装里， `app/config/database.php` 配置文件默认已为 Forge 设定完成，让在平台上的全新应用程序更方便部署。
 
-More information about Laravel Forge can be found on the [official Forge website](https://forge.laravel.com).
+关于 Laravel Forge 的更多信息可以在[官方 Forge 网站](https://forge.laravel.com)上找到。
 
 ### Laravel Homestead
 
-Laravel Homestead is an official Vagrant environment for developing robust Laravel and PHP applications. The vast majority of the boxes' provisioning needs are handled before the box is packaged for distribution, allowing the box to boot extremely quickly. Homestead includes Nginx 1.6, PHP 5.5.12, MySQL, Postgres, Redis, Memcached, Beanstalk, Node, Gulp, Grunt, & Bower. Homestead includes a simple `Homestead.yaml` configuration file for managing multiple Laravel applications on a single box.
+Laravel Homestead 是一个为部署健全的 Laravel 和 PHP 应用程序的官方 Vagrant 环境。绝大多数的封装包的相依与软件在发布前已经部署处理完成，让封装包可以极快的被启用。Homestead 包含 Nginx 1.6, PHP 5.5.12, MySQL, Postres, Redis, Memcached, Beanstalk, Node, Gulp, Grunt 和 Bower。Homestead 包含一个简单的 `Homestead.yaml` 配置文件，让您在单一个封装包中管理多个 Laravel 应用程序。
 
-The default Laravel 4.2 installation now includes an `app/config/local/database.php` configuration file that is configured to use the Homestead database out of the box, making Laravel initial installation and configuration more convenient.
+默认的 Laravel 4.2 安装中包含的 `app/config/local/database.php` 配置文件使用 Homestead 的数据库作为默认。让 Laravel 初始化安装与设定更为方便。
 
-The official documentation has also been updated to include [Homestead documentation](/docs/homestead).
+官方文件已经更新并包含在 [Homestead 文件](/docs/homestead)中。
 
-### Laravel Cashier
+### Laravel 收银台
 
-Laravel Cashier is a simple, expressive library for managing subscription billing with Stripe. With the introduction of Laravel 4.2, we are including Cashier documentation along with the main Laravel documentation, though installation of the component itself is still optional. This release of Cashier brings numerous bug fixes, multi-currency support, and compatibility with the latest Stripe API.
+Laravel 收银台是一个简单、具表达性的资源库，用来管理 Stripe 的订阅帐务。虽然在安装中此组件依然是选用，我们依然将收银台文件包含在主要 Laravel 文件中。此收银台发布版本带来了数个错误修正、多货币支持还有支持最新的 Stripe API。
 
-### Daemon Queue Workers
+### Queue Workers 常驻软件
 
-The Artisan `queue:work` command now supports a `--daemon` option to start a worker in "daemon mode", meaning the worker will continue to process jobs without ever re-booting the framework. This results in a significant reduction in CPU usage at the cost of a slightly more complex application deployment process.
+Artisan `queue:work` 命令现在支持 `--daemon` 参数让 worker 可以以"常驻软件"启用。代表 worker 可以持续的处理队列工作不需要重启框架。这让一个复杂的应用程序部署过程中，使得 CPU 的使用有显著的降低。
 
-More information about daemon queue workers can be found in the [queue documentation](/docs/queues#daemon-queue-worker).
+更多关于 Queue Workers 常驻软件信息请详阅 [queue 文件](/docs/queues#daemon-queue-worker)。
 
 ### Mail API Drivers
 
-Laravel 4.2 introduces new Mailgun and Mandrill API drivers for the `Mail` functions. For many applications, this provides a faster and more reliable method of sending e-mails than the SMTP options. The new drivers utilize the Guzzle 4 HTTP library.
+Laravel 4.2 为 `Mail` 函数采用了新的 Mailgun 和 Mandrill API 驱动。对许多应用程序而言，他提供了比 SMTP 更快也更可靠的方法来递送邮件。新的驱动使用了 Guzzle 4 HTTP 资源库。
 
-### Soft Deleting Traits
+### 软删除特性
 
-A much cleaner architecture for "soft deletes" and other "global scopes" has been introduced via PHP 5.4 traits. This new architecture allows for the easier construction of similar global traits, and a cleaner separation of concerns within the framework itself.
+得益于 PHP 5.4 traits , 一个更加简洁的软删除架构, 还有好多 "global scopes" , 都得以实现. 这些新架构为框架提供了更有扩展性的功能, 并且让框架更加简介.
 
-More information on the new `SoftDeletingTrait` may be found in the [Eloquent documentation](/docs/eloquent#soft-deleting).
+更多关于软删除的信息请见: [Eloquent documentation](/docs/eloquent#soft-deleting).
 
-### Convenient Auth & Remindable Traits
+### 更为方便的 认证(auth) & Remindable Traits
 
-The default Laravel 4.2 installation now uses simple traits for including the needed properties for the authentication and password reminder user interfaces. This provides a much cleaner default `User` model file out of the box.
+得益于 PHP 5.4 traits , 我们有了一个更简洁的 用户认真 和 密码提醒接口, 这也让 `User` 模型文件更加精简.
 
-### "Simple Paginate"
+### "简易分页"
 
-A new `simplePaginate` method was added to the query and Eloquent builder which allows for more efficient queries when using simple "Next" and "Previous" links in your pagination view.
+一个新的 `simplePaginate` 方法已被加入到查询以及 Eloquent 查询器中。让您在分页视图中，使用简单的"上一页"和"下一页"链接查询更为高效。
 
-### Migration Confirmation
+### 迁移确认
 
-In production, destructive migration operations will now ask for confirmation. Commands may be forced to run without any prompts using the `--force` command.
+在正式环境中，破坏性的迁移动作将会被再次确认。如果希望取消提示字串确认请使用 `--force` 参数。
 
 <a name="laravel-4.1"></a>
 ## Laravel 4.1
 
-### Full Change List
+### 完整更新列表
 
-The full change list for this release by running the `php artisan changes` command from a 4.1 installation, or by [viewing the change file on Github](https://github.com/laravel/framework/blob/4.1/src/Illuminate/Foundation/changes.json). These notes only cover the major enhancements and changes for the release.
+此发行版本的完整更新列表，可以在版本 4.1 的安装中命令行执行 `php artisan changes` 取得，或者浏览 [Github 更新文件](https://github.com/laravel/framework/blob/4.1/src/Illuminate/Foundation/changes.json)中了解。其中只记录了该版本比较主要的强化功能和更新。
 
-### New SSH Component
+### 新的 SSH 组件
 
-An entirely new `SSH` component has been introduced with this release. This feature allows you to easily SSH into remote servers and run commands. To learn more, consult the [SSH component documentation](/docs/ssh).
+一个全新的 `SSH` 组件在此发行版本中登场。此功能让您可以轻易的 SSH 至远程服务器并执行命令。更多信息，可以参阅 [SSH 组件文件](/docs/ssh)。
 
-The new `php artisan tail` command utilizes the new SSH component. For more information, consult the `tail` [command documentation](http://laravel.com/docs/ssh#tailing-remote-logs).
+新的 `php artisan tail` 命令就是使用这个新的 SSH 组件。更多的信息，请参阅 `tail` [命令集文件](http://laravel.com/docs/ssh#tailing-remote-logs)。
 
 ### Boris In Tinker
 
-The `php artisan tinker` command now utilizes the [Boris REPL](https://github.com/d11wtq/boris) if your system supports it. The `readline` and `pcntl` PHP extensions must be installed to use this feature. If you do not have these extensions, the shell from 4.0 will be used.
+如果您的系统支持 [Boris REPL](https://github.com/d11wtq/boris)，`php artisan thinker` 命令将会使用到它。系统中也必须先行安装好 `readline` 和 `pcntl` 两个 PHP 扩展包。如果您没这些扩展包，从 4.0 之后将会使用到它。
 
-### Eloquent Improvements
+### Eloquent 强化
 
-A new `hasManyThrough` relationship has been added to Eloquent. To learn how to use it, consult the [Eloquent documentation](/docs/eloquent#has-many-through).
+Eloquent 新增了新的 `hasManyThrough` 关系链。想要了解更多，请参见 [Eloquent 文件](/docs/eloquent#has-many-through)。
 
-A new `whereHas` method has also been introduced to allow [retrieving models based on relationship constraints](/docs/eloquent#querying-relations).
+一个新的 `whereHas` 方法也同时登场，他将允许[检索基于关系模型的约束](/docs/eloquent#querying-relations)。
 
-### Database Read / Write Connections
+### 数据库读写分离
 
-Automatic handling of separate read / write connections is now available throughout the database layer, including the query builder and Eloquent. For more information, consult [the documentation](/docs/database#read-write-connections).
+Query Builder 和 Eloquent 目前通过数据库层，已经可以自动做到读写分离。更多的信息，请参考[文件](/docs/database#read-write-connections)。
 
-### Queue Priority
+### 队列排序
 
-Queue priorities are now supported by passing a comma-delimited list to the `queue:listen` command.
+队列排序已经被支持，只要在 `queue:listen` 命令后将队列以逗号分隔送出。
 
-### Failed Queue Job Handling
+### 失败队列工作处理
 
-The queue facilities now include automatic handling of failed jobs when using the new `--tries` switch on `queue:listen`. More information on handling failed jobs can be found in the [queue documentation](/docs/queues#failed-jobs).
+现在队列将会自动处理失败的工作，只要在 `queue:listen` 后加上 `--tries` 即可。更多的失败工作处理可以参见 [队列文件](/docs/queues#failed-jobs)。
 
-### Cache Tags
+### 缓存标签
 
-Cache "sections" have been superseded by "tags". Cache tags allow you to assign multiple "tags" to a cache item, and flush all items assigned to a single tag. More information on using cache tags may be found in the [cache documentation](/docs/cache#cache-tags).
+缓存“区块”已经被“标签”取代。缓存标签允许您将多个“标签”指向同一个缓存对象，而且可以清空所有被指定某个标签的所有对象。更多使用缓存标签信息请见[缓存文件](/docs/cache#cache-tags)。
 
-### Flexible Password Reminders
+### 更具弹性的密码提醒
 
-The password reminder engine has been changed to provide greater developer flexibility when validating passwords, flashing status messages to the session, etc. For more information on using the enhanced password reminder engine, [consult the documentation](/docs/security#password-reminders-and-reset).
+密码提醒引擎已经可以提供更强大的开发弹性，如：认证密码，显示状态信息等等。使用强化的密码提醒引擎，更多的信息[请参阅文件](/docs/security#password-reminders-and-reset)。
 
-### Improved Routing Engine
+### 强化路由引擎
 
-Laravel 4.1 features a totally re-written routing layer. The API is the same; however, registering routes is a full 100% faster compared to 4.0. The entire engine has been greatly simplified, and the dependency on Symfony Routing has been minimized to the compiling of route expressions.
+Laravel 4.1 拥有一个完全重新编写的路由层。API 一样不变。然而与 4.0 相比，速度快上 100%。整个引擎大幅的简化，且对于路由表达式的编译大大减少对 Symfony Routing 的依赖。
 
-### Improved Session Engine
+### 强化 Session 引擎
 
-With this release, we're also introducing an entirely new session engine. Similar to the routing improvements, the new session layer is leaner and faster. We are no longer using Symfony's (and therefore PHP's) session handling facilities, and are using a custom solution that is simpler and easier to maintain.
+此发行版本中，我们亦发布了全新的 Session 引擎。如同路由增进的部分，新的 Session 曾更加简化且更快速。我们不再使用 Symfony 的 Session 处理工具，并且使用更简单、更容易维护的自定义解法。
+
 
 ### Doctrine DBAL
 
-If you are using the `renameColumn` function in your migrations, you will need to add the `doctrine/dbal` dependency to your `composer.json` file. This package is no longer included in Laravel by default.
+如果您有在您的迁移中使用到 `renameColumn`，之后您必须在 `composer.json` 里加 `doctrine/dbal` 进相依扩展包中。此扩展包不再默认包含在 Laravel 之中。

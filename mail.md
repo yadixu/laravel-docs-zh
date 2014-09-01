@@ -1,66 +1,70 @@
 # Mail
 
-- [Configuration](#configuration)
-- [Basic Usage](#basic-usage)
-- [Embedding Inline Attachments](#embedding-inline-attachments)
-- [Queueing Mail](#queueing-mail)
-- [Mail & Local Development](#mail-and-local-development)
+- [设定](#configuration)
+- [基本用法](#basic-usage)
+- [内嵌附件](#embedding-inline-attachments)
+- [邮件队列](#queueing-mail)
+- [邮件与本地开发](#mail-and-local-development)
 
 <a name="configuration"></a>
-## Configuration
+## 设定
 
-Laravel provides a clean, simple API over the popular [SwiftMailer](http://swiftmailer.org) library. The mail configuration file is `app/config/mail.php`, and contains options allowing you to change your SMTP host, port, and credentials, as well as set a global `from` address for all messages delivered by the library. You may use any SMTP server you wish. If you wish to use the PHP `mail` function to send mail, you may change the `driver` to `mail` in the configuration file. A `sendmail` driver is also available.
+Laravel 利用一个热门的函数库 [SwiftMailer](http://swiftmailer.org) 来建立一个干净简单的 API。邮件配置文件为 `app/config/mail.php`，里面有些选项，可以让您更改您的 SMTP 连接地址、凭证以及可以为通过此函数库寄出的所有信件，设定一个全局的寄件者 `from`。您可以使用任何的 SMTP 服务器。如果您想要使用 PHP 内建的 `mail` 函数来发送邮件，您可以将配置文件中的 `driver` 改为 `mail` 即可。`sendmail` 的驱动一样可以使用。
 
-### API Drivers
 
-Laravel also includes drivers for the Mailgun and Mandrill HTTP APIs. These APIs are often simpler and quicker than the SMTP servers. Both of these drivers require that the Guzzle 4 HTTP library be installed into your application. You can add Guzzle 4 to your project by adding the following line to your `composer.json` file:
+### 第三方邮件服务 API 驱动
+
+Laravel 也包含了 Mailgun 和 Mandrill 服务的 HTTP API 的驱动方式。这些 API 比使用 SMTP 服务器更简单快速。这些驱动都需要在您的应用程序里预先安装 Guzzle 4 HTTP 函数库。您可以通过在您的 `composer.json` 文件中增加一行如下，来将 Guzzle 4 安装到您的项目中：
 
 	"guzzlehttp/guzzle": "~4.0"
 
-#### Mailgun Driver
+#### Mailgun 驱动
 
-To use the Mailgun driver, set the `driver` option to `mailgun` in your `app/config/mail.php` configuration file. Next, create an `app/config/services.php` configuration file if one does not already exist for your project. Verify that it contains the following options:
+使用 Mailgun 驱动前，先在 `app/config/mail.php` 配置文件中将 `driver` 设定为 `mailgun`。再来，如果您的项目中没有 `app/config/services.php` 请先建立他。并确定它包含了如下的内容：
 
 	'mailgun' => array(
 		'domain' => 'your-mailgun-domain',
 		'secret' => 'your-mailgun-key',
 	),
 
-#### Mandrill Driver
+#### Mandrill 驱动
 
-To use the Mandrill driver, set the `driver` option to `mandrill` in your `app/config/mail.php` configuration file. Next, create an `app/config/services.php` configuration file if one does not already exist for your project. Verify that it contains the following options:
+使用 Mandrill 驱动前，先在 `app/config/mail.php` 配置文件中将 `driver` 设定为 `mandrill`。再来，如果您的项目中没有 `app/config/services.php` 请先建立他。并确定它包含了如下的内容：
 
 	'mandrill' => array(
 		'secret' => 'your-mandrill-key',
 	),
 
-### Log Driver
+### Log 驱动
 
-If the `driver` option of your `app/config/mail.php` configuration file is set to `log`, all e-mails will be written to your log files, and will not actually be sent to any of the recipients. This is primarily useful for quick, local debugging and content verification.
+如果您的 `app/config/mail.php` 配置文件的 `driver` 被设定为 `log` 时，所有的邮件将会被写进日志中，且并不会真的被寄出。这主要用在快速本地除错和内容验证上。
 
 <a name="basic-usage"></a>
-## Basic Usage
+## 基本用法
 
-The `Mail::send` method may be used to send an e-mail message:
+ `Mail::send` 方法是用来发送电子邮件：
 
 	Mail::send('emails.welcome', $data, function($message)
 	{
 		$message->to('foo@example.com', 'John Smith')->subject('Welcome!');
 	});
 
-The first argument passed to the `send` method is the name of the view that should be used as the e-mail body. The second is the `$data` that should be passed to the view, and the third is a Closure allowing you to specify various options on the e-mail message.
+`send` 方法的第一个参数为邮件内容的视图名称，第二个参数 `$data` 为传递至视图的变量，而第三个参数为一个闭包让您可以指定更多发送电子邮件的信息选项。
 
-> **Note:** A `$message` variable is always passed to e-mail views, and allows the inline embedding of attachments. So, it is best to avoid passing a `message` variable in your view payload.
 
-You may also specify a plain text view to use in addition to an HTML view:
+> **注意:** 变量默认被传递进邮件的视图中，且允许内嵌键值数组。所以最好避免传递名为 `message` 的变量至您的视图中造成重叠。
+
+除了使用 HTML 视图外，您也可以指定一个纯文字的视图：
 
 	Mail::send(array('html.view', 'text.view'), $data, $callback);
 
-Or, you may specify only one type of view using the `html` or `text` keys:
+
+或者您也可以指定视图类为 `html` 或 `text`：
 
 	Mail::send(array('text' => 'view'), $data, $callback);
 
-You may specify other options on the e-mail message such as any carbon copies or attachments as well:
+
+您也可以为电子邮件信息指定其他选项如附加文件或是任何的副本收件者：
 
 	Mail::send('emails.welcome', $data, function($message)
 	{
@@ -71,18 +75,19 @@ You may specify other options on the e-mail message such as any carbon copies or
 		$message->attach($pathToFile);
 	});
 
-When attaching files to a message, you may also specify a MIME type and / or a display name:
+
+当附加文件到一个电子邮件，您也可以指定一个 MIME type 及/或 一个显示名称：
 
 	$message->attach($pathToFile, array('as' => $display, 'mime' => $mime));
 
-> **Note:** The message instance passed to a `Mail::send` Closure extends the SwiftMailer message class, allowing you to call any method on that class to build your e-mail messages.
+> **注意:** 在 `Mail::send` 的闭包中使用 SwiftMailer 的 message 扩充实例，允许您可以调用任何类中的方法来建立您的电子邮件。
 
 <a name="embedding-inline-attachments"></a>
-## Embedding Inline Attachments
+## 内嵌附件
 
-Embedding inline images into your e-mails is typically cumbersome; however, Laravel provides a convenient way to attach images to your e-mails and retrieving the appropriate CID.
+内嵌图片到邮件中通常是一件很麻烦的事，然而Laravel 提供一个便利的方式让您内嵌图片到您的电子邮件当中且接收相对应的 CID。
 
-#### Embedding An Image In An E-Mail View
+#### 内嵌图片到电子邮件的视图中
 
 	<body>
 		Here is an image:
@@ -90,7 +95,7 @@ Embedding inline images into your e-mails is typically cumbersome; however, Lara
 		<img src="<?php echo $message->embed($pathToFile); ?>">
 	</body>
 
-#### Embedding Raw Data In An E-Mail View
+#### 内嵌数据到电子邮件的视图中
 
 	<body>
 		Here is an image from raw data:
@@ -98,28 +103,28 @@ Embedding inline images into your e-mails is typically cumbersome; however, Lara
 		<img src="<?php echo $message->embedData($data, $name); ?>">
 	</body>
 
-Note that the `$message` variable is always passed to e-mail views by the `Mail` class.
+注意 `$message` 这个变量一定会被 `Mail` 类传递到电子邮件的视图当中。
 
 <a name="queueing-mail"></a>
-## Queueing Mail
+## 邮件队列
 
-#### Queueing A Mail Message
+#### 加入一个邮件到队列中
 
-Since sending e-mail messages can drastically lengthen the response time of your application, many developers choose to queue e-mail messages for background sending. Laravel makes this easy using its built-in [unified queue API](/docs/queues). To queue a mail message, simply use the `queue` method on the `Mail` class:
+发送电子邮件会大幅的延长您应用程序的反应时间，许多开发者选择让电子邮件放进队列中，并在后台(非即时)发送。Laravel 使用内建的 [unified queue API](/docs/queues) 让您可以方便的将要发送的电子邮件加入到队列之中，只要使用 `Mail` 类的 `queue` 方法：
 
 	Mail::queue('emails.welcome', $data, function($message)
 	{
 		$message->to('foo@example.com', 'John Smith')->subject('Welcome!');
 	});
 
-You may also specify the number of seconds you wish to delay the sending of the mail message using the `later` method:
+您也可以通过使用 `later` 方法来指定发送电子邮件的延迟秒数：
 
 	Mail::later(5, 'emails.welcome', $data, function($message)
 	{
 		$message->to('foo@example.com', 'John Smith')->subject('Welcome!');
 	});
 
-If you wish to specify a specific queue or "tube" on which to push the message, you may do so using the `queueOn` and `laterOn` methods:
+假如您想要指定一个特别的队列或管道来发送邮件，您可以使用 `queueOn` 和 `laterOn` 方法：
 
 	Mail::queueOn('queue-name', 'emails.welcome', $data, function($message)
 	{
@@ -127,10 +132,11 @@ If you wish to specify a specific queue or "tube" on which to push the message, 
 	});
 
 <a name="mail-and-local-development"></a>
-## Mail & Local Development
+## 邮件与本地开发
 
-When developing an application that sends e-mail, it's usually desirable to disable the sending of messages from your local or development environment. To do so, you may either call the `Mail::pretend` method, or set the `pretend` option in the `app/config/mail.php` configuration file to `true`. When the mailer is in `pretend` mode, messages will be written to your application's log files instead of being sent to the recipient.
+在开发应用程序的寄信功能时，通常会希望在本地或是开发环境中关闭发送功能。您可以调用 `Mail::pretend` 方法，或是在 `app/config/mail.php` 配置文件的 `pretend` 为 `true` 可以达到。当在 `pretend` 模式开启下，邮件将会被写到您的应用程序日志中取代实际寄出信件。
 
-#### Enabling Pretend Mail Mode
+
+#### 开启 "Pretend" 发送模式
 
 	Mail::pretend();

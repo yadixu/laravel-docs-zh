@@ -1,21 +1,21 @@
-# Localization
+# 本地化
 
-- [Introduction](#introduction)
-- [Language Files](#language-files)
-- [Basic Usage](#basic-usage)
-- [Pluralization](#pluralization)
-- [Validation Localization](#validation)
-- [Overriding Package Language Files](#overriding-package-language-files)
+- [介绍](#introduction)
+- [语言文件](#language-files)
+- [基本用法](#basic-usage)
+- [复数](#pluralization)
+- [验证本地化](#validation)
+- [重写扩展包的语言文件](#overriding-package-language-files)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-The Laravel `Lang` class provides a convenient way of retrieving strings in various languages, allowing you to easily support multiple languages within your application.
+Laravel 的 `Lang` 类提供方便的方法来取得多种语言的字串，让您简单地在应用程序里支持多种语言。
 
 <a name="language-files"></a>
-## Language Files
+## 语言文件
 
-Language strings are stored in files within the `app/lang` directory. Within this directory there should be a subdirectory for each language supported by the application.
+语言字串储存在 `app/lang` 文件夹的文件里。 在这个文件夹里应该要有子文件夹给每一个应用程序支持的语言。
 
 	/app
 		/lang
@@ -24,9 +24,9 @@ Language strings are stored in files within the `app/lang` directory. Within thi
 			/es
 				messages.php
 
-#### Example Language File
+#### 语言文件例子
 
-Language files simply return an array of keyed strings. For example:
+语言文件简单地回传键跟字串的数组。例如：
 
 	<?php
 
@@ -34,44 +34,44 @@ Language files simply return an array of keyed strings. For example:
 		'welcome' => 'Welcome to our application'
 	);
 
-#### Changing The Default Language At Runtime
+#### 在执行时变换默认语言
 
-The default language for your application is stored in the `app/config/app.php` configuration file. You may change the active language at any time using the `App::setLocale` method:
+应用程序的默认语言被储存在 `app/config/app.php` 配置文件。 您可以在任何时候用 `App::setLocale` 方法变换现行语言：
 
 	App::setLocale('es');
 
-#### Setting The Fallback Language
+#### 设定备用语言
 
-You may also configure a "fallback language", which will be used when the active language does not contain a given language line. Like the default language, the fallback language is also configured in the `app/config/app.php` configuration file:
+您也可以设定 "备用语言"，它将会在当现行语言没有给定的语句时被使用。 就像默认语言，备用语言也可以在 `app/config/app.php` 配置文件设定：
 
 	'fallback_locale' => 'en',
 
 <a name="basic-usage"></a>
-## Basic Usage
+## 基本用法
 
-#### Retrieving Lines From A Language File
+#### 从语言文件取得句子
 
 	echo Lang::get('messages.welcome');
 
-The first segment of the string passed to the `get` method is the name of the language file, and the second is the name of the line that should be retrieved.
+ 传递给 `get` 方法的字串的第一个部分是语言文件的名称，第二个部分是应该被取得的句子的名称。
 
-> **Note**: If a language line does not exist, the key will be returned by the `get` method.
+> **备注**: 如果句子不存在， `get` 方法将会回传键的名称。
 
-You may also use the `trans` helper function, which is an alias for the `Lang::get` method.
+您也可以使用 `trans` 辅助方法，它是 `Lang::get` 方法的别名。
 
 	echo trans('messages.welcome');
 
-#### Making Replacements In Lines
+#### 在句子中做替代
 
-You may also define place-holders in your language lines:
+您也可以在语言文件中定义占位符：
 
 	'welcome' => 'Welcome, :name',
 
-Then, pass a second argument of replacements to the `Lang::get` method:
+接着，传递替代用的第二个参数给 `Lang::get` 方法：
 
 	echo Lang::get('messages.welcome', array('name' => 'Dayle'));
 
-#### Determine If A Language File Contains A Line
+#### 判断语言文件是否有句子
 
 	if (Lang::has('messages.welcome'))
 	{
@@ -79,31 +79,31 @@ Then, pass a second argument of replacements to the `Lang::get` method:
 	}
 
 <a name="pluralization"></a>
-## Pluralization
+## 复数
 
-Pluralization is a complex problem, as different languages have a variety of complex rules for pluralization. You may easily manage this in your language files. By using a "pipe" character, you may separate the singular and plural forms of a string:
+复数是个复杂的问题，不同语言对于复数有很多种复杂的规则。 您可以简单地在您的语言文件里管理它。 您可以用 "管道" 字串区分字串的单数和复数形态：
 
 	'apples' => 'There is one apple|There are many apples',
 
-You may then use the `Lang::choice` method to retrieve the line:
+接着您可以用 `Lang::choice` 方法取得语句：
 
 	echo Lang::choice('messages.apples', 10);
 
-You may also supply a locale argument to specify the language. For example, if you want to use the Russian (ru) language:
+您也可以提供一个地区参数来指定语言。 举个例，如果您想要使用俄语 (ru)：
 
 	echo Lang::choice('товар|товара|товаров', $count, array(), 'ru');
 
-Since the Laravel translator is powered by the Symfony Translation component, you may also create more explicit pluralization rules easily:
+因为 Laravel 的翻译器由 Symfony 翻译组件赞助，您也可以很容易地建立更明确的复数规则：
 
 	'apples' => '{0} There are none|[1,19] There are some|[20,Inf] There are many',
 
 
 <a name="validation"></a>
-## Validation
+## 验证
 
-For localization for validation errors and messages, take a look at the <a href="/docs/validation#localization">documentation on Validation</a>.
+要验证本地化的错误和信息，可以看一下 <a href="/docs/validation#localization">验证的文件</a>.
 
 <a name="overriding-package-language-files"></a>
-## Overriding Package Language Files
+## 重写扩展包的语言文件
 
-Many packages ship with their own language lines. Instead of hacking the package's core files to tweak these lines, you may override them by placing files in the `app/lang/packages/{locale}/{package}` directory. So, for example, if you need to override the English language lines in `messages.php` for a package named `skyrim/hearthfire`, you would place a language file at: `app/lang/packages/en/hearthfire/messages.php`. In this file you would define only the language lines you wish to override. Any language lines you don't override will still be loaded from the package's language files.
+许多扩展包附带它们自有的语句。 您可以通过放置文件在 `app/lang/packages/{locale}/{package}` 文件夹重写它们，而不是改变扩展包的核心文件来调整这些句子。 所以，举个例子，如果您需要重写 `skyrim/hearthfire` 扩展包在 `messages.php` 的英文语句 ，您可以放置语言文件在： `app/lang/packages/en/hearthfire/messages.php`。 您可以只定义您想要重写的语句在这个文件里，任何您没有重写的语句将会仍从扩展包的语言文件载入。

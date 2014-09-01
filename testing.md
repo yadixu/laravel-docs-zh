@@ -1,27 +1,27 @@
-# Unit Testing
+# 单元测试
 
-- [Introduction](#introduction)
-- [Defining & Running Tests](#defining-and-running-tests)
-- [Test Environment](#test-environment)
-- [Calling Routes From Tests](#calling-routes-from-tests)
-- [Mocking Facades](#mocking-facades)
-- [Framework Assertions](#framework-assertions)
-- [Helper Methods](#helper-methods)
-- [Refreshing The Application](#refreshing-the-application)
+- [介绍](#introduction)
+- [定义并执行测试](#defining-and-running-tests)
+- [测试环境](#test-environment)
+- [从测试调用路由](#calling-routes-from-tests)
+- [模拟 Facades](#mocking-facades)
+- [框架 Assertions](#framework-assertions)
+- [辅助方法](#helper-methods)
+- [重置应用程序](#refreshing-the-application)
 
 <a name="introduction"></a>
-## Introduction
+## 介绍
 
-Laravel is built with unit testing in mind. In fact, support for testing with PHPUnit is included out of the box, and a `phpunit.xml` file is already setup for your application. In addition to PHPUnit, Laravel also utilizes the Symfony HttpKernel, DomCrawler, and BrowserKit components to allow you to inspect and manipulate your views while testing, allowing to simulate a web browser.
+Laravel 在创立时就有考虑到单元测试。事实上，它支持立即使用被引入的 PHPUnit 做测试，而且已经为您的应用程序建立了 `phpunit.xml` 文件。 除了 PHPUnit 以外，Laravel 也利用 Symfony HttpKernel、 DomCrawler 和 BrowserKit 组件让您在测试的时候模拟为一个网页浏览器，来检查和处理您的视图。
 
-An example test file is provided in the `app/tests` directory. After installing a new Laravel application, simply run `phpunit` on the command line to run your tests.
+在 `app/tests` 文件夹有提供一个测试例子。在安装新 Laravel 应用程序之后，只要在命令行上执行 `phpunit` 来进行测试流程。
 
 <a name="defining-and-running-tests"></a>
-## Defining & Running Tests
+## 定义并执行测试
 
-To create a test case, simply create a new test file in the `app/tests` directory. The test class should extend `TestCase`. You may then define test methods as you normally would when using PHPUnit.
+要建立一个测试案例，只要在 `app/tests` 文件夹建立新的测试文件。测试类必须继承自 `TestCase`，接着您可以如您平常使用 PHPUnit 一般去定义测试方法。
 
-#### An Example Test Class
+#### 测试类例子
 
 	class FooTest extends TestCase {
 
@@ -32,53 +32,53 @@ To create a test case, simply create a new test file in the `app/tests` director
 
 	}
 
-You may run all of the tests for your application by executing the `phpunit` command from your terminal.
+您可以从命令行执行 `phpunit` 命令来执行应用程序的所有测试。
 
-> **Note:** If you define your own `setUp` method, be sure to call `parent::setUp`.
+> **注意:** 如果您定义自己的 `setUp` 方法， 请记得调用 `parent::setUp`。
 
 <a name="test-environment"></a>
-## Test Environment
+## 测试环境
 
-When running unit tests, Laravel will automatically set the configuration environment to `testing`. Also, Laravel includes configuration files for `session` and `cache` in the test environment. Both of these drivers are set to `array` while in the test environment, meaning no session or cache data will be persisted while testing. You are free to create other testing environment configurations as necessary.
+当执行单元测试的时候，Laravel 会自动将环境设置在 `testing`。另外 Laravel 会在测试环境汇入 `session` 和 `cache` 的配置文件。当在测试环境里这两个驱动会被设定为 `array` (空数组)，代表在测试的时候没有 session 或 cache 数据将会被保留。视情况您可以任意的建立您需要的测试环境设定。
 
 <a name="calling-routes-from-tests"></a>
-## Calling Routes From Tests
+## 从测试调用路由
 
-#### Calling A Route From A Test
+#### 从单一测试中调用路由
 
-You may easily call one of your routes for a test using the `call` method:
+您可以使用 `call` 方法，轻易地调用您的其中一个路由来测试:
 
 	$response = $this->call('GET', 'user/profile');
 
 	$response = $this->call($method, $uri, $parameters, $files, $server, $content);
 
-You may then inspect the `Illuminate\Http\Response` object:
+接着您可以检查 `Illuminate\Http\Response` 对象:
 
 	$this->assertEquals('Hello World', $response->getContent());
 
-#### Calling A Controller From A Test
+#### 从测试调用控制器
 
-You may also call a controller from a test:
+您也可以从测试调用控制器 :
 
 	$response = $this->action('GET', 'HomeController@index');
 
 	$response = $this->action('GET', 'UserController@profile', array('user' => 1));
 
-The `getContent` method will return the evaluated string contents of the response. If your route returns a `View`, you may access it using the `original` property:
+`getContent` 方法会回传求值后的字串内容回应. 如果您的路由回传一个 `View`, 您可以通过 `original` 属性获取它:
 
 	$view = $response->original;
 
 	$this->assertEquals('John', $view['name']);
 
-To call a HTTPS route, you may use the `callSecure` method:
+您可以使用 `callSecure` 方法去调用 HTTPS 路由:
 
 	$response = $this->callSecure('GET', 'foo/bar');
 
-> **Note:** Route filters are disabled when in the testing environment. To enable them, add `Route::enableFilters()` to your test.
+> **注意:** 在测试环境中， 路由筛选器是被禁用的。如果要启用它们，必须增加 `Route::enableFilters()` 到您的测试。
 
-### DOM Crawler
+### DOM 捞取器
 
-You may also call a route and receive a DOM Crawler instance that you may use to inspect the content:
+您也可以通过调用路由来取得 DOM 捞取器实例来检查内容：
 
 	$crawler = $this->client->request('GET', '/');
 
@@ -86,12 +86,12 @@ You may also call a route and receive a DOM Crawler instance that you may use to
 
 	$this->assertCount(1, $crawler->filter('h1:contains("Hello World!")'));
 
-For more information on how to use the crawler, refer to its [official documentation](http://symfony.com/doc/master/components/dom_crawler.html).
+如果需要更多如何使用捞取器的信息，请参考它的[官方文件](http://symfony.com/doc/master/components/dom_crawler.html).
 
 <a name="mocking-facades"></a>
-## Mocking Facades
+## 模拟 Facades
 
-When testing, you may often want to mock a call to a Laravel static facade. For example, consider the following controller action:
+当测试的时候，您或许常会想要模拟调用 Laravel 静态 facade。举个例子，思考下面的控制器行为:
 
 	public function getIndex()
 	{
@@ -100,9 +100,9 @@ When testing, you may often want to mock a call to a Laravel static facade. For 
 		return 'All done!';
 	}
 
-We can mock the call to the `Event` class by using the `shouldReceive` method on the facade, which will return an instance of a [Mockery](https://github.com/padraic/mockery) mock.
+我们可以在 facade 上使用 `shouldReceive` 方法，模拟调用 `Event` 类，它将会回传一个 [Mockery](https://github.com/padraic/mockery) mock 对象实例。
 
-#### Mocking A Facade
+#### 模拟 Facade
 
 	public function testGetIndex()
 	{
@@ -111,14 +111,14 @@ We can mock the call to the `Event` class by using the `shouldReceive` method on
 		$this->call('GET', '/');
 	}
 
-> **Note:** You should not mock the `Request` facade. Instead, pass the input you desire into the `call` method when running your test.
+> **注意:** 您不应该模拟 `Request` facade。取而代之，当执行您的测试，传递想要的输入数据进去 `call` 方法。
 
 <a name="framework-assertions"></a>
-## Framework Assertions
+## 框架 Assertions
 
-Laravel ships with several `assert` methods to make testing a little easier:
+Laravel 附带几个 `assert` 方法，让测试更简单一点:
 
-#### Asserting Responses Are OK
+#### Assert 回应为 OK
 
 	public function testMethod()
 	{
@@ -127,11 +127,11 @@ Laravel ships with several `assert` methods to make testing a little easier:
 		$this->assertResponseOk();
 	}
 
-#### Asserting Response Statuses
+#### Assert 回应状态码
 
 	$this->assertResponseStatus(403);
 
-#### Asserting Responses Are Redirects
+#### Assert 回应为重定向
 
 	$this->assertRedirectedTo('foo');
 
@@ -139,7 +139,7 @@ Laravel ships with several `assert` methods to make testing a little easier:
 
 	$this->assertRedirectedToAction('Controller@method');
 
-#### Asserting A View Has Some Data
+#### Assert 回应带数据的视图
 
 	public function testMethod()
 	{
@@ -149,7 +149,7 @@ Laravel ships with several `assert` methods to make testing a little easier:
 		$this->assertViewHas('age', $value);
 	}
 
-#### Asserting The Session Has Some Data
+#### Assert 回应带数据的 Session
 
 	public function testMethod()
 	{
@@ -159,7 +159,7 @@ Laravel ships with several `assert` methods to make testing a little easier:
 		$this->assertSessionHas('age', $value);
 	}
 
-#### Asserting The Session Has Errors
+#### Assert 回应带错误信息的 Session
 
     public function testMethod()
     {
@@ -174,7 +174,7 @@ Laravel ships with several `assert` methods to make testing a little easier:
         $this->assertSessionHasErrors(array('name', 'age'));
     }
 
-#### Asserting Old Input Has Some Data
+#### Assert 回应带数据的旧输入内容
 
 	public function testMethod()
 	{
@@ -184,35 +184,35 @@ Laravel ships with several `assert` methods to make testing a little easier:
 	}
 
 <a name="helper-methods"></a>
-## Helper Methods
+## 辅助方法
 
-The `TestCase` class contains several helper methods to make testing your application easier.
+`TestCase` 类包含几个辅助方法让应用程序的测试更为简单。
 
-#### Setting And Flushing Sessions From Tests
+#### 从测试里设定和刷新 Sessions
 
 	$this->session(['foo' => 'bar']);
 
 	$this->flushSession();
 
-#### Setting The Currently Authenticated User
+#### 设定目前经过验证的用户
 
-You may set the currently authenticated user using the `be` method:
+您可以使用 `be` 方法设定目前经过验证的用户:
 
 	$user = new User(array('name' => 'John'));
 
 	$this->be($user);
 
-You may re-seed your database from a test using the `seed` method:
+您可以从测试中使用 `seed` 方法重新填充您的数据库:
 
-#### Re-Seeding Database From Tests
+#### 从测试中重新填充数据库
 
 	$this->seed();
 
 	$this->seed($connection);
 
-More information on creating seeds may be found in the [migrations and seeding](/docs/migrations#database-seeding) section of the documentation.
+更多建立填充数据的信息可以在文件的 [迁移与数据填充](/docs/migrations#database-seeding) 部分找到。
 
 <a name="refreshing-the-application"></a>
-## Refreshing The Application
+## 重置应用程序
 
-As you may already know, you can access your Laravel `Application` / IoC Container via `$this->app` from any test method. This Application instance is refreshed for each test class. If you wish to manually force the Application to be refreshed for a given method, you may use the `refreshApplication` method from your test method. This will reset any extra bindings, such as mocks, that have been placed in the IoC container since the test case started running.
+您可能已经知道，您可以通过 `$this->app` 在任何测试方法中获取您的 Laravel `应用程序本体` / IoC 容器。这个应用程序对象实例会在每个测试类被重置。如果您希望在给定的方法手动强制重置应用程序，您可以从您的测试方法使用 `refreshApplication` 方法。 这将会重置任何额外的绑定， 例如那些从测试案例执行开始被放到 IoC 容器的 mocks。

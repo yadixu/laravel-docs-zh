@@ -1,40 +1,39 @@
-# Configuration
+# 设定
 
-- [Introduction](#introduction)
-- [Environment Configuration](#environment-configuration)
-- [Provider Configuration](#provider-configuration)
-- [Protecting Sensitive Configuration](#protecting-sensitive-configuration)
-- [Maintenance Mode](#maintenance-mode)
+- [简介](#introduction)
+- [环境设定](#environment-configuration)
+- [供应商设定](#provider-configuration)
+- [保护敏感设定](#protecting-sensitive-configuration)
+- [维护模式](#maintenance-mode)
 
 <a name="introduction"></a>
-## Introduction
+## 简介
 
-All of the configuration files for the Laravel framework are stored in the `app/config` directory. Each option in every file is documented, so feel free to look through the files and get familiar with the options available to you.
+所有关于 Laravel 框架的设定文件都被放置在 `app/config` 目录下。每个文件里的所有选项都有注释，因此您可以轻松地察看这些文件，请尽可能的去熟悉这些选项配置。
 
-Sometimes you may need to access configuration values at run-time. You may do so using the `Config` class:
+有时候，您可能在运行时需要获取这些设定值，您可以使用 `Config` 类：
 
-#### Accessing A Configuration Value
+#### 获取一个选项的值
 
 	Config::get('app.timezone');
 
-You may also specify a default value to return if the configuration option does not exist:
+如果选项值不存在，您可以指定一个默认值：
 
 	$timezone = Config::get('app.timezone', 'UTC');
 
-#### Setting A Configuration Value
+#### 设定选项值
 
-Notice that "dot" style syntax may be used to access values in the various files. You may also set configuration values at run-time:
+注意，"点"式语法可以用来获取不同设定文件里的选项。您还可以在运行阶段更改设定值:
 
 	Config::set('database.default', 'sqlite');
 
-Configuration values that are set at run-time are only set for the current request, and will not be carried over to subsequent requests.
+在运行阶段设定的选项值只在该次请求中有效，不会对其他的请求造成影响。
 
 <a name="environment-configuration"></a>
-## Environment Configuration
+## 环境配置
+通常应用程序需要根据不同的运行环境而有不同的配置设定值。例如，您会希望在您的本地开发机器上会有与正式环境不同的缓存驱动（cache driver），通过配置文件，这是非常容易达成的。
 
-It is often helpful to have different configuration values based on the environment the application is running in. For example, you may wish to use a different cache driver on your local development machine than on the production server. It is easy to accomplish this using environment based configuration.
-
-Simply create a folder within the `config` directory that matches your environment name, such as `local`. Next, create the configuration files you wish to override and specify the options for that environment. For example, to override the cache driver for the local environment, you would create a `cache.php` file in `app/config/local` with the following content:
+在 `config` 目录下建立与环境名称相同的目录，例如 `local`。接下来，创建您想要重写的设定文件，并且设定该环境所希望的设定值。例如，您要在 `app/config/local` 建立 `cache.php` 文件，内容如下：
 
 	<?php
 
@@ -44,11 +43,11 @@ Simply create a folder within the `config` directory that matches your environme
 
 	);
 
-> **Note:** Do not use 'testing' as an environment name. This is reserved for unit testing.
+> **注:** 请勿使用 'testing' 当作环境名称，它是专门为单元测试保留的。
 
-Notice that you do not have to specify _every_ option that is in the base configuration file, but only the options you wish to override. The environment configuration files will "cascade" over the base files.
+注意，您不需要为基本设定文件中的_所有_选项设定选项值，只需要指定您需要覆蓋的配置选项即可。环境配置文件将会以层叠替换的方式覆蓋基本设定文件。
 
-Next, we need to instruct the framework how to determine which environment it is running in. The default environment is always `production`. However, you may setup other environments within the `bootstrap/start.php` file at the root of your installation. In this file you will find an `$app->detectEnvironment` call. The array passed to this method is used to determine the current environment. You may add other environments and machine names to the array as needed.
+接下来，我们需要让框架知道如何确认其运行环境。默认环境是 `production`。然而，您可以在安装目录下的 `bootstrap/environment.php` 文件中设定其他环境。在该文件中，您可以找到 `$app->detectEnvironment` 函数。该数组将会用来侦测当前的运行环境。您可以根据您的需求增加环境或者是机器名称。
 
     <?php
 
@@ -58,48 +57,48 @@ Next, we need to instruct the framework how to determine which environment it is
 
     ));
 
-In this example, 'local' is the name of the environment and 'your-machine-name' is the hostname of your server. On Linux and Mac, you may determine your hostname using the `hostname` terminal command.
+在这个例子中，'local' 是运行环境的名称而 'your-machine-name' 是您的服务器的主机名称。在 Linux 和 Mac 上，您可以通过命令行执行 `hostsname` 查到您的主机名称。
 
-If you need more flexible environment detection, you may pass a `Closure` to the `detectEnvironment` method, allowing you to implement environment detection however you wish:
+如果您想要更灵活的环境侦测方式，可以传递一个 `闭包（Closure）` 给 `detectEnvironment` 函数，这样您就可以按照您想要的方式侦测了：
 
 	$env = $app->detectEnvironment(function()
 	{
 		return $_SERVER['MY_LARAVEL_ENV'];
 	});
 
-#### Accessing The Current Application Environment
+#### 获取目前的运行环境
 
-You may access the current application environment via the `environment` method:
+您也可以通过 `environment` 函数来取的目前运行阶段的环境：
 
 	$environment = App::environment();
 
-You may also pass arguments to the `environment` method to check if the environment matches a given value:
+您也可以传递参数至 `environment` 函数中，来确认目前的环境是否与参数相符合：
 
 	if (App::environment('local'))
 	{
-		// The environment is local
+		// 当环境为 local 时
 	}
 
 	if (App::environment('local', 'staging'))
 	{
-		// The environment is either local OR staging...
+		// 环境为 local 或 staging...
 	}
 
 <a name="provider-configuration"></a>
-### Provider Configuration
+### 供应商设定
 
-When using environment configuration, you may want to "append" environment [service providers](/docs/ioc#service-providers) to your primary `app` configuration file. However, if you try this, you will notice the environment `app` providers are overriding the providers in your primary `app` configuration file. To force the providers to be appended, use the `append_config` helper method in your environment `app` configuration file:
+当使用环境设定时，您会想要"附加"环境[服务供应商](/docs/ioc#service-providers) 到您主要的 `app` 配置文件中。然而，如果您这样做，您会发现环境 `app` 供应商将会覆蓋掉您主要 `app` 配置文件的供应商。如果要附加供应商，在您的环境 `app` 配置文件中使用 `append_config` helper 方法：
 
 	'providers' => append_config(array(
 		'LocalOnlyServiceProvider',
 	))
 
 <a name="protecting-sensitive-configuration"></a>
-## Protecting Sensitive Configuration
+## 保护敏感设定
 
-For "real" applications, it is advisable to keep all of your sensitive configuration out of your configuration files. Things such as database passwords, Stripe API keys, and encryption keys should be kept out of your configuration files whenever possible. So, where should we place them? Thankfully, Laravel provides a very simple solution to protecting these types of configuration items using "dot" files.
+对于一个"实际"的应用程序，不把敏感的设定放在您的配置文件中, 是明智的抉择。如数据库密码, Stripe API Key 和 `加密金钥` 都应该尽可能地不要存在配置文件中。所以，该放在哪里？很庆幸的，Laravel 提供了一个非常简单的方式：使用 "点开头" 的仿环境变量文件来保存这种类型的设定。
 
-First, [configure your application](/docs/configuration#environment-configuration) to recognize your machine as being in the `local` environment. Next, create a `.env.local.php` file within the root of your project, which is usually the same directory that contains your `composer.json` file. The `.env.local.php` should return an array of key-value pairs, much like a typical Laravel configuration file:
+首先，[设定您的应用程序](/docs/configuration#environment-configuration)来识别您的机器是否在 `local` 环境中。然后创建一个 `.env.local.php` 文件在您的项目最上层目录中（一般而言与 `composer.json` 文件同目录)。`.env.local.php` 将会回传一个键值组的数组，类似于一般的 Laravel 配置文件：
 
 	<?php
 
@@ -109,38 +108,39 @@ First, [configure your application](/docs/configuration#environment-configuratio
 
 	);
 
-All of the key-value pairs returned by this file will automatically be available via the `$_ENV` and `$_SERVER` PHP "superglobals". You may now reference these globals from within your configuration files:
+
+所有在这个文件中的键值组将会被回传，并转成 PHP 的超级全局变量 `$_ENV` 和 `$_SERVER`。您可以在您的配置文件中通过这些全局变量获取：
 
 	'key' => $_ENV['TEST_STRIPE_KEY']
 
-Be sure to add the `.env.local.php` file to your `.gitignore` file. This will allow other developers on your team to create their own local environment configuration, as well as hide your sensitive configuration items from source control.
+请确认将 `.env.local.php` 加进您的 `.gitignore` 文件中。他允许您的团队成员可以创建自己的本机环境配置文件，也可以将敏感设定从版本控制系统中隐藏。
 
-Now, on your production server, create a `.env.php` file in your project root that contains the corresponding values for your production environment. Like the `.env.local.php` file, the production `.env.php` file should never be included in source control.
+现在，您可以在正式环境中，创建一个包含正式环境敏感设定值的 `.env.php` 于您项目的最上层目录。如同 `.env.local.php`，正式环境的 `.env.php` 也不应该在版本控制系统中。
 
-> **Note:** You may create a file for each environment supported by your application. For example, the `development` environment will load the `.env.development.php` file if it exists.
+> **附注:** 您可以为每个有支持的环境创建所属的配置文件。例如，`development` 环境下，如果 `.env.development.php` 文件若存在将会自动读取进来。
 
 <a name="maintenance-mode"></a>
-## Maintenance Mode
+## 维护模式
 
-When your application is in maintenance mode, a custom view will be displayed for all routes into your application. This makes it easy to "disable" your application while it is updating or when you are performing maintenance. A call to the `App::down` method is already present in your `app/start/global.php` file. The response from this method will be sent to users when your application is in maintenance mode.
+当您的应用程序处于维护模式时，所有的路由都会指向一个自定义的视图。当您要更新或进行维护工作时，“关闭”整个网站是很简单的。
 
-To enable maintenance mode, simply execute the `down` Artisan command:
+启用维护模式，只要执行 Artisan 命令 'down'：
 
 	php artisan down
 
-To disable maintenance mode, use the `up` command:
+关闭维护模式，只要执行 Artisan 命令 'up'：
 
 	php artisan up
 
-To show a custom view when your application is in maintenance mode, you may add something like the following to your application's `app/start/global.php` file:
+如果您想要自定义维护模式的页面，您只需要增加下面内容至应用程序里的 `app/start/global.php` 文件中：
 
 	App::down(function()
 	{
 		return Response::view('maintenance', array(), 503);
 	});
 
-If the Closure passed to the `down` method returns `NULL`, maintenance mode will be ignored for that request.
+如果传给 `down` 函数的闭包回传 'NULL' 值，`该此请求将会略过维护模式`。
 
-### Maintenance Mode & Queues
+### 维护模式与队列
 
-While your application is in maintenance mode, no [queue jobs](/docs/queues) will be handled. The jobs will continue to be handled as normal once the application is out of maintenance mode.
+当应用程序处于维护模式中，将不会处理任何[队列工作](/docs/queues)。所有的队列工作将会在应用程序离开维护模式后继续被进行。

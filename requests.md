@@ -1,158 +1,158 @@
-# Requests & Input
+# 请求与输入
 
-- [Basic Input](#basic-input)
+- [基本输入数据](#basic-input)
 - [Cookies](#cookies)
-- [Old Input](#old-input)
-- [Files](#files)
-- [Request Information](#request-information)
+- [旧输入数据](#old-input)
+- [上传文件](#files)
+- [请求信息](#request-information)
 
 <a name="basic-input"></a>
-## Basic Input
+## 基本输入数据
 
-You may access all user input with a few simple methods. You do not need to worry about the HTTP verb used for the request, as input is accessed in the same way for all verbs.
+您可以经由几个简洁的方法拿到用户的输入数据。不需要担心发出请求时使用的 HTTP 动词，取得输入数据的方式都是相同的。
 
-#### Retrieving An Input Value
+#### 取得特定输入数据
 
 	$name = Input::get('name');
 
-#### Retrieving A Default Value If The Input Value Is Absent
+#### 取得特定输入数据，若没有便则取默认值
 
 	$name = Input::get('name', 'Sally');
 
-#### Determining If An Input Value Is Present
+#### 确认是否有输入数据
 
 	if (Input::has('name'))
 	{
 		//
 	}
 
-#### Getting All Input For The Request
+#### 取得所有发出请求时传入的输入数据
 
 	$input = Input::all();
 
-#### Getting Only Some Of The Request Input
+#### 取得部分发出请求时传入的输入数据
 
 	$input = Input::only('username', 'password');
 
 	$input = Input::except('credit_card');
 
-When working on forms with "array" inputs, you may use dot notation to access the arrays:
+如果是「数组」形式的输入数据，可以使用「点」语法取得数组：
 
 	$input = Input::get('products.0.name');
 
-> **Note:** Some JavaScript libraries such as Backbone may send input to the application as JSON. You may access this data via `Input::get` like normal.
+> **提醒：** 有些 JavaScript 函数库如 Backbone 可能会送出 JSON 格式的输入数据，但是一样可以使用 `Input::get` 取得数据。
 
 <a name="cookies"></a>
 ## Cookies
 
-All cookies created by the Laravel framework are encrypted and signed with an authentication code, meaning they will be considered invalid if they have been changed by the client.
+Laravel 建立的 cookie 会加密并且加上认证记号，意味着如果被客户端擅改，会造成 cookie 失效。
 
-#### Retrieving A Cookie Value
+#### 取得 Cookie 值
 
 	$value = Cookie::get('name');
 
-#### Attaching A New Cookie To A Response
+#### 加上新的 Cookie 到回应
 
 	$response = Response::make('Hello World');
 
 	$response->withCookie(Cookie::make('name', 'value', $minutes));
 
-#### Queueing A Cookie For The Next Response
+#### 加入 Cookie 队列到下一个回应
 
-If you would like to set a cookie before a response has been created, use the `Cookie::queue()` method. The cookie will automatically be attached to the final response from your application.
+如果您想在回应被建立前设定 cookie ，使用 `Cookie::queue()` 方法。 Cookie 会在最后自动加到回应里。
 
 	Cookie::queue($name, $value, $minutes);
 
-#### Creating A Cookie That Lasts Forever
+#### 建立永久有效的 Cookie
 
 	$cookie = Cookie::forever('name', 'value');
 
 <a name="old-input"></a>
-## Old Input
+## 旧输入数据
 
-You may need to keep input from one request until the next request. For example, you may need to re-populate a form after checking it for validation errors.
+您可能想要在用户下一次发送请求前，保留这次的输入数据。例如，您可能需要在表单验证失败后重新填入表单值。
 
-#### Flashing Input To The Session
+#### 将输入数据存成一次性 Session 
 
 	Input::flash();
 
-#### Flashing Only Some Input To The Session
+#### 将部分输入数据存成一次性 Session
 
 	Input::flashOnly('username', 'email');
 
 	Input::flashExcept('password');
 
-Since you often will want to flash input in association with a redirect to the previous page, you may easily chain input flashing onto a redirect.
+您很可能常常需要在重新跳转至前一页，并将输入数据存成一次性 Session 。只要在重定向跳转方法串接的方法中传入输入数据，就能简单地完成。
 
 	return Redirect::to('form')->withInput();
 
 	return Redirect::to('form')->withInput(Input::except('password'));
 
-> **Note:** You may flash other data across requests using the [Session](/docs/session) class.
+> **提示：** 您可以使用 [Session](/docs/session) 类将不同请求数据存成其他一次性 Session。
 
-#### Retrieving Old Data
+#### 取得旧输入数据
 
 	Input::old('username');
 
 <a name="files"></a>
-## Files
+## 上传文件
 
-#### Retrieving An Uploaded File
+#### 取得上传文件
 
 	$file = Input::file('photo');
 
-#### Determining If A File Was Uploaded
+#### 确认文件是否有上传
 
 	if (Input::hasFile('photo'))
 	{
 		//
 	}
 
-The object returned by the `file` method is an instance of the `Symfony\Component\HttpFoundation\File\UploadedFile` class, which extends the PHP `SplFileInfo` class and provides a variety of methods for interacting with the file.
+`file` 方法回传的对象是 `Symfony\Component\HttpFoundation\File\UploadedFile` 的实例， `UploadedFile` 继承了 PHP 的 `SplFileInfo` 类并且提供了很多方法和文件互动。
 
-#### Determining If An Uploaded File Is Valid
+#### 确认上传的文件是否有效
 
 	if (Input::file('photo')->isValid())
 	{
 		//
 	}
 
-#### Moving An Uploaded File
+#### 移动上传文件
 
 	Input::file('photo')->move($destinationPath);
 
 	Input::file('photo')->move($destinationPath, $fileName);
 
-#### Retrieving The Path To An Uploaded File
+#### 取得上传文件所在的路径
 
 	$path = Input::file('photo')->getRealPath();
 
-#### Retrieving The Original Name Of An Uploaded File
+#### 取得上传文件的原始名称
 
 	$name = Input::file('photo')->getClientOriginalName();
 
-#### Retrieving The Extension Of An Uploaded File
+#### 取得上传文件的后缀名
 
 	$extension = Input::file('photo')->getClientOriginalExtension();
 
-#### Retrieving The Size Of An Uploaded File
+#### 取得上传文件的大小
 
 	$size = Input::file('photo')->getSize();
 
-#### Retrieving The MIME Type Of An Uploaded File
+#### 取得上传文件的 MIME 类型
 
 	$mime = Input::file('photo')->getMimeType();
 
 <a name="request-information"></a>
-## Request Information
+## 请求信息
 
-The `Request` class provides many methods for examining the HTTP request for your application and extends the `Symfony\Component\HttpFoundation\Request` class. Here are some of the highlights.
+`Request` 类提供很多方法检查 HTTP 请求，它继承了 `Symfony\Component\HttpFoundation\Request` 类，下面是一些使用方式。
 
-#### Retrieving The Request URI
+#### 取得请求 URI
 
 	$uri = Request::path();
 
-#### Retrieving The Request Method
+#### 取得请求方法
 
 	$method = Request::method();
 
@@ -161,60 +161,60 @@ The `Request` class provides many methods for examining the HTTP request for you
 		//
 	}
 
-#### Determining If The Request Path Matches A Pattern
+#### 确认请求路径是否符合特定格式
 
 	if (Request::is('admin/*'))
 	{
 		//
 	}
 
-#### Get The Request URL
+#### 取得请求 URL
 
 	$url = Request::url();
 
-#### Retrieve A Request URI Segment
+#### 取得请求 URI 部分片段
 
 	$segment = Request::segment(1);
 
-#### Retrieving A Request Header
+#### 取得请求 header 
 
 	$value = Request::header('Content-Type');
 
-#### Retrieving Values From $_SERVER
+#### 从 $_SERVER 取得值
 
 	$value = Request::server('PATH_INFO');
 
-#### Determining If The Request Is Over HTTPS
+#### 确认是否为 HTTPS 请求
 
 	if (Request::secure())
 	{
 		//
 	}
 
-#### Determine If The Request Is Using AJAX
+#### 确认是否为 AJAX 请求
 
 	if (Request::ajax())
 	{
 		//
 	}
 
-#### Determine If The Request Has JSON Content Type
+#### 确认请求是否有 JSON Content Type
 
 	if (Request::isJson())
 	{
 		//
 	}
 
-#### Determine If The Request Is Asking For JSON
+#### 确认是否要求 JSON 回应
 
 	if (Request::wantsJson())
 	{
 		//
 	}
 
-#### Checking The Requested Response Format
+#### 确认要求的回应格式
 
-The `Request::format` method will return the requested response format based on the HTTP Accept header:
+`Request::format` 方法会基于 HTTP Accept 标头回传请求的回应格式：
 
 	if (Request::format() == 'json')
 	{

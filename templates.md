@@ -1,16 +1,16 @@
-# Templates
+# 模板
 
-- [Controller Layouts](#controller-layouts)
-- [Blade Templating](#blade-templating)
-- [Other Blade Control Structures](#other-blade-control-structures)
-- [Extending Blade](#extending-blade)
+- [控制器版面布局](#controller-layouts)
+- [Blade 模板](#blade-templating)
+- [其他 Blade 控制语法结构](#other-blade-control-structures)
+- [扩展 Blade](#extending-blade)
 
 <a name="controller-layouts"></a>
-## Controller Layouts
+## 控制器版面布局
 
-One method of using templates in Laravel is via controller layouts. By specifying the `layout` property on the controller, the view specified will be created for you and will be the assumed response that should be returned from actions.
+在 Laravel 中使用模板的其中一个方法就是利用控制器中的 `layout` 版面布局属性。通过指定控制器中的 `layout` 属性值，被指定使用的视图将会被自动创建出来，并作为控制器中动作的回应。
 
-#### Defining A Layout On A Controller
+#### 在控制器中定义一个版面布局
 
 	class UserController extends BaseController {
 
@@ -30,11 +30,11 @@ One method of using templates in Laravel is via controller layouts. By specifyin
 	}
 
 <a name="blade-templating"></a>
-## Blade Templating
+## Blade 模板
 
-Blade is a simple, yet powerful templating engine provided with Laravel. Unlike controller layouts, Blade is driven by _template inheritance_ and _sections_. All Blade templates should use the `.blade.php` extension.
+Blade 是 Laravel 所提供的一个简单却又非常强大的模板引擎。Blade 是使用 _模板继承（template inheritance）_ 及 _区块（sections）_ 来创建出视图。所有的 Blade 模板的后缀名都要命名为 `.blade.php`。
 
-#### Defining A Blade Layout
+#### 定义一个 Blade 版面布局
 
 	<!-- Stored in app/views/layouts/master.blade.php -->
 
@@ -50,7 +50,7 @@ Blade is a simple, yet powerful templating engine provided with Laravel. Unlike 
 		</body>
 	</html>
 
-#### Using A Blade Layout
+#### 在视图模板中使用 Blade 版面布局
 
 	@extends('layouts.master')
 
@@ -64,48 +64,48 @@ Blade is a simple, yet powerful templating engine provided with Laravel. Unlike 
 		<p>This is my body content.</p>
 	@stop
 
-Note that views which `extend` a Blade layout simply override sections from the layout. Content of the layout can be included in a child view using the `@parent` directive in a section, allowing you to append to the contents of a layout section such as a sidebar or footer.
+请注意在视图中 `extend` 一个 Blade 版面布局会直接将版面布局中定义的区块部分用视图的区块部份重写掉。如果想要将版面布局中的区块内容也能在继承此版面布局的视图中呈现，那就要在区块中使用 `@parent` 语法，这样就可以让您将视图的区块内容附加到版面布局区块的内容，而不会是用重写的方式。我们可能会在侧边栏区块或是页尾区块使用类似的技巧。
 
-Sometimes, such as when you are not sure if a section has been defined, you may wish to pass a default value to the `@yield` directive. You may pass the default value as the second argument:
+有时候，如您不确定这个区块内容有没有被定义，您可能会想要传一个默认的内容给 `@yield`。您可以使用第二个参数传入一个默认值给 `@yield`：
 
 	@yield('section', 'Default Content');
 
 <a name="other-blade-control-structures"></a>
-## Other Blade Control Structures
+## 其他 Blade 控制语法结构
 
-#### Echoing Data
+#### 在 Blade 视图中打印（Echoing）数据
 
 	Hello, {{{ $name }}}.
 
 	The current UNIX timestamp is {{{ time() }}}.
 
-#### Echoing Data After Checking For Existence
+#### 检查数据是否存在后再打印数据
 
-Sometimes you may wish to echo a variable, but you aren't sure if the variable has been set. Basically, you want to do this:
+有时候您想要打印一个变量，但您不确定这个变量有没有被设定，基本上，您会想要这样写：
 
 	{{{ isset($name) ? $name : 'Default' }}}
 
-However, instead of writing a ternary statement, Blade allows you to use the following convenient short-cut:
+然而，除了写这种三元叙述语法之外，Blade 让您可以使用下面这种更简便的语法：
 
 	{{{ $name or 'Default' }}}
 
-#### Displaying Raw Text With Curly Braces
+#### 使用花括号显示文字
 
-If you need to display a string that is wrapped in curly braces, you may escape the Blade behavior by prefixing your text with an `@` symbol:
+如果您需要显示一串字串刚好被花刮号包起来，您可以在花刮号之前加上 `@` 符号前缀来跳脱 Blade 引擎的行为：
 
 	@{{ This will not be processed by Blade }}
 
-Of course, all user supplied data should be escaped or purified. To escape the output, you may use the triple curly brace syntax:
+当然，所有用户所提供的数据应该都要被处理过以避免一些安全性问题。所以您可以使用三重花刮号来跳脱用户输入的危险字串：
 
 	Hello, {{{ $name }}}.
 
-If you don't want the data to be escaped, you may use double curly-braces:
+如果您希望打印用户输入的原生文字而不希望跳脱这些字串，您可以使用双重花刮号来打印原生文字：
 
 	Hello, {{ $name }}.
 
-> **Note:** Be very careful when echoing content that is supplied by users of your application. Always use the triple curly brace syntax to escape any HTML entities in the content.
+> **特别注意：** 在您的应用程序打印用户所提供的内容时要非常小心！请记得永远使用三重花刮号的语法来跳脱内容中的 HTML 字串实体。
 
-#### If Statements
+#### If 叙述语法
 
 	@if (count($records) === 1)
 		I have one record!
@@ -119,7 +119,7 @@ If you don't want the data to be escaped, you may use double curly-braces:
 		You are not signed in.
 	@endunless
 
-#### Loops
+#### 循环
 
 	@for ($i = 0; $i < 10; $i++)
 		The current value is {{ $i }}
@@ -130,26 +130,26 @@ If you don't want the data to be escaped, you may use double curly-braces:
 	@endforeach
 
 	@forelse($users as $user)
-	  	<li>{{ $user->name }}</li>
+		<li>{{ $user->name }}</li>
 	@empty
-	  	<p>No users</p>
+		<p>No users</p>
 	@endforelse
 
 	@while (true)
 		<p>I'm looping forever.</p>
 	@endwhile
 
-#### Including Sub-Views
+#### 包含子视图
 
 	@include('view.name')
 
-You may also pass an array of data to the included view:
+您可以利用传数组的方式将数据传给包含进来的子视图：
 
 	@include('view.name', array('some'=>'data'))
 
-#### Overwriting Sections
+#### 重写区块
 
-By default, sections are appended to any previous content that exists in the section. To overwrite a section entirely, you may use the `overwrite` statement:
+在默认的情况中，区块的内容会附加进去之前的同一个区块内容里，如果想要重写掉前面区块中的内容，您可以使用 `overwrite` 叙述语法：
 
 	@extends('list.item.container')
 
@@ -157,26 +157,26 @@ By default, sections are appended to any previous content that exists in the sec
 		<p>This is an item of type {{ $item->type }}</p>
 	@overwrite
 
-#### Displaying Language Lines
+#### 显示语言行
 
 	@lang('language.line')
 
 	@choice('language.line', 1);
 
-#### Comments
+#### 注释
 
 	{{-- This comment will not be in the rendered HTML --}}
 
 <a name="extending-blade"></a>
-## Extending Blade
+## 扩展 Blade
 
-Blade even allows you to define your own custom control structures. When a Blade file is compiled, each custom extension is called with the view contents, allowing you to do anything from simple `str_replace` manipulations to more complex regular expressions.
+Blade 甚至让您可以定义自己的自定义控制语法结构。当一个 Blade 文件被编译时，每一个自定义扩展语法会与视图内容一起被调用，让您可以做任何如单纯的 `str_replace` 操作至更为复杂的正规表达式操作。
 
-The Blade compiler comes with the helper methods `createMatcher` and `createPlainMatcher`, which generate the expression you need to build your own custom directives.
+Blade 的编译器带有一些辅助方法 `createMatcher` 及 `createPlainMatcher`，这些辅助方法可以产生您需要的表达式帮助您建制自己的自定义扩展语法。
 
-The `createPlainMatcher` method is used for directives with no arguments like `@endif` and `@stop`, while `createMatcher` is used for directives with arguments.
+其中 `createPlainMatcher` 方法是用在没有参数的语法命令如 `@endif` 及 `@stop` 等，而 `createMatcher` 方法是用在有参数的语法命令。
 
-The following example creates a `@datetime($var)` directive which simply calls `->format()` on `$var`:
+下面的例子创建了一个 `@datetime($var)` 语法命令，这个命令单纯是让 `$var` 调用 `->format()`：
 
 	Blade::extend(function($view, $compiler)
 	{

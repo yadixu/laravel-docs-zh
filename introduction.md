@@ -1,26 +1,27 @@
-# Introduction
+# 简介
 
-- [Where To Start](#where-to-start)
-- [Laravel Philosophy](#laravel-philosophy)
+- [如何开始](#where-to-start)
+- [Laravel 哲学](#laravel-philosophy)
 
 <a name="where-to-start"></a>
-## Where To Start
+## 如何开始
 
-Learning a new framework can be daunting, but it's also exciting. To smooth your transition, we've attempted to create very clear, concise documentation for Laravel. Here are some recommendations for what to read first:
+学习一个新的框架会很艰辛，但也是很令人兴奋的。为了让您更平顺的学习 Laravel，我们尝试建立了非常清楚明了且简洁的学习文档。这里有一些您可以先阅读的文件
 
-- [Installation](/docs/installation) and [Configuration](/docs/configuration)
-- [Routing](/docs/routing)
-- [Requests & Input](/docs/requests)
-- [Views & Responses](/docs/responses)
-- [Controllers](/docs/controllers)
+- [安装说明](/docs/installation) 和 [设定说明](/docs/configuration)
+- [路由](/docs/routing)
+- [请求与输入](/docs/requests)
+- [视图与回应](/docs/responses)
+- [控制器](/docs/controllers)
 
-After reading through these documents, you should have a good grasp on basic request / response handling in Laravel. Next, you may wish to read about [configuring your database](/docs/database), the [fluent query builder](/docs/queries), and the [Eloquent ORM](/docs/eloquent). Or, you may wish to read about [authentication and security](/docs/security) so you can start signing people into your application.
+通过这些文件，您可以对 Laravel 中的请求与回应有基本的了解。接下来，您不妨看看 [设定数据库](/docs/database)， [fluent query builder](/docs/queries)，还有 [Eloquent ORM](/docs/eloquent)。或者，您也可以看看 [认证与安全性](/docs/security)，这样您就可以让用户登入您的应用程序中。
+
 
 <a name="laravel-philosophy"></a>
-## Laravel Philosophy
+## Laravel 哲学
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, and caching.
+Laravel 是一套富有表达性且具有简洁语法的网页应用程序框架。我们认为开发过程应该是愉悦且有创造性的体验。Laravel 努力减少开发过程中的不便，因此我们提供了验证(authentication)、路由(routing)、sessions、缓存(caching)等开发过程中经常用到的工具或功能。
 
-Laravel aims to make the development process a pleasing one for the developer without sacrificing application functionality. Happy developers make the best code. To this end, we've attempted to combine the very best of what we have seen in other web frameworks, including frameworks implemented in other languages, such as Ruby on Rails, ASP.NET MVC, and Sinatra.
+Laravel 目标是给开发者创造一个愉快的开发过程，并且不牺牲应用程序的功能性。快乐的开发者才能创造最棒的代码。为了这个目的，我们竭取了各框架的优点集中到 Laravel 中，这些框架包括并不局限于 Ruby on Rails、ASP.NET MVC 和 Sinatra 等。
 
-Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
+Laravel 是易于理解且强大的，它提供了强大的工具来开发大型、稳健的应用程序。杰出的 IoC、数据库迁移工具和紧密集成的单元测试，这些工具赋予您构建任何大小规模的应用程序的能力。

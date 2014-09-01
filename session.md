@@ -1,89 +1,90 @@
 # Session
 
-- [Configuration](#configuration)
-- [Session Usage](#session-usage)
-- [Flash Data](#flash-data)
-- [Database Sessions](#database-sessions)
-- [Session Drivers](#session-drivers)
+- [配置信息](#configuration)
+- [Session 用法](#session-usage)
+- [快闪数据（Flash Data）](#flash-data)
+- [数据库 Sessions](#database-sessions)
+- [Session 驱动](#session-drivers)
 
 <a name="configuration"></a>
-## Configuration
+## 配置信息
 
-Since HTTP driven applications are stateless, sessions provide a way to store information about the user across requests. Laravel ships with a variety of session back-ends available for use through a clean, unified API. Support for popular back-ends such as [Memcached](http://memcached.org), [Redis](http://redis.io), and databases is included out of the box.
+由于 HTTP 协定是无状态（Stateless）的，所以 session 提供一种储存用户数据的方法。Laravel 支持了多种 session 后端驱动，并通过清楚、统一的 API 提供使用。也内建支持如 [Memcached](http://memcached.org), [Redis](http://redis.io) 和数据库的后端驱动。
 
-The session configuration is stored in `app/config/session.php`. Be sure to review the well documented options available to you in this file. By default, Laravel is configured to use the `file` session driver, which will work well for the majority of applications.
+session 的配置文件配置在 `app/config/session.php` 中，请务必看一下 session 配置文件中可用的选项设定及注释。Laravel 默认使用 `file` 的 session 驱动，它在大多的应用中可以良好运作。
 
-#### Reserved Keys
+#### 保留键值
 
-The Laravel framework uses the `flash` session key internally, so you should not add an item to the session by that name.
+Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该避免 session 使用此名称。
+
 
 <a name="session-usage"></a>
-## Session Usage
+## Session 用法
 
-#### Storing An Item In The Session
+#### 储存数据到 Session 中
 
 	Session::put('key', 'value');
 
-#### Push A Value Onto An Array Session Value
+#### 储存数据进 Session 数组值中
 
 	Session::push('user.teams', 'developers');
 
-#### Retrieving An Item From The Session
+#### 从 Session 取回数据
 
 	$value = Session::get('key');
 
-#### Retrieving An Item Or Returning A Default Value
+#### 从 Session 取回数据，若无则回传默认值
 
 	$value = Session::get('key', 'default');
 
 	$value = Session::get('key', function() { return 'default'; });
 
-#### Retrieving An Item And Forgetting It
+#### 从 Session 取回数据，并删除
 
 	$value = Session::pull('key', 'default');
 
-#### Retrieving All Data From The Session
+#### 从 Session 取出所有数据
 
 	$data = Session::all();
 
-#### Determining If An Item Exists In The Session
+#### 判断数据在 Session 中是否存在
 
 	if (Session::has('users'))
 	{
 		//
 	}
 
-#### Removing An Item From The Session
+#### 移除 Session 中指定的数据
 
 	Session::forget('key');
 
-#### Removing All Items From The Session
+#### 清空整个 Session
 
 	Session::flush();
 
-#### Regenerating The Session ID
+#### 重新产生 Session ID
 
 	Session::regenerate();
 
 <a name="flash-data"></a>
-## Flash Data
+## 快闪数据（Flash Data）
 
-Sometimes you may wish to store items in the session only for the next request. You may do so using the `Session::flash` method:
+有时您可能希望暂存一些数据，并只在下次请求有效。您可以使用 `Session::flash` 方法来达成目的：
 
 	Session::flash('key', 'value');
 
-#### Reflashing The Current Flash Data For Another Request
+#### 刷新当前快闪数据，延长到下次请求
 
 	Session::reflash();
 
-#### Reflashing Only A Subset Of Flash Data
+#### 只刷新指定快闪数据
 
 	Session::keep(array('username', 'email'));
 
 <a name="database-sessions"></a>
-## Database Sessions
+## 数据库 Sessions
 
-When using the `database` session driver, you will need to setup a table to contain the session items. Below is an example `Schema` declaration for the table:
+当使用 `database` session 驱动时，您必需创建一张储存 session 的数据库表。下方例子使用 `Schema` 来建表：
 
 	Schema::create('sessions', function($table)
 	{
@@ -92,7 +93,7 @@ When using the `database` session driver, you will need to setup a table to cont
 		$table->integer('last_activity');
 	});
 
-Of course, you may use the `session:table` Artisan command to generate this migration for you!
+当然您也可以使用 Artisan 命令 `session:table` 来建表：
 
 	php artisan session:table
 
@@ -101,14 +102,14 @@ Of course, you may use the `session:table` Artisan command to generate this migr
 	php artisan migrate
 
 <a name="session-drivers"></a>
-## Session Drivers
+## Session 驱动
 
-The session "driver" defines where session data will be stored for each request. Laravel ships with several great drivers out of the box:
+session 配置文件中的 "driver" 定义了 session 数据将以哪种方式被储存。Laravel 提供了许多良好的驱动：
 
-- `file` - sessions will be stored in `app/storage/sessions`.
-- `cookie` - sessions will be stored in secure, encrypted cookies.
-- `database` - sessions will be stored in a database used by your application.
-- `memcached` / `redis` - sessions will be stored in one of these fast, cached based stores.
-- `array` - sessions will be stored in a simple PHP array and will not be persisted across requests.
+- `file` - sessions 将储存在 `app/storage/sessions` 文件夹中。
+- `cookie` - sessions 将安全储存在加密的 cookies 中。
+- `database` - sessions 将储存在您的应用程序数据库中。
+- `memcached` / `redis` - sessions 将储存在一个高速缓存的系统中。
+- `array` - sessions 将单纯的以 PHP 数组储存，只存在当次请求。
 
-> **Note:** The array driver is typically used for running [unit tests](/docs/testing), so no session data will be persisted.
+> **注意：** 运行 [unit tests](/docs/testing) 时，session 驱动会被设定为 `array`，所以不会留下任何 session 数据。
