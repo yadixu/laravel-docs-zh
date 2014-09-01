@@ -6,15 +6,15 @@
 <a name="where-to-start"></a>
 ## 如何开始
 
-学习一个新的框架会很艰辛，但也是很令人兴奋的。为了让您更平顺的学习 Laravel，我们尝试建立了非常清楚明了且简洁的学习文档。这里有一些您可以先阅读的文件
+学习一个新的框架会很艰辛，但也是令人兴奋的。为了让您更平滑的学习Laravel，我们尝试建立了非常清晰简洁的学习文档。推荐以下阅读顺序:
 
-- [安装说明](/docs/installation) 和 [设定说明](/docs/configuration)
+- [安装说明](/docs/installation) 和 [配置](/docs/configuration)
 - [路由](/docs/routing)
 - [请求与输入](/docs/requests)
-- [视图与回应](/docs/responses)
+- [视图与响应](/docs/responses)
 - [控制器](/docs/controllers)
 
-通过这些文件，您可以对 Laravel 中的请求与回应有基本的了解。接下来，您不妨看看 [设定数据库](/docs/database)， [fluent query builder](/docs/queries)，还有 [Eloquent ORM](/docs/eloquent)。或者，您也可以看看 [认证与安全性](/docs/security)，这样您就可以让用户登入您的应用程序中。
+通过这些文件，您可以对 Laravel 中的请求与响应有基本的了解。接下来，您不妨看看 [设定数据库](/docs/database)， [查询构造器](/docs/queries)，还有 [Eloquent ORM](/docs/eloquent)。或者，您也可以看看 [认证与安全性](/docs/security)，这样您就可以在应用中实现用户登录的功能。
 
 
 <a name="laravel-philosophy"></a>

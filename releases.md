@@ -1,4 +1,4 @@
-# Release Notes
+# 更新记录
 
 - [Laravel 4.2](#laravel-4.2)
 - [Laravel 4.1](#laravel-4.1)
@@ -6,17 +6,17 @@
 <a name="laravel-4.2"></a>
 ## Laravel 4.2
 
-此发行版本的完整更新列表可以从一个 4.2 的完整安装下，执行 `php artisan changes` 命令，或者 [Github 上的更新纪录](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json)。此纪录仅含括主要的强化更新和此发行的更新部分。
+通过在4.2版本的安装目录下执行 `php artisan changes` 来获取此次版本的完整更新列表，或者 查看[Github 上的更新纪录](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json)。此纪录只含括当前版本的主要功能改进和变更。
 
 > **附注:** 在 4.2 发布周期间，许多小的BUG修正与功能强化被整并至各个 4.1 的子发行版本中。所以最好确认 Laravel 4.1 版本的更新列表。 
 
-### PHP 5.4 需求
+### PHP 版本最低5.4
 
-Laravel 4.2 需要 PHP 5.4 以上的版本。此 PHP 更新版本让我们可以使用 PHP 的新功能：traits 来为如[Laravel 收银台](/docs/billing) 来提供更具表达力的接口。PHP 5.4 也比 PHP 5.3 带来显著的速度及性能提升。
+Laravel 4.2 需要 PHP 5.4 或者更高的版本。此 PHP 更新版本让我们可以使用 PHP 的新特性：traits 来为如[Laravel 收银台](/docs/billing) 来提供更具表达力的接口。PHP 5.4 也比 PHP 5.3 带来显著的速度及性能提升。
 
 ### Laravel Forge
 
-Larvel Forge，一个网页应用程序，提供一个简单的接口去建立管理您云端上的 PHP 服务器，如 Linode, DigitalOcean, Rackspace, 和 Amazon EC2。支持自动化 nginx 设定、SSH 金钥管理、Cron job 自动化、通过 NewRelic & Papertrail 服务器监控，"推送部署", Laravel queue worker 设定等等。Forge 提供最简单且更实惠的方式来部署所有您的 Laravel 应用程序。
+Larvel Forge，一个 Web 应用程序，提供一个简单的接口去建立管理您云端上的 PHP 服务器，如 Linode, DigitalOcean, Rackspace, 和 Amazon EC2。支持自动化 nginx 设定、SSH 密钥管理、Cron job 自动化、通过 NewRelic & Papertrail 服务器监控，"推送部署", Laravel queue worker 设定等等。Forge 提供最简单且更实惠的方式来部署所有您的 Laravel 应用程序。
 
 默认 Laravel 4.2 的安装里， `app/config/database.php` 配置文件默认已为 Forge 设定完成，让在平台上的全新应用程序更方便部署。
 
@@ -32,27 +32,27 @@ Laravel Homestead 是一个为部署健全的 Laravel 和 PHP 应用程序的官
 
 ### Laravel 收银台
 
-Laravel 收银台是一个简单、具表达性的资源库，用来管理 Stripe 的订阅帐务。虽然在安装中此组件依然是选用，我们依然将收银台文件包含在主要 Laravel 文件中。此收银台发布版本带来了数个错误修正、多货币支持还有支持最新的 Stripe API。
+Laravel 收银台是一个简单、具表达性的资源库，用来管理 Stripe 的订阅帐务。虽然在安装中此组件依然是选用，我们任然将收银台文件包含在主要 Laravel 文件中。此收银台发布版本带来了数个错误修正、多货币支持还有支持最新的 Stripe API。
 
 ### Queue Workers 常驻软件
 
 Artisan `queue:work` 命令现在支持 `--daemon` 参数让 worker 可以以"常驻软件"启用。代表 worker 可以持续的处理队列工作不需要重启框架。这让一个复杂的应用程序部署过程中，使得 CPU 的使用有显著的降低。
 
-更多关于 Queue Workers 常驻软件信息请详阅 [queue 文件](/docs/queues#daemon-queue-worker)。
+更多关于 Queue Workers 常驻软件信息请阅读 [queue 文件](/docs/queues#daemon-queue-worker)。
 
 ### Mail API Drivers
 
-Laravel 4.2 为 `Mail` 函数采用了新的 Mailgun 和 Mandrill API 驱动。对许多应用程序而言，他提供了比 SMTP 更快也更可靠的方法来递送邮件。新的驱动使用了 Guzzle 4 HTTP 资源库。
+Laravel 4.2 为 `Mail` 函数采用了新的 Mailgun 和 Mandrill API 驱动。对许多应用程序而言，他提供了比 SMTP 更快也更可靠的方法来发送邮件。新的驱动使用了 Guzzle 4 HTTP 资源库。
 
-### 软删除特性
+### 软删除 Traits
 
-得益于 PHP 5.4 traits , 一个更加简洁的软删除架构, 还有好多 "global scopes" , 都得以实现. 这些新架构为框架提供了更有扩展性的功能, 并且让框架更加简介.
+得益于 PHP 5.4 的 traits , 一个更加简洁的软删除架构, 还有好多 "global scopes" , 都得以实现. 这些新架构为框架提供了更有扩展性的功能, 并且让框架更加简介.
 
-更多关于软删除的信息请见: [Eloquent documentation](/docs/eloquent#soft-deleting).
+更多关于软删除的文档请见: [Eloquent documentation](/docs/eloquent#soft-deleting).
 
 ### 更为方便的 认证(auth) & Remindable Traits
 
-得益于 PHP 5.4 traits , 我们有了一个更简洁的 用户认真 和 密码提醒接口, 这也让 `User` 模型文件更加精简.
+得益于 PHP 5.4 traits , 我们有了一个更简洁的 用户认证 和 密码提醒接口, 这也让 `User` 模型文件更加精简.
 
 ### "简易分页"
 
@@ -67,7 +67,7 @@ Laravel 4.2 为 `Mail` 函数采用了新的 Mailgun 和 Mandrill API 驱动。�
 
 ### 完整更新列表
 
-此发行版本的完整更新列表，可以在版本 4.1 的安装中命令行执行 `php artisan changes` 取得，或者浏览 [Github 更新文件](https://github.com/laravel/framework/blob/4.1/src/Illuminate/Foundation/changes.json)中了解。其中只记录了该版本比较主要的强化功能和更新。
+通过在4.1版本的安装目录下执行 `php artisan changes` 来获取此次版本的完整更新列表，或者 查看[Github 上的更新纪录](https://github.com/laravel/framework/blob/4.1/src/Illuminate/Foundation/changes.json)。此纪录只含括当前版本的主要功能改进和变更。
 
 ### 新的 SSH 组件
 
@@ -89,9 +89,9 @@ Eloquent 新增了新的 `hasManyThrough` 关系链。想要了解更多，请�
 
 Query Builder 和 Eloquent 目前通过数据库层，已经可以自动做到读写分离。更多的信息，请参考[文件](/docs/database#read-write-connections)。
 
-### 队列排序
+### 队列优先级
 
-队列排序已经被支持，只要在 `queue:listen` 命令后将队列以逗号分隔送出。
+支持通过在 `queue:listen` 后面传递一组以逗号分隔的列表来指定队列优先级。
 
 ### 失败队列工作处理
 
@@ -116,4 +116,4 @@ Laravel 4.1 拥有一个完全重新编写的路由层。API 一样不变。然�
 
 ### Doctrine DBAL
 
-如果您有在您的迁移中使用到 `renameColumn`，之后您必须在 `composer.json` 里加 `doctrine/dbal` 进相依扩展包中。此扩展包不再默认包含在 Laravel 之中。
+如果您有在您的迁移中使用到 `renameColumn`，之后您必须在 `composer.json` 里加入 `doctrine/dbal` 扩展包。此扩展包不再默认包含在 Laravel 之中。
