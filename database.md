@@ -3,14 +3,14 @@
 - [配置文件](#configuration)
 - [读写分离](#read-write-connections)
 - [数据库操作](#running-queries)
-- [数据库交易](#database-transactions)
-- [获取连线](#accessing-connections)
+- [数据库事务](#database-transactions)
+- [获取连接](#accessing-connections)
 - [数据库操作纪录](#query-logging)
 
 <a name="configuration"></a>
 ## 配置文件
 
-Laravel 让数据库连接与执行查询语句变得相当简单。数据库配置文件位在 `app/config/database.php`。 您可以在此定义所需的数据库连接，也可以指定哪一个连接是默认的。所有支持的数据库类型与例子皆在文件内说明。
+Laravel 让数据库连接与执行查询语句变得相当简单。数据库配置文件存放在 `app/config/database.php`。 您可以在此定义所需的数据库连接，也可以指定哪一个连接是默认的。所有支持的数据库类型与例子皆在文件内说明。
 
 目前为止 Laravel 支持 4 种数据库系统: MySQL, Postgres, SQLite 和 SQL Server。
 
@@ -70,9 +70,9 @@ Laravel 让数据库连接与执行查询语句变得相当简单。数据库配
 
 	DB::statement('drop table users');
 
-#### 聆听数据库操作事件
+#### 监听数据库操作事件
 
-您可以使用 `DB::listen` 方法来聆听数据库操作事件:
+您可以使用 `DB::listen` 方法来监听数据库操作事件:
 
 	DB::listen(function($sql, $bindings, $time)
 	{
@@ -116,7 +116,7 @@ Laravel 让数据库连接与执行查询语句变得相当简单。数据库配
 
 	$pdo = DB::connection()->getPdo();
 
-有时候您会需要重新连线至某个数据库:
+有时候您会需要重新连接至某个数据库:
 
 	DB::reconnect('foo');
 

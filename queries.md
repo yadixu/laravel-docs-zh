@@ -5,7 +5,7 @@
 - [Joins](#joins)
 - [进阶 Wheres](#advanced-wheres)
 - [聚合](#aggregates)
-- [Raw Expressions](#raw-expressions)
+- [原生表达式](#raw-expressions)
 - [新增](#inserts)
 - [更新](#updates)
 - [删除](#deletes)
@@ -65,7 +65,7 @@
 
 	$users = $query->addSelect('age')->get();
 
-#### 使用 where 及运算子
+#### 使用 where 及运算符
 
 	$users = DB::table('users')->where('votes', '>', 100)->get();
 
@@ -314,6 +314,6 @@
 
 这个例子中，查询结果将会缓存 10 分钟。当结果被缓存时，查询语句将不会被执行，而会从应用程序指定的缓存驱动器中载入缓存的结果。
 
-如果您正在使用的是 [支持的缓存驱动器](/docs/cache#cache-tags)，您也可以为缓存增加标签：
+如果您正在使用的是 [支持标签的缓存驱动器](/docs/cache#cache-tags)，您也可以为缓存增加标签：
 
 	$users = DB::table('users')->cacheTags(array('people', 'authors'))->remember(10)->get();
