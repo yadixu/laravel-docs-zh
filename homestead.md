@@ -41,27 +41,27 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 ### 增加 Vagrant 封装包
 
-当 VirtualBox 和 Vagrant 安装完成后，您可以在终端机以下列命令将 'laravel/homestead' 封装包安装进您的 Vagrant 安装软件中。下载封装包会花您一点时间，看您的网路速度决定：
+当 VirtualBox 和 Vagrant 安装完成后，您需要在终端机执行以下列命令将 'laravel/homestead' 封装包安装进您的 Vagrant 安装软件中。下载封装包会根据您的网速速度花费一点时间：
 
 	vagrant box add laravel/homestead
 
 ### 复制 Homestead 软件源
 
-一旦封装包已经被加进您的 Vagrant 安装软件后，您必须克隆置于一个集中的 `Homestead` 目录中，目录中放置所有您的 Laravel 项目，如此 homestead 封装包就可以运行您所有的 Laravel（和 PHP）项目。
+一旦封装包已经被加进您的 Vagrant 后，您应该克隆或下载这个 `repository` ，`Homestead` 目录中放置所有您的 Laravel 项目，如此 homestead 封装包就可以运行您所有的 Laravel（和 PHP）项目。
 
 	git clone https://github.com/laravel/homestead.git Homestead
 
-### 设定您的 SSH 金钥
+### 设定您的 SSH 密钥
 
-使用钱需要编辑下 `Homestead.yaml` 文件。您可以在文件中设定您的 SSH 公开金钥，以及您主要机器与 Homestead 虚拟机器之间的共享目录。
+在将其放入版本库之前，您需要编辑下 `Homestead.yaml` 文件。您可以在文件中设定您的 SSH 公开密钥，以及您主要机器与 Homestead 虚拟机器之间的共享目录。
 
-您没有 SSH 金钥? 在 Mac 和 Linux 下，您可以利用下面的命令来创建一个 SSH 金钥组:
+您没有 SSH 密钥? 在 Mac 和 Linux 平台下，您可以利用下面的命令来创建一个 SSH 金钥组:
 
 	ssh-keygen -t rsa -C "your@email.com"
 
 在 Windows 下，您需要安装 [Git](http://git-scm.com/) 并且使用包含在 Git 里的 `Git Bash` 来执行上述的命令。另外您也可以使用 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) 和 [PuTTYgen](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)。
 
-一旦您创建了一个 SSH 金钥，记得在您的 `Homestead.yaml` 文件中的 `authorize` 属性指明金钥路径。
+一旦您创建了一个 SSH 密钥，记得在您的 `Homestead.yaml` 文件中的 `authorize` 属性指明密钥路径。
 
 ### 设定您的共享文件夹
 
@@ -69,7 +69,7 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 ### 设定您的 Nginx 站点
 
-对 Nginx 不熟悉? 没关系。`sites` 属性允许您简单的对应一个 `网域` 到一个您 homestead 环境中的目录。一个例子的站点设定被在 `Homestead.yaml` 文件中。同样的，您可以加任何您需要的站点到您的 Homestead 环境中。Homestead 可以作为您进行中项目的一个方便虚拟化环境。
+对 Nginx 不熟悉? 没关系。`sites` 属性允许您简单的将一个 `域名` 对应到一个您在 homestead 环境中的目录。在 `Homestead.yaml` 文件中有默认一个简单的站点配置样例提您参考。同样的，您可以添j加任何您需要的站点到您的 Homestead 环境中。Homestead 可以作为您进行中项目的一个方便虚拟化环境。
 
 ### Bash Aliases
 
@@ -77,9 +77,9 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 ### 启动 Vagrant 封装包
 
-当您根据您的情况编辑完 `Homestead.yaml` 后，在终端机里，从 Homestead 目录里执行 `vagrant up` 命令。Vagrant 将会将虚拟机器开机，并且自动设定您的共享目录和 Nginx 站点。
+当您根据您的情况编辑完 `Homestead.yaml` 后，在终端机里，从 Homestead 目录里执行 `vagrant up` 命令。Vagrant 将会开启虚拟机，并且自动设定您的共享目录和 Nginx 站点。
 
-为了能访问您的 Nginx 站点，别忘记在本机的 `hosts` 文件中将"网域"加进去。`hosts` 文件会将您的本地网域的站点请求重定向跳转至您的 Homestead 环境中。在 Mac 和 Linux，该文件放在 `/etc/hosts`。在 Windows 环境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。您要加进去的内容类似如下：
+为了能访问您的 Nginx 站点，别忘记在本机的 `hosts` 文件中将"域名"加进去。`hosts` 文件会将您的本地网域的站点请求重定向跳转至您的 Homestead 环境中。在 Mac 和 Linux，该文件放在 `/etc/hosts`。在 Windows 环境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。您要加进去的内容类似如下：
 
 	127.0.0.1  homestead.app
 
