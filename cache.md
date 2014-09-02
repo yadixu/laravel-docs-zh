@@ -9,7 +9,7 @@
 <a name="configuration"></a>
 ## 设定
 
-Laravel 为各种不同的缓存系统提供一致的 API。 缓存配置文件位在 `app/config/cache.php`。 您可以在此为应用程序指定使用哪一种缓存系统，Laravel 支持各种常见的后端缓存系统，如 [Memcached](http://memcached.org) 和 [Redis](http://redis.io)。
+Laravel 为各种不同的缓存系统提供一致的 API。 缓存配置文件存放在 `app/config/cache.php`。 您可以在此为应用程序指定使用哪一种缓存系统，Laravel 支持各种常见的后端缓存系统，如 [Memcached](http://memcached.org) 和 [Redis](http://redis.io)。
 
 缓存配置文件也包含多个其他选项，在文件里都有说明，所以请务必先阅读过。Laravel 默认使用 `文件` 缓存系统，该系统会储存序列化、缓存对象在文件系统中。在大型应用程序中，建议使用储存在内存中的缓存系统，如 Memcached 或 APC。
 
