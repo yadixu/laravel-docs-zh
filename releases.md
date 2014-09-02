@@ -6,33 +6,33 @@
 <a name="laravel-4.2"></a>
 ## Laravel 4.2
 
-通过在4.2版本的安装目录下执行 `php artisan changes` 来获取此次版本的完整更新列表，或者 查看[Github 上的更新纪录](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json)。此纪录只含括当前版本的主要功能改进和变更。
+通过在4.2版本的安装目录下执行 `php artisan changes` 可以获取此次版本的完整更新列表，或者 查看[Github 上的更新记录](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json)。此记录只含括当前版本的主要功能改进和变更。
 
-> **附注:** 在 4.2 发布周期间，许多小的BUG修正与功能强化被整并至各个 4.1 的子发行版本中。所以最好确认 Laravel 4.1 版本的更新列表。 
+> **附注:** 在 4.2 发布周期内，许多小的BUG修正与功能强化被整合至各个 4.1 的子发行版本中。所以最好确认 Laravel 4.1 版本的更新列表。 
 
-### PHP 版本最低5.4
+### PHP 所需最低版本为 5.4
 
-Laravel 4.2 需要 PHP 5.4 或者更高的版本。此 PHP 更新版本让我们可以使用 PHP 的新特性：traits 来为如[Laravel 收银台](/docs/billing) 来提供更具表达力的接口。PHP 5.4 也比 PHP 5.3 带来显著的速度及性能提升。
+Laravel 4.2 需要 PHP 5.4 或者更高的版本。此 PHP 的更新版本让我们可以使用 PHP 的新特性：`traits` 来为如[Laravel Cashier](/docs/billing) 来提供更具表达力的接口。PHP 5.4 相比 PHP 5.3 ，在性能、速度、执行力效率上都有显著的提高。
 
 ### Laravel Forge
 
-Larvel Forge，一个 Web 应用程序，提供一个简单的接口去建立管理您云端上的 PHP 服务器，如 Linode, DigitalOcean, Rackspace, 和 Amazon EC2。支持自动化 nginx 设定、SSH 密钥管理、Cron job 自动化、通过 NewRelic & Papertrail 服务器监控，"推送部署", Laravel queue worker 设定等等。Forge 提供最简单且更实惠的方式来部署所有您的 Laravel 应用程序。
+Larvel Forge是一个 Web 应用程序，它提供了一个简单的接口去建立、管理您云端上的 PHP 服务器，如 Linode, DigitalOcean, Rackspace 和 Amazon EC2。支持自动化 nginx 设定、SSH 密钥管理、Cron job 自动化， 通过 NewRelic 或者 Papertrail 进行服务器监控，"Push To Deploy", Laravel queue worker 设定等等。Forge 提供最简单且更实惠的方式来部署所有您的 Laravel 应用程序。
 
-默认 Laravel 4.2 的安装里， `app/config/database.php` 配置文件默认已为 Forge 设定完成，让在平台上的全新应用程序更方便部署。
+默认在 Laravel 4.2 的安装里， `app/config/database.php` 配置文件已为 Forge 设定完成，能让新应用在平台上的更方便的部署更加方便。
 
 关于 Laravel Forge 的更多信息可以在[官方 Forge 网站](https://forge.laravel.com)上找到。
 
 ### Laravel Homestead
 
-Laravel Homestead 是一个为部署健全的 Laravel 和 PHP 应用程序的官方 Vagrant 环境。绝大多数的封装包的相依与软件在发布前已经部署处理完成，让封装包可以极快的被启用。Homestead 包含 Nginx 1.6, PHP 5.5.12, MySQL, Postres, Redis, Memcached, Beanstalk, Node, Gulp, Grunt 和 Bower。Homestead 包含一个简单的 `Homestead.yaml` 配置文件，让您在单一个封装包中管理多个 Laravel 应用程序。
+Laravel Homestead 是一个为开发强壮的 Laravel 和 PHP 应用程序的所提供的官方 Vagrant 环境，是一个离线的，预先打好包的`Vagrant box`。绝大多数的 `box` 依赖软件在发布前已经部署处理完成，这让`box`可以极快的被启用。Homestead 包含 Nginx 1.6, PHP 5.5.12, MySQL, Postres, Redis, Memcached, Beanstalk, Node, Gulp, Grunt 和 Bower。Homestead 包含一个简单的 `Homestead.yaml` 配置文件，让您在单一个封装包中能管理多个 Laravel 应用程序。
 
 默认的 Laravel 4.2 安装中包含的 `app/config/local/database.php` 配置文件使用 Homestead 的数据库作为默认。让 Laravel 初始化安装与设定更为方便。
 
 官方文件已经更新并包含在 [Homestead 文件](/docs/homestead)中。
 
-### Laravel 收银台
+### Laravel Cashier
 
-Laravel 收银台是一个简单、具表达性的资源库，用来管理 Stripe 的订阅帐务。虽然在安装中此组件依然是选用，我们任然将收银台文件包含在主要 Laravel 文件中。此收银台发布版本带来了数个错误修正、多货币支持还有支持最新的 Stripe API。
+Laravel Cashier是一个简单、具有表现力的资源库，用来管理 Stripe 的订阅帐务。虽然在安装中此组件是选用状态，我们仍将Cashier文件包含在主要 Laravel 文件中。此发布版本修复了多个错误、支持多货币还有支持最新的 Stripe API。
 
 ### Queue Workers 常驻软件
 
@@ -46,7 +46,8 @@ Laravel 4.2 为 `Mail` 函数采用了新的 Mailgun 和 Mandrill API 驱动。�
 
 ### 软删除 Traits
 
-得益于 PHP 5.4 的 traits , 一个更加简洁的软删除架构, 还有好多 "global scopes" , 都得以实现. 这些新架构为框架提供了更有扩展性的功能, 并且让框架更加简介.
+对于软删除和全作用域更简洁的方案
+PHP 5.4 的 `traits` 提供了一个更加简洁的软删除架构和全局作用域, 这些新架构为框架提供了更有扩展性的功能, 并且让框架更加简洁.
 
 更多关于软删除的文档请见: [Eloquent documentation](/docs/eloquent#soft-deleting).
 
