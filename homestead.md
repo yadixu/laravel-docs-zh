@@ -55,7 +55,7 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 在将其放入版本库之前，您需要编辑下 `Homestead.yaml` 文件。您可以在文件中设定您的 SSH 公开密钥，以及您主要机器与 Homestead 虚拟机器之间的共享目录。
 
-您没有 SSH 密钥? 在 Mac 和 Linux 平台下，您可以利用下面的命令来创建一个 SSH 金钥组:
+如果没有 SSH 密钥 在 Mac 和 Linux 平台下，您可以利用下面的命令来创建一个 SSH 密钥:
 
 	ssh-keygen -t rsa -C "your@email.com"
 
@@ -69,7 +69,7 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 ### 设定您的 Nginx 站点
 
-对 Nginx 不熟悉? 没关系。`sites` 属性允许您简单的将一个 `域名` 对应到一个您在 homestead 环境中的目录。在 `Homestead.yaml` 文件中有默认一个简单的站点配置样例提您参考。同样的，您可以添j加任何您需要的站点到您的 Homestead 环境中。Homestead 可以作为您进行中项目的一个方便虚拟化环境。
+对 Nginx 不熟悉? 没关系。`sites` 属性允许您简单的将一个 `域名` 对应到一个您在 homestead 环境中的目录。在 `Homestead.yaml` 文件中有默认一个简单的站点配置样例提您参考。同样的，您可以添加任何您需要的站点到您的 Homestead 环境中。Homestead 可以作为您开发项目时的一个方便的虚拟化环境。
 
 ### Bash Aliases
 
@@ -83,7 +83,7 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 	127.0.0.1  homestead.app
 
-一旦您将网域加进您的 `hosts` 文件中，您本机可以从端口 8000 通过您的浏览器获取到您的站点。
+一旦您将网址加进您的 `hosts` 文件中，您本机可以从端口 8000 通过您的浏览器获取到您的站点。
 
 	http://homestead.app:8000
 
@@ -94,15 +94,15 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 ### 通过 SSH 连接
 
-要通过 SSH 连接您的 Homestead 环境，您需要使用您设定在 `Homestead.yaml` 文件中的 SSH 金钥连接 `127.0.0.1` 的端口 2222。您也可以轻易的从您的 `Homestead` 目录下执行 `vagrant ssh` 命令来连接。
+要通过 SSH 连接您的 Homestead 环境，您需要使用您设定在 `Homestead.yaml` 文件中的 SSH 密钥连接 `127.0.0.1` 的端口 2222。您也可以轻易的从您的 `Homestead` 目录下执行 `vagrant ssh` 命令来连接。
 
 如果您想要更简便，您可以将下面的 alias 加到您的 `~/.bash_aliases` 或是 `~/.bash_profile` 中：
 
 	alias vm='ssh vagrant@127.0.0.1 -p 2222'
 
-### 链接您的数据库
+### 连接您的数据库
 
-在 `Homestead` 封装包中，MySQL 与 Postgres 两套数据库都已预装其中。为了更简便，Laravel 的 `local` 数据库设定已经默认将其设定完成。
+在 `Homestead` 封装包中，MySQL 与 Postgres 两套数据库都已预装其中。为了更简便，Laravel 的 `local` 环境下的数据库配置已经默认设置为 `homestead` 。
 
 如果您想要从您的本机上通过 Navicat 或者是 Sequel Pro 连接您的 MySQL 或者 Postgres 数据库，您可以连接 `127.0.0.1` 的 端口 33060 (MySQL) 或 54320 (Postgres)。而帐号密码分别是 `homestead` / `secret`。
 
@@ -110,7 +110,7 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 ### 增加更多的站点
 
-一旦您的 Homestead 环境上架且运行后，您可能会需要为您的 Laravel 应用程序增加够多的 Nginx 站点。您可以在单一个 Homestead 环境中运行非常多 Laravel 安装软件。两个方式可以达到：第一，您可以在您的 `Homestead.yaml` 文件中增加站点然后执行 `vagrant provision`。
+一旦您的 Homestead 环境上架且运行后，您可能会需要为您的 Laravel 应用程序增加够多的 Nginx 站点。您可以在一台 Homestead 环境中运行非常多 Laravel 安装软件。可以通过如下两个方式：第一，可以在您的 `Homestead.yaml` 文件中增加站点然后执行 `vagrant provision`。
 
 另外，您也可以使用放在您的 Homestead 环境中的 `serve` 命令。您需要 SSH 进入您的 Homestead 环境中，并执行下列命令：
 

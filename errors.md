@@ -9,7 +9,7 @@
 <a name="configuration"></a>
 ## 配置文件
 
-日志处理程序注册在[启动文件](/docs/lifecycle#start-files) `app/start/global.php` 文件里面。日志都默认储存在一个单独的文件中，您可以依照实际需求自定义日志。因为 Laravel 使用了广为人用的 Monolog 日志，您可以利用 Monolog 提供的多种方式管理你的日志。
+日志处理程序注册在[启动文件](/docs/lifecycle#start-files) `app/start/global.php` 文件里面。日志都默认储存在一个单独的文件中，您可以依照实际需求自定义日志。因为 Laravel 使用了非常流行的 Monolog 日志库，您可以利用 Monolog 提供的多种方式管理你的日志。
 
 例如，如果您想每天使用一个文件记录日志而不是使用单独的庞大文件，您可以照着下面的例子更改开始配置文件：
 

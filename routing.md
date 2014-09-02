@@ -5,7 +5,7 @@
 - [路由筛选](#route-filters)
 - [路由命名](#named-routes)
 - [路由群组](#route-groups)
-- [子网域路由](#sub-domain-routing)
+- [子域名路由](#sub-domain-routing)
 - [前缀路由](#route-prefixing)
 - [路由模型绑定](#route-model-binding)
 - [404 错误](#throwing-404-errors)
@@ -30,14 +30,14 @@
 		return 'Hello World';
 	});
 
-#### 在一个路由中注册多个动作
+#### 在一个路由中注册多种请求
 
 	Route::match(array('GET', 'POST'), '/', function()
 	{
 		return 'Hello World';
 	});
 
-#### 在一个路由中回应所有 HTTP 动作
+#### 在一个路由中回应所有 HTTP 请求
 
 	Route::any('foo', function()
 	{
@@ -279,7 +279,7 @@
 
 Laravel 路由一样可以处理通配的子域名，并且从域名中传递您的通配符参数：
 
-#### 注册子网域路由
+#### 注册子域名路由
 
 	Route::group(array('domain' => '{account}.myapp.com'), function()
 	{

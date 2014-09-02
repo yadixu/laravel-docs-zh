@@ -1,14 +1,14 @@
-# 视图（ View ）与回应（ Response ）
+# 视图（ View ）与响应（ Response ）
 
-- [基本回应](#basic-responses)
+- [基本响应](#basic-responses)
 - [重定向跳转](#redirects)
 - [视图](#views)
 - [视图组件](#view-composers)
-- [特殊回应](#special-responses)
-- [回应宏](#response-macros)
+- [特殊响应](#special-responses)
+- [响应宏](#response-macros)
 
 <a name="basic-responses"></a>
-## 基本回应
+## 基本响应
 
 #### 从路由回传字串
 
@@ -17,9 +17,9 @@
 		return 'Hello World';
 	});
 
-#### 建立自定义回应
+#### 建立自定义响应
 
-`Response` 实例继承了 `Symfony\Component\HttpFoundation\Response` 类，其提供了很多方法建立 HTTP 回应。
+`Response` 实例继承了 `Symfony\Component\HttpFoundation\Response` 类，其提供了很多方法建立 HTTP 响应。
 
 	$response = Response::make($contents, $statusCode);
 
@@ -31,7 +31,7 @@
 
 	return Response::view('hello')->header('Content-Type', $type);
 
-#### 附加 Cookies 到回应
+#### 附加 Cookies 到响应
 
 	$cookie = Cookie::make('name', 'value');
 
@@ -199,17 +199,17 @@
 	});
 
 <a name="special-responses"></a>
-## 特殊回应
+## 特殊响应
 
-#### 建立 JSON 回应
+#### 建立 JSON 响应
 
 	return Response::json(array('name' => 'Steve', 'state' => 'CA'));
 
-#### 建立 JSONP 回应
+#### 建立 JSONP 响应
 
 	return Response::json(array('name' => 'Steve', 'state' => 'CA'))->setCallback(Input::get('callback'));
 
-#### 建立下载文件回应
+#### 建立下载文件响应
 
 	return Response::download($pathToFile);
 
@@ -218,9 +218,9 @@
 > **提醒：** 管理文件下载的扩展包，Symfony HttpFoundation，要求下载文件名必须为 ASCII 。
 
 <a name="response-macros"></a>
-## 回应宏
+## 响应宏
 
-如果您想要自定义可以在很多路由和控制器重复使用的回应，可以使用 `Response::macro` 方法：
+如果您想要自定义可以在很多路由和控制器重复使用的响应，可以使用 `Response::macro` 方法：
 
 	Response::macro('caps', function($value)
 	{

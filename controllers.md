@@ -12,7 +12,7 @@
 除了在 `routes.php` 文件中定义所有路由层逻辑外，您可能也想利用控制器来整合这些行为。控制器可以利用更先进的框架特性的优势，如自动的[依赖注入](/docs/ioc)整合相关的路由逻辑到同一个类中。
 
 
-控制器一般存放在 `app/controllers` 目录下，这个目录已默认注册在 `composer.json` 的 `classmap` 中。然而，控制器可以放在任何目录或是子目录中。路由定义与控制器类存放在哪个位址并无关系。所以，只要 Composer 知道如何自动载入控制器类，您就可以把控制器放在任何您想要的地方。
+控制器一般存放在 `app/controllers` 目录下，这个目录已默认注册在 `composer.json` 的 `classmap` 中。然而，控制器可以放在任何目录或是子目录中。路由定义与控制器类存放在哪个位置并无关系。所以，只要 Composer 知道如何自动载入控制器类，您就可以把控制器放在任何您想要的地方。
 
 下面是一个基本的控制器类例子：
 
@@ -151,7 +151,7 @@ Laravel 让您可以简单的经由定义一个路由规则来处理控制器里
 
 `index` 方法会对应到 controller 的根 URI，以上面的例子来说，就是 `users`。
 
-若您的控制器方法包含很多单字，您可以在 URI 使用 "破折号(-)" 来对应方法。例如 `UserController` 中，如下的方法会对应到 `users/admin-profile` URI：
+若您的控制器方法包含很多单词，您可以在 URI 使用 "破折号(-)" 来对应方法。例如 `UserController` 中，如下的方法会对应到 `users/admin-profile` URI：
 
 	public function getAdminProfile() {}
 
