@@ -18,9 +18,9 @@
 
 	php artisan migrate:make create_users_table
 
-迁移文件会建立在 `app/database/migrations` 目录下，文件名会包含时间戳记，在执行迁移时用来决定顺序。
+迁移文件会建立在 `app/database/migrations` 目录下，文件名会包含时间戳，用于在执行迁移时用来决定顺序。
 
-您也可以在建立迁移命令加上 `--path` 参数。路径要相对于应用程序所在的根目录。
+您也可以在建立迁移命令加上 `--path` 参数指定要生成的目录，路径要相对于应用程序所在的根目录。
 
 	php artisan migrate:make foo --path=app/migrations
 
@@ -73,7 +73,7 @@
 <a name="database-seeding"></a>
 ## 数据填充
 
-Laravel 可以简单的使用 seed 类，填充测试数据到数据库。所有的 seed 类放在 `app/database/seeds` 目录下。可以使用任何您想要的类名称，但是应该遵守某些大小写规范，如 `UserTableSeeder` 之类。默认已经有一个 `DatabaseSeeder` 类。在这个类里，使用 `call` 方法执行其他的 seed 类，让您控制填充的顺序。
+Laravel 可以简单的使用 seed 类填充测试数据到数据库。所有的 seed 类放在 `app/database/seeds` 目录下。可以使用任何您想要的类名称，但是应该遵守某些大小写规范，如 `UserTableSeeder` 之类。默认已经有一个 `DatabaseSeeder` 类。在这个类里，使用 `call` 方法执行其他的 seed 类，让您控制填充的顺序。
 
 #### Seed 类例子
 

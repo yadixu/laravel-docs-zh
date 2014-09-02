@@ -3,14 +3,14 @@
 - [介绍](#introduction)
 - [配置文件](#configuration)
 - [使用方式](#usage)
-- [管线](#pipelining)
+- [管道](#pipelining)
 
 <a name="introduction"></a>
 ## 介绍
 
 [Redis](http://redis.io) 是开源，先进的键值对储存库。由于它可用的键包含了[字串](http://redis.io/topics/data-types#strings)，[哈希](http://redis.io/topics/data-types#hashes)，[列表](http://redis.io/topics/data-types#lists)，[集合](http://redis.io/topics/data-types#sets)，和[有序集合](http://redis.io/topics/data-types#sorted-sets)，因此常被称作数据结构服务器。
 
-> **提醒：** 如果您用 PECL 安装了 Redis PHP extension，则需要重新命名 `app/config/app.php` 里的 Redis 别名。
+> **提醒：** 如果您通过 PECL 安装了 Redis PHP extension，则需要重新命名 `app/config/app.php` 里的 Redis 别名。
 
 <a name="configuration"></a>
 ## 配置文件
@@ -65,9 +65,9 @@
 > **提示：** 也可以使用 Redis 作为 Laravel 的[缓存](/docs/cache) 和 [session](/docs/session) 驱动。
 
 <a name="pipelining"></a>
-## 管线
+## 管道
 
-当您想要一次发送很多命令到服务器时可以使用管线 。使用 `pipeline` 方法：
+当您想要一次发送很多命令到服务器时可以使用管道。使用 `pipeline` 方法：
 
 #### 发送多个命令到服务器
 
