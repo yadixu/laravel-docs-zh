@@ -9,10 +9,10 @@
 <a name="basic-controllers"></a>
 ## 基本 Controllers
 
-除了在单一 `routes.php` 文件中定义所有路由层逻辑外，您可能也想利用控制器来整合这些行为。控制器可以统合相关的路由逻辑到同一个类中，并且还可以利用更先进的框架特性的优势，如自动的[依赖注入](/docs/ioc)。
+除了在 `routes.php` 文件中定义所有路由层逻辑外，您可能也想利用控制器来整合这些行为。控制器可以利用更先进的框架特性的优势，如自动的[依赖注入](/docs/ioc)整合相关的路由逻辑到同一个类中。
 
 
-控制器一般存放在 `app/controllers` 目录下，这个目录已默认注册在 `composer.json` 的 `classmap` 中。然而，控制器可以放在任何目录或是子目录。路由定义与控制器类存放在哪个位址并无关系。所以，只要 Composer 知道如何自动载入控制器类，您就可以把控制器放在任何您想要的地方。
+控制器一般存放在 `app/controllers` 目录下，这个目录已默认注册在 `composer.json` 的 `classmap` 中。然而，控制器可以放在任何目录或是子目录中。路由定义与控制器类存放在哪个位址并无关系。所以，只要 Composer 知道如何自动载入控制器类，您就可以把控制器放在任何您想要的地方。
 
 下面是一个基本的控制器类例子：
 
@@ -38,7 +38,7 @@
 
 	Route::get('foo', 'Namespace\FooController@method');
 
-> **注意：**既然我们使用 [Composer](http://getcomposer.org) 自动载入 PHP 类，只要 Composer 知道如何载入他们，控制器就可以放在文件系统的任何地方。对您的应用程序而言，控制器目录并没有强制使用怎样目录结构。路由至控制器是完全与文件系统脱钩的。
+> **注意：**既然我们使用 [Composer](http://getcomposer.org) 自动载入 PHP 类，因此只要 Composer 知道如何载入控制器，控制器文件就可以放在文件系统的任何地方。对您的应用程序而言，并没有强制控制器文件要使用怎样的目录结构。路由至控制器是完全与文件系统脱离的。
 
 您可以为控制器路由指定名称：
 
@@ -227,7 +227,7 @@ DELETE    | /resource/{resource}        | destroy      | resource.destroy
 	Route::resource('photos', 'PhotoController');
 
 <a name="handling-missing-methods"></a>
-## 对应遗漏的方法
+## 对应缺失的方法
 
 可以定义一个 catch-all 方法，当 controller 找不到对应的方法时就会被调用，这个方法名称为`missingMethod`, 会传入请求的方法和参数数组：
 
