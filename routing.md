@@ -14,7 +14,7 @@
 <a name="basic-routing"></a>
 ## 基本路由
 
-应用程序大多数的路由都会被定义在 `app/routes.php` 中。最简单的一个路由是由一个 URI 和闭包回调(Closure callback)。
+应用程序大多数的路由都会被定义在 `app/routes.php` 中。最简单的一个路由是由一个 URI 和闭包回调(Closure callback)构成的。
 
 #### 基本 GET 路由
 
@@ -44,14 +44,14 @@
 		return 'Hello World';
 	});
 
-#### 强制路由走 HTTPS
+#### 强制路由使用 HTTPS
 
 	Route::get('foo', array('https', function()
 	{
 		return 'Must be over HTTPS';
 	}));
 
-通常情况下，您需要产生 URLs 到您的路由上，您可以使用 `URL::to` 方法来达成：
+通常情况下，您需要生成 URLs 到你的路由中，您可以使用 `URL::to` 方法来实现：
 
 	$url = URL::to('foo');
 
@@ -63,21 +63,21 @@
 		return 'User '.$id;
 	});
 
-#### 选用路由参数
+#### 可选路由参数
 
 	Route::get('user/{name?}', function($name = null)
 	{
 		return $name;
 	});
 
-#### 带默认值的选用路由参数
+#### 带默认值的可选路由参数
 
 	Route::get('user/{name?}', function($name = 'John')
 	{
 		return $name;
 	});
 
-#### 正规表示式路由
+#### 正规表达式路由
 
 	Route::get('user/{name}', function($name)
 	{
@@ -91,9 +91,9 @@
 	})
 	->where('id', '[0-9]+');
 
-#### 传递数组使用 Where 筛选
+#### 传递数组并使用 Where 筛选
 
-当然，如果需要您可以传递限制条件的数组：
+如果需要，您可以传递限制条件的数组：
 
 	Route::get('user/{id}/{name}', function($id, $name)
 	{
@@ -101,9 +101,9 @@
 	})
 	->where(array('id' => '[0-9]+', 'name' => '[a-z]+'))
 
-#### 定义全局样式
+#### 定义全局正则表达式 Pattern
 
-如果您有常用的限制正规标示式样式，您可以使用 `pattern` 方法：
+如果您有常用的正则表达式 Pattern，您可以使用 `pattern` 方法：
 
 	Route::pattern('id', '[0-9]+');
 
@@ -127,7 +127,7 @@
 <a name="route-filters"></a>
 ## 路由筛选器
 
-路由筛选器提供一个便捷的方式对于一个给定的路由做出限制访问，这对于您的站点需要认证的情况下非常有用。在 Laravel 框架中包含了数个筛选器，如 `auth`, `auth.basic`, `guest` 和 `csrf` 筛选器。他们都放在 `app/filters.php` 中。
+路由筛选器能便捷的给指定的路由提供访问限制，这对于您的站点需要认证的情况下非常有用。在 Laravel 框架中包含了数个筛选器，如 `auth`, `auth.basic`, `guest` 和 `csrf` 筛选器。他们都放在 `app/filters.php` 中。
 
 #### 定义一个路由筛选器
 
@@ -139,7 +139,7 @@
 		}
 	});
 
-如果筛选器传回了回应，这个会应将会直接被视为该请求的回应，且路由将不会继续被执行，任何路由的 `after` 筛选器将直接被取消。
+如果筛选器有了回应，这个回应将会直接被视为该请求的回应，且路由将不会继续被执行，任何路由的 `after` 筛选器都将直接被取消。
 
 #### 对路由加上筛选器
 
@@ -196,7 +196,7 @@
 
 	Route::when('admin/*', 'admin');
 
-在上面的例子中，`admin` 筛选器将会套用在所有以 `admin/` 开头的路由中。星号通常用作通配符，他会匹配任何的字串组合。
+在上面的例子中，`admin` 筛选器将会套用在所有以 `admin/` 开头的路由中。`*` 通常用作通配符，他会匹配任何的字串组合。
 
 您一样可以筛选指定的 HTTP 动作：
 
@@ -275,9 +275,9 @@
 	});
 
 <a name="sub-domain-routing"></a>
-## 子网域路由
+## 子域名路由
 
-Laravel 路由一样可以处理通配的子网域，并且从网域中传递您的通配符参数：
+Laravel 路由一样可以处理通配的子域名，并且从域名中传递您的通配符参数：
 
 #### 注册子网域路由
 
@@ -326,7 +326,7 @@ Laravel 路由一样可以处理通配的子网域，并且从网域中传递您
 
 > **注意：** 假如在数据库内没有任何一个模型实体符合，则会抛出 404 错误。
 
-假如您希望指定您自定义的「找不到」错误行为，您可以在 `model` 方法里的第三个参数指定一个 Closure：
+假如您想指定自定的「找不到」行为，您可以在 `model` 方法里的第三个参数指定一个 Closure：
 
 	Route::model('user', 'User', function()
 	{
