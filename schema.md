@@ -15,7 +15,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Laravel 的 `结构生成器` 提供一个产生数据库表可与数据库无关的方法，它可以很好的处理 Laravel 支持的各种数据库类型，并且在不同系统间提供一致性的 API 操作。
+Laravel 的 `结构生成器` 提供一个数据库无关的操作数据库表方法（即不关心应用将使用何种数据库，只考虑数据表架构操作），它可以让 Laravel 很好的支持各种数据库类型，并且能在不同系统间提供一致性的 API 操作。
 
 <a name="creating-and-dropping-tables"></a>
 ## 建立与删除数据库表
@@ -33,7 +33,7 @@ Laravel 的 `结构生成器` 提供一个产生数据库表可与数据库无�
 
 	Schema::rename($from, $to);
 
-要指定特定连线来操作，可使用 `Schema::connection` 方法:
+要指定特定连接来操作，可使用 `Schema::connection` 方法:
 
 	Schema::connection('foo')->create('users', function($table)
 	{
