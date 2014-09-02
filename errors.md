@@ -9,9 +9,9 @@
 <a name="configuration"></a>
 ## 配置文件
 
-日志处理程序注册在[开始配置文件](/docs/lifecycle#start-files) `app/start/global.php` 文件里面。日志默认储存在单一文件，您可以依照需求自定义。既然 Laravel 使用广为人用的 Monolog 日志，您可以利用很多 Monolog 提供的处理器程序。
+日志处理程序注册在[启动文件](/docs/lifecycle#start-files) `app/start/global.php` 文件里面。日志都默认储存在一个单独的文件中，您可以依照实际需求自定义日志。因为 Laravel 使用了广为人用的 Monolog 日志，您可以利用 Monolog 提供的多种方式管理你的日志。
 
-例如，如果您想每天使用一个日志文件而不是使用单一的庞大文件，您可以照着下面的例子更改开始配置文件：
+例如，如果您想每天使用一个文件记录日志而不是使用单独的庞大文件，您可以照着下面的例子更改开始配置文件：
 
 	$logFile = 'laravel.log';
 
@@ -21,7 +21,7 @@
 
 错误显示默认为开启，意味着当错误发生时，将有错误页面显示详细的调用追踪和错误信息。您可以关掉错误显示的选项，把`app/config/app.php`里的`debug`选项改成`false`。
 
-> **注意：**强烈建议在 production 环境中关掉错误显示。
+> **注意：**强烈建议在生产环境中关掉错误显示。
 
 <a name="handling-errors"></a>
 ## 错误处理
@@ -60,7 +60,7 @@
 
 ### 何处定义异常处理程序
 
-默认上没有注册异常处理程序的地方。Laravel 可以让您自由设定。选择之一是定义程序在 `start/global.php`中，一般来说，这是一个让您方便写入任何"bootstrapping" 代码的地方。如果文件变得很拥挤，可以建立一个 `app/errors.php`文件，并且在`start/global.php`中引入。第三个选择是建立 [service provider](/docs/ioc#service-providers) 以注册程序。再一次地，并没有正确的答案，选择一个让您觉得舒适的地方。
+默认上没有注册异常处理程序的地方。Laravel 可以让您自由设定。选择之一是定义程序在 `start/global.php`中，一般来说，这是一个让您方便写入任何"bootstrapping" 代码的地方。如果文件变得很拥挤，可以建立一个 `app/errors.php`文件，并且在`start/global.php`中引入。第三个选择是建立 [service provider](/docs/ioc#service-providers) 以注册程序。再一次强调，这个问题并没有正确的答案，您直接选择一个让您觉得舒适的地方注册异常处理程序即可。
 
 <a name="http-exceptions"></a>
 ## HTTP 异常处理
