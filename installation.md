@@ -4,7 +4,7 @@
 - [安装 Laravel](#install-laravel)
 - [服务器环境需求](#server-requirements)
 - [设定](#configuration)
-- [优雅链结](#pretty-urls)
+- [优雅链接](#pretty-urls)
 
 <a name="install-composer"></a>
 ## 安装 Composer
@@ -67,11 +67,11 @@ Laravel 框架有一个目录需要额外设置权限：`app/storage` 需要让�
 一些框架的目录路径是可以被设定配置的。如果要更改这些目录的位置，请查看 `bootstrap/paths.php` 文件。
 
 <a name="pretty-urls"></a>
-## 优雅链结
+## 优雅链接
 
 ### Apache
 
-Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.php`。如果您网页服务器是使用 Apache 的话，请确认您有开启 'mod_rewrite` 模组。
+Laravel 框架通过 `public/.htaccess` 文件来去掉URL结尾的 `index.php`。如果您的网页服务器是使用 Apache 的话，请确认开启 'mod_rewrite` 模块。
 
 如果框架附带的 `.htaccess` 文件在 Apache 中无法作用，请尝试下面的版本：
 
@@ -85,7 +85,7 @@ Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.ph
 
 ### Nginx
 
-在 Nginx, 在您的网站设定中增加下面的设定将可以开启"优雅链接"：
+如果使用的是 Nginx, 在 nginx 的配置文件中增加如下代码即可开启"优雅链接"：
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;

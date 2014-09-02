@@ -17,7 +17,7 @@ Laravel 的目标就是要让实现认证机制变得简单。事实上，几乎
 
 Laravel 默认在 `app/models` 文件夹内就包含了一个使用 Eloquent 认证驱动的`User` 模型。请记得在建立模型结构时，密码字段至少要有 60 个字串宽度。
 
-假如您的应用程序并不是使用 Eloquent ，您也可以使用 Laravel 的查寻产生器做  `database` 认证驱动。
+假如您的应用程序并不是使用 Eloquent ，您也可以使用 Laravel 的查询构造器做  `database` 认证驱动。
 
 > **注意：** 在开始之前，请先确认您的 `users` (或其他同义) 数据库表包含一个名为 `remember_token` 长度为100的string类型、可接受 null 的字段。这个字段将会被用来储存「记住我」的 session token。
 
@@ -54,7 +54,7 @@ Laravel 的 `Hash` 类提供了安全的 Bcrypt 哈希演算法：
 		return Redirect::intended('dashboard');
 	}
 
-需提醒的是 `email`并不是一个必要的字段，在这里仅用于示范。您可以使用数据库里任何类似于「用户名称」的字段做为帐号唯一值。若用户尚未登入的话，认证筛选器会使用 `Redirect::intended` 方法重定向跳转用户至指定的 URL。我们可指定一个备用 URI ，当预定重定向跳转位置不存在时使用。
+需提醒的是 `email`并不是一个必要的字段，在这里仅用于示范。您可以使用数据库里任何类似于「用户名称」的字段做为帐号的唯一标识。若用户尚未登入的话，认证筛选器会使用 `Redirect::intended` 方法重定向跳转用户至指定的 URL。我们可指定一个备用 URI ，当预定重定向跳转位置不存在时使用。
 
 当 `attempt` 方法被调用时，`auth.attempt` [事件](/docs/events) 将会被触发。假如认证成功的话，则 `auth.login` 事件会接着被触发。
 
@@ -136,7 +136,7 @@ Laravel 的 `Hash` 类提供了安全的 Bcrypt 哈希演算法：
 <a name="manually"></a>
 ## 手动登入用户
 
-假如您需要将一个已存在的用户实例登入您的应用程序，您可以通过该实例很简单的调用 `login` 方法：
+假如您需要将一个已存在的用户实例登入您的应用程序，只需要简单的调用 `login` 方法，并且将该实例作为参数传入即可：
 
 	$user = User::find(1);
 
@@ -209,7 +209,7 @@ HTTP 简易认证提供了一个快速的方式来认证用户而不用特定设
 
 ### 模型与数据库表
 
-大多数的web应用程序都会提供用户忘记密码的功能。为了不让开发者重复实现这个功能，Laravel 提供了方便的方法来发送忘记密码通知及密码重设的功能。在开始之前，请先确认您的 `User` 模型有实现 `Illuminate\Auth\Reminders\RemindableInterface` 。当然，默认 Laravel 的 `User` 模型本身就已实现，并且引入`Illuminate\Auth\Reminders\RemindableTrait` 来包括所有需要实现的接口方法。
+大多数的web应用程序都会提供用户忘记密码的功能。为了不让开发者重复实现这个功能，Laravel 提供了方便的方法来发送忘记密码通知及密码重设的功能。在开始之前，请先确认您的 `User` 模型实现了 `Illuminate\Auth\Reminders\RemindableInterface` 接口。当然，默认 Laravel 的 `User` 模型本身就已实现，并且引入`Illuminate\Auth\Reminders\RemindableTrait` 来包括所有需要实现的接口方法。
 
 #### 实现 RemindableInterface
 
@@ -222,9 +222,9 @@ HTTP 简易认证提供了一个快速的方式来认证用户而不用特定设
 
 	}
 
-#### 产生 Reminder 数据库表迁移
+#### 生成 Reminder 数据库表迁移
 
-接下来，我们需要产生一个数据库表来储存重设密码标记。为了产生这个数据库表的迁移文件，需要执行 `auth:reminders-table` artisan 命令：
+接下来，我们需要生成一个数据库表来储存重设密码标记。为了产生这个数据库表的迁移文件，需要执行 `auth:reminders-table` artisan 命令：
 
 	php artisan auth:reminders-table
 
@@ -232,7 +232,7 @@ HTTP 简易认证提供了一个快速的方式来认证用户而不用特定设
 
 ### 密码重设控制器
 
-然后我们已经准备好产生密码重设控制器，您可以使用 `auth:reminders-controller` artisan 命令来自动产生这个控制器，它会产生出一个 `RemindersController.php` 文件在您的 `app/controllers` 文件夹内。
+然后我们已经准备好生成密码重设控制器，您可以使用 `auth:reminders-controller` artisan 命令来自动生成这个控制器，它会在您的 `app/controllers` 文件夹内创建一个 `RemindersController.php` 文件。
 
 	php artisan auth:reminders-controller
 
@@ -284,13 +284,13 @@ HTTP 简易认证提供了一个快速的方式来认证用户而不用特定设
 <a name="encryption"></a>
 ## 加密
 
-Laravel 通过 mcrypt PHP 外挂来提供 AES 强度的加密演算：
+Laravel 通过 mcrypt PHP 扩展来提供 AES 强度的加密算法：
 
 #### 加密一个值
 
 	$encrypted = Crypt::encrypt('secret');
 
-> **注意：** 记得在 `app/config/app.php` 文件里设定一个 16, 24 或 32 字串的随机字做 `key` ，否则这个加密演算结果将不够安全。
+> **注意：** 记得在 `app/config/app.php` 文件里设定一个 16, 24 或 32 字串的随机字做 `key` ，否则这个加密算法结果将不够安全。
 
 #### 解密一个值
 
