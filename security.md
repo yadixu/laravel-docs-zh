@@ -13,13 +13,13 @@
 <a name="configuration"></a>
 ## 设定
 
-Laravel 的目标就是要让实现认证机制变得简单。事实上，几乎所有的设定默认就已经完成了。有关认证的配置文件都放在 `app/config/auth.php` 里，而在这些文件里也都包含了良好的注释说明每一个选项的所对应的认证行为及动作。
+Laravel 的目标就是要让实现认证机制变得简单。事实上，几乎所有的设置默认就已经完成了。有关认证的配置文件都放在 `app/config/auth.php` 里，而在这些文件里也都包含了良好的注释描述每一个选项的所对应的认证行为及动作。
 
 Laravel 默认在 `app/models` 文件夹内就包含了一个使用 Eloquent 认证驱动的`User` 模型。请记得在建立模型结构时，密码字段至少要有 60 个字串宽度。
 
 假如您的应用程序并不是使用 Eloquent ，您也可以使用 Laravel 的查寻产生器做  `database` 认证驱动。
 
-> **注意：** 在开始之前，请先确认您的 `users` (或其他同义) 数据库表包含一个名为 `remember_token` 的字段，大小 100 字串、字串类型、可接受 null。这个字段将会被用来储存「记住我」的 session token。
+> **注意：** 在开始之前，请先确认您的 `users` (或其他同义) 数据库表包含一个名为 `remember_token` 长度为100的string类型、可接受 null 的字段。这个字段将会被用来储存「记住我」的 session token。
 
 <a name="storing-passwords"></a>
 ## 储存密码
@@ -47,14 +47,14 @@ Laravel 的 `Hash` 类提供了安全的 Bcrypt 哈希演算法：
 <a name="authenticating-users"></a>
 ## 用户认证
 
-要让用户登入，您可以使用 `Auth::attempt` 方法：
+您可以使用 `Auth::attempt` 方法来验证用户成功登录之前的信息确认：
 
 	if (Auth::attempt(array('email' => $email, 'password' => $password)))
 	{
 		return Redirect::intended('dashboard');
 	}
 
-需提醒的是 `email`并不是一个必要的字段，在这里仅用于示范。您可以使用数据库里任何类似于「用户名称」的字段做为帐号唯一值。若用户尚未登入的话，认证筛选器会使用 `Redirect::intended` 方法重定向跳转用户至指定的 URL。我们可指定一个备用 URI ，假如预定的位置不存在时使用。
+需提醒的是 `email`并不是一个必要的字段，在这里仅用于示范。您可以使用数据库里任何类似于「用户名称」的字段做为帐号唯一值。若用户尚未登入的话，认证筛选器会使用 `Redirect::intended` 方法重定向跳转用户至指定的 URL。我们可指定一个备用 URI ，当预定重定向跳转位置不存在时使用。
 
 当 `attempt` 方法被调用时，`auth.attempt` [事件](/docs/events) 将会被触发。假如认证成功的话，则 `auth.login` 事件会接着被触发。
 
@@ -69,7 +69,7 @@ Laravel 的 `Hash` 类提供了安全的 Bcrypt 哈希演算法：
 
 #### 认证一个用户并且「记住」他
 
-假如您想要在您的应用程序内提供「记住我」的选项，您可以在 `attempt` 方法的第二个参数给 `true` 值，这样就可以保留用户的认证身份 (或直到他手动登出为止)。当然，您的 `users` 数据库表必需包括一个字串类型的 `remember_token` 字段来储存「记住我」的标记。
+假如您想要在您的应用程序内提供「记住我」的选项，您可以在 `attempt` 方法的第二个参数复制为 `true` ，这样就可以保留用户的认证身份 (或直到他手动登出为止)。当然，您的 `users` 数据库表必需包括一个字串类型的 `remember_token` 字段来储存「记住我」的标记。
 
 	if (Auth::attempt(array('email' => $email, 'password' => $password), true))
 	{
@@ -136,7 +136,7 @@ Laravel 的 `Hash` 类提供了安全的 Bcrypt 哈希演算法：
 <a name="manually"></a>
 ## 手动登入用户
 
-假如您需要将一个已存在的用户实体登入您的应用程序，您可以用该实体很简单的调用 `login` 方法：
+假如您需要将一个已存在的用户实例登入您的应用程序，您可以通过该实例很简单的调用 `login` 方法：
 
 	$user = User::find(1);
 
@@ -147,7 +147,7 @@ Laravel 的 `Hash` 类提供了安全的 Bcrypt 哈希演算法：
 <a name="protecting-routes"></a>
 ## 保护路由
 
-路由过滤器可让特定的路由仅能让已认证的用户链接。Laravel 默认提供 `auth` 过滤器，其被定义在 `app/filters.php` 文件内。
+路由过滤器可让用户仅能访问特定的链接。Laravel 默认提供 `auth` 过滤器，其被定义在 `app/filters.php` 文件内。
 
 #### 保护特定路由
 
@@ -209,7 +209,7 @@ HTTP 简易认证提供了一个快速的方式来认证用户而不用特定设
 
 ### 模型与数据库表
 
-大多数的网路应用程序都会提供用户忘记密码的功能。为了不让开发者重复实现这个功能，Laravel 提供了方便的方法来发送忘记密码通知及密码重设的功能。在开始之前，请先确认您的 `User` 模型有实现 `Illuminate\Auth\Reminders\RemindableInterface` 。当然，默认 Laravel 的 `User` 模型本身就已实现，并且引入`Illuminate\Auth\Reminders\RemindableTrait` 来包括所有需要实现的接口方法。
+大多数的web应用程序都会提供用户忘记密码的功能。为了不让开发者重复实现这个功能，Laravel 提供了方便的方法来发送忘记密码通知及密码重设的功能。在开始之前，请先确认您的 `User` 模型有实现 `Illuminate\Auth\Reminders\RemindableInterface` 。当然，默认 Laravel 的 `User` 模型本身就已实现，并且引入`Illuminate\Auth\Reminders\RemindableTrait` 来包括所有需要实现的接口方法。
 
 #### 实现 RemindableInterface
 
