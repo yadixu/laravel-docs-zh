@@ -23,20 +23,20 @@
 <a name="introduction"></a>
 ## 介绍
 
-Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和数据库互动。 每个数据库表会和一个对应的「模型」互动。
+Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和数据库的互动。 每个数据库表会和一个对应的「模型」互动。
 
-在开始之前，记得把 `app/config/database.php` 里的数据库连线设定好。
+在开始之前，记得把 `app/config/database.php` 里的数据库连线配置好。
 
 <a name="basic-usage"></a>
 ## 基本用法
 
-先从建立一个 Eloquent 模型开始。模型通常放在 `app/models` 目录下，但是您可以将它们放在任何地方，只要可以根据 `composer.json` 被自动载入。
+我们先从建立一个 Eloquent 模型开始。模型通常放在 `app/models` 目录下，但是您可以将它们放在任何地方，只要能通过 `composer.json` 被自动载入。
 
 #### 定义一个 Eloquent 模型
 
 	class User extends Eloquent {}
 
-注意我们并没有告诉 Eloquent `User` 模型会使用哪个数据库表。若没有特别指定，默认会自动对应名称为「类名称的小写复数形态」的数据库表。所以，在上面的例子中， Eloquent 会假设 `User` 将把数据存在 `users` 数据库表。可以在类里定义 `table` 属性自定义要对应的数据库表。
+注意我们并没有告诉 Eloquent `User` 模型会使用哪个数据库表。若没有特别指定，系统会默认自动对应名称为「类名称的小写复数形态」的数据库表。所以，在上面的例子中， Eloquent 会假设 `User` 将把数据存在 `users` 数据库表。可以在类里定义 `table` 属性自定义要对应的数据库表。
 
 	class User extends Eloquent {
 
@@ -46,7 +46,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 
 > **注意：** Eloquent 也会假设每个数据库表都有一个字段名称为 `id` 的主键。您可以在类里定义 `primaryKey` 属性来重写。同样的，您也可以定义 `connection` 属性，指定模型连接到专属的数据库连线。
 
-定义好模型之后，您就可以从数据库表新增及获取数据了。注意默认上，在数据库表里需要有 `updated_at` 和 `created_at` 两个字段。如果您不想设定或自动更新这两个字段，将类里的 `$timestamps` 属性设为 `false`。
+定义好模型之后，您就可以从数据库表新增及获取数据了。注意在默认情况下，在数据库表里需要有 `updated_at` 和 `created_at` 两个字段。如果您不想设定或自动更新这两个字段，则将类里的 `$timestamps` 属性设为 `false`即可。
 
 #### 取出所有模型数据
 
@@ -62,7 +62,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 
 #### 根据主键取出一条数据或抛出异常
 
-有时, 您可能想要在找不到模型数据时抛出异常，以捕捉异常让 `App::error` 处理并显示 404 页面。
+有时, 您可能想要在找不到模型数据时抛出异常，以捕捉异常并让 `App::error` 处理并显示 404 页面。
 
 	$model = User::findOrFail(1);
 
@@ -96,7 +96,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 
 	$users = User::whereRaw('age > ? and votes = 100', array(25))->get();
 
-#### 切分查询
+#### 拆分查询
 
 如果您要处理非常多（数千条）Eloquent 查询结果，使用 `chunk` 方法可以让您顺利工作而不会吃掉内存：
 
@@ -108,7 +108,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 		}
 	});
 
-传到方法里的第一个参数表示每次「切分」要取出的数据数量。第二个参数的闭合函数会在每次取出数据时被调用。
+传到方法里的第一个参数表示每次「拆分」要取出的数据数量。第二个参数的闭合函数会在每次取出数据时被调用。
 
 #### 指定查询时连线数据库
 
@@ -119,7 +119,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 <a name="mass-assignment"></a>
 ## Mass Assignment
 
-在建立一个新的模型时，您把属性数组传入 `create` 方法，这些属性值会经由 mass-assignment 存成模型数据。这非常方便，然而，当盲目地将用户输入存到模型时，可能会造成严重的安全隐患。如果盲目的存入用户输入，用户可以随意的修改**任何**以及**所有**模型属性。基于这个理由，所有 Eloquent 模型默认会防止 mass-assignment 。
+在建立一个新的模型时，您把属性以数组的方式传入 `create` 方法，这些属性值会经由 mass-assignment 存成模型数据。这非常方便，然而，若盲目地将用户输入存到模型时，可能会造成严重的安全隐患。如果盲目的存入用户输入，用户可以随意的修改**任何**以及**所有**模型的属性。基于这个理由，所有 Eloquent 模型默认会防止 mass-assignment 。
 
 在模型里设定 `fillable` 或 `guarded` 属性作为开始。
 
@@ -149,7 +149,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 
 #### 阻挡所有属性被 Mass Assignment
 
-上面的例子中， `id` 和 `password` 属性**不会**被 mass assigned，而所有其他的属性则是 mass assignable。您也可以使用 guard 属性阻挡**所有**属性被 mass assignment ：
+上面的例子中， `id` 和 `password` 属性**不会**被 mass assigned，而所有其他的属性则是 mass assignable。您也可以使用 guard 属性阻止**所有**属性被 mass assignment ：
 
 	protected $guarded = array('*');
 
@@ -244,7 +244,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 <a name="soft-deleting"></a>
 ## 软删除
 
-当软删除一个模型后，数据并不是真的从数据库被移除。而是会设定 `deleted_at` 时间戳。要让模型使用软删除功能，只要在模型类里加入 `SoftDeletingTrait`：
+通过软删除方式删除了一个模型后，模型中的数据并不是真的从数据库被移除。而是会设定 `deleted_at` 时间戳。要让模型使用软删除功能，只要在模型类里加入 `SoftDeletingTrait` 即可：
 
 	use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
@@ -482,7 +482,7 @@ SQL 会执行如下语句：
 
 #### 定义相对的关联
 
-要在 `Comment` 模型定义相对的关联，使用 `belongsTo` 方法：
+要在 `Comment` 模型定义相对应的关联，可使用 `belongsTo` 方法：
 
 	class Comment extends Eloquent {
 
@@ -645,7 +645,7 @@ SQL 会执行如下语句：
 		imageable_type - string
 
 
-要注意的关键是 `photos` 数据库表的 `imageable_id` 和 `imageable_type`。在上面的例子里， ID 字段会包含 staff 或 order 的 ID，而 type 是拥有者的模型类名称。这就是让 ORM 在取得 `imageable` 关联对象时，决定要哪一种模型对象的机制。
+要注意的重点是 `photos` 数据库表的 `imageable_id` 和 `imageable_type`。在上面的例子里， ID 字段会包含 staff 或 order 的 ID，而 type 是拥有者的模型类名称。这就是让 ORM 在取得 `imageable` 关联对象时，决定要哪一种模型对象的机制。
 
 <a name="many-to-many-polymorphic-relations"></a>
 ### 多态的多对多关联
@@ -1179,7 +1179,7 @@ Eloquent 模型有静态的 `boot` 方法，可以使用它方便的注册事件
 
 #### 从路由回传模型
 
-注意当模型或 collection 被类型转换成字串，会自动转换成 JSON 格式，这意味着您可以直接从路由回传 Eloquent 对象！
+注意当模型或 collection 被类型转换成字符串时会自动转换成 JSON 格式，这意味着您可以直接从路由回传 Eloquent 对象！
 
 	Route::get('users', function()
 	{
