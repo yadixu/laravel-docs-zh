@@ -29,7 +29,7 @@ Laravel Cashier 提供口语化，流畅的接口和 [Stripe](https://stripe.com
 
 #### 服务提供者
 
-再来，在 `app` 配置文件注册 `Laravel\Cashier\CashierServiceProvider`。
+接下来，在 `app` 配置文件注册 `Laravel\Cashier\CashierServiceProvider`。
 
 #### 迁移
 
@@ -37,7 +37,7 @@ Laravel Cashier 提供口语化，流畅的接口和 [Stripe](https://stripe.com
 
 #### 设定模型
 
-再来，把 BillableTrait 和日期字段参数加到模型 (model) 里：
+再次，把 BillableTrait 和日期字段参数加到模型 (model) 里：
 
 	use Laravel\Cashier\BillableTrait;
 	use Laravel\Cashier\BillableInterface;
