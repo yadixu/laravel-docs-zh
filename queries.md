@@ -16,10 +16,10 @@
 <a name="introduction"></a>
 ## 介绍
 
-数据库查询构造器 (query builder) 提供方便流畅的接口，用来建立及执行数据库查询语法。在您的应用程序里面，它可以被使用在大部分的数据
+数据库查询构造器 (query builder) 提供方便流畅的接口来建立、执行数据库查询语法。在您的应用程序里面，它可以被使用在大部分的数据
 库操作，而且它在所有支持的数据库系统上都可以执行。
 
-> **注意:** Laravel 查询构造器使用 PDO 参数绑定，以保护应用程序免于数据隐码攻击 (SQL injection)，因此传入的参数不需额外过滤特殊字串。
+> **注意:** Laravel 查询构造器使用 PDO 参数绑定，以保护应用程序免于SQL注入攻击 (SQL injection)，因此传入的参数不需过滤额外的特殊字符串。
 
 <a name="selects"></a>
 ## Selects
@@ -47,7 +47,7 @@
 
 	$roles = DB::table('roles')->lists('title');
 
-这个方法将会回传数据库表 role 的 title 字段值的数组。您也可以通过下面的方法，为回传的数组指定自定义键值。
+这个方法将会回传含有数据库表 role 的 title 字段值的数组。您也可以通过下面的方法，为回传的数组指定自定义键值。
 
 	$roles = DB::table('roles')->lists('title', 'name');
 
@@ -139,7 +139,7 @@
 	        })
 	        ->get();
 
-如果您想在您的 join 中使用 where 型式的子句，您可以在 join 子句里使用 `where` 或 `orWhere` 方法。下面的方法将会比较 contacts 数据库表中的 user_id 的数值，而不是比较两个字段。
+如果您想在您的 join 中使用 where 型式的子句，您可以在 join 子句里使用 `where` 或 `orWhere` 方法。下面的方法将会比较 contacts 数据库表中的 user_id 的字段值，而不是比较两个字段。
 
 	DB::table('users')
 	        ->join('contacts', function($join)
@@ -207,7 +207,7 @@
 <a name="raw-expressions"></a>
 ## Raw Expressions
 
-有些时候您需要使用 raw expression 在查询语句里，这样的表达式会成为字串插入至查询，因此要小心勿建立任何 SQL 隐码攻击点。要建立 raw expression，您可以使用 `DB::raw` 方法：
+有些时候您需要使用 raw expression 在查询语句里，这样的表达式会成为字串插入至查询中，因此要小心勿建立任何 SQL 注入的攻击点。要建立 raw expression，您可以使用 `DB::raw` 方法：
 
 #### 使用 Raw Expression
 
@@ -248,7 +248,7 @@
 		array('email' => 'john@example.com', 'votes' => 0)
 	);
 
-> **注意:** 当使用 PostgreSQL 时，insertGetId 方法会预期自动增加的字段是以 "id" 为命名。
+> **注意:** 当使用 PostgreSQL 时，insertGetId 方法会预先自动递增字段名为 "id" 的值。
 
 #### 新增多条数据进数据库表
 
@@ -297,13 +297,11 @@
 
 查询构造器提供了少数函数协助您在 SELECT 语句中做到“悲观锁定”。
 
-您只要在 SELECT 语句中加上 "Shard lock"，在查询语句中使用 `sharedLock`：
+您只要在 SELECT 查询语句中使用 `sharedLock`：
 
 	DB::table('users')->where('votes', '>', 100)->sharedLock()->get();
 
-要"锁住更新(lock for update)"在 select 语法时，您可以使用"lockForUpdate"方法：
-
-要在 SELECT 语句中"锁住更新"，您仅需在查询语句中使用 `lockForUpdate` 方法即可：
+在 select 语法中，要"锁住更新(lock for update)"，您仅需在查询语句中使用 `lockForUpdate` 方法即可：
 
 	DB::table('users')->where('votes', '>', 100)->lockForUpdate()->get();
 
