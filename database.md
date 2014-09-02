@@ -1,6 +1,6 @@
 # 数据库基本用法
 
-- [设定](#configuration)
+- [配置文件](#configuration)
 - [读写分离](#read-write-connections)
 - [数据库操作](#running-queries)
 - [数据库交易](#database-transactions)
@@ -8,7 +8,7 @@
 - [数据库操作纪录](#query-logging)
 
 <a name="configuration"></a>
-## 设定
+## 配置文件
 
 Laravel 让数据库连接与执行查询语句变得相当简单。数据库配置文件位在 `app/config/database.php`。 您可以在此定义所需的数据库连接，也可以指定哪一个连接是默认的。所有支持的数据库类型与例子皆在文件内说明。
 
