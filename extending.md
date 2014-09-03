@@ -12,7 +12,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Laravel 提供许多可扩展的地方让您自定义框架核心组件的行为，或甚至完全地取代它们。 例如，`HasherInterface` 契约定义了哈希工具，您可以基于应用程序的需求来实现它。 您也可以扩展 `Request` 对象，让您加入自己的便利 "辅助" 方法。 甚至您可以加入全新的认证、缓存和 session 驱动！
+Laravel 提供许多可扩展的地方让您自定义框架核心组件的行为，或甚至完全地取代它们。 例如，`HasherInterface` 接口定义了哈希工具，您可以基于应用程序的需求来实现它。 您也可以扩展 `Request` 对象，让您加入自己的便利 "辅助" 方法。 甚至您可以加入全新的认证、缓存和 session 驱动！
 
 Laravel 组件一般以两种方式来扩展： 在 IoC 容器里绑定新的实现，或用 "工厂" 设计模式实现的 `Manager` 类来注册扩展。 在这个章节我们将会探索多种扩展框架的方法和查看必要的代码。
 
@@ -44,7 +44,7 @@ Laravel 有几个 `Manager` 类用来管理建立基于驱动的组件。 这些
 
 传递到 `extend` 方法的第一个参数是驱动的名称。 这将会对应到您的 `app/config/cache.php` 配置文件里的 `driver` 选项。 第二个参数是个应该回传 `Illuminate\Cache\Repository` 实体的闭包。 `$app` 实体将被传递到闭包，它是 `Illuminate\Foundation\Application` 和 IoC 容器的实体。
 
-要建立我们的自定义缓存驱动，首先需要实现 `Illuminate\Cache\StoreInterface` 契约。 所以，我们的 MongoDB 缓存实现将会看起来像这样：
+要建立我们的自定义缓存驱动，首先需要实现 `Illuminate\Cache\StoreInterface` 接口。 所以，我们的 MongoDB 缓存实现将会看起来像这样：
 
 	class MongoStore implements Illuminate\Cache\StoreInterface {
 
@@ -125,14 +125,14 @@ Session 需要用与其他扩展如 Cache 和 Auth 不同地方式扩展。 因�
 <a name="authentication"></a>
 ## 认证
 
-认证可以用与缓存和 session 工具相同的方法扩展。 再一次的，我们将会使用我们已经熟悉的 `extend` 方法：
+认证可以通过与缓存和 session 工具相同的方法来扩展。 再一次的，我们将会使用我们已经熟悉的 `extend` 方法：
 
 	Auth::extend('riak', function($app)
 	{
 		// Return implementation of Illuminate\Auth\UserProviderInterface
 	});
 
-`UserProviderInterface` 实现只负责从永久存储系统抓取 `UserInterface` 实现，例如： MySQL、 Riak，等等。 这两个接口让 Laravel 认证机制无论用户数据如何储存或用什么种类的类来代表它都能继续运作。
+`UserProviderInterface` 实现只负责从持久化存储中抓取 `UserInterface` 实现，例如： MySQL、 Riak，等等。 这两个接口让 Laravel 认证机制无论用户数据如何储存或用什么种类的类来代表它都能继续运作。
 
 让我们来看一下 `UserProviderInterface`：
 
@@ -148,9 +148,9 @@ Session 需要用与其他扩展如 Cache 和 Auth 不同地方式扩展。 因�
 
 `retrieveById` 函数通常接收一个代表用户的数字键，例如： MySQL 数据库的自动递增 ID。 符合 ID 的 `UserInterface` 实现应该被取回并被方法回传。
 
-`retrieveByToken` 函数用用户唯一的 `$identifier` 和储存在 `remember_token` 字段的 "记住我" `$token` 取得用户。 跟前面的方法一样，应该回传 `UserInterface` 实现。
+`retrieveByToken` 函数通过用户唯一的 `$identifier` 和储存在 `remember_token` 字段的 "记住我" `$token` 取得用户。 跟前面的方法一样，应该回传 `UserInterface` 实现。
 
-`updateRememberToken` 方法用新的 `$token` 更新 `$user` 的 `remember_token` 字段。 新 token 可以是在 "记住我" 成功地登入时发一个新的 token，或当用户登出时为 null.
+`updateRememberToken` 方法用新的 `$token` 更新 `$user` 的 `remember_token` 字段。 新 token 的值 可以是在 "记住我" 成功地登入时生成的一个新的 token，或当用户登出时变为 null.
 
 `retrieveByCredentials` 方法接收当尝试登入应用程序时，传递到 `Auth::attempt` 方法的凭证数组。 这个方法应该接着 "查询" 背后的永久存储，看用户是否符合这些凭证。 这个方法通常会对 `$credentials['username']` 用 "where" 条件查询。 **这个方法不应该尝试做任何密码验证或认证。**
 
@@ -178,9 +178,9 @@ Session 需要用与其他扩展如 Cache 和 Auth 不同地方式扩展。 因�
 <a name="ioc-based-extension"></a>
 ## 基于 IoC 的扩展
 
-几乎每个 Laravel 框架引入的服务提供者会绑定对象到 IoC 容器中。 您可以在 `app/config/app.php` 配置文件中找到应用程序的服务提供者清单。 当您有时间的时候，您应该浏览过这里面每一个提供者的代码。 通过这样做，您将会对每一个提供者加了什么到框架有更多的了解，以及各种服务用什么键来绑定到 IoC 容器。
+几乎每个 Laravel 框架引入的服务提供者会绑定对象到 IoC 容器中。 您可以在 `app/config/app.php` 配置文件中找到应用程序的服务提供者清单。 当您有时间的时候，您应该浏览一下这里面每一个提供者的源代码。 通过这样做，您将会对每一个提供者为框架增加了什么功能有更多的了解，以及各种服务用什么键来绑定到 IoC 容器。
 
-举个例子， `HashServiceProvider` 绑定一个 `hash` 键到 IoC 容器，它将解析成 `Illuminate\Hashing\BcryptHasher` 实体。 您可以轻松地通过在您的应用程序中重写这个 IoC 绑定，扩展并重写这个类。 例如：
+举个例子， `HashServiceProvider` 绑定一个 `hash` 键到 IoC 容器，它将解析成 `Illuminate\Hashing\BcryptHasher` 实例。 您可以轻松地通过在您的应用程序中重写这个 IoC 绑定，扩展并重写这个类。 例如：
 
 	class SnappyHashProvider extends Illuminate\Hashing\HashServiceProvider {
 
@@ -198,14 +198,14 @@ Session 需要用与其他扩展如 Cache 和 Auth 不同地方式扩展。 因�
 
 要注意的是这个类扩展 `HashServiceProvider`，不是默认的 `ServiceProvider` 基底类。 当您扩展了服务提供者，在您的 `app/config/app.php` 配置文件把 `HashServiceProvider` 换成您扩展的提供者名称。
 
-这是扩展任何被绑定在容器的核心类的普遍方法。 实际上，每个被以这种方式绑定在容器的核心类都可以被重写。 再次强调，看过被框架引入的服务提供者将会使您熟悉每个类被绑在容器的哪里，还有它们是用什么键绑。 这是个好方法可以了解更多关于 Laravel 如何结合它们。
+这是扩展任何被绑定在容器的核心类的普遍方法。 实际上，每个被以这种方式绑定在容器的核心类都可以被重写。 再次强调，看过被框架引入的服务提供者将会使您熟悉每个类被绑在容器的哪里，以及它们是用什么键绑定的。 这也是可以了解更多关于 Laravel 是如何结合它们的好方法。
 
 <a name="request-extension"></a>
 ## 扩展请求
 
-因为它是框架非常基础的部件并且在请求周期的非常早期就被实体化，扩展 `Request` 类跟前面的例子有一点不同。
+因为它是框架非常基础的部件并且在请求周期的非常早期就被实例化，扩展 `Request` 类跟前面的例子有一点不同。
 
-首先，像一般一样扩展类：
+首先，继承 laravel 的 `Request` 基类：
 
 	<?php namespace QuickBill\Extensions;
 
@@ -215,14 +215,14 @@ Session 需要用与其他扩展如 Cache 和 Auth 不同地方式扩展。 因�
 
 	}
 
-当您扩展了类，打开 `bootstrap/start.php` 文件。 这个文件是当应用程序受到请求后非常早被引入的文件之一。 需要注意的是第一个被执行的动作是建立 Laravel `$app` 实体：
+当您扩展了类，打开 `bootstrap/start.php` 文件。 这个文件是当应用程序受到请求后非常早被引入的文件之一。 需要注意的是第一个被执行的动作是建立 Laravel `$app` 实例：
 
 	$app = new \Illuminate\Foundation\Application;
 
-当一个新的应用程序实体被建立，它将会建立一个新的 `Illuminate\Http\Request` 实体并用 `request` 键把它绑定到 IoC 容器。 所以，我们需要一个方法去指定一个应该被用作 "默认" 请求类型的自定义类，对吧？ 并且值得庆幸的是，应用程序实体的 `requestClass` 方法就做了这件事！ 所以，我们可以在 `bootstrap/start.php` 文件的最上面加这行：
+当一个新的应用程序实例被建立，它将会建立一个新的 `Illuminate\Http\Request` 实例并用 `request` 键把它绑定到 IoC 容器。 所以，我们需要一个方法去指定一个应该被用作 "默认" 请求类型的自定义类，对吧？ 并且值得庆幸的是，应用程序实例的 `requestClass` 方法就做了这件事！ 所以，我们可以在 `bootstrap/start.php` 文件的最上面加这行：
 
 	use Illuminate\Foundation\Application;
 
 	Application::requestClass('QuickBill\Extensions\Request');
 
-每当您指定了自定义请求类， Laravel 将会在任何建立 `Request` 实体的时候使用这个类，便利地让您总是有一个可用的您的自定义请求类实体，甚至在单元测试也有！
+每当您指定了自定义请求类， Laravel 将会在任何建立 `Request` 实体的时候使用这个类，便利地让您总是有一个可用的自定义请求类实例，甚至在单元测试也有！
