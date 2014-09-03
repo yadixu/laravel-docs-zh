@@ -17,9 +17,9 @@
 <a name="introduction"></a>
 ## 简介
 
-扩展包是扩增 Laravel 的主要方式。扩展包可以是任何功能，比方说处理时间的 [Carbon](https://github.com/briannesbitt/Carbon) 或是 BDD 测试框架如 [Behat](https://github.com/Behat/Behat)。
+扩展包是扩增 Laravel 的主要方式。扩展包可以是完成任何功能的数据，比方说处理时间的 [Carbon](https://github.com/briannesbitt/Carbon) 或是 BDD 测试框架如 [Behat](https://github.com/Behat/Behat)。
 
-当然，有各式各样的扩展包。有些扩展包是独立运作 (stand-alone) 的，意思是指他们并不相依任何框架，包括 Laravel 。刚提到的 Carbon 及 Behat 就是这种扩展包。要使用这种扩展包只需要在 `composer.json` 文件里引入它们即可。
+当然，目前有各式各样的扩展包。有些扩展包是独立运作 (stand-alone) 的，意思是指他们并不相依任何框架，包括 Laravel 。刚提到的 Carbon 及 Behat 就是这种扩展包。要使用这种扩展包只需要在 `composer.json` 文件里引入它们即可。
 
 另一方面，有些扩展包特别指定要与 Laravel 整合。这种型式的扩展包在上一个版本的 Laravel 里称做 Bundle。这种扩展包可能有路由、控制器、视图、设定以及迁移，目标是增强 Laravel 本身的功能。由于没有特别需求要开发独立运作的扩展包，因此在这份指南里将主要以开发 Laravel 专属的扩展包为目标进行说明。
 
@@ -34,9 +34,9 @@
 
 	php artisan workbench vendor/package --resources
 
-发行商 (vendor) 名称是为了识别不同作者发行相同名称的扩展包而设计。比方说，我 (Taylor Otwell) 建立了一个新的扩展包名称为 "Zapper" ，而发行商的名称就是 `Taylor`。默认 workbench 命令会建立框架独立 (framework agnostic) 的扩展包结构；然后，`resources` 参数则会让 workbench 在产生扩展包结构时，额外针对 Laravel 产生特定的文件夹，包括 `migrations`、`views`、`config` 等。
+发行商 (vendor) 名称是为了识别不同作者发行相同名称的扩展包而设计的。比方说，我 (Taylor Otwell) 建立了一个新的扩展包名称为 "Zapper" ，而发行商的名称就是 `Taylor`。默认 workbench 命令会建立框架独立 (framework agnostic) 的扩展包结构。然后，`resources` 参数则会让 workbench 在产生扩展包结构时，额外针对 Laravel 产生特定的文件夹，包括 `migrations`、`views`、`config` 等。
 
-当 `workbench` 命令被执行后，您的扩展包就可以在 `workbench` 文件夹内获取。接着，您需要为您的扩展包`注册服务提供者 (ServiceProvider)`。您可以通过在 `app/config/app.php` 的 `providers` 数组里新增您扩展包的服务提供者名称进行注册，这个动作将会让 Laravel 启动时载入您的扩展包。服务提供者使用 `[Package]ServiceProvider` 这种命名惯例来为软件命名，以上述的例子来说，我们将会新增一行 `Taylor\Zapper\ZapperServiceProvider` 到 `providers` 数组里。
+当 `workbench` 命令被执行后，您的扩展包就可以在 `workbench` 文件夹内被获取。接着，您需要为您的扩展包`注册服务提供者 (ServiceProvider)`。您可以通过在 `app/config/app.php` 的 `providers` 数组里新增您扩展包的服务提供者名称进行注册，这个动作将会让 Laravel 启动时载入您的扩展包。服务提供者使用 `[Package]ServiceProvider` 这种命名惯例来为软件命名，以上述的例子来说，我们将会新增一行 `Taylor\Zapper\ZapperServiceProvider` 到 `providers` 数组里。
 
 当提供者被注册后，您就已经完成扩展包开发的前置工作了！不过，建议您在深入开发工作前，先熟悉一下以下章节要接口的扩展包数据结构及开发工作流程。
 
@@ -75,7 +75,7 @@
 
 这个方法让 Laravel 知道如何载入视图、设定及其他您的应用程序所需的资源。在大多数的情况下，跟随这个 workbench 的惯例即可，并不需要特别修改这一行。
 
-在默认的情况下，当注册完扩展包后，其资源就可以通过 `vendor/package` 取得。然后，您可以通过 package 方法的第二个参数来重写其动作，就方说：
+在默认的情况下，当注册完扩展包后，其资源就可以通过 `vendor/package` 取得。然后，您可以通过 package 方法的第二个参数来重写其动作，比方说：
 
 	// 将 custom-namespace 传给 package 方法
 	$this->package('vendor/package', 'custom-namespace');
@@ -85,7 +85,7 @@
 
 服务提供者类并没有「默认」的存放位置，您可以把它放在任何您喜欢的地方，或许可以将它们统一整理在 `Providers` 命名空间后，放到您的 `app` 文件夹里。只要 Composer [知道如何载入它们的话](http://getcomposer.org/doc/01-basic-usage.md#autoloading)，您就可以把这些文件放在任何地方。
 
-假如您更改了您扩展包资源存放的位置，可能是配置文件或是视图，那您就应该在 `package` 方法调用时，传第第三个参考来指定您的资源位置：
+假如您更改了您扩展包资源存放的位置，可能是配置文件或是视图，那您就应该在 `package` 方法调用时，传入第三个参数来指定您的资源位置：
 
 	$this->package('vendor/package', null, '/path/to/resources');
 
@@ -123,7 +123,7 @@
 <a name="development-workflow"></a>
 ## 开发工作流程
 
-当您开发一个扩展包时，通过如同开发一个应用程序一样的脉络来进行往往是很有帮助的，这样能让您简单的观看及实验您的样板…等。因此，安装一个新的 Laravel 框架，然后使用 `workbench` 命令来建立您的扩展包结构。
+当您开发一个扩展包时，通过如同开发一个应用程序一样的脉络来进行往往是很有帮助的，这样能让您简单的观看及实验您的样板等。因此，安装一个新的 Laravel 框架，然后使用 `workbench` 命令来建立您的扩展包结构来开始你的工作流程。
 
 当 `workbench` 命令建立好您的扩展包结构后，您可以直接在 `workbench/[vendor]/[package]` 文件夹底下执行 `git init` 和 `git push` 进行开发过程的版本控制。这样可以让您很方便的在一个完整的应用程序脉络下开发您的扩展包，而不会受到 `composer update` 干扰而越陷越深。
 
@@ -180,7 +180,7 @@
 
 ### 串接设定
 
-当其他的开发者安装了您的扩展包后，他们或许会希望可以重写部份的设定值。但假如他们直接修改您的扩展包代码，则当他们下次次执行 composer update 时，这些设定值就又会被重写回来。取而代之，应该使用 `config:publish` 命令来发布配置文件：
+当其他的开发者安装了您的扩展包后，他们或许会希望可以重写部份的设定值。但假如他们直接修改您的扩展包代码，则当他们下次执行 composer update 时，这些设定值就又会被重写回来。取而代之，应该使用 `config:publish` 命令来发布配置文件：
 
 	php artisan config:publish vendor/package
 
@@ -232,7 +232,7 @@
 
 	php artisan asset:publish --bench="vendor/package"
 
-这个命令将会把资源依照供应商及扩展包名称移至 `public/packages` 底下。因此，一个叫 `userscape/kudos` 的扩展包资产就会被移到 `public/packages/userscape/kudos`。使用这个惯例可以让您安全地在您的扩展包视图引入资源。
+这个命令将会把资源依照供应商及扩展包名称移至 `public/packages` 底下。因此，一个叫 `userscape/kudos` 的扩展包资产就会被移到 `public/packages/userscape/kudos`。使用这个惯例可以让您安全地在您的扩展包视图中引入资源。
 
 <a name="publishing-packages"></a>
 ## 发布扩展包
