@@ -25,7 +25,7 @@
 
 Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和数据库的互动。 每个数据库表会和一个对应的「模型」互动。
 
-在开始之前，记得把 `app/config/database.php` 里的数据库连线配置好。
+在开始之前，记得把 `app/config/database.php` 里的数据库连接配置好。
 
 <a name="basic-usage"></a>
 ## 基本用法
@@ -44,7 +44,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 
 	}
 
-> **注意：** Eloquent 也会假设每个数据库表都有一个字段名称为 `id` 的主键。您可以在类里定义 `primaryKey` 属性来重写。同样的，您也可以定义 `connection` 属性，指定模型连接到专属的数据库连线。
+> **注意：** Eloquent 也会假设每个数据库表都有一个字段名称为 `id` 的主键。您可以在类里定义 `primaryKey` 属性来重写。同样的，您也可以定义 `connection` 属性，指定模型连接到专属的数据库连接。
 
 定义好模型之后，您就可以从数据库表新增及获取数据了。注意在默认情况下，在数据库表里需要有 `updated_at` 和 `created_at` 两个字段。如果您不想设定或自动更新这两个字段，则将类里的 `$timestamps` 属性设为 `false`即可。
 
@@ -110,7 +110,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 
 传到方法里的第一个参数表示每次「拆分」要取出的数据数量。第二个参数的闭合函数会在每次取出数据时被调用。
 
-#### 指定查询时连线数据库
+#### 指定查询时连接数据库
 
 您也可以指定在执行 Eloquent 查询时要使用哪个数据库连线。只要使用 `on` 方法：
 

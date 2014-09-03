@@ -3,7 +3,7 @@
 - [介绍](#introduction)
 - [建立迁移文件](#creating-migrations)
 - [执行迁移](#running-migrations)
-- [回溯迁移](#rolling-back-migrations)
+- [回滚迁移](#rolling-back-migrations)
 - [数据填充](#database-seeding)
 
 <a name="introduction"></a>
@@ -54,17 +54,17 @@
 	php artisan migrate --force
 
 <a name="rolling-back-migrations"></a>
-## 回溯迁移
+## 回滚迁移
 
-#### 回溯上一次的迁移
+#### 回滚上一次的迁移
 
 	php artisan migrate:rollback
 
-#### 回溯所有迁移
+#### 回滚所有迁移
 
 	php artisan migrate:reset
 
-#### 回溯所有迁移并且再执行一次
+#### 回滚所有迁移并且再执行一次
 
 	php artisan migrate:refresh
 
@@ -107,6 +107,6 @@ Laravel 可以简单的使用 seed 类填充测试数据到数据库。所有的
 
 	php artisan db:seed --class=UserTableSeeder
 
-您可以也使用 `migrate:refresh` 命令填充数据，它会回溯并且再次执行所有迁移：
+您可以也使用 `migrate:refresh` 命令填充数据，它会回滚并且再次执行所有迁移：
 
 	php artisan migrate:refresh --seed
