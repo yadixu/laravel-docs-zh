@@ -115,15 +115,15 @@ Laravel 提供简易的方法，让您可以保护您的应用程序不受到 CS
 	echo Form::file($name, $attributes = array());
 
 <a name="checkboxes-and-radio-buttons"></a>
-## 核取方块和单选项钮
+## 复选框和单选项钮
 
-#### 产生核取方块或单选按钮
+#### 产生复选框或单选按钮
 
 	echo Form::checkbox('name', 'value');
 
 	echo Form::radio('name', 'value');
 
-#### 产生已选取的核取方块或单选按钮
+#### 产生已选取的复选框或单选按钮
 
 	echo Form::checkbox('name', 'value', true);
 
