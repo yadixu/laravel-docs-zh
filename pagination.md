@@ -9,14 +9,14 @@
 <a name="configuration"></a>
 ## 设置
 
-在其他的框架中，实现分页是令人感到苦恼的事，但是 Laravel 令它实现起来变得轻松。在 `app/config/view.php` 文件中有设置选项可以设定，`pagination` 选项需要指定用哪个视图来建立分页，而 Laravel 默认包含两种视图。
+在其他的框架中，实现分页是令人感到苦恼的事，但是 Laravel 能让它实现得很轻松。在 `app/config/view.php` 文件中有设置选项可以设定相关参数，`pagination` 选项需要指定用哪个视图来建立分页，而 Laravel 默认包含两种视图。
 
 `pagination::slider` 视图将会基于现在的页面智能的显示「范围」的页数链接，`pagination::simple` 视图将仅显示「上一页」和「下一页」的按钮。**两种视图都兼容  Twitter Bootstrap 框架**
 
 <a name="usage"></a>
 ## 使用
 
-有几种方法来分页数据。最简单的是在查询构造器或 Eloquent 模型使用 `paginate` 方法。
+有几种方法可用来操作分页数据。最简单的是在查询构造器或 Eloquent 模型使用 `paginate` 方法。
 
 #### 对数据库结果分页
 
@@ -30,7 +30,7 @@
 
 	$someUsers = User::where('votes', '>', 100)->paginate(15);
 
-传送给 `paginate` 方法的参数是您希望每页要显示的数据选项数目，只要您取得查询结果后，您可以在视图中显示，并使用 `links` 方法去建立分页链接：
+传送给 `paginate` 方法的参数是您希望每页要显示的数据条数，只要您取得查询结果后，您可以在视图中显示，并使用 `links` 方法去建立分页链接：
 
 	<div class="container">
 		<?php foreach ($users as $user): ?>
@@ -40,9 +40,9 @@
 
 	<?php echo $users->links(); ?>
 
-这就是所有建立分页系统的步骤了! 您会注意到我们还没有告知 Laravel 我们目前的页面是哪一页，这个信息 Laravel 会自动帮您做好。
+这就是所有建立分页系统的步骤了! 您会注意到我们还没有告知 Laravel 我们目前的页面是哪一页，放心，这个信息 Laravel 会自动帮您做好。
 
-如果您想要指定自定义的视图来使用分页，您可以通过 `links` 方法至视图：
+如果您想要指定自定义的视图来使用分页，您可以使用 `links` 方法：
 
 	<?php echo $users->links('view.name'); ?>
 
@@ -59,7 +59,7 @@
 
 #### 「简单分页」
 
-如果您只是要在您的分页视图显示「上一页」和「下一页」链接，您有个选项 `simplePaginate`  方法来执行更高效率的搜寻。当您不需要精准的显示页码在视图上时，这个方法在较大的数据集非常有用：
+如果您只是要在您的分页视图显示「上一页」和「下一页」链接，您可以使用 `simplePaginate`  方法来执行更高效率的搜寻。当您不需要精准的显示页码在视图上时，且数据集比较大时，这个方法非常有用：
 
 	$someUsers = User::where('votes', '>', 100)->simplePaginate(15);
 
@@ -90,7 +90,7 @@
 
 	http://example.com/something?page=2&sort=votes
 
-如果您想要将「哈希片段 hash」加到分页的 URL，您可以使用 `fragment` 方法：
+如果您想要将「哈希片段 hash」加到分页的 URL中，您可以使用 `fragment` 方法：
 
 	<?php echo $users->fragment('foo')->links(); ?>
 
