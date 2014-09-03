@@ -3,7 +3,7 @@
 - [介绍](#introduction)
 - [定义并执行测试](#defining-and-running-tests)
 - [测试环境](#test-environment)
-- [从测试调用路由](#calling-routes-from-tests)
+- [在测试中调用路由](#calling-routes-from-tests)
 - [模拟 Facades](#mocking-facades)
 - [框架 Assertions](#framework-assertions)
 - [辅助方法](#helper-methods)
@@ -12,14 +12,14 @@
 <a name="introduction"></a>
 ## 介绍
 
-Laravel 在创立时就有考虑到单元测试。事实上，它支持立即使用被引入的 PHPUnit 做测试，而且已经为您的应用程序建立了 `phpunit.xml` 文件。 除了 PHPUnit 以外，Laravel 也利用 Symfony HttpKernel、 DomCrawler 和 BrowserKit 组件让您在测试的时候模拟为一个网页浏览器，来检查和处理您的视图。
+Laravel 在创立时就有考虑到单元测试。事实上，它能立即使用被引入的 PHPUnit 做测试，而且默认已经为您的应用程序建立了 `phpunit.xml` 文件。 除了 PHPUnit 以外，Laravel 也利用 Symfony HttpKernel、 DomCrawler 和 BrowserKit 组件让您在测试的时候模拟一个网页浏览器来检查和处理您的视图。
 
-在 `app/tests` 文件夹有提供一个测试例子。在安装新 Laravel 应用程序之后，只要在命令行上执行 `phpunit` 来进行测试流程。
+在 `app/tests` 文件夹中有提供一个测试例子。在安装好新的 Laravel 应用程序之后，只要在命令行上执行 `phpunit` 来进行测试流程。
 
 <a name="defining-and-running-tests"></a>
 ## 定义并执行测试
 
-要建立一个测试案例，只要在 `app/tests` 文件夹建立新的测试文件。测试类必须继承自 `TestCase`，接着您可以如您平常使用 PHPUnit 一般去定义测试方法。
+要建立一个测试案例，只要在 `app/tests` 文件夹建立新的测试文件。测试类必须继承自 `TestCase`，接着您可以如平常使用 PHPUnit 一般去定义测试方法。
 
 #### 测试类例子
 
@@ -39,14 +39,14 @@ Laravel 在创立时就有考虑到单元测试。事实上，它支持立即使
 <a name="test-environment"></a>
 ## 测试环境
 
-当执行单元测试的时候，Laravel 会自动将环境设置在 `testing`。另外 Laravel 会在测试环境汇入 `session` 和 `cache` 的配置文件。当在测试环境里这两个驱动会被设定为 `array` (空数组)，代表在测试的时候没有 session 或 cache 数据将会被保留。视情况您可以任意的建立您需要的测试环境设定。
+当执行单元测试的时候，Laravel 会自动将环境设置在 `testing` 中。另外 Laravel 会在测试环境中加载 `session` 和 `cache` 的配置文件，在测试环境中这两个驱动会被设定为 `array` (空数组)，表示在测试的时候不对 session 或 cache 数据进行持久化操作。必要时你也可以创建其他的测试环境。
 
 <a name="calling-routes-from-tests"></a>
-## 从测试调用路由
+## 在测试中调用路由
 
 #### 从单一测试中调用路由
 
-您可以使用 `call` 方法，轻易地调用您的其中一个路由来测试:
+您可以使用 `call` 方法方便地调用您的其中一个路由来进行测试:
 
 	$response = $this->call('GET', 'user/profile');
 
@@ -56,15 +56,15 @@ Laravel 在创立时就有考虑到单元测试。事实上，它支持立即使
 
 	$this->assertEquals('Hello World', $response->getContent());
 
-#### 从测试调用控制器
+#### 在测试中调用控制器
 
-您也可以从测试调用控制器 :
+您也可以在测试中调用控制器 :
 
 	$response = $this->action('GET', 'HomeController@index');
 
 	$response = $this->action('GET', 'UserController@profile', array('user' => 1));
 
-`getContent` 方法会回传求值后的字串内容回应. 如果您的路由回传一个 `View`, 您可以通过 `original` 属性获取它:
+`getContent` 方法会回传求值后的字符串内容. 如果您的路由回传一个 `View`, 您可以通过 `original` 属性获取它:
 
 	$view = $response->original;
 
@@ -74,11 +74,11 @@ Laravel 在创立时就有考虑到单元测试。事实上，它支持立即使
 
 	$response = $this->callSecure('GET', 'foo/bar');
 
-> **注意:** 在测试环境中， 路由筛选器是被禁用的。如果要启用它们，必须增加 `Route::enableFilters()` 到您的测试。
+> **注意:** 在测试环境中， 路由过滤器是被禁用的。如果要启用它们，必须增加 `Route::enableFilters()` 到您的测试中。
 
-### DOM 捞取器
+### DOM Crawler
 
-您也可以通过调用路由来取得 DOM 捞取器实例来检查内容：
+您也可以通过调用路由来取得 DOM Crawler 实例来检查内容：
 
 	$crawler = $this->client->request('GET', '/');
 
@@ -86,12 +86,12 @@ Laravel 在创立时就有考虑到单元测试。事实上，它支持立即使
 
 	$this->assertCount(1, $crawler->filter('h1:contains("Hello World!")'));
 
-如果需要更多如何使用捞取器的信息，请参考它的[官方文件](http://symfony.com/doc/master/components/dom_crawler.html).
+如需更多如何使用 DOM Crawler 的信息，请参考它的[官方文件](http://symfony.com/doc/master/components/dom_crawler.html).
 
 <a name="mocking-facades"></a>
 ## 模拟 Facades
 
-当测试的时候，您或许常会想要模拟调用 Laravel 静态 facade。举个例子，思考下面的控制器行为:
+当测试的时候，您或许常会想要模拟调用 Laravel 静态 facade。举个例子，参考下面的控制器行为:
 
 	public function getIndex()
 	{
@@ -111,12 +111,12 @@ Laravel 在创立时就有考虑到单元测试。事实上，它支持立即使
 		$this->call('GET', '/');
 	}
 
-> **注意:** 您不应该模拟 `Request` facade。取而代之，当执行您的测试，传递想要的输入数据进去 `call` 方法。
+> **注意:** 您不应该模拟 `Request` facade。当执行您的测试，应该传递想要的输入数据给 `call` 方法。
 
 <a name="framework-assertions"></a>
 ## 框架 Assertions
 
-Laravel 附带几个 `assert` 方法，让测试更简单一点:
+Laravel 附带几个 `assert` 方法，能让测试更简单一点:
 
 #### Assert 回应为 OK
 
@@ -215,4 +215,4 @@ Laravel 附带几个 `assert` 方法，让测试更简单一点:
 <a name="refreshing-the-application"></a>
 ## 重置应用程序
 
-您可能已经知道，您可以通过 `$this->app` 在任何测试方法中获取您的 Laravel `应用程序本体` / IoC 容器。这个应用程序对象实例会在每个测试类被重置。如果您希望在给定的方法手动强制重置应用程序，您可以从您的测试方法使用 `refreshApplication` 方法。 这将会重置任何额外的绑定， 例如那些从测试案例执行开始被放到 IoC 容器的 mocks。
+您可能已经知道，您可以通过 `$this->app` 在任何测试方法中获取您的 Laravel `应用程序本体` / IoC 容器。这个应用程序对象实例会在每个测试类里被重置。如果您希望在给定的方法中手动强制重置应用程序，则可以在测试方法使用 `refreshApplication` 方法。 这将会重置任何额外的绑定， 例如那些从测试案例执行开始被放到 IoC 容器的 mocks。
