@@ -11,19 +11,19 @@
 - [扩展包设定](#package-configuration)
 - [扩展包视图](#package-views)
 - [扩展包迁移](#package-migrations)
-- [扩展包资产](#package-assets)
-- [发布扩展包 Assets](#publishing-packages)
+- [扩展包资源](#package-assets)
+- [发布扩展包](#publishing-packages)
 
 <a name="introduction"></a>
 ## 简介
 
-扩展包是扩增 Laravel 的主要方式。扩展包可以是任何功能，比方说处理时间像 [Carbon](https://github.com/briannesbitt/Carbon) 或是 BDD 测试框架如 [Behat](https://github.com/Behat/Behat)。
+扩展包是扩增 Laravel 的主要方式。扩展包可以是任何功能，比方说处理时间的 [Carbon](https://github.com/briannesbitt/Carbon) 或是 BDD 测试框架如 [Behat](https://github.com/Behat/Behat)。
 
 当然，有各式各样的扩展包。有些扩展包是独立运作 (stand-alone) 的，意思是指他们并不相依任何框架，包括 Laravel 。刚提到的 Carbon 及 Behat 就是这种扩展包。要使用这种扩展包只需要在 `composer.json` 文件里引入它们即可。
 
 另一方面，有些扩展包特别指定要与 Laravel 整合。这种型式的扩展包在上一个版本的 Laravel 里称做 Bundle。这种扩展包可能有路由、控制器、视图、设定以及迁移，目标是增强 Laravel 本身的功能。由于没有特别需求要开发独立运作的扩展包，因此在这份指南里将主要以开发 Laravel 专属的扩展包为目标进行说明。
 
-所有的 Laravel 扩展包都通过 [Packagist](http://packagist.org) 及 [Composer](http://getcomposer.org) 进行散布，因此学习如何使用这些美妙的 PHP 散布工具是一个必经的过程。
+所有的 Laravel 扩展包都通过 [Packagist](http://packagist.org) 及 [Composer](http://getcomposer.org) 进行发布，因此学习如何使用这些美妙的 PHP 发布工具是一个必经的过程。
 
 <a name="creating-a-package"></a>
 ## 建立一个扩展包
@@ -65,7 +65,7 @@
 <a name="service-providers"></a>
 ## 服务提供者
 
-服务提供者就是一个扩展包的启始类。默认来说，他包含两个方法：`boot` 和 `register`。通过这两个方法，您可以做任何您需要做的事，比方说：引入路由档、注册 IoC 容器、衔接事件或是任何其他您想要做的事。
+服务提供者就是一个扩展包的启始类。默认来说，他包含两个方法：`boot` 和 `register`。通过这两个方法，您可以做任何您需要做的事，比方说：引入路由文件、注册 IoC 容器、注册事件或是任何其他您想要做的事。
 
 `register` 这个方法则是当服务提供者被注册时马上被调用，而 `boot` 命令则是仅当一个请求被路由时才会被执行。所以，假如您的服务提供者相依于其他已经注册的服务提供者，或是您想要重写由其他服务提供者所做的绑定，则您应该使用 `boot` 方法。
 
@@ -92,7 +92,7 @@
 <a name="deferred-providers"></a>
 ## 缓载提供者
 
-假如您正在开发的服务提供者并没有注册任何型式的资源如配置文件或视图等，那您就可以考虑将您的服务提供者设定为「缓载」提供者。一个缓载提供者的特性就是只有需要它的功能时才载入，假如在当次的请求循环内不需要这个服务，则这个提供者就不会被载入。
+假如您正在开发的服务提供者并没有注册任何形式的资源如配置文件或视图等，那您就可以考虑将您的服务提供者设定为「缓载」提供者。一个缓载提供者的特性就是只有需要它的功能时才载入，假如在当次的请求循环内不需要这个服务，则这个提供者就不会被载入。
 
 要设定您的服务提供者采用缓载设定，只需要将 `defer` 属性设定为 `true` 即可：
 
@@ -140,7 +140,7 @@
 
 在早先的 Laravel 里是使用 `handles` 的方式来指定哪些 URI 会由扩展包进行回应。但在 Laravel 4 里，一个扩展包可以对任何 URI 进行回应。在您的扩展包里载入路由文件，只需要在您的服务提供者的 `boot` 方法里 `include` 即可。
 
-#### 从服务提供者引入一个路由档
+#### 从服务提供者引入一个路由文件
 
 	public function boot()
 	{
@@ -218,11 +218,11 @@
 	php artisan migrate --package="vendor/package"
 
 <a name="package-assets"></a>
-## 扩展包资产 Assets
+## 扩展包资源 Assets
 
-#### 把扩展包资产移到 public
+#### 把扩展包资源移到 public
 
-有些扩展包会带有诸多资产如 Javascript、CSS 和图片。然而，我们没有办法取用这些在 `vendor` 或 `workbench` 文件夹里的资产，所以我们需要一个把它们移到 `public` 文件夹的方法。而 `asset:publish` 这个命令就是为了这个目的而存在：
+有些扩展包会带有诸多资源如 Javascript、CSS 和图片。然而，我们没有办法取用这些在 `vendor` 或 `workbench` 文件夹里的资源，所以我们需要一个把它们移到 `public` 文件夹的方法。而 `asset:publish` 这个命令就是为了这个目的而存在：
 
 	php artisan asset:publish
 
@@ -232,7 +232,7 @@
 
 	php artisan asset:publish --bench="vendor/package"
 
-这个命令将会把资产依照供应商及扩展包名称移至 `public/packages` 底下。因此，一个叫 `userscape/kudos` 的扩展包资产就会被移到 `public/packages/userscape/kudos`。使用这个惯例可以让您安全地在您的扩展包视图引入资产。
+这个命令将会把资源依照供应商及扩展包名称移至 `public/packages` 底下。因此，一个叫 `userscape/kudos` 的扩展包资产就会被移到 `public/packages/userscape/kudos`。使用这个惯例可以让您安全地在您的扩展包视图引入资源。
 
 <a name="publishing-packages"></a>
 ## 发布扩展包

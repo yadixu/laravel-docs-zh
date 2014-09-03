@@ -11,12 +11,12 @@
 
 在其他的框架中，实现分页是令人感到苦恼的事，但是 Laravel 令它实现起来变得轻松。在 `app/config/view.php` 文件中有设置选项可以设定，`pagination` 选项需要指定用哪个视图来建立分页，而 Laravel 默认包含两种视图。
 
-`pagination::slider` 视图将会基于现在的页面智慧的显示「范围」的页数链接，`pagination::simple` 视图将仅显示「上一页」和「下一页」的按钮。**两种视图都兼容  Twitter Bootstrap 框架**
+`pagination::slider` 视图将会基于现在的页面智能的显示「范围」的页数链接，`pagination::simple` 视图将仅显示「上一页」和「下一页」的按钮。**两种视图都兼容  Twitter Bootstrap 框架**
 
 <a name="usage"></a>
 ## 使用
 
-有几种方法来分页数据。最简单的是在搜寻建立器或 Eloquent 模型使用 `paginate` 方法。
+有几种方法来分页数据。最简单的是在查询构造器或 Eloquent 模型使用 `paginate` 方法。
 
 #### 对数据库结果分页
 
@@ -101,7 +101,7 @@
 <a name="converting-to-json"></a>
 ## 转换至 JSON
 
-`Paginator` 类实现 `Illuminate\Support\Contracts\JsonableInterface` 接口的 `toJson` 公开方法。 由路由返回的值，您可以将 `Paginator` 实例传换成 JSON。JSON 表单的实例会包含一些「后设」信息，例如 `total`, `current_page`, `last_page`, `from` , `to`。该实例数据将可通过在 JSON 数组中 `data` 的键取得。
+`Paginator` 类实现 `Illuminate\Support\Contracts\JsonableInterface` 接口的 `toJson` 公开方法。 由路由返回的值，您可以将 `Paginator` 实例传换成 JSON。JSON 表单的实例会包含一些「元」信息，例如 `total`, `current_page`, `last_page`, `from` , `to`。该实例数据将可通过在 JSON 数组中 `data` 的键取得。
 
 <a name="custom-presenters"></a>
 ## 自定义表示器（Presenter）

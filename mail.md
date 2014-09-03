@@ -1,4 +1,4 @@
-# Mail
+# 邮件发送
 
 - [设定](#configuration)
 - [基本用法](#basic-usage)

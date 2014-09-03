@@ -1,4 +1,4 @@
-# SSH
+# 远程连接
 
 - [配置文件](#configuration)
 - [基本用法](#basic-usage)

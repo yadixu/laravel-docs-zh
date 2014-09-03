@@ -1,4 +1,4 @@
-# Session
+# 会话
 
 - [配置信息](#configuration)
 - [Session 用法](#session-usage)
