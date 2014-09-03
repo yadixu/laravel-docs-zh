@@ -4,14 +4,14 @@
 - [使用错误信息](#working-with-error-messages)
 - [错误信息 & 视图](#error-messages-and-views)
 - [使用验证规则](#available-validation-rules)
-- [有条件新增规则](#conditionally-adding-rules)
+- [添加条件验证规则](#conditionally-adding-rules)
 - [自定义错误信息](#custom-error-messages)
 - [自定义验证规则](#custom-validation-rules)
 
 <a name="basic-usage"></a>
 ## 基本用法
 
-Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确性及查看验证的错误信息。
+Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确性及查看相应的验证错误信息。
 
 #### 基本验证例子
 
@@ -21,11 +21,11 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 	);
 
 
-我们通过 `make` 这个方法来的第一个参数设定该被验证数据名称，然后第二个参数我们定义该数据可被接受的规则。
+上文中通过 `make` 这个方法来的第一个参数来设定所需要被验证的数据名称，第二个参数设定该数据可被接受的规则。
 
 #### 使用数组来定义规则
 
-多个规则可以使用"|"符号分隔，或是单一数组作为单独的元素分隔。
+多个验证规则可以使用"|"符号分隔，或是单一数组作为单独的元素分隔。
 
 	$validator = Validator::make(
 		array('name' => 'Dayle'),
@@ -48,7 +48,7 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
     );
 
 
-当一个 `Validator` 实例被建立，`fails`（或 `passes`） 这二个方法就可以在验证时使用，如下：
+当一个 `Validator` 实例被建立，`fails`（或 `passes`） 这两个方法就可以在验证时使用，如下：
 
 	if ($validator->fails())
 	{
@@ -72,7 +72,7 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 <a name="working-with-error-messages"></a>
 ## 使用错误信息
 
-当您调用一个 `Validator` 实例的 `messages` 方法后，您会得到一个 `MessageBag` 的变量，里面有许多方便的方法让您取得错误信息。
+当您调用一个 `Validator` 实例的 `messages` 方法后，您会得到一个命名为 `MessageBag` 的变量，该变量里有许多方便的方法能让您取得相关的错误信息。
 
 #### 查看一个字段的第一个错误信息
 
@@ -115,7 +115,7 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 <a name="error-messages-and-views"></a>
 ## 错误信息 & 视图
 
-当您开始进行验证，您将会需要一个简易的方法去取得错误信息并回传到您的视图中，在 Laravel 您可以很方便的处理这些事，您可以通过下面的路由例子来了解：
+当您开始进行验证数据时，您会需要一个简易的方法去取得错误信息并回传到您的视图中，在 Laravel 中您可以很方便的处理这些操作，您可以通过下面的路由例子来了解：
 
 
 	Route::get('register', function()
@@ -135,9 +135,9 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 		}
 	});
 
-记得当验证失败后，我们会使用 `withErrors` 方法来将 `Validator` 实例进行重新导向。这方法会将错误信息存入 session 中，这样才能在下个请求中被使用。
+需要记住的是，当验证失败后，我们会使用 `withErrors` 方法来将 `Validator` 实例进行重新导向。这个方法会将错误信息存入 session 中，这样才能在下个请求中被使用。
 
-然而，我们并不需要特别去将错误信息绑定在我们 GET 路由的视图中。因为 Laravel 会确认在 Session 数据中是否有错误信息，并且自动将它们绑定至视图中。**所以请注意，`$errors` 变量存在于所有的视图中，所有的请求里，**让您可以直接假设 `$errors` 变量已被定义且可以安全地使用。`$errors` 变量是 `MessageBag` 类的一个实例。
+然而，我们并不需要特别去将错误信息绑定在我们 GET 路由的视图中。因为 Laravel 会确认在 Session 数据中检查是否有错误信息，并且自动将它们绑定至视图中。**所以请注意，`$errors` 变量存在于所有的视图中，所有的请求里，**让您可以直接假设 `$errors` 变量已被定义且可以安全地使用。`$errors` 变量是 `MessageBag` 类的一个实例。
 
 所以，重新导向之后，您可以自然的在视图中使用 `$errors` 变量：
 
@@ -145,7 +145,7 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 
 ### 命名错误清单
 
-假如您在一个页面中有许多的表单, 您可能希望为错误命名一个`MessageBag`. 这将让您针对特定的表单查看其错误信息, 我们只要简单的在 `withErrors` 的第二个参数设定名称即可：
+假如您在一个页面中有许多的表单, 您可能希望为错误命名一个`MessageBag`. 这样能方便您针对特定的表单查看其错误信息, 我们只要简单的在 `withErrors` 的第二个参数设定名称即可：
 
 	return Redirect::to('register')->withErrors($validator, 'login');
 
@@ -441,9 +441,9 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 > **注意:** 此函数会使用 PHP `filter_var` 方法验证。
 
 <a name="conditionally-adding-rules"></a>
-## 有条件新增规则
+## 添加条件验证规则
 
-某些情况下，您可能 **只想** 当字段有值时，才进行验证。只要增加 `sometimes` 条件进条件列表中，就可以快速达成：
+某些情况下，您可能 **只想** 当字段有值时，才进行验证。这时只要增加 `sometimes` 条件进条件列表中，就可以快速达成：
 
 	$v = Validator::make($data, array(
 		'email' => 'sometimes|required|email',
@@ -453,7 +453,7 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 
 #### 复杂的条件式验证
 
-有时，您可以希望给定字段在其他字段有超过 100 时为必填。或者您希望两个字段，当其一字段有值时，另一字段将会有一个给定的值。增加这样的验证条件并不痛苦。首先，利用您尚未更动的 _静态规则_ 创建一个 `Validator` 实例：
+有时，您可以希望给指定字段在其他字段长度有超过 100 时才验证是否为必填。或者您希望有两个字段，当其中一字段有值时，另一字段将会有一个默认值。增加这样的验证条件并不复杂。首先，利用您尚未更动的 _静态规则_ 创建一个 `Validator` 实例：
 
 	$v = Validator::make($data, array(
 		'email' => 'required|email',
@@ -479,7 +479,7 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 <a name="custom-error-messages"></a>
 ## 自定义错误信息
 
-如果需要，您可以为验证自定义错误信息取代默认错误信息。这里有几个方式可以设定自定义消息。
+如果有需要，您可以设置自定义的错误信息取代默认错误信息。这里有几个方式可以设定自定义消息。
 
 #### 传递自定义消息进验证器
 
@@ -509,9 +509,9 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 	);
 
 <a name="localization"></a>
-#### 在语言文件中指定自定义消息
+#### 在语言包文件中指定自定义消息
 
-某些状况下，您可能希望在语言文件中设定您的自定义消息，而非直接将他们传递给 `Validator`。要达到目的，将您的信息增加至 `app/lang/xx/validation.php` 文件的 `custom` 数组中。
+某些状况下，您可能希望在语言包文件中设定您的自定义消息，而非直接将他们传递给 `Validator`。要达到目的，将您的信息增加至 `app/lang/xx/validation.php` 文件的 `custom` 数组中。
 
 	'custom' => array(
 		'email' => array(
@@ -524,14 +524,14 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 
 #### 注册自定义验证规则
 
-Laravel 提供了各种有用的验证规则，但是，您可能希望可以设定一些自己专用的。注册自定义的验证规则的方法之一就是使用 `Validator::extend` 方法：
+Laravel 提供了各种有用的验证规则，但是，您可能希望可以设定自定义验证规则。注册生成自定义的验证规则的方法之一就是使用 `Validator::extend` 方法：
 
 	Validator::extend('foo', function($attribute, $value, $parameters)
 	{
 		return $value == 'foo';
 	});
 
-客制验证器闭包接收三个参数：要被验证的 `$attribute(属性)` 的名称，属性的值 `$value`，传递至验证规则的 `$parameters` 数组。
+自定义验证器闭包接收三个参数：要被验证的 `$attribute(属性)` 的名称，属性的值 `$value`，传递至验证规则的 `$parameters` 数组。
 
 您同样可以传递一个类和方法到 `extend` 方法中，取代原本的闭包：
 
@@ -555,8 +555,7 @@ Laravel 提供了各种有用的验证规则，但是，您可能希望可以设
 
 	}
 
-#### Registering A Custom Validator Resolver
-
+#### 拓展自定义验证器
 接下来，您需要注册您自定义验证器扩展：
 
 	Validator::resolver(function($translator, $data, $rules, $messages)
