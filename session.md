@@ -11,11 +11,11 @@
 
 由于 HTTP 协定是无状态（Stateless）的，所以 session 提供一种储存用户数据的方法。Laravel 支持了多种 session 后端驱动，并通过清楚、统一的 API 提供使用。也内建支持如 [Memcached](http://memcached.org), [Redis](http://redis.io) 和数据库的后端驱动。
 
-session 的配置文件配置在 `app/config/session.php` 中，请务必看一下 session 配置文件中可用的选项设定及注释。Laravel 默认使用 `file` 的 session 驱动，它在大多的应用中可以良好运作。
+session 的配置文件配置在 `app/config/session.php` 中，请务必看一下 session 配置文件中可用的选项设定及注释。Laravel 默认使用 `file` 的 session 驱动，它在多数的应用中可以良好运作。
 
 #### 保留键值
 
-Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该避免 session 使用此名称。
+Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该您在使用 session 时应避免使用此名称。
 
 
 <a name="session-usage"></a>
@@ -84,7 +84,7 @@ Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该
 <a name="database-sessions"></a>
 ## 数据库 Sessions
 
-当使用 `database` session 驱动时，您必需创建一张储存 session 的数据库表。下方例子使用 `Schema` 来建表：
+当使用 `database` session 驱动时，您必需创建一张储存 session 的数据库表。下面的例子使用 `Schema` 来建表：
 
 	Schema::create('sessions', function($table)
 	{
