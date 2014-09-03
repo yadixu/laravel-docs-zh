@@ -11,9 +11,9 @@
 <a name="configuration"></a>
 ## 配置文件
 
-Laravel 可以简单的 SSH 到远程服务器以及执行命令，让您可以简单在远程执行的建立 Artisan 任务。`SSH` facade 提供了使用方式让您连线到远程服务器并执行命令。
+Laravel 可以简单的通过 SSH 方式登录到远程服务器并执行相关操作命令，让您可以简单在远程执行的建立 Artisan 任务。`SSH` facade 提供了此类行为的入口。
 
-配置文件位在 `app/config/remote.php` ，包含所有您需要设定的远程连线设定， `connections` 数组里有以远程服务器名称作为键值的列表。只要在 `connections` 数组设定好认证，您就准备好可以执行远程任务了。记得 `SSH` 可以经由密码或 SSH key 认证。
+相关的配置文件存在 `app/config/remote.php` 中，此文件包含所有您需要设定的远程连接配置， `connections` 数组里有以远程服务器名称作为键值的列表。只要在 `connections` 数组设定好认证，您就准备好可以执行远程任务了。记得 `SSH` 可以使用密码或 SSH key 进行身份认证。
 
 > **提示:** 需要在远程服务器执行很多任务吗？请阅读 [Envoy 任务执行](#envoy-task-runner)!
 
@@ -103,7 +103,7 @@ Laravel 有一个有用的命令可以让您在任何远程服务器的 `laravel
 - [提醒通知](#envoy-notifications)
 - [更新 Envoy](#envoy-updating-envoy)
 
-Laravel Envoy 提供了简洁，轻量的语法，定义在远程服务器执行的共同任务。使用 [Blade](/docs/templates#blade-templating) 风格的语法，您可以简单的设置部署任务，执行 Artisan 命令或是更多。
+Laravel Envoy 提供了简洁，轻量的语法能让您对远程服务器执行任务操作。使用 [Blade](/docs/templates#blade-templating) 风格的语法，您可以简单的设置部署任务，执行 Artisan 命令。
 
 > **提醒:** Envoy 需要 PHP 5.4 或更高的版本，并且只能在 Mac / Linux 发行版本下执行。
 
@@ -116,7 +116,7 @@ Laravel Envoy 提供了简洁，轻量的语法，定义在远程服务器执行
 
 记得将 `~/.composer/vendor/bin` 路径加入 PATH，如此在终端机执行 `envoy` 命令时才找得到。
 
-再来，在项目根目录建立 `Envoy.blade.php` 文件。这里有个例子可以让您作为起头：
+再来，在项目根目录建立 `Envoy.blade.php` 文件。这里有个例子可以让您作为示例：
 
 	@servers(['web' => '192.168.1.1'])
 
@@ -124,7 +124,7 @@ Laravel Envoy 提供了简洁，轻量的语法，定义在远程服务器执行
 		ls -la
 	@endtask
 
-如您所见，`@servers` 数组建立在文件的起始。您可以在定义任务时，在 `on` 选项里参照这些服务器。在您的 `@task` 定义里，写入想要在远程服务器执行的 Bash code。
+如您所见，`@servers` 数组建立在文件的开头。您可以在定义任务时，在 `on` 选项里参照这些服务器。在您的 `@task` 定义里，写入想要在远程服务器执行的 Bash code。
 
 `init` 命令可以简单的建立一个基本的 Envoy 文件：
 
