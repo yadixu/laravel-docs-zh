@@ -11,11 +11,11 @@
 <a name="configuration"></a>
 ## 设定
 
-Laravel 队列组件提供一个统一的API整合了许多不同的队列服务，队列允许您将一个执行任务延后执行，例如发送邮件延后至您指定的时间，进而大幅的加快您的网站应用程序的速度。
+Laravel 队列组件提供了一个统一的队列服务API，队列允许您将一个任务延后执行，例如可以将邮件延后至您指定的时间再发送，进而大幅的加快您开发网站应用程序的效率。
 
-队列的配置文件在 `app/config/queue.php`，在这个文件您将可以找到框架中每种不同的队列服务的连接配置，其中包含了 [Beanstalkd](http://kr.github.com/beanstalkd)，[IronMQ](http://iron.io)，[Amazon SQS](http://aws.amazon.com/sqs)，[Redis](http://redis.io)，以及同步(本地端使用)驱动设定。
+队列的配置文件在 `app/config/queue.php`，在这个文件里您将可以找到框架中每种不同的队列服务的连接配置，其中包含了 [Beanstalkd](http://kr.github.com/beanstalkd)，[IronMQ](http://iron.io)，[Amazon SQS](http://aws.amazon.com/sqs)，[Redis](http://redis.io)，以及同步(本地端使用)驱动设定。
 
-下列的 composer.json 设定可以依照您使用的队列服务必需在使用前安装：
+下列的 composer.json 表示您的队列服务所需要的依赖环境：
 
 - Beanstalkd: `pda/pheanstalk ~3.0`
 - Amazon SQS: `aws/aws-sdk-php`
@@ -57,7 +57,7 @@ Laravel 队列组件提供一个统一的API整合了许多不同的队列服务
 
 	Queue::push('SendEmail@send', array('message' => $message), 'emails');
 
-#### 传送相同的数据去多个连接
+#### 发送相同的数据去多个连接
 
 如果您需要传送一样的数据去几个不同的队列服务器，您也可以使用 `Queue::bulk` 方法：
 
@@ -163,7 +163,7 @@ Laravel 内含一个 Artisan 命令，它将推送到队列的工作拉来下执
 
 	php artisan queue:listen --sleep=5
 
-注意队列只会队列上没有工作时休息，假如有许多可执行的工作，队列监听将持续的处理工作不会休息
+注意队列只会在没有队列内容时停止工作，假如队列中仍有许多可执行的工作，队列监听将持续不中断的处理
 
 #### 处理队列上的一个工作
 
@@ -174,9 +174,9 @@ Laravel 内含一个 Artisan 命令，它将推送到队列的工作拉来下执
 <a name="daemon-queue-worker"></a>
 ## 常驻队列处理器
 
-`queue:work` 也包含了一个 `--daemon` 选项强迫队列处理器可以持续处理工作即使重新启动框架，这个作法相对的比 `queue:listen` 可有效的减少CPU的使用量，但是却增加了您布署时正在处理中的队列任务的复杂性。
+`queue:work` 也包含了一个 `--daemon` 选项能强迫队列处理器可以持续处理工作，即使框架重新启动了也不会停止。这种方式比起 `queue:listen` 来说，可以更有效的减少CPU的使用量，不过代价是要增加了您布署时的复杂性。
 
-当开始一个队列处理器于常驻模式，使用 `--daemon` 旗标：
+当开始一个队列处理器处于常驻模式，使用 `--daemon` 标示：
 
 	php artisan queue:work connection --daemon
 
@@ -189,7 +189,7 @@ Laravel 内含一个 Artisan 命令，它将推送到队列的工作拉来下执
 
 ### 布署常驻队列处理器
 
-最简单的方式布署一个应用程序使用常驻队列处理器就是将应用程序在开始布署时使用维护模式，您可以使用 `php artisan down` 命令来完成这件事情，当这个应用程序在维护模式，Laravel 将不会允许任何来自队列上的新工作，但会持续的处理已存在的工作，当过了足够的时间所有您正在执行的工作都已处理完(通常不会很久约 30-60 秒)，您可以停止处理器及继续处理您的布署工作。
+最简单的布署一个应用程序使用常驻队列处理器的方式就是将应用程序在开始布署时使用维护模式，您可以使用 `php artisan down` 命令来完成这件事情，当这个应用程序在维护模式，Laravel 将不会运行队列上的任何新工作，但会持续的处理已存在的工作，当过了一段时间足够您所有的正在执行的工作都已处理完以后(通常不会很久，大约 30-60 秒即可)，您可以停止处理器及继续处理您的布署工作。
 
 假如您使用 Supervisor 或 Laravel Forge，那您通常就会使用下面的命令来停止处理器：
 
@@ -200,11 +200,11 @@ Laravel 内含一个 Artisan 命令，它将推送到队列的工作拉来下执
 <a name="push-queues"></a>
 ## 推送队列
 
-您可以利用强大的 Laravel 4 队列架构来进行推送队列工作，不需要执行任何的常驻或后台监听，目前只支持 [Iron.io](http://iron.io) 驱动，在您开始前建立一个 Iron.io 帐号及新增您的 Iron 凭证到 `app/config/queue.php` 配置文件。
+您可以利用 Laravel 4 强大的队列架构来进行推送队列工作，不需要执行任何的常驻事务或后台监听，目前只支持 [Iron.io](http://iron.io) 驱动，在您开始前建立一个 Iron.io 帐号及新增您的 Iron 凭证到 `app/config/queue.php` 配置文件。
 
 #### 注册一个推送队列订阅
 
-接下来，您可以使用 `queue:subscribe` 命令注册一个URL，这将会接收新的推送队列工作：
+接下来，您可以使用 `queue:subscribe` 命令注册一个URL来接收新的队列推送工作：
 
 	php artisan queue:subscribe queue_name http://foo.com/queue/receive
 
