@@ -24,6 +24,8 @@
 
 安装并且配置成功后, 可以使用命令 `laravel new` 在您指定的目录下创建一份全新安装的 `Laravel 应用`, 如这样的调用: `laravel new blog` 将会在当前目录下创建一个叫 `blog` 的目录, 此目录里面存放着全新安装的 Laravel 应用, 此方法跟其他方法不一样的地方在于是提前安装好所有代码依赖的, 您无需再通过 `composer install` 安装, 速度一下子提高了很多. 
 
+### 通过 Composer
+
 Laravel 框架使用 [composer](http://getcomposer.org) 来执行安装及管理依赖。如果还没有安装它的话，请先从 [安装 Composer](http://getcomposer.org/doc/00-intro.md) 开始吧。
 
 安装之后，您可以通过终端执行下列命令来安装 Laravel：
@@ -33,7 +35,9 @@ Laravel 框架使用 [composer](http://getcomposer.org) 来执行安装及管理
 这个命令会下载并安装一份全新的 Laravel 存放在指定的 `your-project-name` 的目录中。
 
 
-如果您想要手动安装 Laravel 可以直接从 [Github 上的 Laravel Respoitory](https://github.com/laravel/laravel/archive/master.zip）下载一份代码。然后在解压后的根目录里，执行 `composer install` 即可，这个命令会把框架所需要的依赖下载完整。
+### 手动安装
+
+手动安装 Laravel, 可以直接从 [Github 上的 Laravel Respoitory](https://github.com/laravel/laravel/archive/master.zip) 下载一份打包的代码, 解压缩, 然后在解压后的根目录里，执行 `composer install` 即可，这个命令会把框架所需要的依赖下载完整。
 
 ### 权限配置
 
@@ -41,19 +45,21 @@ Laravel 框架使用 [composer](http://getcomposer.org) 来执行安装及管理
 
 ### 运行 Laravel
 
-一般而言，您需要一个 Web 服务器（比如: Apache 或是 Nginx）来运行您的 Laravel 应用。如果您是使用 PHP 5.4 以上版本，那可以使用 PHP 内建的开发服务器，您只需要通过使用 Laravel 的 Artisan 命令 来执行 `serve` 即可：
+一般而言，您需要一个 Web 服务器（比如: Apache 或是 Nginx）来运行您的 Laravel 应用。如果您是使用 PHP 5.4 以上版本，为了方便, 可以使用 PHP 内建的开发服务器，只需要通过使用 Laravel 的 Artisan 命令 来执行 `serve` 即可：
 
 	php artisan serve
 
 <a name="directories"></a>
 ### 目录结构
 
-安装完框架后，我们来了解熟悉一下项目的目录结构。`app` 目录里面包含了 `views（视图）`, `controllers（控制器）`, 还有 `models（模型）` 等目录。您的应用程序大多数的代码都会在这个目录中。您也会发现 `app/config` 目录中存放的是相关的配置文件。
+安装完框架后，我们来了解熟悉一下项目的目录结构。`app` 目录里面包含了 `views（视图）`, `controllers（控制器）`, 还有 `models（模型）` 等目录。您的应用程序大多数的代码都会在这个目录中, 需要注意的还有存放相关配置文件的目录 `app/config` 。
 
 <a name="local-development-environment"></a>
 ## 本地开发环境
 
-过去要在本机上配置一个本地的 PHP 开发环境是非常让人头痛的事情。除了要安装正确的 PHP 版本、对应的扩展包，还有一些所需的组件，都是一个大工程。很多情况下因为这些繁琐的配置原因，导致我们直接放弃了尝试要做的事， 非常的可惜。 为了解决这状况，使用 [Laravel Homestead](/docs/homestead) 吧。Homestead 是由 Laravel 和 [Vagrant](http://vagrantup.com) 所设计的虚拟机。而 Homestead Vagrant 里封装了建立一个完整 PHP 应用所需的所有软件。因此可以在瞬间创建一个虚拟化的、独立不受干扰的开发环境。特别适用于团队开发环境的统一。 下面列出包装在 Homestead 里的软件：
+过去要在本机上配置一个本地的 PHP 开发环境是非常让人头痛的事情。除了要安装正确的 PHP 版本、对应的扩展包，还有一些所需的组件，都是一个大工程。很多情况下因为这些繁琐的配置问题，导致我们直接放弃了尝试要做的事， 非常的可惜。 
+
+为了解决这状况，使用 [Laravel Homestead](/docs/homestead) 吧。Homestead 是由 Laravel 和 [Vagrant](http://vagrantup.com) 所设计的虚拟机。而 Homestead Vagrant 里封装了建立一个完整 PHP 应用所需的所有软件。因此可以在瞬间创建一个虚拟化的、独立不受干扰的开发环境。特别适用于团队开发环境的统一。 下面列出包装在 Homestead 里的软件：
 
 - Nginx
 - PHP 5.5
@@ -64,28 +70,34 @@ Laravel 框架使用 [composer](http://getcomposer.org) 来执行安装及管理
 
 Homestead 依赖于 VirtualBox 和 Vagrant ， 所以您需要先安装他们。两个软件都有各平台的图形化安装界面。请参阅 [Homestead 说明](/docs/homestead) 进行了解。
 
+Laravel 的社区特别推荐使用 Homestead 来开发应用, 主要有以下优势: 
+
+1. 安装部署简单, 快速使用, 并支持各种主流系统;
+2. 统一开发环境, 避免了团队开发时, 各种 `运行系统`, `软件发行版本`, `软件配置` 的不一致所带来不必要的复杂性;
+3. 能使开发环境最大程度上跟线上生产环境一致;
+
 <a name="routing"></a>
 ## 路由
 
-首先，我们先创建第一个路由。在 Laravel 中，最简单的路由是通过匿名函数来定义路由。打开 `app/routes.php` 文件，在文件的最下方添加如下代码：
+首先，我们先创建第一个路由。在 Laravel 中，最简单的路由是通过匿名函数来实现的。打开 `app/routes.php` 文件，在文件的最下方添加如下代码：
 
 	Route::get('users', function()
 	{
 		return 'Users!';
 	});
 
-现在，在浏览器中输入 `/users`，您应该会看到页面出现 `Users!`。很好！您已经建立了第一个路由。
+现在，在浏览器中输入 `/users`，您应该会看到页面出现 `Users!`。简单吧, 您已经建立了第一个路由。
 
-路由也可以指向一个控制器类。例如：
+路由也可以指向一个控制器类和动作方法。例如：
 
 	Route::get('users', 'UserController@getIndex');
 
-这个路由告诉框架 `/users` 路由的请求应该使用 `UserController` 类的 `getIndex` 方法。查看更多关于控制器路由的信息，请查阅[控制器](/docs/controllers)。
+以上代码声明 `/users` 路由的请求应该使用 `UserController` 类的 `getIndex` 方法。查看更多关于控制器路由的信息，请查阅[控制器](/docs/controllers)。
 
 <a name="creating-a-view"></a>
 ## 建立视图
 
-接下来，我们要创建视图来显示我们的用户数据。视图以 HTML 代码存放在 `app/views` 的目录中。我们先来创建两个视图文件： `layout.blade.php` 和 `user.blade.php`。首先，我们建立`layout.blade.php` 文件：
+接下来，我们要创建视图来显示我们的用户数据。视图以 HTML 代码存放在 `app/views` 的目录中, 后缀名一般为 `.blade.php`。我们先来创建两个视图文件： `layout.blade.php` 和 `user.blade.php`。首先，我们建立`layout.blade.php` 文件：
 
 	<html>
 		<body>
@@ -112,12 +124,12 @@ Homestead 依赖于 VirtualBox 和 Vagrant ， 所以您需要先安装他们。
 		return View::make('users');
 	});
 
-太棒了！现在您已经成功地建立了一个继承自 layout 的简单视图。接下来，我们来玩转一下数据库层。
+太棒了！现在您已经成功地建立了一个继承自 layout 的简单视图。接下来，我们来学习一下数据库层。
 
 <a name="creating-a-migration"></a>
 ## 建立迁移文件
 
-我们使用 Laravel 的迁移(migration)系统来建立数据库表以保存我们的数据。迁移记录着数据库的改变历史，可以通过版本控制的方式来更好的让团队保持一致性。
+我们使用 Laravel 的迁移 (migration) 系统来建立数据库表以保存我们的数据。迁移记录着数据库的改变历史，可以通过版本控制的方式来更好的让团队开发保持一致性。
 
 首先，我们要配置数据库连接。您可以在 `app/config/database.php` 文件中配置所有的数据库连接信息。Laravel 默认使用 MySQL，所以您必须将相关的数据库连接信息填入其中。您也可以更改 `driver` 选项为 `sqlite`，如此 Laravel 就会使用放置在 `app/database` 里的 SQLite 数据库。
 
@@ -149,18 +161,22 @@ Homestead 依赖于 VirtualBox 和 Vagrant ， 所以您需要先安装他们。
 
 	php artisan migrate
 
-如果您想回滚迁移，您可以执行 `migrate:rollback` 命令。现在我们已经建好了数据库表了，开始放些数据进去吧。
+如果您想回滚迁移，您可以执行以下命令
+	
+	php artisan migrate:rollback
+	
+现在我们已经建好了数据库表了，开始放些数据进去吧。
 
 <a name="eloquent-orm"></a>
 ## Eloquent ORM
 
-Laravel 提供了很棒的 ORM：Eloquent。如果您曾经使用过 Ruby on Rails 框架，那您将会觉得 Eloquent 很熟悉，因为它遵循 ActiveRecord ORM 风格的数据库互动模式。
+Laravel 提供了很棒的 ORM：Eloquent。如果您曾经使用过 Ruby on Rails 框架，那您将会觉得 Eloquent 很熟悉，因为它遵循着 ActiveRecord ORM 风格的数据库互动模式。
 
-首先，我们先来定义一个模型(model)。一个 Eloquent 模型可以用来查询关联的数据库表，以及表内的某一行。别担心，我们很快就会了解了。模型通常存放在 `app/models` 目录中。让我们先来在这目录里创建一个 `User.php` 的模型文件：
+首先，我们先来定义一个模型 (model)。一个 Eloquent 模型可以用来查询关联的数据库表，以及表内的某一行。模型通常存放在 `app/models` 目录中。让我们先来在这目录里创建一个 `User.php` 的模型文件：
 
 	class User extends Eloquent {}
 
-注意，我们并未告诉 Eloquent 使用哪个表。Eloquent 有多种惯例，一种就是使用模型的复数形态作为该模型的数据库表名称，非常方便。
+注意，我们并未告诉 Eloquent 使用哪个表。Eloquent 有多种惯例，一种就是使用模型的复数形态作为该模型的数据库表名称，非常方便, 这是 Laravel 的开发规范。
 
 使用您喜欢的数据库管理工具，插入几条数据到 `users` 数据库表，我们将使用 Eloquent 来取得这些数据并且传递到视图中去。
 
@@ -173,12 +189,12 @@ Laravel 提供了很棒的 ORM：Eloquent。如果您曾经使用过 Ruby on Rai
 		return View::make('users')->with('users', $users);
 	});
 
-我们来看看这个路由。首先，`User` 模型里的 `all` 方法会取得 `users` 表里的所有记录。接下来，我们通过 `with` 方法将这些记录传递到视图中。`with` 方法接受一个键和与其对应的值，这样这对键值就可以在视图中使用了。
+在以上代码中, 首先，`User` 模型里的 `all` 方法会取得 `users` 表里的所有记录。接下来，我们通过 `with` 方法将这些记录传递到视图中。`with` 方法接受一个键和与其对应的值，这样这对键值就可以在视图中使用了。
 
 <a name="displaying-data"></a>
 ## 显示数据
 
-现在，我们视图中已经可以获取到 `users` 变量了，我们可以显示出来，如下：
+现在，通过 `view` 下的 `with` 方法, 视图中已经可以获取到 `users` 变量了，我们可以显示出来，如下：
 
 	@extends('layout')
 
@@ -188,9 +204,9 @@ Laravel 提供了很棒的 ORM：Eloquent。如果您曾经使用过 Ruby on Rai
 		@endforeach
 	@stop
 
-您会发现没有看到任何 `echo` 语句。当使用 Blade 时，您可以使用两个大括号来输出数据。下面，您应该可以通过访问 `/users` 路由来看到用户数据了吧。
+您会发现没有看到任何 `echo` 语句。当使用 Blade 时，您可以使用两个大括号来输出数据。接下来, 通过访问 `/users` 路由, 就能看到用户数据了。
 
-这仅仅只是开始。在这个教程中，您已经了解了 Laravel 基础部分，但是还有更多令人兴奋的东西等着您学习。继续阅读文件且更深入的了解 [Eloquent](/docs/eloquent) 和 [Blade](/docs/templates) 的强大特性。或许，您也更有兴趣去了解 [队列](/docs/queues) 和 [单元测试](/docs/testing)。也或许，您更想要了解 [IoC 容器] 来展现实力，任君选择。
+这仅仅只是开始。在这个教程中，您已经了解了 Laravel 基础部分，但是还有更多令人兴奋的东西等着您学习。继续阅读文件且更深入的了解 [Eloquent](/docs/eloquent) 和 [Blade](/docs/templates) 的强大特性。或许，您也更有兴趣去了解 [队列](/docs/queues) 和 [单元测试](/docs/testing)。
 
 <a name="deploying-your-application"></a>
 ## 部署应用程序
