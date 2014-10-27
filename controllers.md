@@ -221,7 +221,7 @@ DELETE    | /resource/{resource}        | destroy      | resource.destroy
 
 #### 增加额外路由规则到 Resource Controller
 
-您果您需要增加额外的 route 规则到默认的 resource controller，您应该在定义`Route::resource`之前定义这些规则：
+如果您需要增加额外的 route 规则到默认的 resource controller，您应该在定义`Route::resource`之前定义这些规则：
 
 	Route::get('photos/popular');
 	Route::resource('photos', 'PhotoController');
