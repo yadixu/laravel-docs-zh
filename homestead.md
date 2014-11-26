@@ -45,15 +45,25 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 	vagrant box add laravel/homestead
 
-### 复制 Homestead 软件源
+### 安装 Homestead
 
-一旦封装包已经被加进您的 Vagrant 后，您应该克隆或下载这个 `repository` ，`Homestead` 目录中放置所有您的 Laravel 项目，如此 homestead 封装包就可以运行您所有的 Laravel（和 PHP）项目。
+一旦封装包已经被加进您的 Vagrant 后，您就可以通过 composer 的 `global` 命令来安装 Homestead 命令行工具。
 
-	git clone https://github.com/laravel/homestead.git Homestead
+
+	composer global require "laravel/homestead=~2.0"
+
+确保 `~/.composer/vendor/bin` 目录已经写入 PATH 变量， 这样才可以在命令行下全局执行 `homestead` 命令。
+
+当您安装完 Homestead 的 命令行工具后, 可以通过使用 `init` 命令来创建 `Homestead.yaml` 配置文件。
+
+   homestead init
+
+将会在 `~/.homestead` 目录中生成 `Homestead.yaml` 配置文件。
+
 
 ### 设定您的 SSH 密钥
 
-在将其放入版本库之前，您需要编辑下 `Homestead.yaml` 文件。您可以在文件中设定您的 SSH 公开密钥，以及您主要机器与 Homestead 虚拟机器之间的共享目录。
+接下来，您需要编辑下 `Homestead.yaml` 文件。您可以在文件中设定您的 SSH 公开密钥，以及您主要机器与 Homestead 虚拟机器之间的共享目录。(译者注：可通过 `homestead edit` 命令直接打开 homestead.yaml 文件)
 
 如果没有 SSH 密钥 在 Mac 和 Linux 平台下，您可以利用下面的命令来创建一个 SSH 密钥:
 
@@ -73,11 +83,11 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 ### Bash Aliases
 
-如果要增加 Bash aliases 到您的 Homestead 封装包中，只要加到 Homestead 目录根目录下的 `aliases` 文件中。
+如果要增加 Bash aliases 到您的 Homestead 封装包中，只要加到 `~/.homestead` 目录根目录下的 `aliases` 文件中。
 
 ### 启动 Vagrant 封装包
 
-当您根据您的情况编辑完 `Homestead.yaml` 后，在终端机里，从 Homestead 目录里执行 `vagrant up` 命令。Vagrant 将会开启虚拟机，并且自动设定您的共享目录和 Nginx 站点。
+当您根据您的情况编辑完 `Homestead.yaml` 后，在终端机里，从命令行执行 `homestead up` 命令。Vagrant 将会开启虚拟机，并且自动设定您的共享目录和 Nginx 站点。如果要删除虚拟机, 您可以使用 `homestead destroy` 命令，通过执行 `homestead list`， 您可以获取到完整的 homestead 命令列表。
 
 为了能访问您的 Nginx 站点，别忘记在本机的 `hosts` 文件中将"域名"加进去。`hosts` 文件会将您的本地网域的站点请求重定向跳转至您的 Homestead 环境中。在 Mac 和 Linux，该文件放在 `/etc/hosts`。在 Windows 环境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。您要加进去的内容类似如下：
 
@@ -94,11 +104,7 @@ Homestead 创建且测试于 Vagrant 1.6 上。
 
 ### 通过 SSH 连接
 
-要通过 SSH 连接您的 Homestead 环境，您需要使用您设定在 `Homestead.yaml` 文件中的 SSH 密钥连接 `127.0.0.1` 的端口 2222。您也可以轻易的从您的 `Homestead` 目录下执行 `vagrant ssh` 命令来连接。
-
-如果您想要更简便，您可以将下面的 alias 加到您的 `~/.bash_aliases` 或是 `~/.bash_profile` 中：
-
-	alias vm='ssh vagrant@127.0.0.1 -p 2222'
+要通过 SSH 连接您的 Homestead 环境，在命令行执行 `homestead ssh` 即可。
 
 ### 连接您的数据库
 
