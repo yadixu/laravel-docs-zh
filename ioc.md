@@ -11,7 +11,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Laravel 的依赖反转 ( IoC, inversion of control ) 容器是管理类依赖的强力工具。 依赖注入 ( Dependency injection ) 是一种移除 hard-coded 类依赖的方式。相较之下，在执行的时候才注入依赖，
+Laravel 的控制反转 ( IoC, inversion of control ) 容器是管理类依赖的强力工具。 依赖注入 ( Dependency injection ) 是一种移除 hard-coded 类依赖的方式。相较之下，在执行的时候才注入依赖，
 可以拥有更好的弹性，在替换依赖实体时相当容易。
 
 理解 Laravel IoC 容器对于建立大型的应用程序，以及改进 Laravel 核心是很重要的。
