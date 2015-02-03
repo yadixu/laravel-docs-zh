@@ -278,7 +278,7 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 <a name="rule-boolean"></a>
 #### boolean
 
-字段必须可以转换成布林值，可接受的值为 `true`, `false`, `1`, `0`, `"1"`, `"0"`。
+字段必须可以转换成布尔值，可接受的值为 `true`, `false`, `1`, `0`, `"1"`, `"0"`。
 
 <a name="rule-email"></a>
 #### email
