@@ -13,7 +13,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 这些管理者都拥有 `extend` 方法，可以简单地用它来注入新的驱动解析功能到管理者。我们将会在下面的例子，随着如何注入自定义驱动支持给它们，涵盖这些管理者的内容。
 
-> **注意：** 建议花点时间来探索 Laravel 附带的各种 `Manager` 类，例如：`CacheManager` 和 `SessionManager`。看过这些类将会让你更彻底了解 Laravel 表面下是如何运作。所有的管理者类继承  `Illuminate\Support\Manager` 基底类，它提供一些有用、常见的功能给每一个管理者。
+> **注意：** 建议花点时间来探索 Laravel 附带的各种 `Manager` 类，例如：`CacheManager` 和 `SessionManager`。看过这些类将会让你更彻底了解 Laravel 表面下是如何运作。所有的管理者类继承  `Illuminate\Support\Manager` 基础类，它提供一些有用、常见的功能给每一个管理者。
 
 <a name="cache"></a>
 ## 缓存
@@ -85,7 +85,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 - `open` 方法通常会被用在基于文件的 session 保存系统。因为 Laravel 附带一个 `file` session 驱动，几乎不需要在这个方法放任何东西。你可以让它留空。PHP 要求我们去实现这个方法，事实上明显是个差劲的接口设计 (我们将会晚点讨论它)。
 - `close` 方法，就像 `open` 方法，通常也可以忽略。对大部份的驱动来说，并不需要它。
-- `read` 方法应该返回与给定 `$sessionId` 关联的 session 数据的字串形态。当你的驱动取回或保存 session 数据时不需要做任何串行化或进行其他编码，因为 Laravel 将会为你进行串行化
+- `read` 方法应该返回与给定 `$sessionId` 关联的 session 数据的字串形态。当你的驱动取回或保存 session 数据时不需要做任何序列化或进行其他编码，因为 Laravel 将会为你进行序列化
 - `write` 方法应该写入给定 `$data` 字串与 `$sessionId` 的关联到一些永久存储系统，例如：MongoDB、 Dynamo、等等。
 - `destroy` 方法应该从永久存储移除与 `$sessionId` 关联的数据。
 - `gc` 方法应该销毁所有比给定 `$lifetime` UNIX 时间戳记还旧的 session 数据。对于会自己过期的系统如 Memcached 和 Redis，这个方法可以留空。
@@ -181,6 +181,6 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 	}
 
-要注意的是这个类扩展 `HashServiceProvider`，不是默认的 `ServiceProvider` 基底类。当你扩展了服务提供者，在 `config/app.php` 配置文件把 `HashServiceProvider` 换成你扩展的提供者名称。
+要注意的是这个类扩展 `HashServiceProvider`，不是默认的 `ServiceProvider` 基础类。当你扩展了服务提供者，在 `config/app.php` 配置文件把 `HashServiceProvider` 换成你扩展的提供者名称。
 
 这是被绑定在容器的所有核心类的一般扩展方法。实际上，每个以这种方式绑定在容器的核心类都可以被覆写。再次强调，看过每个框架引入的服务提供者将会使你熟悉：每个类被绑在容器的哪里、它们是用什么键值绑定。这是个好方法可以了解更多关于 Laravel 如何结合它们。

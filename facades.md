@@ -10,7 +10,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Facades 提供一个静态接口给在应用程序的 [IoC 容器](/docs/5.0/container) 中可以取用的类。Laravel 附带许多 facades，甚至你可能已经在不知情的状况下使用过它们！Laravel 的「facades」作为在 IoC 容器里面的基底类的静态代理，提供的语法有简洁、易表达的优点，同时维持比传统的静态方法更高的可测试性和弹性。
+Facades 提供一个静态接口给在应用程序的 [IoC 容器](/docs/5.0/container) 中可以取用的类。Laravel 附带许多 facades，甚至你可能已经在不知情的状况下使用过它们！Laravel 的「facades」作为在 IoC 容器里面的基础类的静态代理，提供的语法有简洁、易表达的优点，同时维持比传统的静态方法更高的可测试性和弹性。
 
 有时，你或许会希望为应用程序和扩展包建立自己的 facades，所以让我们来探索这些类的概念、开发和用法。
 
@@ -134,7 +134,7 @@ Cache 类继承基本的 `Facade` 类并定义一个 `getFacadeAccessor()` 方�
 <a name="facade-class-reference"></a>
 ## Facade 类参考
 
-你将会在下面找到每一个 facade 和它的基底类。这是个可以从一个给定的 facade 根源快速地深入 API 文档的有用工具。可应用的 [IoC 绑定](/docs/5.0/container) 关键字也包含在里面。
+你将会在下面找到每一个 facade 和它的基础类。这是个可以从一个给定的 facade 根源快速地深入 API 文档的有用工具。可应用的 [IoC 绑定](/docs/5.0/container) 关键字也包含在里面。
 
 Facade  |  Class  |  IoC Binding
 ------------- | ------------- | -------------
@@ -163,7 +163,7 @@ Paginator (实例)  |  [Illuminate\Pagination\Paginator](http://laravel.com/api/
 Password  |  [Illuminate\Auth\Passwords\PasswordBroker](http://laravel.com/api/5.0/Illuminate/Auth/Passwords/PasswordBroker.html)  |  `auth.reminder`
 Queue  |  [Illuminate\Queue\QueueManager](http://laravel.com/api/5.0/Illuminate/Queue/QueueManager.html)  |  `queue`
 Queue (实例) |  [Illuminate\Queue\QueueInterface](http://laravel.com/api/5.0/Illuminate/Queue/QueueInterface.html)  |
-Queue (基底类) |  [Illuminate\Queue\Queue](http://laravel.com/api/5.0/Illuminate/Queue/Queue.html)  |
+Queue (基础类) |  [Illuminate\Queue\Queue](http://laravel.com/api/5.0/Illuminate/Queue/Queue.html)  |
 Redirect  |  [Illuminate\Routing\Redirector](http://laravel.com/api/5.0/Illuminate/Routing/Redirector.html)  |  `redirect`
 Redis  |  [Illuminate\Redis\Database](http://laravel.com/api/5.0/Illuminate/Redis/Database.html)  |  `redis`
 Request  |  [Illuminate\Http\Request](http://laravel.com/api/5.0/Illuminate/Http/Request.html)  |  `request`

@@ -111,7 +111,7 @@ Command bus 不仅仅作为当下请求的同步作业，也可以作为 Laravel
 
 	php artisan make:command PurchasePodcast --queued
 
-正如你所见的，这让命令增加了一点功能，即 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口和`SerializesModels` trait 。 他们指示 command bus 使用队列来执行命令，以及优雅的串行化和反串行化任何在命令内被保存的 Eloquent 模型。
+正如你所见的，这让命令增加了一点功能，即 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口和`SerializesModels` trait 。 他们指示 command bus 使用队列来执行命令，以及优雅的序列化和反序列化任何在命令内被保存的 Eloquent 模型。
 
 若你想将已存在的命令转换为队列命令，只需手动修改让命令类实现 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口，它不包含方法，而是仅仅给调用员作为"标记接口"。
 
