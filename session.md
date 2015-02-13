@@ -24,40 +24,40 @@ Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该
 <a name="session-usage"></a>
 ## 使用 Session
 
-#### 保存项目到 Session 中
+#### 保存对象到 Session 中
 
 	Session::put('key', 'value');
 
-#### 保存项目进 Session 数组值中
+#### 保存对象进 Session 数组值中
 
 	Session::push('user.teams', 'developers');
 
-#### 从 Session 取回项目
+#### 从 Session 取回对象
 
 	$value = Session::get('key');
 
-#### 从 Session 取回项目，若无则返回默认值
+#### 从 Session 取回对象，若无则返回默认值
 
 	$value = Session::get('key', 'default');
 
 	$value = Session::get('key', function() { return 'default'; });
 
-#### 从 Session 取回项目，并删除
+#### 从 Session 取回对象，并删除
 
 	$value = Session::pull('key', 'default');
 
-#### 从 Session 取出所有项目
+#### 从 Session 取出所有对象
 
 	$data = Session::all();
 
-#### 判断项目在 Session 中是否存在
+#### 判断对象在 Session 中是否存在
 
 	if (Session::has('users'))
 	{
 		//
 	}
 
-#### 从 Session 中移除项目
+#### 从 Session 中移除对象
 
 	Session::forget('key');
 
@@ -87,7 +87,7 @@ Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该
 <a name="database-sessions"></a>
 ## 数据库 Sessions
 
-当使用 `database` session 驱动时，你必需建置一张保存 session 的数据表。下方范例使用 `Schema` 来建表：
+当使用 `database` session 驱动时，你必需建置一张保存 session 的数据表。下方例子使用 `Schema` 来建表：
 
 	Schema::create('sessions', function($table)
 	{

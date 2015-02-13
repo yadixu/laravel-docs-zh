@@ -48,7 +48,7 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 		$message->to('foo@example.com', 'John Smith')->subject('Welcome!');
 	});
 
-传入 `send` 方法的第一个参数为邮件视图的名称。第二个是传递给该视图的数据，通常是一个关联式数组，让视图可透过 `$key` 来取得数据项目。第三个参数是一个闭包，可以对 message 进行各种设置。
+传入 `send` 方法的第一个参数为邮件视图的名称。第二个是传递给该视图的数据，通常是一个关联式数组，让视图可透过 `$key` 来取得数据对象。第三个参数是一个闭包，可以对 message 进行各种设置。
 
 > **注意：** `$message` 变量总是会被传入邮件视图中，并且允许内嵌附件。因此最好避免在您的视图本体中传入 `message` 变量。 
 

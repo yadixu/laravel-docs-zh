@@ -40,7 +40,7 @@
 
 	return view('courier::view.name');
 
-当您使用 `loadViewsFrom` 方法，Laravel 实际上为了您的视图注册了**两个位置**。一个是您应用程序的 `resources/views/vendor` 目录，一个是您指定的目录。所以使用我们的范例 `courier` 当要求一个扩展包的视图时，Laravel 会第一时间检查是否有一个开发者自行自订在 `resources/views/vendor/courier` 的视图存在。然而如果还没有这个路径的视图被自订。Laravel 会搜索您在扩展包 `loadViewsFrom` 方法里所指定的视图。这个方法让个别的用户可以方便的自订且覆写您在扩展包里的视图。
+当您使用 `loadViewsFrom` 方法，Laravel 实际上为了您的视图注册了**两个位置**。一个是您应用程序的 `resources/views/vendor` 目录，一个是您指定的目录。所以使用我们的例子 `courier` 当要求一个扩展包的视图时，Laravel 会第一时间检查是否有一个开发者自行自订在 `resources/views/vendor/courier` 的视图存在。然而如果还没有这个路径的视图被自订。Laravel 会搜索您在扩展包 `loadViewsFrom` 方法里所指定的视图。这个方法让个别的用户可以方便的自订且覆写您在扩展包里的视图。
 
 #### 视图的发布
 

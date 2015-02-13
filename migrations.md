@@ -67,7 +67,7 @@
 
 Laravel 可以简单的使用 seed 类别，填充测试数据到数据库。所有的 seed 类别放在 `database/seeds` 目录下。可以使用任何你想要的类别名称，但是应该遵守某些大小写规范，像是 `UserTableSeeder` 之类。默认已经有一个 `DatabaseSeeder` 类别。在这个类别里，使用 `call` 方法执行其他的 seed 类别，让你控制填充的顺序。
 
-#### Seed 类别范例
+#### Seed 类别例子
 
     class DatabaseSeeder extends Seeder {
 

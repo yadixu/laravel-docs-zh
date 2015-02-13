@@ -13,7 +13,7 @@
 <a name="usage"></a>
 ## 使用
 
-有几种方法来分页项目。最简单的是在搜索建立器使用 `paginate` 方法或 Eloquent 模型。
+有几种方法来分页对象。最简单的是在搜索建立器使用 `paginate` 方法或 Eloquent 模型。
 
 #### 对数据库结果分页
 
@@ -29,7 +29,7 @@
 
 	$someUsers = User::where('votes', '>', 100)->paginate(15);
 
-发送给 `paginate` 方法的参数是您希望每页要显示的项目选项数目，只要您取得查找结果后，您可以在视图中显示，并使用 `render` 方法去建立分页链接：
+发送给 `paginate` 方法的参数是您希望每页要显示的对象选项数目，只要您取得查找结果后，您可以在视图中显示，并使用 `render` 方法去建立分页链接：
 
 	<div class="container">
 		<?php foreach ($users as $user): ?>
@@ -57,7 +57,7 @@
 
 #### 手动建立分页
 
-有的时候您可能会想要从数组中项目手动建立分页实体， 您可以根据您的需要透过 `Illuminate\Pagination\Paginator` 或 `Illuminate\Pagination\LengthAwarePaginator` 实体来建立。
+有的时候您可能会想要从数组中对象手动建立分页实体， 您可以根据您的需要透过 `Illuminate\Pagination\Paginator` 或 `Illuminate\Pagination\LengthAwarePaginator` 实体来建立。
 
 #### 自订分页 URL
 
@@ -67,7 +67,7 @@
 
 	$users->setPath('custom/url');
 
-上面的范例将建立 URL，类似以下内容：
+上面的例子将建立 URL，类似以下内容：
 http://example.com/custom/url?page=2
 
 <a name="appending-to-pagination-links"></a>

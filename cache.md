@@ -18,7 +18,7 @@ Laravel 为各种不同的缓存系统提供一致的 API 。缓存配置文件�
 <a name="cache-usage"></a>
 ## 缓存用法
 
-#### 保存项目到缓存中
+#### 保存对象到缓存中
 
 	Cache::put('key', 'value', $minutes);
 
@@ -28,34 +28,34 @@ Laravel 为各种不同的缓存系统提供一致的 API 。缓存配置文件�
 
 	Cache::put('key', 'value', $expiresAt);
 
-#### 若是项目不存在，则将其存入缓存中
+#### 若是对象不存在，则将其存入缓存中
 
 	Cache::add('key', 'value', $minutes);
 
-当项目确实被加入缓存时，使用 `add` 方法将会返回 `true` 否则会返回 `false` 。
+当对象确实被加入缓存时，使用 `add` 方法将会返回 `true` 否则会返回 `false` 。
 
-#### 确认项目是否存在
+#### 确认对象是否存在
 
 	if (Cache::has('key'))
 	{
 		//
 	}
 
-#### 从缓存中取得项目
+#### 从缓存中取得对象
 
 	$value = Cache::get('key');
 
-#### 取得项目或是返回默认值
+#### 取得对象或是返回默认值
 
 	$value = Cache::get('key', 'default');
 
 	$value = Cache::get('key', function() { return 'default'; });
 
-#### 永久保存项目到缓存中
+#### 永久保存对象到缓存中
 
 	Cache::forever('key', 'value');
 
-有时候您会希望从缓存中取得项目，而当此项目不存在时会保存一笔默认值，您可以使用 `Cache::remember` 方法：
+有时候您会希望从缓存中取得对象，而当此对象不存在时会保存一笔默认值，您可以使用 `Cache::remember` 方法：
 
 	$value = Cache::remember('users', $minutes, function()
 	{
@@ -69,15 +69,15 @@ Laravel 为各种不同的缓存系统提供一致的 API 。缓存配置文件�
 		return DB::table('users')->get();
 	});
 
-请注意所有保存在缓存中的项目皆会被串行化，所以您可以任意保存各种类型的数据。
+请注意所有保存在缓存中的对象皆会被串行化，所以您可以任意保存各种类型的数据。
 
-#### 从缓存拉出项目
+#### 从缓存拉出对象
 
-如果您需要从缓存中取得项目后将它删除，您可以使用 `pull` 方法：
+如果您需要从缓存中取得对象后将它删除，您可以使用 `pull` 方法：
 
 	$value = Cache::pull('key');
 
-#### 从缓存中删除项目
+#### 从缓存中删除对象
 
 	Cache::forget('key');
 
@@ -105,7 +105,7 @@ Laravel 为各种不同的缓存系统提供一致的 API 。缓存配置文件�
 
 #### 访问缓存标签
 
-缓存标签允许您标记缓存内的相关项目，然后使用特定名称更新所有缓存标签。要访问缓存标签可以使用 `tags` 方法。
+缓存标签允许您标记缓存内的相关对象，然后使用特定名称更新所有缓存标签。要访问缓存标签可以使用 `tags` 方法。
 
 您可以保存缓存标签，借由将有串行表当作参数传入，或者作为标签名称的有序数组：
 
@@ -113,9 +113,9 @@ Laravel 为各种不同的缓存系统提供一致的 API 。缓存配置文件�
 
 	Cache::tags(array('people', 'artists'))->put('Anne', $anne, $minutes);
 
-您可以结合使用各种缓存保存方法与标签，包含 `remember`, `forever`, 和 `rememberForever` 。您也可以从已标记的缓存中访问项目，以及使用其他缓存方法像是 `increment` 和 `decrement` 。
+您可以结合使用各种缓存保存方法与标签，包含 `remember`, `forever`, 和 `rememberForever` 。您也可以从已标记的缓存中访问对象，以及使用其他缓存方法像是 `increment` 和 `decrement` 。
 
-#### 从已标记的缓存中访问项目
+#### 从已标记的缓存中访问对象
 
 要访问已标记的缓存，可传入相同的有序标签列表。
 
@@ -123,18 +123,18 @@ Laravel 为各种不同的缓存系统提供一致的 API 。缓存配置文件�
 
 	$john = Cache::tags(array('people', 'authors'))->get('John');
 
-您可以更新所有已标记的项目，使用指定名称或名称列表。例如，以下范例将会移除带有 `people` 或 `authors` 或者两者皆有的所有缓存标签，所以「Anne」和「John」皆会从缓存中被移除:
+您可以更新所有已标记的对象，使用指定名称或名称列表。例如，以下例子将会移除带有 `people` 或 `authors` 或者两者皆有的所有缓存标签，所以「Anne」和「John」皆会从缓存中被移除:
 
 	Cache::tags('people', 'authors')->flush();
 
-对照来看，以下范例将只会移除带有 `authors` 的标签，所以「John」会被移除，但是「Anne」不会。
+对照来看，以下例子将只会移除带有 `authors` 的标签，所以「John」会被移除，但是「Anne」不会。
 
 	Cache::tags('authors')->flush();
 
 <a name="database-cache"></a>
 ## 数据库缓存
 
-当使用`数据库`缓存系统时，您必须设置一张数据表来保存缓存项目。数据表的 `Schema` 宣告范例如下：
+当使用`数据库`缓存系统时，您必须设置一张数据表来保存缓存对象。数据表的 `Schema` 宣告例子如下：
 
 	Schema::create('cache', function($table)
 	{

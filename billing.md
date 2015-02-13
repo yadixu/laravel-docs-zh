@@ -210,7 +210,7 @@ Laravel Cashier 提供口语化，流畅的接口和 [Stripe](https://stripe.com
 
 	Route::post('stripe/webhook', 'Laravel\Cashier\WebhookController@handleWebhook');
 
-这样就成了！失败的交易会经由控制器捕捉并进行处理。控制器会进行至多三次再交易尝试，都失败后才会取消顾客的订单。上面的 `stripe/webhook` URI 只是一个范例，你必须使用设置在 Stripe 里的 URI 才行。
+这样就成了！失败的交易会经由控制器捕捉并进行处理。控制器会进行至多三次再交易尝试，都失败后才会取消顾客的订单。上面的 `stripe/webhook` URI 只是一个例子，你必须使用设置在 Stripe 里的 URI 才行。
 
 <a name="handling-other-stripe-webhooks"></a>
 ## 处理其它 Stripe Webhooks

@@ -191,7 +191,7 @@ Laravel 也支持数据表的外键约束：
 	$table->integer('user_id')->unsigned();
 	$table->foreign('user_id')->references('id')->on('users');
 
-范例中，我们关注字段 `user_id` 参照到 `users` 数据表的 `id` 字段。请先确认已经建立外键！
+例子中，我们关注字段 `user_id` 参照到 `users` 数据表的 `id` 字段。请先确认已经建立外键！
 
 您也可以指定选择在「on delete」和「on update」进行约束动作：
 

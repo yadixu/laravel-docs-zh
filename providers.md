@@ -1,7 +1,7 @@
 # 服务提供者
 
 - [简介](#introduction)
-- [基本提供者范例](#basic-provider-example)
+- [基本提供者例子](#basic-provider-example)
 - [注册提供者](#registering-providers)
 - [缓载提供者](#deferred-providers)
 
@@ -17,7 +17,7 @@
 在这份概述中，你会学到如何编写你自己的服务提供者，并将它们注册于你的 Laravel 应用程序。
 
 <a name="basic-provider-example"></a>
-## 基本提供者范例
+## 基本提供者例子
 
 所有的服务提供者都应继承 `Illuminate\Support\ServiceProvider` 此一类别。在这个抽象类别中，至少必须定义一个方法： `register` 。在 `register` 方法中，应该**只绑定服务到[服务容器](/docs/5.0/container)之中**。你永远不该试图在 `register` 方法中注册任何事件监听器、路由或任何其他功能。
 

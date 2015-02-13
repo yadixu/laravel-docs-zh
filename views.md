@@ -39,7 +39,7 @@
 	// 使用魔术方法
 	$view = view('greeting')->withName('Victoria');
 
-在上面的范例代码中，视图将可以使用 `$name` 来取得数据，其值为 `Victoria`。
+在上面的例子代码中，视图将可以使用 `$name` 来取得数据，其值为 `Victoria`。
 
 如果你想的话，还有一种方式就是直接在 `view` 辅助方法的第二个参数直接传递一个数组：
 
@@ -49,7 +49,7 @@
 
 有时候你可能需要共享一些数据给你的所有视图，你有很多个选择：`view` 辅助方法；`Illuminate\Contracts\View\Factory` [公约 \(contract\)](/docs/5.0/contracts)；在 [视图组件 \(view composer\)](#view-composers) 内使用万用字符。
 
-这里有个 `view` 辅助方法的范例：
+这里有个 `view` 辅助方法的例子：
 
 	view()->share('data', [1, 2, 3]);
 
@@ -83,7 +83,7 @@
 
 #### 定义一个视图组件
 
-让我们在 [服务提供者](/docs/5.0/providers) 内组织我们的视图组件。底下范例将使用 `View` Facade 来取得底层 `Illuminate\Contracts\View\Factory` 合约的实作：
+让我们在 [服务提供者](/docs/5.0/providers) 内组织我们的视图组件。底下例子将使用 `View` Facade 来取得底层 `Illuminate\Contracts\View\Factory` 合约的实作：
 
 	<?php namespace App\Providers;
 

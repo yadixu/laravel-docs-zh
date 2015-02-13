@@ -14,14 +14,14 @@
 
 Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使用被引入的 PHPUnit 做测试，而且已经为你的应用程序建立了 `phpunit.xml` 文件。
 
-在 `tests` 文件夹有提供一个测试范例。在安装新 Laravel 应用程序之后，只要在命令行上执行 `phpunit` 来进行测试流程。
+在 `tests` 文件夹有提供一个测试例子。在安装新 Laravel 应用程序之后，只要在命令行上执行 `phpunit` 来进行测试流程。
 
 <a name="defining-and-running-tests"></a>
 ## 定义并执行测试
 
 要建立一个测试案例，只要在 `tests` 文件夹建立新的测试文件。测试类别必须继承自 `TestCase`，接着你可以如你平常使用 PHPUnit 一般去定义测试方法。
 
-#### 测试类别范例
+#### 测试类别例子
 
 	class FooTest extends TestCase {
 
