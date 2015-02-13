@@ -2,7 +2,7 @@
 
 - [简介](#introduction)
 - [建立命令](#creating-commands)
-- [派送命令](#dispatching-commands)
+- [调用命令](#dispatching-commands)
 - [命令队列](#queued-commands)
 - [命令管线](#command-pipeline)
 
@@ -13,7 +13,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 
 用户购买 podcasts 的过程中需要做很多事。例如，我们需要从用户的信用卡扣款，将纪录添加到数据库以表示购买，并发送购买确认的电子邮件，或许，我们还需要进行许多验证来确认用户是否可以购买。
 
-我们可以将这些逻辑通通放在控制器的方法内，然而，这样做会有一些缺点，首先，控制器可能还需要处理许多其他的 HTTP 动作，包含复杂的逻辑，这会让控制器变得很肥大且难易阅读，第二点，这些逻辑无法在这个控制器以外被重复使用，第三，这些命令无法被单元测试，为此我们还得额外产生一个 HTTP 请求，并向网站进行完整购买 podcast 的流程。
+我们可以将这些逻辑通通放在控制器的方法内，然而，这样做会有一些缺点，首先，控制器可能还需要处理许多其他的 HTTP 动作，包含复杂的逻辑，这会让控制器变得很臃肿且难易阅读，第二点，这些逻辑无法在这个控制器以外被重复使用，第三，这些命令无法被单元测试，为此我们还得额外产生一个 HTTP 请求，并向网站进行完整购买 podcast 的流程。
 
 比起将逻辑放在控制器内，我们可以选择使用一个「命令」对象来封装它，像是 `PurchasePodcast` 命令。
 
@@ -24,7 +24,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 
 	php artisan make:command PurchasePodcast
 
-新产生的类别会被放在 `app/Commands` 目录中，命令默认包含了两个方法：建构子和 `handle` 。当然，`handle` 方法执行命令时，你可以使用建构子传入相关的对象到这个命令中。例如：
+新产生的类别会被放在 `app/Commands` 目录中，命令默认包含了两个方法：构造器和 `handle` 。当然，`handle` 方法执行命令时，你可以使用构造器传入相关的对象到这个命令中。例如：
 
 	class PurchasePodcast extends Command implements SelfHandling {
 
@@ -68,9 +68,9 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 		}
 
 <a name="dispatching-commands"></a>
-## 派送命令
+## 调用命令
 
-所以，我们建立的命令该如何派送它呢？当然，我们可以直接调用 `handle` 方法，然而使用 Laravel 的 "command bus" 来派送命令将会有许多优点，待会我们会讨论这个部分。
+所以，我们建立的命令该如何调用它呢？当然，我们可以直接调用 `handle` 方法，然而使用 Laravel 的 "command bus" 来调用命令将会有许多优点，待会我们会讨论这个部分。
 
 如果你有浏览过内置的基本控制器，将会发现 `DispatchesCommands` trait ，它将允许我们在控制器内调用 `dispatch` 方法，例如：
 
@@ -83,7 +83,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 
 Command bus 将会负责执行命令和调用 IoC 容器来将所需的依赖注入到 `handle` 方法。
 
-你也可以将 `Illuminate\Foundation\Bus\DispatchesCommands` trait 加入任何要使用的类别内。若你想要在任何类别的建构子内接收 command bus 的实体 ，你可以使用类型暗示 `Illuminate\Contracts\Bus\Dispatcher` 这个接口。
+你也可以将 `Illuminate\Foundation\Bus\DispatchesCommands` trait 加入任何要使用的类别内。若你想要在任何类别的构造器内接收 command bus 的实体 ，你可以使用类型暗示 `Illuminate\Contracts\Bus\Dispatcher` 这个接口。
 最后，你也可以使用 `Bus` facade 来快速派发命令：
 
 		Bus::dispatch(
@@ -96,9 +96,9 @@ Command bus 将会负责执行命令和调用 IoC 容器来将所需的依赖注
 
 	$this->dispatchFrom('Command\Class\Name', $request);
 
-这个方法将会检查这个被传入的命令类别的建构子，并取出来自于 HTTP 请求的变量(或其他任何的 `ArrayAccess` 对象) 并将其填入建构子，所以，若命令类在建构子接受 `firstName` 参数，command bus 将会试图从 HTTP 请求取出 `firstName` 参数。
+这个方法将会检查这个被传入的命令类别的构造器，并取出来自于 HTTP 请求的变量(或其他任何的 `ArrayAccess` 对象) 并将其填入构造器，所以，若命令类在构造器接受 `firstName` 参数，command bus 将会试图从 HTTP 请求取出 `firstName` 参数。
 
-`dispatchFrom` 方法的第三个参数允许你传入数组，那些不在 HTTP 请求内的参数可用这个数组来填入建构子：
+`dispatchFrom` 方法的第三个参数允许你传入数组，那些不在 HTTP 请求内的参数可用这个数组来填入构造器：
 
 	$this->dispatchFrom('Command\Class\Name', $request, [
 		'firstName' => 'Taylor',
@@ -142,7 +142,7 @@ Command bus 不仅仅作为当下请求的同步作业，也可以作为 Laravel
 
 	}
 
-命令管线是透过 IoC 容器来达成，所以请自行在建构子类型暗示所需的依赖。
+命令管线是透过 IoC 容器来达成，所以请自行在构造器类型暗示所需的依赖。
 
 你甚至可以定义一个 `闭包` 来作为命令管线：
 
