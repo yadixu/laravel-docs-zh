@@ -172,7 +172,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 <a name="named-routes"></a>
 ## 命名路由
 
-命名路由让你更方便于产生 URL 与重导特定路。您可以用 `as` 的数组键值指定名称给路由：
+命名路由让你更方便于产生 URL 与重导特定路由。您可以用 `as` 的数组键值指定名称给路由：
 
 	Route::get('user/profile', ['as' => 'profile', function()
 	{
@@ -198,7 +198,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 <a name="route-groups"></a>
 ## 路由群组
 
-有时候您需要套用筛选器到群组的路由上。不需要为每个路由去套用筛选器，您只需使用路由群组：
+有时候您需要嵌套筛选器到群组的路由上。不需要为每个路由去嵌套筛选器，您只需使用路由群组：
 
 	Route::group(['before' => 'auth'], function()
 	{
@@ -225,7 +225,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 <a name="sub-domain-routing"></a>
 ### 子域名路由
 
-Laravel 路由一样可以处理万用字符的子域名，并且从域名中传递您的万用字符参数：
+Laravel 路由一样可以处理通配符的子域名，并且从域名中传递您的通配符参数：
 
 #### 注册子域名路由
 

@@ -47,7 +47,7 @@
 
 #### 把数据共享给所有视图
 
-有时候你可能需要共享一些数据给你的所有视图，你有很多个选择：`view` 辅助方法；`Illuminate\Contracts\View\Factory` [公约 \(contract\)](/docs/5.0/contracts)；在 [视图组件 \(view composer\)](#view-composers) 内使用万用字符。
+有时候你可能需要共享一些数据给你的所有视图，你有很多个选择：`view` 辅助方法；`Illuminate\Contracts\View\Factory` [公约 \(contract\)](/docs/5.0/contracts)；在 [视图组件 \(view composer\)](#view-composers) 内使用通配符。
 
 这里有个 `view` 辅助方法的例子：
 
@@ -158,9 +158,9 @@
 
 > **备注：** 所有的视图组件会被 [服务容器 \(service container\)](/docs/5.0/container) 解析，所以你需要在视图组件的构造器类型限制你所需的任何依赖参数。
 
-#### 在视图组件内使用万用字符
+#### 在视图组件内使用通配符
 
-`View` 的 `composer` 方法可以接受 `*` 作为万用字符，所以你可以对所有视图附加 `composer` 如下：
+`View` 的 `composer` 方法可以接受 `*` 作为通配符，所以你可以对所有视图附加 `composer` 如下：
 
 	View::composer('*', function()
 	{
