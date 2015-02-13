@@ -190,7 +190,7 @@ _虽然说是「永远」，但真正的意思是五年。_
 
 ### 其他上传文件的方法
 
-`UploadedFile` 的实例还有许多可用的方法，可以至[该对象的 API 文档](http://api.symfony.com/2.5/Symfony/Component/HttpFoundation/File/UploadedFile.html)了解有关这些方法的详细信息。
+`UploadedFile` 的实例还有许多可用的方法，可以至[该对象的 API 文文件](http://api.symfony.com/2.5/Symfony/Component/HttpFoundation/File/UploadedFile.html)了解有关这些方法的详细信息。
 
 <a name="other-request-information"></a>
 ## 其他的请求信息

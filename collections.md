@@ -35,4 +35,4 @@
 
 #### 探索集合
 
-作为列出集合可以用的所有方法 (有很多) 的替代，请查看 [类的 API 文档](http://laravel.com/api/master/Illuminate/Support/Collection.html)！
+作为列出集合可以用的所有方法 (有很多) 的替代，请查看 [类的 API 文文件](http://laravel.com/api/master/Illuminate/Support/Collection.html)！

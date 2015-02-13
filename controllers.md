@@ -299,7 +299,7 @@ Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制
 
 	php artisan route:cache
 
-就是这样！你的缓存路由文件将会被用来代替 `app/Http/routes.php` 此一文件。记住，若你增加了任何新的路由，你就 必须产生一个新的路由缓存。因此在专案部署时，你可能会希望只要执行 `route:cache` 命令：
+就是这样！你的缓存路由文件将会被用来代替 `app/Http/routes.php` 此一文件。记住，若你增加了任何新的路由，你就 必须产生一个新的路由缓存。因此在应用部署时，你可能会希望只要执行 `route:cache` 命令：
 
 要移除路由缓存文件，但不希望产生新的缓存，可使用 `route:clear` 命令：
 

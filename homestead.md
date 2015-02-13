@@ -52,7 +52,7 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 #### 手动透过 Git 安装（本地端没有 PHP）
 
-如果你不希望在你的本机上安装 PHP ，你可以简单地透过手动复制资源库的方式来安装 Homestead。建议可将资源库复制至你的 "home" 目录中的 `Homestead` 文件夹，如此一来 Homestead 封装包将能提供主机服务给你所有的 Laravel（及 PHP）专案:
+如果你不希望在你的本机上安装 PHP ，你可以简单地透过手动复制资源库的方式来安装 Homestead。建议可将资源库复制至你的 "home" 目录中的 `Homestead` 文件夹，如此一来 Homestead 封装包将能提供主机服务给你所有的 Laravel（及 PHP）应用:
 
 	git clone https://github.com/laravel/homestead.git Homestead
 
@@ -60,7 +60,7 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 	bash init.sh
 
-此 `Homestead.yaml` 档，将会被放置在你的 `~/.homestead` 目录中。
+此 `Homestead.yaml` 文件，将会被放置在你的 `~/.homestead` 目录中。
 
 #### 透过 Composer + PHP 工具
 
@@ -96,9 +96,9 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 ### 配置你的 Nginx 站点
 
-对 Nginx 不熟悉？没关系。`sites` 属性允许你简单的对应一个 `网域` 到一个 homestead 环境中的目录。一个例子的站台被配置在 `Homestead.yaml` 文件中。同样的，你可以加任何你需要的站台到你的 Homestead 环境中。Homestead 可以为你每个进行中的 Laravel 专案提供方便的虚拟化环境。
+对 Nginx 不熟悉？没关系。`sites` 属性允许你简单的对应一个 `域名` 到一个 homestead 环境中的目录。一个例子的站点被配置在 `Homestead.yaml` 文件中。同样的，你可以加任何你需要的站点到你的 Homestead 环境中。Homestead 可以为你每个进行中的 Laravel 应用提供方便的虚拟化环境。
 
-你可以透过配置 `hhvm` 属性为 `true` 来让虚拟站台支持 [HHVM](http://hhvm.com):
+你可以透过配置 `hhvm` 属性为 `true` 来让虚拟站点支持 [HHVM](http://hhvm.com):
 
 	sites:
 	    - map: homestead.app
@@ -113,13 +113,13 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 当你根据你的喜好编辑完 `Homestead.yaml` 后，在终端机里进入你的 Homestead 文件夹并执行 `vagrant up` 命令。
 
-Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx 站台。如果要移除虚拟机，可以使用 `vagrant destroy --force` 命令。
+Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx 站点。如果要移除虚拟机，可以使用 `vagrant destroy --force` 命令。
 
-为了你的 Nginx 站台，别忘记在你的机器的 `hosts` 档将「网域」加进去。`hosts` 档会将你的本地网域的站台请求重导至你的 Homestead 环境中。在 Mac 和 Linux，该文件放在 `/etc/hosts`。在 Windows 环境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。你要加进去的内容类似如下：
+为了你的 Nginx 站点，别忘记在你的机器的 `hosts` 文件将「域名」加进去。`hosts` 文件会将你的本地域名的站点请求重导至你的 Homestead 环境中。在 Mac 和 Linux，该文件放在 `/etc/hosts`。在 Windows 环境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。你要加进去的内容类似如下：
 
 	192.168.10.10  homestead.app
 
-务必确认 IP 位置与你的 `Homestead.yaml` 文件中的相同。一旦你将网域加进你的 `hosts` 文件中，你就可以透过网页浏览器 访问到你的站台。
+务必确认 IP 位置与你的 `Homestead.yaml` 文件中的相同。一旦你将域名加进你的 `hosts` 文件中，你就可以透过网页浏览器 访问到你的站点。
 
 	http://homestead.app
 
@@ -146,15 +146,15 @@ Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx �
 
 > **附注：** 从本机端你应该只能使用这些非标准的连接端口来连接数据库。因为当 Laravel 运行在虚拟机时，在 Laravel 的数据库配置文件中依然是配置使用默认的 3306 及 5432 连接端口。
 
-### 增加更多的站台
+### 增加更多的站点
 
-一旦 Homestead 环境上架且运行后，你可能会需要为 Laravel 应用程序增加更多的 Nginx 站台。你可以在单一个 Homestead 环境中运行非常多 Laravel 安装程序。有两种方式可以达成：第一种，在 `Homestead.yaml` 文件中增加站台然后执行 `vagrant provision`。
+一旦 Homestead 环境上架且运行后，你可能会需要为 Laravel 应用程序增加更多的 Nginx 站点。你可以在单一个 Homestead 环境中运行非常多 Laravel 安装程序。有两种方式可以达成：第一种，在 `Homestead.yaml` 文件中增加站点然后执行 `vagrant provision`。
 
-另外，也可以使用存放在 Homestead 环境中的 `serve` 命令档。要使用 `serve` 命令档，请先 SSH 进入 Homestead 环境中，并执行下列命令：
+另外，也可以使用存放在 Homestead 环境中的 `serve` 命令文件。要使用 `serve` 命令文件，请先 SSH 进入 Homestead 环境中，并执行下列命令：
 
 	serve domain.app /home/vagrant/Code/path/to/public/directory
 
-> **附注：** 在执行 `serve` 命令过后，别忘记将新的站台加进本机的 `hosts` 文件中。
+> **附注：** 在执行 `serve` 命令过后，别忘记将新的站点加进本机的 `hosts` 文件中。
 
 <a name="ports"></a>
 ## 连接端口

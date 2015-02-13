@@ -11,7 +11,7 @@
 <a name="introduction"></a>
 ## 简介
 
-所有 Laravel 框架的配置文件都放置在 `config` 目录下。 每个选项都有说明，因此你可以轻松地浏览这些文档，并且熟悉这些选项配置。
+所有 Laravel 框架的配置文件都放置在 `config` 目录下。 每个选项都有说明，因此你可以轻松地浏览这些文文件，并且熟悉这些选项配置。
 
 <a name="after-installation"></a>
 ## 完成安装后
@@ -28,7 +28,7 @@
 
 ### 其他配置
 
-Laravel 几乎不需配置就可以马上使用。你可以自由的开始开发！然而，你可以浏览 `config/app.php` 文件和其他的文档。你可能希望依据你的本机而做更改，文件包含数个选项如`时区`和`语言环境`。
+Laravel 几乎不需配置就可以马上使用。你可以自由的开始开发！然而，你可以浏览 `config/app.php` 文件和其他的文文件。你可能希望依据你的本机而做更改，文件包含数个选项如`时区`和`语言环境`。
 
 一旦 Laravel 安装完成，你应该同时 [配置本机环境](/docs/5.0/configuration#environment-configuration)。
 
@@ -126,7 +126,7 @@ Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vanc
 
 Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.php`。如果你的服务器是使用，请确认是否有开启 `mod_rewrite` 模块。
 
-假设 Laravel 附带的 `.htaccess` 档在 Apache 无法作用的话，请尝试下面的方法：
+假设 Laravel 附带的 `.htaccess` 文件在 Apache 无法作用的话，请尝试下面的方法：
 
 	Options +FollowSymLinks
 	RewriteEngine On

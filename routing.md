@@ -223,11 +223,11 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 > **注意：** 在默认情况下，`RouteServiceProvider` 包含内置您命名空间群组的 `routes.php` 文件，让您不须使用完整的命名空间就可以注册控制器路由。
 
 <a name="sub-domain-routing"></a>
-### 子网域路由
+### 子域名路由
 
-Laravel 路由一样可以处理万用字符的子网域，并且从网域中传递您的万用字符参数：
+Laravel 路由一样可以处理万用字符的子域名，并且从域名中传递您的万用字符参数：
 
-#### 注册子网域路由
+#### 注册子域名路由
 
 	Route::group(['domain' => '{account}.myapp.com'], function()
 	{
@@ -306,4 +306,4 @@ Laravel 模型绑定提供方便的方式将模型实体注入到您的路由中
 
 第二，您可以手动抛出 `Symfony\Component\HttpKernel\Exception\NotFoundHttpException` 的实体。
 
-有关如何处理 404 异常状况和自定响应的更多信息，可以参考[错误](/docs/5.0/errors#http-exceptions)章节内的文档。
+有关如何处理 404 异常状况和自定响应的更多信息，可以参考[错误](/docs/5.0/errors#http-exceptions)章节内的文文件。

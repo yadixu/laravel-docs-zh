@@ -12,7 +12,7 @@
 
 日志工具默认使用每天的日志文件；然而，你可以依照需求自定义这个行为。因为 Laravel 使用受欢迎的 [Monolog](https://github.com/Seldaek/monolog) 日志函数库，你可以利用很多 Monolog 提供的处理进程。
 
-例如，如果你想要使用单一日志档，而不是每天一个日志档，你可以对 `config/app.php` 配置文件做下面的变更：
+例如，如果你想要使用单一日志文件，而不是每天一个日志文件，你可以对 `config/app.php` 配置文件做下面的变更：
 
 	'log' => 'single'
 
@@ -51,7 +51,7 @@ Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。�
 
 `render` 方法负责把异常转换成应该被传递回浏览器的 HTTP 响应。默认情况下，异常会被传递到基础类并帮你产生响应。然而，你可以自由的检查异常类型或返回自定义的响应。
 
-异常处理进程的 `dontReport` 属性是个数组，包含应该不要被纪录的异常类型。由 404 错误导致的异常默认不会被写到日志档。你可以依照需求添加其他类型的异常到这个数组。
+异常处理进程的 `dontReport` 属性是个数组，包含应该不要被纪录的异常类型。由 404 错误导致的异常默认不会被写到日志文件。你可以依照需求添加其他类型的异常到这个数组。
 
 <a name="http-exceptions"></a>
 ## HTTP 异常
@@ -73,7 +73,7 @@ Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。�
 <a name="logging"></a>
 ## 日志
 
-Laravel 日志工具在强大的 [Monolog](http://github.com/seldaek/monolog) 函数库上提供一层简单的功能。Laravel 默认为应用程序建立每天的日志档在 `storage/logs` 目录。你可以像这样把信息写到日志：
+Laravel 日志工具在强大的 [Monolog](http://github.com/seldaek/monolog) 函数库上提供一层简单的功能。Laravel 默认为应用程序建立每天的日志文件在 `storage/logs` 目录。你可以像这样把信息写到日志：
 
 	Log::info('This is some useful information.');
 

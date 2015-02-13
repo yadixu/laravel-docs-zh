@@ -23,9 +23,9 @@
 
 `database` 目录包含你的数据库迁移与数据填充文件。
 
-`public` 目录包含前面的控制器和你的资源档 (图片、JavaScript、CSS，等等)。
+`public` 目录包含前面的控制器和你的资源文件 (图片、JavaScript、CSS，等等)。
 
-`resources` 目录包含你的视图、原始的资源档 (LESS、SASS、CoffeeScript) 和「语言」档。
+`resources` 目录包含你的视图、原始的资源文件 (LESS、SASS、CoffeeScript) 和「语言」文件。
 
 `storage` 目录包含编译后的 Blade 模板、基于文件的 session、文件缓存和其他框架产生的文件。
 
