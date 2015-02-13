@@ -10,7 +10,7 @@
 
 应用程序的日志功能配置在 `Illuminate\Foundation\Bootstrap\ConfigureLogging` 启动类中。这个类使用 `config/app.php` 配置文件的 `log` 配置选项。
 
-日志工具默认使用每天的日志文件；然而，你可以依照需求客制化这个行为。因为 Laravel 使用受欢迎的 [Monolog](https://github.com/Seldaek/monolog) 日志函式库，你可以利用很多 Monolog 提供的处理进程。
+日志工具默认使用每天的日志文件；然而，你可以依照需求客制化这个行为。因为 Laravel 使用受欢迎的 [Monolog](https://github.com/Seldaek/monolog) 日志函数库，你可以利用很多 Monolog 提供的处理进程。
 
 例如，如果你想要使用单一日志档，而不是每天一个日志档，你可以对 `config/app.php` 配置文件做下面的变更：
 
@@ -73,7 +73,7 @@ Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。�
 <a name="logging"></a>
 ## 日志
 
-Laravel 日志工具在强大的 [Monolog](http://github.com/seldaek/monolog) 函式库上提供一层简单的功能。Laravel 默认为应用程序建立每天的日志档在 `storage/logs` 目录。你可以像这样把信息写到日志：
+Laravel 日志工具在强大的 [Monolog](http://github.com/seldaek/monolog) 函数库上提供一层简单的功能。Laravel 默认为应用程序建立每天的日志档在 `storage/logs` 目录。你可以像这样把信息写到日志：
 
 	Log::info('This is some useful information.');
 

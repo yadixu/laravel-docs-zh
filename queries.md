@@ -312,9 +312,9 @@
 <a name="pessimistic-locking"></a>
 ## 悲观锁定 (Pessimistic Locking)
 
-查找产生器提供了少数函式协助你在 SELECT 语句中做到「悲观锁定」。
+查找产生器提供了少数函数协助你在 SELECT 语句中做到「悲观锁定」。
 
-想要在 SELECT 语句中加上「Shard lock」，只要在查找语句中使用 `sharedLock` 函式：
+想要在 SELECT 语句中加上「Shard lock」，只要在查找语句中使用 `sharedLock` 函数：
 
 	DB::table('users')->where('votes', '>', 100)->sharedLock()->get();
 

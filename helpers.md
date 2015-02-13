@@ -11,7 +11,7 @@
 
 ### array_add
 
-如果给定的键不在数组中，`array_add` 函式会把给定的键值对加到数组中。
+如果给定的键不在数组中，`array_add` 函数会把给定的键值对加到数组中。
 
 	$array = array('foo' => 'bar');
 
@@ -19,7 +19,7 @@
 
 ### array_divide
 
-`array_divide` 函式返回两个数组，一个包含原本数组的键，另一个包含原本数组的值。
+`array_divide` 函数返回两个数组，一个包含原本数组的键，另一个包含原本数组的值。
 
 	$array = array('foo' => 'bar');
 
@@ -27,7 +27,7 @@
 
 ### array_dot
 
-`array_dot` 函式把多维数组扁平化成一维数组，并用「点」符号表示深度。
+`array_dot` 函数把多维数组扁平化成一维数组，并用「点」符号表示深度。
 
 	$array = array('foo' => array('bar' => 'baz'));
 
@@ -37,13 +37,13 @@
 
 ### array_except
 
-`array_except` 函式从数组移除给定的键值对。
+`array_except` 函数从数组移除给定的键值对。
 
 	$array = array_except($array, array('keys', 'to', 'remove'));
 
 ### array_fetch
 
-`array_fetch` 函式返回包含被选择的嵌套元素的扁平化数组。
+`array_fetch` 函数返回包含被选择的嵌套元素的扁平化数组。
 
 	$array = array(
 		array('developer' => array('name' => 'Taylor')),
@@ -56,7 +56,7 @@
 
 ### array_first
 
-`array_first` 函式返回数组中第一个通过给定的测试为真的元素。
+`array_first` 函数返回数组中第一个通过给定的测试为真的元素。
 
 	$array = array(100, 200, 300);
 
@@ -71,7 +71,7 @@
 
 ### array_last
 
-`array_last` 函式返回数组中最后一个通过给定的测试为真的元素。
+`array_last` 函数返回数组中最后一个通过给定的测试为真的元素。
 
 	$array = array(350, 400, 500, 300, 200, 100);
 
@@ -88,7 +88,7 @@
 
 ### array_flatten
 
-`array_flatten` 函式将会把多维数组扁平化成一维。
+`array_flatten` 函数将会把多维数组扁平化成一维。
 
 	$array = array('name' => 'Joe', 'languages' => array('PHP', 'Ruby'));
 
@@ -98,7 +98,7 @@
 
 ### array_forget
 
-`array_forget` 函式将会用「点」符号从深度嵌套数组移除给定的键值对。
+`array_forget` 函数将会用「点」符号从深度嵌套数组移除给定的键值对。
 
 	$array = array('names' => array('joe' => array('programmer')));
 
@@ -106,7 +106,7 @@
 
 ### array_get
 
-`array_get` 函式将会使用「点」符号从深度嵌套数组取回给定的值。
+`array_get` 函数将会使用「点」符号从深度嵌套数组取回给定的值。
 
 	$array = array('names' => array('joe' => array('programmer')));
 
@@ -118,7 +118,7 @@
 
 ### array_only
 
-`array_only` 函式将会只从数组返回给定的键值对。
+`array_only` 函数将会只从数组返回给定的键值对。
 
 	$array = array('name' => 'Joe', 'age' => 27, 'votes' => 1);
 
@@ -126,7 +126,7 @@
 
 ### array_pluck
 
-`array_pluck` 函式将会从数组拉出给定键值对的清单。
+`array_pluck` 函数将会从数组拉出给定键值对的清单。
 
 	$array = array(array('name' => 'Taylor'), array('name' => 'Dayle'));
 
@@ -136,7 +136,7 @@
 
 ### array_pull
 
-`array_pull` 函式将会从数组返回给定的键值对，并移除它。
+`array_pull` 函数将会从数组返回给定的键值对，并移除它。
 
 	$array = array('name' => 'Taylor', 'age' => 27);
 
@@ -144,7 +144,7 @@
 
 ### array_set
 
-`array_set` 函式将会使用「点」符号在深度嵌套数组中指定值。
+`array_set` 函数将会使用「点」符号在深度嵌套数组中指定值。
 
 	$array = array('names' => array('programmer' => 'Joe'));
 
@@ -152,7 +152,7 @@
 
 ### array_sort
 
-`array_sort` 函式借由给定闭包的结果来排序数组。
+`array_sort` 函数借由给定闭包的结果来排序数组。
 
 	$array = array(
 		array('name' => 'Jill'),

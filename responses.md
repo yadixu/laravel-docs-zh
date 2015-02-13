@@ -168,6 +168,6 @@
 
 	}
 
-`macro` 函式第一个参数为巨集名称，第二个参数为闭包函式。闭包函式会在 `ResponseFactory`的实做或者辅助方法 `response` 调用巨集名称的时候被执行：
+`macro` 函数第一个参数为巨集名称，第二个参数为闭包函数。闭包函数会在 `ResponseFactory`的实做或者辅助方法 `response` 调用巨集名称的时候被执行：
 
 	return response()->caps('foo');

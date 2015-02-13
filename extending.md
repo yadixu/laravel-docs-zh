@@ -125,9 +125,9 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 	}
 
-`retrieveById` 函式通常接收一个代表用户的数字键，例如：MySQL 数据库的自动递增 ID。这方法应该取得符合 ID 的 `Authenticatable` 实现并返回。
+`retrieveById` 函数通常接收一个代表用户的数字键，例如：MySQL 数据库的自动递增 ID。这方法应该取得符合 ID 的 `Authenticatable` 实现并返回。
 
-`retrieveByToken` 函式用用户唯一的 `$identifier` 和保存在 `remember_token` 字段的「记住我」 `$token` 来取得用户。跟前面的方法一样，应该返回 `Authenticatable` 的实现。
+`retrieveByToken` 函数用用户唯一的 `$identifier` 和保存在 `remember_token` 字段的「记住我」 `$token` 来取得用户。跟前面的方法一样，应该返回 `Authenticatable` 的实现。
 
 `updateRememberToken` 方法用新的 `$token` 更新 `$user` 的 `remember_token` 字段。新 token 可以是在「记住我」成功地登录时，传入一个新的 token，或当用户注销时传入一个 null。
 

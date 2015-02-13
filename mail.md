@@ -9,11 +9,11 @@
 <a name="configuration"></a>
 ## 配置
 
-Laravel 基于热门的 [SwiftMailer](http://swiftmailer.org) 函式库之上，提供了一个简洁的 API。邮件配置文件为 `config/mail.php`，包含若干选项，让您可以更改 SMTP  主机、连接端口、凭证，也可以让您对函式库发送出去的所有消息配置全局的 `from` 地址。您可使用任何您想要的 SMTP 服务器。如果想使用 PHP `mail` 函式来发送邮件，您可以将配置文件中的 `driver` 更改为 `mail`。您也可以使用 `sendmail`  驱动器。
+Laravel 基于热门的 [SwiftMailer](http://swiftmailer.org) 函数库之上，提供了一个简洁的 API。邮件配置文件为 `config/mail.php`，包含若干选项，让您可以更改 SMTP  主机、连接端口、凭证，也可以让您对函数库发送出去的所有消息配置全局的 `from` 地址。您可使用任何您想要的 SMTP 服务器。如果想使用 PHP `mail` 函数来发送邮件，您可以将配置文件中的 `driver` 更改为 `mail`。您也可以使用 `sendmail`  驱动器。
 
 ### API 驱动
 
-Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常比 SMTP  服务器更简单快速。这两套驱动都需要在应用程序中安装 Guzzle 4 HTTP 函式库。您可在 `composer.josn` 中加入下列代码， 以便在专案中加入 Guzzle 4：
+Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常比 SMTP  服务器更简单快速。这两套驱动都需要在应用程序中安装 Guzzle 4 HTTP 函数库。您可在 `composer.josn` 中加入下列代码， 以便在专案中加入 Guzzle 4：
 
 	"guzzlehttp/guzzle": "~4.0"
 
