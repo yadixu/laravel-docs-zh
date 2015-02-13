@@ -4,7 +4,7 @@
     - [贡献导引](/docs/5.0/contributions)
 - 环境配置
     - [安装](/docs/5.0/installation)
-    - [设置](/docs/5.0/configuration)
+    - [配置](/docs/5.0/configuration)
     - [Homestead](/docs/5.0/homestead)
 - 基本功能
     - [路由](/docs/5.0/routing)

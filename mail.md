@@ -1,15 +1,15 @@
 # 邮件
 
-- [设置](#configuration)
+- [配置](#configuration)
 - [基本用法](#basic-usage)
 - [内嵌附件](#embedding-inline-attachments)
 - [邮件队列](#queueing-mail)
 - [邮件与本地端开发](#mail-and-local-development)
 
 <a name="configuration"></a>
-## 设置
+## 配置
 
-Laravel 基于热门的 [SwiftMailer](http://swiftmailer.org) 函式库之上，提供了一个简洁的 API。邮件配置文件为 `config/mail.php`，包含若干选项，让您可以更改 SMTP  主机、连接端口、凭证，也可以让您对函式库发送出去的所有消息设置全局的 `from` 地址。您可使用任何您想要的 SMTP 服务器。如果想使用 PHP `mail` 函式来发送邮件，您可以将配置文件中的 `driver` 更改为 `mail`。您也可以使用 `sendmail`  驱动器。
+Laravel 基于热门的 [SwiftMailer](http://swiftmailer.org) 函式库之上，提供了一个简洁的 API。邮件配置文件为 `config/mail.php`，包含若干选项，让您可以更改 SMTP  主机、连接端口、凭证，也可以让您对函式库发送出去的所有消息配置全局的 `from` 地址。您可使用任何您想要的 SMTP 服务器。如果想使用 PHP `mail` 函式来发送邮件，您可以将配置文件中的 `driver` 更改为 `mail`。您也可以使用 `sendmail`  驱动器。
 
 ### API 驱动
 
@@ -19,7 +19,7 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 
 #### Mailgun 驱动
 
-要使用 Mailgun 驱动，请将 `config/mail.php` 配置文件中的 `driver` 选项设置为 `mailgun`。接下来，若 `config/service.php` 配置文件还不存在于您的专案中，请建立此档，并确认其包含下列选项：
+要使用 Mailgun 驱动，请将 `config/mail.php` 配置文件中的 `driver` 选项配置为 `mailgun`。接下来，若 `config/service.php` 配置文件还不存在于您的专案中，请建立此档，并确认其包含下列选项：
 
 	'mailgun' => array(
 		'domain' => 'your-mailgun-domain',
@@ -28,7 +28,7 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 
 #### Mandrill 驱动
 
-要使用 Mandrill 驱动，将 `config/mail.php` 配置文件中的 `driver` 选项设置为 `mandrill`。接下来，若 `config/service.php` 配置文件还不存在于您的专案中，请建立此档，并确认其包含下列选项：
+要使用 Mandrill 驱动，将 `config/mail.php` 配置文件中的 `driver` 选项配置为 `mandrill`。接下来，若 `config/service.php` 配置文件还不存在于您的专案中，请建立此档，并确认其包含下列选项：
 
 	'mandrill' => array(
 		'secret' => 'your-mandrill-key',
@@ -36,7 +36,7 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 
 ### 日志驱动
 
-若您的 `config/mail.php` 配置文件中的 `driver` 选项设置为 `log` ，所有的电子邮件都会被写入日志档，而不会真正寄给任何收件者。这主要用于快速的本地端除错及内容验证。
+若您的 `config/mail.php` 配置文件中的 `driver` 选项配置为 `log` ，所有的电子邮件都会被写入日志档，而不会真正寄给任何收件者。这主要用于快速的本地端除错及内容验证。
 
 <a name="basic-usage"></a>
 ## 基本用法
@@ -48,7 +48,7 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 		$message->to('foo@example.com', 'John Smith')->subject('Welcome!');
 	});
 
-传入 `send` 方法的第一个参数为邮件视图的名称。第二个是传递给该视图的数据，通常是一个关联式数组，让视图可透过 `$key` 来取得数据对象。第三个参数是一个闭包，可以对 message 进行各种设置。
+传入 `send` 方法的第一个参数为邮件视图的名称。第二个是传递给该视图的数据，通常是一个关联式数组，让视图可透过 `$key` 来取得数据对象。第三个参数是一个闭包，可以对 message 进行各种配置。
 
 > **注意：** `$message` 变量总是会被传入邮件视图中，并且允许内嵌附件。因此最好避免在您的视图本体中传入 `message` 变量。 
 
@@ -138,6 +138,6 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 <a name="mail-and-local-development"></a>
 ## 邮件与本地端开发
 
-当开发发送电子邮件的应用程序时，我们通常希望不要真的从本地端或开发环境发送邮件。您可以使用 `Mail::pretend` 方法或将 `config/mail.php` 配置文件中的 `pretend` 选项设置为 `true`。在 `pretend`  模式下，消息会改而写入应用程序的日志档，而不会真的发送给收件者。
+当开发发送电子邮件的应用程序时，我们通常希望不要真的从本地端或开发环境发送邮件。您可以使用 `Mail::pretend` 方法或将 `config/mail.php` 配置文件中的 `pretend` 选项配置为 `true`。在 `pretend`  模式下，消息会改而写入应用程序的日志档，而不会真的发送给收件者。
 
 若您想要实际阅览测试的邮件，可考虑使用像是 [MailTrap](https://mailtrap.io) 的服务。

@@ -1,17 +1,17 @@
-# 设置
+# 配置
 
 - [简介](#introduction)
 - [完成安装后](#after-installation)
-- [取得设置值](#accessing-configuration-values)
+- [取得配置值](#accessing-configuration-values)
 - [环境配置](#environment-configuration)
-- [设置缓存](#configuration-caching)
+- [配置缓存](#configuration-caching)
 - [维护模式](#maintenance-mode)
 - [优雅链接](#pretty-urls)
 
 <a name="introduction"></a>
 ## 简介
 
-所有 Laravel 框架的设置文件都放置在 `config` 目录下。 每个选项都有说明，因此你可以轻松地浏览这些文档，并且熟悉这些选项配置。
+所有 Laravel 框架的配置文件都放置在 `config` 目录下。 每个选项都有说明，因此你可以轻松地浏览这些文档，并且熟悉这些选项配置。
 
 <a name="after-installation"></a>
 ## 完成安装后
@@ -26,23 +26,23 @@
 
 重命名你的应用程序是完全自由的，如果你希望的话也可以保持命名空间为 `App` 。
 
-### 其他设置
+### 其他配置
 
-Laravel 几乎不需设置就可以马上使用。你可以自由的开始开发！然而，你可以浏览 `config/app.php` 文件和其他的文档。你可能希望依据你的本机而做更改，文件包含数个选项如`时区`和`语言环境`。
+Laravel 几乎不需配置就可以马上使用。你可以自由的开始开发！然而，你可以浏览 `config/app.php` 文件和其他的文档。你可能希望依据你的本机而做更改，文件包含数个选项如`时区`和`语言环境`。
 
-一旦 Laravel 安装完成，你应该同时 [设置本机环境](/docs/5.0/configuration#environment-configuration)。
+一旦 Laravel 安装完成，你应该同时 [配置本机环境](/docs/5.0/configuration#environment-configuration)。
 
-> **注意：** 你不应该在正式环境中将 `app.debug` 设置为 `true` 。绝对！千万不要！
+> **注意：** 你不应该在正式环境中将 `app.debug` 配置为 `true` 。绝对！千万不要！
 
 <a name="permissions"></a>
 ### 权限
 
-Laravel 框架有一个目录需要额外设置权限：`storage` 目录必须让服务器有写入权限。
+Laravel 框架有一个目录需要额外权限：`storage` 目录必须让服务器有写入权限。
 
 <a name="accessing-configuration-values"></a>
-## 取得设置值
+## 取得配置值
 
-你可以很轻松的使用 `Config` facade 取得你的设置值：
+你可以很轻松的使用 `Config` facade 取得你的配置值：
 
 	$value = Config::get('app.timezone');
 
@@ -55,11 +55,11 @@ Laravel 框架有一个目录需要额外设置权限：`storage` 目录必须�
 <a name="environment-configuration"></a>
 ## 环境配置
 
-通常应用程序常常需要根据不同的执行环境而有不同的设置值。例如，你会希望在你的本机开发环境上会有与正式环境不同的暂存驱动（cache driver），通过设置文件，就可以轻松完成。
+通常应用程序常常需要根据不同的执行环境而有不同的配置值。例如，你会希望在你的本机开发环境上会有与正式环境不同的暂存驱动（cache driver），通过配置文件，就可以轻松完成。
 
 Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vance Lucas。 在全新安装好的 Laravel 里，你的应用程序的根目录下会包含一个 `.env.example` 文件。如果你通过 Composer 安装 Laravel，这个文件将自动被命名为 `.env`，不然你应该手动更改文件名。
 
-当你的应用程序收到请求，这个文件所有的变量会被加载到 `$_ENV` PHP 超级全局变量里。你可以使用辅助方法 `env` 查看这些变量。事实上，如果你检阅过 Laravel 设置文件，你会注意到几个选项已经在使用这个辅助方法！
+当你的应用程序收到请求，这个文件所有的变量会被加载到 `$_ENV` PHP 超级全局变量里。你可以使用辅助方法 `env` 查看这些变量。事实上，如果你检阅过 Laravel 配置文件，你会注意到几个选项已经在使用这个辅助方法！
 
 根据你的本机服务器或者上线环境需求，你可以自由的修改你的环境变量。然而， 你的 `.env`  文件不应该被提交到应用程序的版本控制系统，因为每个开发人员或服务器使用你的应用程序可能需要不同的环境配置。
 
@@ -92,9 +92,9 @@ Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vanc
 	$environment = App::environment();
 
 <a name="configuration-caching"></a>
-## 设置缓存
+## 配置缓存
 
-为了让你的的应用程序提升一些速度，你可以使用 Artisan 命令 `config:cache`  将所有的配置文件暂存到单一文件。通过命令会将所有的设置选项合并成一个文件，让框架能够快速加载。
+为了让你的的应用程序提升一些速度，你可以使用 Artisan 命令 `config:cache`  将所有的配置文件暂存到单一文件。通过命令会将所有的配置选项合并成一个文件，让框架能够快速加载。
 
 通常来说，你应该将执行 `config:cache` 命令作为部署工作的一部分。
 
@@ -137,10 +137,10 @@ Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.ph
 
 ### Nginx
 
-若使用 Nginx ，可以在你的网站设置中增加下面的设置，以开启「优雅链接」：
+若使用 Nginx ，可以在你的网站配置中增加下面的配置，以开启「优雅链接」：
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
     }
 
-当然，如果你使用 [Homestead](/docs/5.0/homestead) 的话，优雅链接会自动的帮你设置完成。
+当然，如果你使用 [Homestead](/docs/5.0/homestead) 的话，优雅链接会自动的帮你配置完成。

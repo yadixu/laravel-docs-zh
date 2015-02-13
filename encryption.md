@@ -15,15 +15,15 @@ Laravel 透过 Mcrypt PHP 扩充扩展包提供功能强大的 AES 加密功能�
 
 	$encrypted = Crypt::encrypt('secret');
 
-> **注意：** 请确保 `config/app.php` 文件中的 `key` 选项设置了 16, 24, 或 32 字符的随机字串，否则加密的数值不会安全。
+> **注意：** 请确保 `config/app.php` 文件中的 `key` 选项配置了 16, 24, 或 32 字符的随机字串，否则加密的数值不会安全。
 
 #### 解密
 
 	$decrypted = Crypt::decrypt($encryptedValue);
 
-#### 设置密码与模式
+#### 配置密码与模式
 
-您也可以使用加密器来设置密码和模式：
+您也可以使用加密器来配置密码和模式：
 
 	Crypt::setMode('ctr');
 

@@ -15,7 +15,7 @@ Laravel Elixir 提供了简洁流畅的 API，让你能够为你的 Laravel 应�
 如果你曾经对于使用 Gulp 及编译资源感到困惑，那么你绝对会爱上 Laravel Elixir！
 
 <a name="installation"></a>
-## 安装与设置
+## 安装与配置
 
 ### 安装 Node
 

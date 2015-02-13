@@ -1,12 +1,12 @@
 # 分页
 
-- [设置](#configuration)
+- [配置](#configuration)
 - [使用](#usage)
 - [追加分页链接](#appending-to-pagination-links)
 - [转换至 JSON](#converting-to-json)
 
 <a name="configuration"></a>
-## 设置
+## 配置
 
 在其他的框架中，实作分页是令人感到苦恼的事，但是 Laravel 令它实作起来变得轻松。 Laravel 可以产生基于当前页面的智能「范围」链接，所产生的 HTML 兼容 Bootstrap CSS 框架.
 

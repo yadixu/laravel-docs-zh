@@ -3,7 +3,7 @@
 - [介绍](#introduction)
 - [根目录](#the-root-directory)
 - [App 目录](#the-app-directory)
-- [为应用程序设置命名空间](#namespacing-your-application)
+- [为应用程序配置命名空间](#namespacing-your-application)
 
 <a name="introduction"></a>
 ## 介绍
@@ -17,7 +17,7 @@
 
 `app` 目录，如你所料，包含应用程序的核心代码。我们之后将会很快深入探讨这个目录的细节。
 
-`bootstrap` 目录包含几个框架启动跟自动加载设置的文件。
+`bootstrap` 目录包含几个框架启动跟自动加载配置的文件。
 
 `config` 目录，顾名思义，包含所有应用程序的配置文件。
 
@@ -53,7 +53,7 @@
 > **注意：** 在 `app` 目录中的许多类可以用 Artisan 命令产生。要查看可以使用的命令，在终端机执行 `php artisan list make` 命令。
 
 <a name="namespacing-your-application"></a>
-## 为应用程序设置命名空间
+## 为应用程序配置命名空间
 
 如前面所提到的，默认的应用程序命名空间为 `App`；然而，你可以变更这个命名空间成跟应用程序的名称一样，这可以简单地借由 `app:name` Artisan 命令完成。例如：如果你的应用程序叫做「SocialNet」，你将会执行下面的命令：
 

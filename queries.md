@@ -111,7 +111,7 @@
 	$users = DB::table('users')
 	                    ->whereNotIn('id', array(1, 2, 3))->get();
 
-#### 使用 Where Null 找有未设置的值的数据
+#### 使用 Where Null 找有未配置的值的数据
 
 	$users = DB::table('users')
 	                    ->whereNull('updated_at')->get();

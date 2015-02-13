@@ -18,7 +18,7 @@
 
 #### 首要之事
 
-`public/index.php` 这个文件是对 Laravel 应用程序所有请求的进入点。所有的请求都透过您网页服务器（Apache / Ngix）的设置导向这个文件。 `index.php` 这个文件并没有太多的代码。更确切地说，它只是个起始点，用来加载框架其他的部分。
+`public/index.php` 这个文件是对 Laravel 应用程序所有请求的进入点。所有的请求都透过您网页服务器（Apache / Ngix）的配置导向这个文件。 `index.php` 这个文件并没有太多的代码。更确切地说，它只是个起始点，用来加载框架其他的部分。
 
 `index.php` 加载由 Composer 产生的自动加载器定义，并接收由 `bootstrap/app.php` 命令稿所产生的 Laravel 应用程序实例。Laravel 自身的第一个动作就是创建一个应用程序 / [服务容器](/docs/5.0/container)的实例。
 
@@ -26,7 +26,7 @@
 
 接下来，进入应用程序的请求的会被送往 HTTP 核心或终端核心，视该请求的种类而定。这两种核心是所有请求流向的中心位置。现在开始，我们只将焦点放在 HTTP 核心，它位于 `app/Http/Kernel.php`。
 
-HTTP 核心扩展了 `Illuminate\Foundation\Http\Kernel` 此一类，它定义了一个 `bootstrappers` 数组，在请求被执行前会先行运作。这些启动器（bootstrappers）设置错误处理，日志记录，侦测应用程序环境，并执行在请求真正被处理之前，需要完成的其他工作。
+HTTP 核心扩展了 `Illuminate\Foundation\Http\Kernel` 此一类，它定义了一个 `bootstrappers` 数组，在请求被执行前会先行运作。这些启动器（bootstrappers）配置错误处理，日志记录，侦测应用程序环境，并执行在请求真正被处理之前，需要完成的其他工作。
 
 HTTP 核心也定义了一份 HTTP [中间层](/docs/5.0/middleware)清单，所有的请求在被应用程序处理之前都必须经过它们。这些中间层负责处理 HTTP session 的读写，决定应用程序是否处于维护模式，查验跨站请求伪造（CSRF）标记，以及其他更多任务作。
 
@@ -34,7 +34,7 @@ HTTP 核心 `handle` 方法的方法签名相当简单：它接收一个 `Reques
 
 #### 服务提供者
 
-最重要的核心启动行为之一，是加载您的应用程序的服务提供者。所有应用程序的服务提供者，都在 `config/app.php` 此配置文件的 `providers` 数组中被设置。首先，对所有的提供者调用 `register` 方法，一旦所有的提供者都被注册之后，`boot` 方法也会被调用。
+最重要的核心启动行为之一，是加载您的应用程序的服务提供者。所有应用程序的服务提供者，都在 `config/app.php` 此配置文件的 `providers` 数组中被配置。首先，对所有的提供者调用 `register` 方法，一旦所有的提供者都被注册之后，`boot` 方法也会被调用。
 
 #### 请求分派
 

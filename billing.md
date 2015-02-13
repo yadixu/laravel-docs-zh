@@ -35,7 +35,7 @@ Laravel Cashier 提供口语化，流畅的接口和 [Stripe](https://stripe.com
 
 使用 Cashier 前，我们需要增加几个字段到数据库。别担心，你可以使用 `cashier:table` Artisan 命令，建立迁移文件来添加必要字段。例如，要增加字段到 users 数据表，使用 `php artisan cashier:table users`。建立完迁移文件后，只要执行 `migrate` 命令即可。
 
-#### 设置模型
+#### 配置模型
 
 然后，把 `Billable` trait 和相关的日期字段参数加到模型里：
 
@@ -71,9 +71,9 @@ Laravel Cashier 提供口语化，流畅的接口和 [Stripe](https://stripe.com
 	     ->withCoupon('code')
 	     ->create($creditCardToken);
 
-`subscription` 方法会自动建立与 Stripe 的交易，以及将 Stripe customer ID 和其他相关帐款信息更新到数据库。如果你的方案有在 Stripe 设置试用期，试用到日期也会自动记录起来。
+`subscription` 方法会自动建立与 Stripe 的交易，以及将 Stripe customer ID 和其他相关帐款信息更新到数据库。如果你的方案有在 Stripe 配置试用期，试用到日期也会自动记录起来。
 
-如果你的方案有试用期间，但是**没有**在 Stripe 里设置，你必须在处理订购后手动保存试用到日期。
+如果你的方案有试用期间，但是**没有**在 Stripe 里配置，你必须在处理订购后手动保存试用到日期。
 
 	$user->trial_ends_at = Carbon::now()->addDays(14);
 
@@ -210,7 +210,7 @@ Laravel Cashier 提供口语化，流畅的接口和 [Stripe](https://stripe.com
 
 	Route::post('stripe/webhook', 'Laravel\Cashier\WebhookController@handleWebhook');
 
-这样就成了！失败的交易会经由控制器捕捉并进行处理。控制器会进行至多三次再交易尝试，都失败后才会取消顾客的订单。上面的 `stripe/webhook` URI 只是一个例子，你必须使用设置在 Stripe 里的 URI 才行。
+这样就成了！失败的交易会经由控制器捕捉并进行处理。控制器会进行至多三次再交易尝试，都失败后才会取消顾客的订单。上面的 `stripe/webhook` URI 只是一个例子，你必须使用配置在 Stripe 里的 URI 才行。
 
 <a name="handling-other-stripe-webhooks"></a>
 ## 处理其它 Stripe Webhooks

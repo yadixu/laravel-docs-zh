@@ -12,16 +12,16 @@
 
 开发扩展包是添加功能到 Laravel 最主要的方法。扩展包可以是任何处理日期的方式。例如，[Carbon](https://github.com/briannesbitt/Carbon)，或是一个全套的 BDD testing 框架。例如，[Behat](https://github.com/Behat/Behat)
 
-当然，有非常多不同类型的扩展包。有些扩展包是独立的，意思是此扩展包运作且兼容于任何的框架，不只有 Laravel。Carbon 以及 Behat 都是这类的扩展包。任何这类的扩展包只需要在您的 `composer.json` 文件里设置就可以使用。
+当然，有非常多不同类型的扩展包。有些扩展包是独立的，意思是此扩展包运作且兼容于任何的框架，不只有 Laravel。Carbon 以及 Behat 都是这类的扩展包。任何这类的扩展包只需要在您的 `composer.json` 文件里配置就可以使用。
 
-另一方面，其他的扩展包所设计的目的是只要在 Laravel 上使用。这些扩展包可能包含路由、控制器、视图以及扩展包的相关设置，目的是为了增加 Laravel 的应用。接下来的说明主要涵盖了 Laravel 开发这些扩展包的重点。
+另一方面，其他的扩展包所设计的目的是只要在 Laravel 上使用。这些扩展包可能包含路由、控制器、视图以及扩展包的相关配置，目的是为了增加 Laravel 的应用。接下来的说明主要涵盖了 Laravel 开发这些扩展包的重点。
 
 所有 Laravel 扩展包都发布到 [Packagist](http://packagist.org) 以及 [Composer](http://getcomposer.org)，所以学习这些美好的 PHP 扩展包管理工具是必须的。
 
 <a name="views"></a>
 ## 视图
 
-您扩展包内部的架构全部由您自己规划。然而，原则上会有一个或更多的 [服务提供者](/docs/5.0/providers). 服务提供者包含着所有的 [IoC](/docs/5.0/container) 绑定，也定义了所有您扩展包的相关设置、视图以及语言文件在什么地方。
+您扩展包内部的架构全部由您自己规划。然而，原则上会有一个或更多的 [服务提供者](/docs/5.0/providers). 服务提供者包含着所有的 [IoC](/docs/5.0/container) 绑定，也定义了所有您扩展包的相关配置、视图以及语言文件在什么地方。
 
 ### 视图
 
@@ -29,7 +29,7 @@
 
 	return view('package::view.name');
 
-所有您所要做的只有告诉 Laravel 您所设置扩展包名称视图的位置在哪里。如果您的扩展包取名为 “courier” 您可能需要添加如下到您的服务提供者的 `boot` 方法:
+所有您所要做的只有告诉 Laravel 您所配置扩展包名称视图的位置在哪里。如果您的扩展包取名为 “courier” 您可能需要添加如下到您的服务提供者的 `boot` 方法:
 
 	public function boot()
 	{
@@ -70,7 +70,7 @@
 
 	return trans('package::file.line');
 
-所有您所要做的只有告诉 Laravel 您所设置扩展包名称的语言位置在哪里。如果您的扩展包取名为 "courier" 您可能需要添加如下的语法到您的服务提供者的 `boot` 方法:
+所有您所要做的只有告诉 Laravel 您所配置扩展包名称的语言位置在哪里。如果您的扩展包取名为 "courier" 您可能需要添加如下的语法到您的服务提供者的 `boot` 方法:
 
 	public function boot()
 	{
@@ -86,7 +86,7 @@
 <a name="configuration"></a>
 ## 配置文件
 
-基本上，您可能想要将您扩展包相关设置的文件发布到应用程序本身的设置目录 `config`。这将允许您扩展包的用户简单的覆写这些默认的设置文件。
+基本上，您可能想要将您扩展包相关配置的文件发布到应用程序本身的配置目录 `config`。这将允许您扩展包的用户简单的覆写这些默认的配置文件。
 
 发布扩展包的配置文件只需要在服务提供者里的 `boot` 方法里使用 `publishes` 方法:
 
@@ -94,11 +94,11 @@
 		__DIR__.'/path/to/config/courier.php' => config_path('courier.php'),
 	]);
 
-现在当扩展包的用户执行 `vendor:publish` 命令，您的文件将会被复制到特定的位置。当然只要设置文件已经被发布，就可以如其他配置文件一样被访问:
+现在当扩展包的用户执行 `vendor:publish` 命令，您的文件将会被复制到特定的位置。当然只要配置文件已经被发布，就可以如其他配置文件一样被访问:
 
 	$value = config('courier.option');
 
-您可能也选择想要合并您扩展包的配置文件和应用程序里的副本配置文件。这允许您的用户在已经被发布的副本配置文件里只包含任何他们想要覆写的设置选项。如果想要合并配置文件，可在服务提供者里的 `register` 方法里使用 `mergeConfigFrom`方法
+您可能也选择想要合并您扩展包的配置文件和应用程序里的副本配置文件。这允许您的用户在已经被发布的副本配置文件里只包含任何他们想要覆写的配置选项。如果想要合并配置文件，可在服务提供者里的 `register` 方法里使用 `mergeConfigFrom`方法
 
 	$this->mergeConfigFrom(
 		__DIR__.'/path/to/config/courier.php', 'courier'
@@ -135,4 +135,4 @@
 		include __DIR__.'/../../routes.php';
 	}
 
-> **注意:** 如果您的扩展包里使用了控制器，您必须要确认您在 `composer.json` 文件里的 auto-load 区块里，是否适当的设置这些控制器。
+> **注意:** 如果您的扩展包里使用了控制器，您必须要确认您在 `composer.json` 文件里的 auto-load 区块里，是否适当的配置这些控制器。

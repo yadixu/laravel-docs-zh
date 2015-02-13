@@ -84,7 +84,7 @@ Cache 类继承基本的 `Facade` 类并定义一个 `getFacadeAccessor()` 方�
 
 - 一个 IoC 绑定。
 - 一个 facade 类。
-- 一个 facade 别名设置。
+- 一个 facade 别名配置。
 
 让我们来看个例子。这里有一个定义为 `PaymentGateway\Payment` 的类。
 
@@ -106,7 +106,7 @@ Cache 类继承基本的 `Facade` 类并定义一个 `getFacadeAccessor()` 方�
 		return new \PaymentGateway\Payment;
 	});
 
-注册这个绑定的好方式是建立新的 [服务提供者](/docs/5.0/container#service-providers) 命名为 `PaymentServiceProvider`，并把这个绑定加到 `register` 方法。然后你可以设置 Laravel 从 `config/app.php` 配置文件加载你的服务提供者。
+注册这个绑定的好方式是建立新的 [服务提供者](/docs/5.0/container#service-providers) 命名为 `PaymentServiceProvider`，并把这个绑定加到 `register` 方法。然后你可以配置 Laravel 从 `config/app.php` 配置文件加载你的服务提供者。
 
 接下来，我们可以建立我们自己的 facade 类：
 

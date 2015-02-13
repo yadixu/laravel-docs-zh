@@ -122,7 +122,7 @@
 
 #### 建立 JSON 回应
 
-`json` 方法会自动将标头的 `Content-Type` 设置为 `application/json`：
+`json` 方法会自动将标头的 `Content-Type` 配置为 `application/json`：
 
 	return response()->json(['name' => 'Abigail', 'state' => 'CA']);
 

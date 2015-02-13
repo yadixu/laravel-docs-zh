@@ -43,22 +43,22 @@ Laravel 框架有一些系统上的需求：
 在 PHP 5.5 之后， 有些操作系统需要手动安装 PHP JSON 扩展包。如果你是使用 Ubuntu，可以通过 `apt-get install php5-json` 来进行安装。
 
 <a name="configuration"></a>
-## 设置
+## 配置
 
-在你安装完 Laravel 后，首先需要做的事情是设置一个随机字串到应用程序密钥。假设你安装 Laravel 是通过 Composer，这个密钥会通过 `key:generate` 命令帮你设置完成。
+在你安装完 Laravel 后，首先需要做的事情是配置一个随机字串到应用程序密钥。假设你安装 Laravel 是通过 Composer，这个密钥会通过 `key:generate` 命令帮你配置完成。
 
-通常这个密钥应该有 32 字符长。这个密钥可以被设置在 `.env` 环境文件中。 **如果这要密钥没有被设置的话，你的用户 sessions 和其他的加密数据都是不安全的！**
+通常这个密钥应该有 32 字符长。这个密钥可以被配置在 `.env` 环境文件中。 **如果这要密钥没有被配置的话，你的用户 sessions 和其他的加密数据都是不安全的！**
 
-Laravel 几乎不需设置就可以马上使用。你可以自由的开始开发！然而，你可以查看 `config/app.php` 文件和其他的文档。你可能希望依据你的应用程序而做更改，文件包含数个选项如 `时区` 和 `语言环境`。
+Laravel 几乎不需配置就可以马上使用。你可以自由的开始开发！然而，你可以查看 `config/app.php` 文件和其他的文档。你可能希望依据你的应用程序而做更改，文件包含数个选项如 `时区` 和 `语言环境`。
 
-一旦 Laravel 安装完成，你应该同时 [设置本地环境](/docs/5.0/configuration#environment-configuration)。
+一旦 Laravel 安装完成，你应该同时 [配置本地环境](/docs/5.0/configuration#environment-configuration)。
 
-> **注意：** 你不应该在正式环境中将 `app.debug` 设置为 `true`。绝对！千万不要！
+> **注意：** 你不应该在正式环境中将 `app.debug` 配置为 `true`。绝对！千万不要！
 
 <a name="permissions"></a>
 ### 权限
 
-Laravel 框架有一个目录需要额外设置权限：`storage` 要让服务器有写入的权限。
+Laravel 框架有一个目录需要额外配置权限：`storage` 要让服务器有写入的权限。
 
 <a name="pretty-urls"></a>
 ## 优雅链接
@@ -78,10 +78,10 @@ Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.ph
 
 ### Nginx
 
-在 Nginx，在你的网站设置增加下面的设置，可以使用「优雅链接」：
+在 Nginx，在你的网站配置增加下面的配置，可以使用「优雅链接」：
 
     location / {
         try_files $uri $uri/ /index.php?$query_string;
     }
 
-当然，如果你使用 [Homestead](/docs/5.0/homestead) 的话，优雅链接会自动的帮你设置完成。
+当然，如果你使用 [Homestead](/docs/5.0/homestead) 的话，优雅链接会自动的帮你配置完成。

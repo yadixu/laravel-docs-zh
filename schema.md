@@ -92,7 +92,7 @@ Laravel 的结构生成器 (`Schema`) 提供一个与数据库无关的数据表
 `$table->rememberToken();`  |  加入 `remember_token` 使用 VARCHAR(100) NULL
 `->nullable()`  |  标示此字段允许 NULL
 `->default($value)`  |  宣告此字段的默认值
-`->unsigned()`  |  设置整数是无分正负
+`->unsigned()`  |  配置整数是无分正负
 
 #### 在 MySQL 使用 After 方法
 
@@ -203,7 +203,7 @@ Laravel 也支持数据表的外键约束：
 
 	$table->dropForeign('posts_user_id_foreign');
 
-> **注意:** 当外键有参照到自动增量时，记得设置外键为 `unsigned` 型态。
+> **注意:** 当外键有参照到自动增量时，记得配置外键为 `unsigned` 型态。
 
 <a name="dropping-indexes"></a>
 ## 移除索引
@@ -229,7 +229,7 @@ Laravel 也支持数据表的外键约束：
 <a name="storage-engines"></a>
 ## 保存引擎
 
-要设置数据表的保存引擎，可在结构生成器设置 `engine` 属性：
+要配置数据表的保存引擎，可在结构生成器配置 `engine` 属性：
 
     Schema::create('users', function($table)
     {

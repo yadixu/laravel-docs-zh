@@ -85,7 +85,7 @@ Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的命令
 
 	$schedule->exec('composer self-update')->daily();
 
-#### 自己设置 Cron 表达式
+#### 自己配置 Cron 表达式
 
 	$schedule->command('foo')->cron('* * * * *');
 

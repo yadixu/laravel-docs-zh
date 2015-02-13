@@ -12,14 +12,14 @@ Laravel 有很棒的文件系统抽象层，是基于 Frank de Jonge 的 [Flysys
 <a name="configuration"></a>
 ## 配置文件
 
-文件系统的配置文件放在 `config/filesystems.php` 。在这个文件内你可以设置所有的「硬盘」。每个硬盘代表一种保存方式和地点。默认的配置文件内已经包含了所有保存方式的例子。所以只要修改保存设置和认证即可！
+文件系统的配置文件放在 `config/filesystems.php` 。在这个文件内你可以配置所有的「硬盘」。每个硬盘代表一种保存方式和地点。默认的配置文件内已经包含了所有保存方式的例子。所以只要修改保存配置和认证即可！
 
 在使用 S3 或 Rackspace 之前，你必须先用 Composer 安装相对应的扩展包：
 
 - Amazon S3: `league/flysystem-aws-s3-v2 ~1.0`
 - Rackspace: `league/flysystem-rackspace ~1.0`
 
-当然，你可以加入任意数量的硬盘配置文件，甚至设置多个硬盘都使用同一种保存方式。
+当然，你可以加入任意数量的硬盘配置文件，甚至配置多个硬盘都使用同一种保存方式。
 
 使用本地端空间时，要注意所有的操作路径都是相对于配置文件里 `local` 的 `root` ，默认的路径是 `storage/app` 。因此下列的操作将会保存一个文件在 `storage/app/file.txt` ：
 
@@ -51,7 +51,7 @@ Laravel 有很棒的文件系统抽象层，是基于 Frank de Jonge 的 [Flysys
 
 	$contents = Storage::get('file.jpg');
 
-#### 设置文件内容
+#### 配置文件内容
 
 	Storage::put('file.jpg', $contents);
 
