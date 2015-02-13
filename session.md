@@ -96,7 +96,7 @@ Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该
 		$table->integer('last_activity');
 	});
 
-当然你也可以使用 Artisan 指令 `session:table` 来建 migration 表：
+当然你也可以使用 Artisan 命令 `session:table` 来建 migration 表：
 
 	php artisan session:table
 

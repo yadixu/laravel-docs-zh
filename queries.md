@@ -64,7 +64,7 @@
 
 	$roles = DB::table('roles')->lists('title');
 
-这个方法将会返回数据表 role 的 title 字段值的数组。你也可以透过下面的方法，为返回的数组指定自订键值。
+这个方法将会返回数据表 role 的 title 字段值的数组。你也可以透过下面的方法，为返回的数组指定自定义键值。
 
 	$roles = DB::table('roles')->lists('title', 'name');
 

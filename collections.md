@@ -25,7 +25,7 @@
 
 #### 建立集合
 
-如上述，`collect` 辅助方法将会用给定的数组返回一个新的 `Illuminate\Support\Collection` 实例。你也可以在 `Collection` 类上使用 `make` 指令：
+如上述，`collect` 辅助方法将会用给定的数组返回一个新的 `Illuminate\Support\Collection` 实例。你也可以在 `Collection` 类上使用 `make` 命令：
 
 	$collection = collect([1, 2, 3]);
 

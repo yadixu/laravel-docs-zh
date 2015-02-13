@@ -28,11 +28,11 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 		],
 	];
 
-使用 Artisan 命令行指令 `handler:event`，来产生一个事件的处理程序：
+使用 Artisan 命令行命令 `handler:event`，来产生一个事件的处理程序：
 
 	php artisan handler:event EmailPurchaseConfirmation --event=PodcastWasPurchased
 
-当然，在每次你需要一个处理程序或是事件时，手动地执行 `make:event` 和 `handler:event` 指令很麻烦。作为替代，简单地添加处理程序跟事件到你的 `EventServiceProvider` 并使用 `event:generate` 指令。这个指令将会产生任何在你的 `EventServiceProvider` 列出的事件跟处理程序：
+当然，在每次你需要一个处理程序或是事件时，手动地执行 `make:event` 和 `handler:event` 命令很麻烦。作为替代，简单地添加处理程序跟事件到你的 `EventServiceProvider` 并使用 `event:generate` 命令。这个命令将会产生任何在你的 `EventServiceProvider` 列出的事件跟处理程序：
 
 	php artisan event:generate
 

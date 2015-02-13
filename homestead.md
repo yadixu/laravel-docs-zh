@@ -56,7 +56,7 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 	git clone https://github.com/laravel/homestead.git Homestead
 
-一旦你安装完 Homestead CLI 工具，即可执行 `bash init.sh` 指令来创建 `Homestead.yaml` 配置文件:
+一旦你安装完 Homestead CLI 工具，即可执行 `bash init.sh` 命令来创建 `Homestead.yaml` 配置文件:
 
 	bash init.sh
 
@@ -64,17 +64,17 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 #### 透过 Composer + PHP 工具
 
-一旦封装包已经安装进你的 Vagrant 安装程序，你就可以准备透过 Composer `global` 指令来安装 Homestead CLI 工具：
+一旦封装包已经安装进你的 Vagrant 安装程序，你就可以准备透过 Composer `global` 命令来安装 Homestead CLI 工具：
 
 	composer global require "laravel/homestead=~2.0"
 
-请务必确认 `homestead` 有被放置在目录 `~/.composer/vendor/bin` 之中，如此一来你才能在终端机中顺利执行 `homestead` 指令。
+请务必确认 `homestead` 有被放置在目录 `~/.composer/vendor/bin` 之中，如此一来你才能在终端机中顺利执行 `homestead` 命令。
 
-一旦你安装完 Homestead CLI 工具，即可执行 `init` 指令来创建 `Homestead.yaml` 配置文件:
+一旦你安装完 Homestead CLI 工具，即可执行 `init` 命令来创建 `Homestead.yaml` 配置文件:
 
 	homestead init
 
-此 `Homestead.yaml` 将会被放置在你的 `~/.homestead` 文件夹中。如果你是使用 Mac 或 Linux，你可以直接在终端机执行 `homestead edit` 指令来编辑 `Homestead.yaml` :
+此 `Homestead.yaml` 将会被放置在你的 `~/.homestead` 文件夹中。如果你是使用 Mac 或 Linux，你可以直接在终端机执行 `homestead edit` 命令来编辑 `Homestead.yaml` :
 
 	homestead edit
 
@@ -82,11 +82,11 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 然后你要编辑 `Homestead.yaml`。可以在文件中设置你的 SSH 公开密钥，以及主要机器与 Homestead 虚拟机之间的共享目录。
 
-你没有 SSH 密钥？在 Mac 和 Linux 下，你可以利用下面的指令来创建一个 SSH 密钥组:
+你没有 SSH 密钥？在 Mac 和 Linux 下，你可以利用下面的命令来创建一个 SSH 密钥组:
 
 	ssh-keygen -t rsa -C "you@homestead"
 
-在 Windows 下，你需要安装 [Git](http://git-scm.com/) 并且使用包含在 Git 里的 `Git Bash` 来执行上述的指令。另外你也可以使用 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) 和 [PuTTYgen](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)。
+在 Windows 下，你需要安装 [Git](http://git-scm.com/) 并且使用包含在 Git 里的 `Git Bash` 来执行上述的命令。另外你也可以使用 [PuTTY](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html) 和 [PuTTYgen](http://www.chiark.greenend.org.uk/~sgtatham/putty/download.html)。
 
 一旦你创建了一个 SSH 密钥，记得在你的 `Homestead.yaml` 文件中的 `authorize` 属性指明密钥路径。
 
@@ -111,9 +111,9 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 ### 启动 Vagrant 封装包
 
-当你根据你的喜好编辑完 `Homestead.yaml` 后，在终端机里进入你的 Homestead 文件夹并执行 `vagrant up` 指令。
+当你根据你的喜好编辑完 `Homestead.yaml` 后，在终端机里进入你的 Homestead 文件夹并执行 `vagrant up` 命令。
 
-Vagrant 会将虚拟机开机，并且自动设置你的共享目录和 Nginx 站台。如果要移除虚拟机，可以使用 `vagrant destroy --force` 指令。
+Vagrant 会将虚拟机开机，并且自动设置你的共享目录和 Nginx 站台。如果要移除虚拟机，可以使用 `vagrant destroy --force` 命令。
 
 为了你的 Nginx 站台，别忘记在你的机器的 `hosts` 档将「网域」加进去。`hosts` 档会将你的本地网域的站台请求重导至你的 Homestead 环境中。在 Mac 和 Linux，该文件放在 `/etc/hosts`。在 Windows 环境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。你要加进去的内容类似如下：
 
@@ -130,13 +130,13 @@ Vagrant 会将虚拟机开机，并且自动设置你的共享目录和 Nginx �
 
 ### 透过 SSH 连接
 
-要透过 SSH 连接上您的 Homestead 环境，在终端机里进入你的 Homestead 目录并执行  `vagrant ssh` 指令。
+要透过 SSH 连接上您的 Homestead 环境，在终端机里进入你的 Homestead 目录并执行  `vagrant ssh` 命令。
 
 因为你可能会经常需要透过 SSH 进入你的 Homestead 虚拟机，可以考虑在你的主要机器上创建一个"别名":
 
 	alias vm="ssh vagrant@127.0.0.1 -p 2222"
 
-一旦你创建了这个别名，无论你在主要机器的哪个目录，都可以简单地使用 "vm" 指令来透过 SSH 进入你的 Homestead 虚拟机。
+一旦你创建了这个别名，无论你在主要机器的哪个目录，都可以简单地使用 "vm" 命令来透过 SSH 进入你的 Homestead 虚拟机。
 
 ### 链接数据库
 
@@ -150,11 +150,11 @@ Vagrant 会将虚拟机开机，并且自动设置你的共享目录和 Nginx �
 
 一旦 Homestead 环境上架且运行后，你可能会需要为 Laravel 应用程序增加更多的 Nginx 站台。你可以在单一个 Homestead 环境中运行非常多 Laravel 安装程序。有两种方式可以达成：第一种，在 `Homestead.yaml` 文件中增加站台然后执行 `vagrant provision`。
 
-另外，也可以使用存放在 Homestead 环境中的 `serve` 指令档。要使用 `serve` 指令档，请先 SSH 进入 Homestead 环境中，并执行下列命令：
+另外，也可以使用存放在 Homestead 环境中的 `serve` 命令档。要使用 `serve` 命令档，请先 SSH 进入 Homestead 环境中，并执行下列命令：
 
 	serve domain.app /home/vagrant/Code/path/to/public/directory
 
-> **附注：** 在执行 `serve` 指令过后，别忘记将新的站台加进本机的 `hosts` 文件中。
+> **附注：** 在执行 `serve` 命令过后，别忘记将新的站台加进本机的 `hosts` 文件中。
 
 <a name="ports"></a>
 ## 连接端口

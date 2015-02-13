@@ -16,11 +16,11 @@ Laravel 框架已经内置一些中间层，包括维护、身份验证、CSRF �
 <a name="defining-middleware"></a>
 ## 建立中间层
 
-要建立一个新的中间层，可以使用 `make:middleware` 这个 Artisan 指令：
+要建立一个新的中间层，可以使用 `make:middleware` 这个 Artisan 命令：
 
 	php artisan make:middleware OldMiddleware
 
-此指令将会 在 `app/Http/Middleware` 目录内置立一个名称为 `OldMiddleware` 的类。在这个中间层内我们只允许 `年龄` 大于 200 的才能访问路由，否则，我们会将用户重新导向 "home" 的 URI 。
+此命令将会 在 `app/Http/Middleware` 目录内置立一个名称为 `OldMiddleware` 的类。在这个中间层内我们只允许 `年龄` 大于 200 的才能访问路由，否则，我们会将用户重新导向 "home" 的 URI 。
 
 	<?php namespace App\Http\Middleware;
 
@@ -57,7 +57,7 @@ HTTP 请求在实际碰触到应用程序之前，最好是可以层层通过许
 
 ### 指派中间层给路由
 
-如果你要指派中间层给特定的路由，你得先将中间层在 `app/Http/Kernel.php` 设置一个键值，默认情况下，这个文件内的 `$routeMiddleware` 属性已包含了 Laravel 目前设置的中间层，你只需要在清单列表中加上一组自订的键值即可。
+如果你要指派中间层给特定的路由，你得先将中间层在 `app/Http/Kernel.php` 设置一个键值，默认情况下，这个文件内的 `$routeMiddleware` 属性已包含了 Laravel 目前设置的中间层，你只需要在清单列表中加上一组自定义的键值即可。
 中间层一旦在 HTTP kernel 文件内被定义，你即可在路由选项内使用 `middleware` 键值来指派：
 
 	Route::get('admin/profile', ['middleware' => 'auth', function()

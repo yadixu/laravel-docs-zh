@@ -20,7 +20,7 @@ Laravel 框架使用 [Composer](http://getcomposer.org) 来管理其依赖性。
 
 请确定把 `~/.composer/vendor/bin` 路径放置于您的 `PATH` 里， 这样 `laravel` 执行档就会存在你的系统。
 
-一旦安装完成后，就可以使用 `laravel new` 指令建立一份全新安装的 `Laravel` 专案，例如： `laravel new blog` 将会在当前目录下建立一个叫 `blog` 的目录， 此目录里面存放着全新安装的 Laravel 相关代码，此方法跟其他方法不一样的地方在于是提前安装好所有相关代码，不需要再通过 `composer install` 安装，速度变快许多。
+一旦安装完成后，就可以使用 `laravel new` 命令建立一份全新安装的 `Laravel` 专案，例如： `laravel new blog` 将会在当前目录下建立一个叫 `blog` 的目录， 此目录里面存放着全新安装的 Laravel 相关代码，此方法跟其他方法不一样的地方在于是提前安装好所有相关代码，不需要再通过 `composer install` 安装，速度变快许多。
 
 	laravel new blog
 
@@ -45,7 +45,7 @@ Laravel 框架有一些系统上的需求：
 <a name="configuration"></a>
 ## 设置
 
-在你安装完 Laravel 后，首先需要做的事情是设置一个随机字串到应用程序密钥。假设你安装 Laravel 是通过 Composer，这个密钥会通过 `key:generate` 指令帮你设置完成。
+在你安装完 Laravel 后，首先需要做的事情是设置一个随机字串到应用程序密钥。假设你安装 Laravel 是通过 Composer，这个密钥会通过 `key:generate` 命令帮你设置完成。
 
 通常这个密钥应该有 32 字符长。这个密钥可以被设置在 `.env` 环境文件中。 **如果这要密钥没有被设置的话，你的用户 sessions 和其他的加密数据都是不安全的！**
 

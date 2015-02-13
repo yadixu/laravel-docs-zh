@@ -33,7 +33,7 @@ Laravel Elixir 提供了简洁流畅的 API，让你能够为你的 Laravel 应�
 
 ### Laravel Elixir
 
-最后的步骤就是安装 Elixir！伴随着新安装的 Laravel，你会发现根目录有个名为 `package.json` 的文件。想像它就如同你的 `composer.json` 文件，只是它定义的是 Node 的依赖，而不是 PHP。你可以使用以下的指令进行安装依赖的动作：
+最后的步骤就是安装 Elixir！伴随着新安装的 Laravel，你会发现根目录有个名为 `package.json` 的文件。想像它就如同你的 `composer.json` 文件，只是它定义的是 Node 的依赖，而不是 PHP。你可以使用以下的命令进行安装依赖的动作：
 
     npm install
 
@@ -110,7 +110,7 @@ elixir(function(mix) {
 
 传递给此方法的文件路径均相对于 `resources/css` 目录。
 
-#### 合并样式文件且保存在自订的路径
+#### 合并样式文件且保存在自定义的路径
 
 ```javascript
 elixir(function(mix) {
@@ -261,7 +261,7 @@ elixir(function(mix) {
 
 请注意我们 `扩增（ extend ）` Elixir 的 API 时所使用的第一个参数，稍后我们需要在 Gulpfile 中使用它，以及建立 Gulp 任务所使用的回呼函式。
 
-如果你想要让你的自订任务能被监控，只要在监控器注册就行了。
+如果你想要让你的自定义任务能被监控，只要在监控器注册就行了。
 
 ```javascript
 this.registerWatcher("message", "**/*.php");
@@ -269,7 +269,7 @@ this.registerWatcher("message", "**/*.php");
 
 这行程序的意思是指，当符合正则表达式的文件一经修改，就会触发 `message` 任务。
 
-很好！接着你可以将这行程序写在 Gulpfile 的顶端，或者将它放到自订任务的文件里。如果你选择后者，那么你必须将它加载至你的 Gulpfile，例如：
+很好！接着你可以将这行程序写在 Gulpfile 的顶端，或者将它放到自定义任务的文件里。如果你选择后者，那么你必须将它加载至你的 Gulpfile，例如：
 
 ```javascript
 require("./custom-tasks")

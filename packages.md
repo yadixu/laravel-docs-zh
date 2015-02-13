@@ -40,7 +40,7 @@
 
 	return view('courier::view.name');
 
-当您使用 `loadViewsFrom` 方法，Laravel 实际上为了您的视图注册了**两个位置**。一个是您应用程序的 `resources/views/vendor` 目录，一个是您指定的目录。所以使用我们的例子 `courier` 当要求一个扩展包的视图时，Laravel 会第一时间检查是否有一个开发者自行自订在 `resources/views/vendor/courier` 的视图存在。然而如果还没有这个路径的视图被自订。Laravel 会搜索您在扩展包 `loadViewsFrom` 方法里所指定的视图。这个方法让个别的用户可以方便的自订且覆写您在扩展包里的视图。
+当您使用 `loadViewsFrom` 方法，Laravel 实际上为了您的视图注册了**两个位置**。一个是您应用程序的 `resources/views/vendor` 目录，一个是您指定的目录。所以使用我们的例子 `courier` 当要求一个扩展包的视图时，Laravel 会第一时间检查是否有一个开发者自行自定义在 `resources/views/vendor/courier` 的视图存在。然而如果还没有这个路径的视图被自定义。Laravel 会搜索您在扩展包 `loadViewsFrom` 方法里所指定的视图。这个方法让个别的用户可以方便的自定义且覆写您在扩展包里的视图。
 
 #### 视图的发布
 
@@ -55,7 +55,7 @@
 		]);
 	}
 
-现在当您扩展包的用户使用 Laravel 的指令 `vendor:publish` 您的视图目录将会被复制到所特定的目录
+现在当您扩展包的用户使用 Laravel 的命令 `vendor:publish` 您的视图目录将会被复制到所特定的目录
 
 如果您想要覆写已存在的文件，可以使用 `--force`:
 
@@ -94,7 +94,7 @@
 		__DIR__.'/path/to/config/courier.php' => config_path('courier.php'),
 	]);
 
-现在当扩展包的用户执行 `vendor:publish` 指令，您的文件将会被复制到特定的位置。当然只要设置文件已经被发布，就可以如其他配置文件一样被访问:
+现在当扩展包的用户执行 `vendor:publish` 命令，您的文件将会被复制到特定的位置。当然只要设置文件已经被发布，就可以如其他配置文件一样被访问:
 
 	$value = config('courier.option');
 

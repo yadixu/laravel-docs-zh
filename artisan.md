@@ -8,7 +8,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的指令协助您开发，它是由强大的 Symfony Console 组件所驱动。
+Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的命令协助您开发，它是由强大的 Symfony Console 组件所驱动。
 
 <a name="usage"></a>
 ## 用法
@@ -27,7 +27,7 @@ Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的指令
 
 #### 指定环境配置
 
-您可以指定要使用的环境配置，只要在执行指令时加上 `--env` 即可切换：
+您可以指定要使用的环境配置，只要在执行命令时加上 `--env` 即可切换：
 
 	php artisan migrate --env=local
 

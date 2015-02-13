@@ -17,9 +17,9 @@
 		return 'Hello World';
 	});
 
-#### 建立自订回应
+#### 建立自定义回应
 
-但是以大部分的路由及控制器所执行的动作来说，你需要返回完整的 `Illuminate\Http\Response` 实例或是一个[视图](/docs/5.0/views)。返回一个完整的 `Response` 实例时，你能够自订回应的 HTTP 状态码以及标头。`Response` 实例继承了 `Symfony\Component\HttpFoundation\Response` 类，其提供了很多方法建立 HTTP 回应。
+但是以大部分的路由及控制器所执行的动作来说，你需要返回完整的 `Illuminate\Http\Response` 实例或是一个[视图](/docs/5.0/views)。返回一个完整的 `Response` 实例时，你能够自定义回应的 HTTP 状态码以及标头。`Response` 实例继承了 `Symfony\Component\HttpFoundation\Response` 类，其提供了很多方法建立 HTTP 回应。
 
 	use Illuminate\Http\Response;
 
@@ -142,7 +142,7 @@
 <a name="response-macros"></a>
 ## 回应巨集
 
-如果你想要自订可以在很多路由和控制器重复使用的回应，你可以使用 `Illuminate\Contracts\Routing\ResponseFactory` 实做的方法 `macro`。
+如果你想要自定义可以在很多路由和控制器重复使用的回应，你可以使用 `Illuminate\Contracts\Routing\ResponseFactory` 实做的方法 `macro`。
 
 举个例子，来自[服务提供者的](/docs/5.0/providers) `boot` 方法:
 

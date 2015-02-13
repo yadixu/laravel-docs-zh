@@ -59,9 +59,9 @@
 
 有的时候您可能会想要从数组中对象手动建立分页实体， 您可以根据您的需要透过 `Illuminate\Pagination\Paginator` 或 `Illuminate\Pagination\LengthAwarePaginator` 实体来建立。
 
-#### 自订分页 URL
+#### 自定义分页 URL
 
-您还可以透过 `setPath` 方法自订使用的 URL：
+您还可以透过 `setPath` 方法自定义使用的 URL：
 
 	$users = User::paginate();
 

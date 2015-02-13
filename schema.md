@@ -59,7 +59,7 @@ Laravel 的结构生成器 (`Schema`) 提供一个与数据库无关的数据表
 
 数据表产生器提供多种字段型态可使用，在您建立数据表时也许会用到：
 
-指令  | 功能描述
+命令  | 功能描述
 ------------- | -------------
 `$table->bigIncrements('id');`  |  ID 自动增量，使用相当于「big integer」型态
 `$table->bigInteger('votes');`  |  相当于 BIGINT 型态
@@ -176,7 +176,7 @@ Laravel 的结构生成器 (`Schema`) 提供一个与数据库无关的数据表
 
 或者，您可以独立一行来加入索引，以下是支持的索引类型：
 
-指令  | 功能描述
+命令  | 功能描述
 ------------- | -------------
 `$table->primary('id');`  |  加入主键 (primary key)
 `$table->primary(array('first', 'last'));`  |  加入复合键 (composite keys)
@@ -210,7 +210,7 @@ Laravel 也支持数据表的外键约束：
 
 要移除索引您必须指定索引名称，Laravel 默认有脉络可循的索引名称。简单地链接这些数据表与索引的字段名称和类型。举例如下：
 
-指令  | 功能描述
+命令  | 功能描述
 ------------- | -------------
 `$table->dropPrimary('users_id_primary');`  |  从「users」数据表移除主键
 `$table->dropUnique('users_email_unique');`  |  从「users」数据表移除唯一索引
@@ -221,7 +221,7 @@ Laravel 也支持数据表的外键约束：
 
 要移除 `timestamps`、`nullableTimestamps` 或 `softDeletes` 字段型态，您可以使用以下方法：
 
-指令  | 功能描述
+命令  | 功能描述
 ------------- | -------------
 `$table->dropTimestamps();`  |  移除 **created\_at** 和 **updated\_at** 字段
 `$table->dropSoftDeletes();`  |  移除 **deleted\_at** 字段

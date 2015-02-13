@@ -20,7 +20,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 <a name="creating-commands"></a>
 ## 建立命令
 
-使用 `make:command` 这个 Artisan 指令可以产生一个新的命令类 ：
+使用 `make:command` 这个 Artisan 命令可以产生一个新的命令类 ：
 
 	php artisan make:command PurchasePodcast
 

@@ -138,7 +138,7 @@ Laravel 让你能轻易地定义单一路由来处理控制器中的每一项行
 <a name="restful-resource-controllers"></a>
 ## RESTful 资源控制器
 
-资源控制器可让你无痛建立和资源相关的 RESTful 控制器。例如，你可能希望创建一个控制器，它可用来处理针对你的应用程序所保存相片的 HTTP 请求。我们可以使用 `make:controller` Artisan 指令，快速创建这样的控制器：
+资源控制器可让你无痛建立和资源相关的 RESTful 控制器。例如，你可能希望创建一个控制器，它可用来处理针对你的应用程序所保存相片的 HTTP 请求。我们可以使用 `make:controller` Artisan 命令，快速创建这样的控制器：
 
 	php artisan make:controller PhotoController
 
@@ -295,12 +295,12 @@ Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制
 <a name="route-caching"></a>
 ## 路由缓存
 
-若控制器路由只由你的应用程序专用，你可利用 Laravel 的路由缓存。使用路由缓存，将大幅降低注册应用程序所有路由所需要的时间。某些情况下，路由注册甚至可以快上 100 倍。要产生路由缓存，只要执行 `route:cache` Artisan 指令：
+若控制器路由只由你的应用程序专用，你可利用 Laravel 的路由缓存。使用路由缓存，将大幅降低注册应用程序所有路由所需要的时间。某些情况下，路由注册甚至可以快上 100 倍。要产生路由缓存，只要执行 `route:cache` Artisan 命令：
 
 	php artisan route:cache
 
-就是这样！你的缓存路由文件将会被用来代替 `app/Http/routes.php` 此一文件。记住，若你增加了任何新的路由，你就 必须产生一个新的路由缓存。因此在专案部署时，你可能会希望只要执行 `route:cache` 指令：
+就是这样！你的缓存路由文件将会被用来代替 `app/Http/routes.php` 此一文件。记住，若你增加了任何新的路由，你就 必须产生一个新的路由缓存。因此在专案部署时，你可能会希望只要执行 `route:cache` 命令：
 
-要移除路由缓存文件，但不希望产生新的缓存，可使用 `route:clear` 指令：
+要移除路由缓存文件，但不希望产生新的缓存，可使用 `route:clear` 命令：
 
 	php artisan route:clear

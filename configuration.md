@@ -18,9 +18,9 @@
 
 ### 命名你的应用程序
 
-在安装完成 Laravel 后，你可以「命名」你的应用程序。默认情况下，`app` 的目录是命名在 `App` 下，通过 Composer 使用 [PSR-4 autoloading standard](http://www.php-f通过ig.org/psr/psr-4/) 自动加载。不过，你可以轻松地通过 Artisan 指令 `app:name` 来修改命名空间，以配合你的应用程序名称。
+在安装完成 Laravel 后，你可以「命名」你的应用程序。默认情况下，`app` 的目录是命名在 `App` 下，通过 Composer 使用 [PSR-4 autoloading standard](http://www.php-f通过ig.org/psr/psr-4/) 自动加载。不过，你可以轻松地通过 Artisan 命令 `app:name` 来修改命名空间，以配合你的应用程序名称。
 
-举例来说，假设你的应用程序叫做「 Horsefly 」，你可以从安装的根目录执行下面的指令：
+举例来说，假设你的应用程序叫做「 Horsefly 」，你可以从安装的根目录执行下面的命令：
 
 	php artisan app:name Horsefly
 
@@ -94,20 +94,20 @@ Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vanc
 <a name="configuration-caching"></a>
 ## 设置缓存
 
-为了让你的的应用程序提升一些速度，你可以使用 Artisan 指令 `config:cache`  将所有的配置文件暂存到单一文件。通过指令会将所有的设置选项合并成一个文件，让框架能够快速加载。
+为了让你的的应用程序提升一些速度，你可以使用 Artisan 命令 `config:cache`  将所有的配置文件暂存到单一文件。通过命令会将所有的设置选项合并成一个文件，让框架能够快速加载。
 
-通常来说，你应该将执行 `config:cache` 指令作为部署工作的一部分。
+通常来说，你应该将执行 `config:cache` 命令作为部署工作的一部分。
 
 <a name="maintenance-mode"></a>
 ## 维护模式
 
 当你的应用程序处于维护模式时，所有的路由都会指向一个自定的视图。当你要更新或进行维护作业时，「关闭」整个网站是很简单的。维护模式会检查包含在应用程序的默认中间层堆叠。如果应用程序处于维护模式，`HttpException` 会抛出 503 的状态码。
 
-启用维护模式，只需要执行 Artisan 指令 `down`：
+启用维护模式，只需要执行 Artisan 命令 `down`：
 
 	php artisan down
 
-关闭维护模式，请使用 Artisan 指令 `up`：
+关闭维护模式，请使用 Artisan 命令 `up`：
 
 	php artisan up
 
