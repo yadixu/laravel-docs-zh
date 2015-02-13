@@ -39,7 +39,7 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 <a name="test-environment"></a>
 ## 测试环境
 
-当执行单元测试的时候，Laravel 会自动将环境设置成 `testing`。另外 Laravel 会在测试环境导入 `session` 和 `cache` 的设置文件。当在测试环境里这两个驱动会被设置为 `array` (空数组)，代表在测试的时候没有 session 或 cache 数据将会被保留。视情况你可以任意的建立你需要的测试环境设置。
+当执行单元测试的时候，Laravel 会自动将环境配置成 `testing`。另外 Laravel 会在测试环境导入 `session` 和 `cache` 的设置文件。当在测试环境里这两个驱动会被设置为 `array` (空数组)，代表在测试的时候没有 session 或 cache 数据将会被保留。视情况你可以任意的建立你需要的测试环境配置。
 
 `testing` 环境的变量可以在 `phpunit.xml` 文件中设置。
 
