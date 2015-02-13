@@ -59,7 +59,7 @@
 <a name="csrf-protection"></a>
 ## CSRF 保护
 
-Laravel 提供简易的方法，让您可以保护您的应用程序不受到 [CSRF (跨网站请求伪造)]((http://en.wikipedia.org/wiki/Cross-site_request_forgery) 攻击。跨网站请求伪造是一种恶意的攻击，借以代表经过身份验证的用户执行未经授权的命令。
+Laravel 提供简易的方法，让您可以保护您的应用程序不受到 [CSRF (跨网站请求伪造)](http://en.wikipedia.org/wiki/Cross-site_request_forgery) 攻击。跨网站请求伪造是一种恶意的攻击，借以代表经过身份验证的用户执行未经授权的命令。
 
 Laravel 会自动在每一位用户的 session 中放置随机的 `token` ，这个 token  将被用来确保经过验证的用户是实际发出请求至应用程序的用户：
 
