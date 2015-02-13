@@ -5,7 +5,7 @@
 - [控制器中间层](#controller-middleware)
 - [内隐控制器](#implicit-controllers)
 - [RESTful 资源控制器](#restful-resource-controllers)
-- [相依注入和控制器](#dependency-injection-and-controllers)
+- [依赖注入和控制器](#dependency-injection-and-controllers)
 - [路由缓存](#route-caching)
 
 <a name="introduction"></a>
@@ -208,11 +208,11 @@ DELETE    | /resource/{resource}        | 删除         | resource.destroy
 	Route::resource('photos', 'PhotoController');
 
 <a name="dependency-injection-and-controllers"></a>
-## 相依注入和控制器
+## 依赖注入和控制器
 
 #### 建构式注入
 
-Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制器。因此，你可以在控制器所需要的建构式中，对相依作任何的类型限制。
+Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制器。因此，你可以在控制器所需要的建构式中，对依赖作任何的类型限制。
 
 	<?php namespace App\Http\Controllers;
 
@@ -243,7 +243,7 @@ Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制
 
 #### 方法注入
 
-除了建构器注入外，你也可以对控制器方法的相依作类型限制。例如，让我们对某个方法的 `Request` 实例作类型限制：
+除了建构器注入外，你也可以对控制器方法的依赖作类型限制。例如，让我们对某个方法的 `Request` 实例作类型限制：
 
 	<?php namespace App\Http\Controllers;
 
@@ -267,7 +267,7 @@ Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制
 
 	}
 
-如果你的控制器方法预期由路由参数取得输入，只要在其他的相依之后列出路由参数即可：
+如果你的控制器方法预期由路由参数取得输入，只要在其他的依赖之后列出路由参数即可：
 
 	<?php namespace App\Http\Controllers;
 

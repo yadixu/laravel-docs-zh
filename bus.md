@@ -55,7 +55,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 
 	}
 	
-`handle` 方法也可以使用类型暗示相依，并且借由 [IoC 容器](/docs/5.0/container) 机制自动进行依赖注入。例如：
+`handle` 方法也可以使用类型暗示依赖，并且借由 [IoC 容器](/docs/5.0/container) 机制自动进行依赖注入。例如：
 
 		/**
 		 * Execute the command.
@@ -81,7 +81,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 		);
 	}
 
-Command bus 将会负责执行命令和调用 IoC 容器来将所需的相依注入到 `handle` 方法。
+Command bus 将会负责执行命令和调用 IoC 容器来将所需的依赖注入到 `handle` 方法。
 
 你也可以将 `Illuminate\Foundation\Bus\DispatchesCommands` trait 加入任何要使用的类别内。若你想要在任何类别的建构子内接收 command bus 的实体 ，你可以使用类型暗示 `Illuminate\Contracts\Bus\Dispatcher` 这个接口。
 最后，你也可以使用 `Bus` facade 来快速派发命令：
@@ -142,7 +142,7 @@ Command bus 不仅仅作为当下请求的同步作业，也可以作为 Laravel
 
 	}
 
-命令管线是透过 IoC 容器来达成，所以请自行在建构子类型暗示所需的相依。
+命令管线是透过 IoC 容器来达成，所以请自行在建构子类型暗示所需的依赖。
 
 你甚至可以定义一个 `闭包` 来作为命令管线：
 

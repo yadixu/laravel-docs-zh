@@ -156,7 +156,7 @@
 
 在视图被渲染之前，视图组件的 `compose` 方法就会被调用，并且传入一个 `Illuminate\Contracts\View\View` 实例。你可以使用 `with` 方法来把数据绑订到 `view`。
 
-> **备注：** 所有的视图组件会被 [服务容器 \(service container\)](/docs/5.0/container) 解析，所以你需要在视图组件的建构子类型限制你所需的任何相依参数。
+> **备注：** 所有的视图组件会被 [服务容器 \(service container\)](/docs/5.0/container) 解析，所以你需要在视图组件的建构子类型限制你所需的任何依赖参数。
 
 #### 在视图组件内使用万用字符
 

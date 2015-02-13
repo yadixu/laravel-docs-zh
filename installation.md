@@ -7,7 +7,7 @@
 <a name="install-composer"></a>
 ## 安装 Composer
 
-Laravel 框架使用 [Composer](http://getcomposer.org) 来管理其相依性。所以，在你使用 Laravel 之前，你必须确认你在你电脑上是否安装了 Composer。
+Laravel 框架使用 [Composer](http://getcomposer.org) 来管理其依赖性。所以，在你使用 Laravel 之前，你必须确认你在你电脑上是否安装了 Composer。
 
 <a name="install-laravel"></a>
 ## 安装 Laravel
