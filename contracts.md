@@ -17,7 +17,7 @@ Laravel 所有的 contracts 都放在[各自的 Github repository](https://githu
 <a name="why-contracts"></a>
 ## 为什么用 Contracts？
 
-你可能有很多关于 contracts 的问题。像是为什么要使用接口？使用接口会不会变的更复杂？
+你可能有很多关于 contracts 的问题。如为什么要使用接口？使用接口会不会变的更复杂？
 
 让我们用下面的标题来解释为什么要使用接口：低耦合和简单性。
 

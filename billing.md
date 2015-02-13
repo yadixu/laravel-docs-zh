@@ -52,7 +52,7 @@ Laravel Cashier 提供口语化，流畅的接口和 [Stripe](https://stripe.com
 
 #### Stripe Key
 
-最后，在初始化文件或服务注册里（像是 `AppServiceProvider` ）加入 Stripe key：
+最后，在初始化文件或服务注册里（如 `AppServiceProvider` ）加入 Stripe key：
 
 	User::setStripeKey('stripe-key');
 

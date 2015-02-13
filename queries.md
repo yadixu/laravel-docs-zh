@@ -171,7 +171,7 @@
 
 #### 群组化参数
 
-有些时候你需要更高级的 where 子句，像是「where exists」或嵌套的群组化参数。Laravel 的查找产生器也可以处理这样的情况：
+有些时候你需要更高级的 where 子句，如「where exists」或嵌套的群组化参数。Laravel 的查找产生器也可以处理这样的情况：
 
 	DB::table('users')
 	            ->where('name', '=', 'John')
@@ -207,7 +207,7 @@
 <a name="aggregates"></a>
 ## 聚合
 
-查找产生器也提供各式各样的聚合方法，像是 `count`、`max`、`min`、`avg` 及 `sum`。
+查找产生器也提供各式各样的聚合方法，如 `count`、`max`、`min`、`avg` 及 `sum`。
 
 #### 使用聚合方法
 

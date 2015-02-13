@@ -140,4 +140,4 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 
 当开发发送电子邮件的应用程序时，我们通常希望不要真的从本地端或开发环境发送邮件。您可以使用 `Mail::pretend` 方法或将 `config/mail.php` 配置文件中的 `pretend` 选项配置为 `true`。在 `pretend`  模式下，消息会改而写入应用程序的日志文件，而不会真的发送给收件者。
 
-若您想要实际阅览测试的邮件，可考虑使用像是 [MailTrap](https://mailtrap.io) 的服务。
+若您想要实际阅览测试的邮件，可考虑使用如 [MailTrap](https://mailtrap.io) 的服务。

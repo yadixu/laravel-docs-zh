@@ -65,7 +65,7 @@
 <a name="database-seeding"></a>
 ## 数据填充
 
-Laravel 可以简单的使用 seed 类，填充测试数据到数据库。所有的 seed 类放在 `database/seeds` 目录下。可以使用任何你想要的类名称，但是应该遵守某些大小写规范，像是 `UserTableSeeder` 之类。默认已经有一个 `DatabaseSeeder` 类。在这个类里，使用 `call` 方法执行其他的 seed 类，让你控制填充的顺序。
+Laravel 可以简单的使用 seed 类，填充测试数据到数据库。所有的 seed 类放在 `database/seeds` 目录下。可以使用任何你想要的类名称，但是应该遵守某些大小写规范，如 `UserTableSeeder` 之类。默认已经有一个 `DatabaseSeeder` 类。在这个类里，使用 `call` 方法执行其他的 seed 类，让你控制填充的顺序。
 
 #### Seed 类例子
 
