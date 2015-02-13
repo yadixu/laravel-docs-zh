@@ -129,12 +129,12 @@ Cache 类继承基本的 `Facade` 类并定义一个 `getFacadeAccessor()` 方�
 <a name="mocking-facades"></a>
 ## 仿真 Facades
 
-单元测试是为什么现在 facades 采用这样的工作方式的主要因素。事实上，可测试性甚至是 facades 存在的主要理由。想要获得更多信息，请查看文文件的 [仿真 facades](/docs/testing#mocking-facades) 章节。
+单元测试是为什么现在 facades 采用这样的工作方式的主要因素。事实上，可测试性甚至是 facades 存在的主要理由。想要获得更多信息，请查看文档的 [仿真 facades](/docs/testing#mocking-facades) 章节。
 
 <a name="facade-class-reference"></a>
 ## Facade 类参考
 
-你将会在下面找到每一个 facade 和它的基础类。这是个可以从一个给定的 facade 根源快速地深入 API 文文件的有用工具。可应用的 [IoC 绑定](/docs/5.0/container) 关键字也包含在里面。
+你将会在下面找到每一个 facade 和它的基础类。这是个可以从一个给定的 facade 根源快速地深入 API 文档的有用工具。可应用的 [IoC 绑定](/docs/5.0/container) 关键字也包含在里面。
 
 Facade  |  Class  |  IoC Binding
 ------------- | ------------- | -------------

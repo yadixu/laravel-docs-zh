@@ -87,7 +87,7 @@ Laravel Cashier 提供口语化，流畅的接口和 [Stripe](https://stripe.com
 		'email' => $email, 'description' => 'Our First Customer'
 	]);
 
-想知道更多 Stripe 支持的额外字段，瞧瞧 Stripe 的在线文文件 [建立客户](https://stripe.com/docs/api#create_customer)。
+想知道更多 Stripe 支持的额外字段，瞧瞧 Stripe 的在线文档 [建立客户](https://stripe.com/docs/api#create_customer)。
 
 <a name="no-card-up-front"></a>
 ## 免信用卡试用

@@ -41,7 +41,7 @@
 		}
 	});
 
-借由在 `Closure` 中返回 `false` 来停止处理接下来的数据列：
+通过在 `Closure` 中返回 `false` 来停止处理接下来的数据列：
 
 	DB::table('users')->chunk(100, function($users)
 	{

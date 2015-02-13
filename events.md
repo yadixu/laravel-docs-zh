@@ -59,7 +59,7 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 
 #### 停止继续传递事件
 
-有时候你会希望停止继续传递事件到其他监听器。你可以借由从处理程序返回 `false` 来做到这件事：
+有时候你会希望停止继续传递事件到其他监听器。你可以通过从处理程序返回 `false` 来做到这件事：
 
 	Event::listen('App\Events\PodcastWasPurchased', function($event)
 	{

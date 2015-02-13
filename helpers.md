@@ -152,7 +152,7 @@
 
 ### array_sort
 
-`array_sort` 函数借由给定闭包的结果来排序数组。
+`array_sort` 函数通过给定闭包的结果来排序数组。
 
 	$array = array(
 		array('name' => 'Jill'),

@@ -15,7 +15,7 @@ Laravel 的 `Lang` facade 提供方便的方法来取得多种语言的字串，
 <a name="language-files"></a>
 ## 语言文件
 
-语言字串保存在 `resources/lang` 文文件夹的文文件里。在这个文文件夹里应该要给每一个应用进程支持的语言一个子文文件夹。
+语言字串保存在 `resources/lang` 文件夹的文档里。在这个文件夹里应该要给每一个应用进程支持的语言一个子文件夹。
 
 	/resources
 		/lang
@@ -101,9 +101,9 @@ Laravel 的 `Lang` facade 提供方便的方法来取得多种语言的字串，
 <a name="validation"></a>
 ## 验证
 
-要验证本地化的错误和消息，可以看一下<a href="/docs/5.0/validation#localization">验证的文文件</a>.
+要验证本地化的错误和消息，可以看一下<a href="/docs/5.0/validation#localization">验证的文档</a>.
 
 <a name="overriding-package-language-files"></a>
 ## 覆写扩展包的语言文件
 
-许多扩展包附带它们自有的语句。你可以借由放置文文件在 `resources/lang/packages/{locale}/{package}` 文文件夹来覆写它们，而不是改变扩展包的核心文文件来调整这些句子。所以，举个例子，如果你需要覆写 `skyrim/hearthfire` 扩展包在 `messages.php` 的英文语句，你可以放置语言文件在： `resources/lang/packages/en/hearthfire/messages.php`。你可以只定义你想要覆写的语句在这个文文件里，任何你没有覆写的语句将会仍从扩展包的语言文件加载。
+许多扩展包附带它们自有的语句。你可以通过放置文档在 `resources/lang/packages/{locale}/{package}` 文件夹来覆写它们，而不是改变扩展包的核心文档来调整这些句子。所以，举个例子，如果你需要覆写 `skyrim/hearthfire` 扩展包在 `messages.php` 的英文语句，你可以放置语言文件在： `resources/lang/packages/en/hearthfire/messages.php`。你可以只定义你想要覆写的语句在这个文档里，任何你没有覆写的语句将会仍从扩展包的语言文件加载。

@@ -133,7 +133,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 `retrieveByCredentials` 方法接收当尝试登录应用程序时，传递到 `Auth::attempt` 方法的凭证数组。这个方法应该接着「查找」底层使用的永久存储，找到符合凭证的用户。这个方法通常会对 `$credentials['username']` 用「 where 」条件查找。 **这个方法不应该尝试做任何密码验证或认证。**
 
-`validateCredentials` 方法应该借由比较给定的 `$user` 与 `$credentials` 来验证用户。举例来说，这个方法可以比较 `$user->getAuthPassword()` 字串跟 `Hash::make` 后的 `$credentials['password']`。
+`validateCredentials` 方法应该通过比较给定的 `$user` 与 `$credentials` 来验证用户。举例来说，这个方法可以比较 `$user->getAuthPassword()` 字串跟 `Hash::make` 后的 `$credentials['password']`。
 
 现在我们已经看过 `UserProvider` 的每个方法，接着来看一下 `Authenticatable`。记住，提供者应该从 `retrieveById` 和 `retrieveByCredentials` 方法返回这个接口的实现：
 
@@ -161,7 +161,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 <a name="ioc-based-extension"></a>
 ## 基于 IoC 的扩展
 
-几乎每个 Laravel 框架引入的服务提供者都会绑定对象到 IoC 容器中。你可以在 `config/app.php` 配置文件中找到应用程序的服务提供者清单。如果你有时间，你应该浏览过这里面每一个提供者的源代码。借由这样做，你将会更了解每一个提供者添加什么到框架，以及用什么键值来绑定各种服务到 IoC 容器。
+几乎每个 Laravel 框架引入的服务提供者都会绑定对象到 IoC 容器中。你可以在 `config/app.php` 配置文件中找到应用程序的服务提供者清单。如果你有时间，你应该浏览过这里面每一个提供者的源代码。通过这样做，你将会更了解每一个提供者添加什么到框架，以及用什么键值来绑定各种服务到 IoC 容器。
 
 例如， `HashServiceProvider` 绑定 `hash` 做为键值到 IoC 容器，它将解析成 `Illuminate\Hashing\BcryptHasher` 实例。你可以在应用程序中覆写这个 IoC 绑定，轻松地扩展并覆写这个类。例如：
 
