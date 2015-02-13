@@ -20,7 +20,7 @@ Laravel 框架已经内置一些中间层，包括维护、身份验证、CSRF �
 
 	php artisan make:middleware OldMiddleware
 
-此指令将会 在 `app/Http/Middleware` 目录内置立一个名称为 `OldMiddleware` 的类别。在这个中间层内我们只允许 `年龄` 大于 200 的才能访问路由，否则，我们会将用户重新导向 "home" 的 URI 。
+此指令将会 在 `app/Http/Middleware` 目录内置立一个名称为 `OldMiddleware` 的类。在这个中间层内我们只允许 `年龄` 大于 200 的才能访问路由，否则，我们会将用户重新导向 "home" 的 URI 。
 
 	<?php namespace App\Http\Middleware;
 
@@ -53,7 +53,7 @@ HTTP 请求在实际碰触到应用程序之前，最好是可以层层通过许
 
 ### 全局中间层
 
-若是希望中间层被所有的 HTTP 请求给执行，只要将中间层的类别加入到 `app/Http/Kernel.php` 的 `$middleware` 属性清单列表中。
+若是希望中间层被所有的 HTTP 请求给执行，只要将中间层的类加入到 `app/Http/Kernel.php` 的 `$middleware` 属性清单列表中。
 
 ### 指派中间层给路由
 

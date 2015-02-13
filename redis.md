@@ -56,7 +56,7 @@
 
 	$values = $redis->command('lrange', array(5, 10));
 
-若你只想对默认服务器下命令，可以使用 `Redis` 类别的静态魔术方法：
+若你只想对默认服务器下命令，可以使用 `Redis` 类的静态魔术方法：
 
 	Redis::set('name', 'Taylor');
 

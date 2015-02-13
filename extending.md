@@ -9,16 +9,16 @@
 <a name="managers-and-factories"></a>
 ## 管理者和工厂
 
-Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。这些类别包括缓存、session 、认证和队列组件。管理者类别负责基于应用程序的设置建立一个特定的驱动实作。例如，`CacheManager` 类别可以建立 APC 、 Memcached 、文件和各种其他的缓存驱动实作。
+Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这些类包括缓存、session 、认证和队列组件。管理者类负责基于应用程序的设置建立一个特定的驱动实作。例如，`CacheManager` 类可以建立 APC 、 Memcached 、文件和各种其他的缓存驱动实作。
 
 这些管理者都拥有 `extend` 方法，可以简单地用它来注入新的驱动解析功能到管理者。我们将会在下面的例子，随着如何注入客制化驱动支持给它们，涵盖这些管理者的内容。
 
-> **注意：** 建议花点时间来探索 Laravel 附带的各种 `Manager` 类别，例如：`CacheManager` 和 `SessionManager`。看过这些类别将会让你更彻底了解 Laravel 表面下是如何运作。所有的管理者类别继承  `Illuminate\Support\Manager` 基底类别，它提供一些有用、常见的功能给每一个管理者。
+> **注意：** 建议花点时间来探索 Laravel 附带的各种 `Manager` 类，例如：`CacheManager` 和 `SessionManager`。看过这些类将会让你更彻底了解 Laravel 表面下是如何运作。所有的管理者类继承  `Illuminate\Support\Manager` 基底类，它提供一些有用、常见的功能给每一个管理者。
 
 <a name="cache"></a>
 ## 缓存
 
-为了扩展 Laravel 缓存功能，我们将会使用 `CacheManager` 的 `extend` 方法，这方法可以用来绑定一个客制化驱动解析器到管理者，并且是全部的管理者类别通用的。例如，注册一个新的缓存驱动名为「mongo」，我们将执行以下操作：
+为了扩展 Laravel 缓存功能，我们将会使用 `CacheManager` 的 `extend` 方法，这方法可以用来绑定一个客制化驱动解析器到管理者，并且是全部的管理者类通用的。例如，注册一个新的缓存驱动名为「mongo」，我们将执行以下操作：
 
 	Cache::extend('mongo', function($app)
 	{
@@ -111,7 +111,7 @@ Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。�
 		// 返回 Illuminate\Contracts\Auth\UserProvider 的实作
 	});
 
-`UserProvider` 实作只负责从永久存储系统抓取 `Illuminate\Contracts\Auth\Authenticatable` 实作，存储系统例如： MySQL 、 Riak ，等等。这两个接口让 Laravel 认证机制无论用户数据如何保存或用什么种类的类别来代表它都能继续运作。
+`UserProvider` 实作只负责从永久存储系统抓取 `Illuminate\Contracts\Auth\Authenticatable` 实作，存储系统例如： MySQL 、 Riak ，等等。这两个接口让 Laravel 认证机制无论用户数据如何保存或用什么种类的类来代表它都能继续运作。
 
 让我们来看一下 `UserProvider` contract ：
 
@@ -147,7 +147,7 @@ Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。�
 
 	}
 
-这个接口很简单。 The `getAuthIdentifier` 方法应该返回用户的「主键」。在 MySQL 后台，同样，这将会是个自动递增的主键。`getAuthPassword` 应该返回用户哈希过的密码。这个接口让认证系统可以与任何用户类别一起运作，无论你使用什么 ORM 或保存抽象层。默认，Laravel 包含一个实作这个接口的 `User` 类别在 `app` 文件夹里，所以你可以参考这个类别当作实作的例子。
+这个接口很简单。 The `getAuthIdentifier` 方法应该返回用户的「主键」。在 MySQL 后台，同样，这将会是个自动递增的主键。`getAuthPassword` 应该返回用户哈希过的密码。这个接口让认证系统可以与任何用户类一起运作，无论你使用什么 ORM 或保存抽象层。默认，Laravel 包含一个实作这个接口的 `User` 类在 `app` 文件夹里，所以你可以参考这个类当作实作的例子。
 
 最后，当我们已经实作了 `UserProvider`，我们准备好用 `Auth` facade 来注册扩展：
 
@@ -163,7 +163,7 @@ Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。�
 
 几乎每个 Laravel 框架引入的服务提供者都会绑定对象到 IoC 容器中。你可以在 `config/app.php` 配置文件中找到应用程序的服务提供者清单。如果你有时间，你应该浏览过这里面每一个提供者的源代码。借由这样做，你将会更了解每一个提供者添加什么到框架，以及用什么键值来绑定各种服务到 IoC 容器。
 
-例如， `HashServiceProvider` 绑定 `hash` 做为键值到 IoC 容器，它将解析成 `Illuminate\Hashing\BcryptHasher` 实例。你可以在应用程序中覆写这个 IoC 绑定，轻松地扩展并覆写这个类别。例如：
+例如， `HashServiceProvider` 绑定 `hash` 做为键值到 IoC 容器，它将解析成 `Illuminate\Hashing\BcryptHasher` 实例。你可以在应用程序中覆写这个 IoC 绑定，轻松地扩展并覆写这个类。例如：
 
 	<?php namespace App\Providers;
 
@@ -181,6 +181,6 @@ Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。�
 
 	}
 
-要注意的是这个类别扩展 `HashServiceProvider`，不是默认的 `ServiceProvider` 基底类别。当你扩展了服务提供者，在 `config/app.php` 配置文件把 `HashServiceProvider` 换成你扩展的提供者名称。
+要注意的是这个类扩展 `HashServiceProvider`，不是默认的 `ServiceProvider` 基底类。当你扩展了服务提供者，在 `config/app.php` 配置文件把 `HashServiceProvider` 换成你扩展的提供者名称。
 
-这是被绑定在容器的所有核心类别的一般扩展方法。实际上，每个以这种方式绑定在容器的核心类别都可以被覆写。再次强调，看过每个框架引入的服务提供者将会使你熟悉：每个类别被绑在容器的哪里、它们是用什么键值绑定。这是个好方法可以了解更多关于 Laravel 如何结合它们。
+这是被绑定在容器的所有核心类的一般扩展方法。实际上，每个以这种方式绑定在容器的核心类都可以被覆写。再次强调，看过每个框架引入的服务提供者将会使你熟悉：每个类被绑在容器的哪里、它们是用什么键值绑定。这是个好方法可以了解更多关于 Laravel 如何结合它们。

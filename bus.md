@@ -20,11 +20,11 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 <a name="creating-commands"></a>
 ## 建立命令
 
-使用 `make:command` 这个 Artisan 指令可以产生一个新的命令类别 ：
+使用 `make:command` 这个 Artisan 指令可以产生一个新的命令类 ：
 
 	php artisan make:command PurchasePodcast
 
-新产生的类别会被放在 `app/Commands` 目录中，命令默认包含了两个方法：构造器和 `handle` 。当然，`handle` 方法执行命令时，你可以使用构造器传入相关的对象到这个命令中。例如：
+新产生的类会被放在 `app/Commands` 目录中，命令默认包含了两个方法：构造器和 `handle` 。当然，`handle` 方法执行命令时，你可以使用构造器传入相关的对象到这个命令中。例如：
 
 	class PurchasePodcast extends Command implements SelfHandling {
 
@@ -83,7 +83,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 
 Command bus 将会负责执行命令和调用 IoC 容器来将所需的依赖注入到 `handle` 方法。
 
-你也可以将 `Illuminate\Foundation\Bus\DispatchesCommands` trait 加入任何要使用的类别内。若你想要在任何类别的构造器内接收 command bus 的实体 ，你可以使用类型暗示 `Illuminate\Contracts\Bus\Dispatcher` 这个接口。
+你也可以将 `Illuminate\Foundation\Bus\DispatchesCommands` trait 加入任何要使用的类内。若你想要在任何类的构造器内接收 command bus 的实体 ，你可以使用类型暗示 `Illuminate\Contracts\Bus\Dispatcher` 这个接口。
 最后，你也可以使用 `Bus` facade 来快速派发命令：
 
 		Bus::dispatch(
@@ -96,7 +96,7 @@ Command bus 将会负责执行命令和调用 IoC 容器来将所需的依赖注
 
 	$this->dispatchFrom('Command\Class\Name', $request);
 
-这个方法将会检查这个被传入的命令类别的构造器，并取出来自于 HTTP 请求的变量(或其他任何的 `ArrayAccess` 对象) 并将其填入构造器，所以，若命令类在构造器接受 `firstName` 参数，command bus 将会试图从 HTTP 请求取出 `firstName` 参数。
+这个方法将会检查这个被传入的命令类的构造器，并取出来自于 HTTP 请求的变量(或其他任何的 `ArrayAccess` 对象) 并将其填入构造器，所以，若命令类在构造器接受 `firstName` 参数，command bus 将会试图从 HTTP 请求取出 `firstName` 参数。
 
 `dispatchFrom` 方法的第三个参数允许你传入数组，那些不在 HTTP 请求内的参数可用这个数组来填入构造器：
 
@@ -113,7 +113,7 @@ Command bus 不仅仅作为当下请求的同步作业，也可以作为 Laravel
 
 正如你所见的，这让命令增加了一点功能，即 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口和`SerializesModels` trait 。 他们指示 command bus 使用队列来执行命令，以及优雅的串行化和反串行化任何在命令内被保存的 Eloquent 模型。
 
-若你想将已存在的命令转换为队列命令，只需手动修改让命令类别实作 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口，它不包含方法，而是仅仅给调用员作为"标记接口"。
+若你想将已存在的命令转换为队列命令，只需手动修改让命令类实作 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口，它不包含方法，而是仅仅给调用员作为"标记接口"。
 
 然后，一如往常撰写你的命令，当你将命令派发到 bus，它将会自动将命令丢到背景队列执行，没有比这个更容易的方法了。
 
@@ -122,7 +122,7 @@ Command bus 不仅仅作为当下请求的同步作业，也可以作为 Laravel
 <a name="command-pipeline"></a>
 ## 命令管线
 
-在命令被派发到处理器之前，你也可以将它借由"命令管线"传递到其他类别去。命令管线操作上像是 HTTP 中间层，除了是专门来给命令用的，例如，一个命令管线能够在数据库交易期间包装全部的命令操作，或者仅作为执行纪录。
+在命令被派发到处理器之前，你也可以将它借由"命令管线"传递到其他类去。命令管线操作上像是 HTTP 中间层，除了是专门来给命令用的，例如，一个命令管线能够在数据库交易期间包装全部的命令操作，或者仅作为执行纪录。
 
 要将管线添加到 bus，只要从`App\Providers\BusServiceProvider::boot` 方法调用调用员的`pipeThrough` 方法：
 

@@ -232,7 +232,7 @@ elixir(function(mix) {
 
     gulp watch
 
-#### 监控测试以及 PHP 类别的变更
+#### 监控测试以及 PHP 类的变更
 
     gulp tdd
 

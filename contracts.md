@@ -61,9 +61,9 @@ Laravel 所有的 contracts 都放在[各自的 Github repository](https://githu
 
 	}
 
-在上面的类别里，代码跟缓存实作之间是强耦合。理由是它会依赖于扩展包库（ package vendor ）的特定缓存类别。一旦这个扩展包的 API 更改了，我们的代码也要跟着改变。
+在上面的类里，代码跟缓存实作之间是强耦合。理由是它会依赖于扩展包库（ package vendor ）的特定缓存类。一旦这个扩展包的 API 更改了，我们的代码也要跟着改变。
 
-同样的，如果想要将底层的缓存技术（比如 Memcached ）抽换成另一种（像 Redis ），又一次的我们必须修改这个 repository 类别。我们的 repository 不应该知道这么多关于谁提供了数据，或是如何提供等等细节。
+同样的，如果想要将底层的缓存技术（比如 Memcached ）抽换成另一种（像 Redis ），又一次的我们必须修改这个 repository 类。我们的 repository 不应该知道这么多关于谁提供了数据，或是如何提供等等细节。
 
 **比起上面的做法，我们可以改用一个简单、和扩展包无关的接口来改进程式码：**
 
@@ -92,7 +92,7 @@ Laravel 所有的 contracts 都放在[各自的 Github repository](https://githu
 
 当所有的 Laravel 服务都简洁的使用简单的接口定义，就能够很简单的决定一个服务需要提供的功能。** 可以将 contracts 视为说明框架特色的简洁文档。**
 
-除此之外，当你依赖简洁的接口，你的代码能够很简单的被了解和维护。比起搜索一个大型复杂的类别里有哪些可用的方法，你有一个简单，干净的接口可以参考。
+除此之外，当你依赖简洁的接口，你的代码能够很简单的被了解和维护。比起搜索一个大型复杂的类里有哪些可用的方法，你有一个简单，干净的接口可以参考。
 
 <a name="contract-reference"></a>
 ## Contract 参考
@@ -136,7 +136,7 @@ Contract  |  Laravel 4.x Facade
 <a name="how-to-use-contracts"></a>
 ## 如何使用 Contracts
 
-所以，要如何实作一个 contract？实际上非常的简单。很多 Laravel 的类别都是经由 [service container](/docs/5.0/container) 解析，包含控制器，事件监听，过滤器，队列任务，甚至是闭包。所以，要实作一个 contract，你可以在类别的构造器使用「类型提示」解析类别。例如，看下面的事件处理程序：
+所以，要如何实作一个 contract？实际上非常的简单。很多 Laravel 的类都是经由 [service container](/docs/5.0/container) 解析，包含控制器，事件监听，过滤器，队列任务，甚至是闭包。所以，要实作一个 contract，你可以在类的构造器使用「类型提示」解析类。例如，看下面的事件处理程序：
 
 	<?php namespace App\Handlers\Events;
 
@@ -175,4 +175,4 @@ Contract  |  Laravel 4.x Facade
 
 	}
 
-当事件监听被解析时，服务容器会经由类别构造器参数的类型提示，注入适当的值。要知道怎么注册更多服务容器，参考[这个文档](/docs/5.0/container)。
+当事件监听被解析时，服务容器会经由类构造器参数的类型提示，注入适当的值。要知道怎么注册更多服务容器，参考[这个文档](/docs/5.0/container)。

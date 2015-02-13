@@ -16,11 +16,11 @@
 
 	$name = Request::input('name');
 
-切记，如果你在一个命名空间中，你必须导入 `Request` facade，接着在类别的上方宣告 `use Request;`。
+切记，如果你在一个命名空间中，你必须导入 `Request` facade，接着在类的上方宣告 `use Request;`。
 
 ### 透过依赖注入
 
-要透过依赖注入的方式取得 HTTP 请求的实例，你必须在控制器中的构造函数或方法对该类别使用类型提示。当前请求的实例将会自动由[服务容器](/docs/5.0/master/container)注入：
+要透过依赖注入的方式取得 HTTP 请求的实例，你必须在控制器中的构造函数或方法对该类使用类型提示。当前请求的实例将会自动由[服务容器](/docs/5.0/master/container)注入：
 
 	<?php namespace App\Http\Controllers;
 
@@ -173,7 +173,7 @@ _虽然说是「永远」，但真正的意思是五年。_
 		//
 	}
 
-`file` 方法返回的对象是 `Symfony\Component\HttpFoundation\File\UploadedFile` 的实例，`UploadedFile` 继承了 PHP 的 `SplFileInfo` 类别并且提供了很多和文件交互的方法。
+`file` 方法返回的对象是 `Symfony\Component\HttpFoundation\File\UploadedFile` 的实例，`UploadedFile` 继承了 PHP 的 `SplFileInfo` 类并且提供了很多和文件交互的方法。
 
 #### 确认上传的文件是否有效
 
@@ -195,7 +195,7 @@ _虽然说是「永远」，但真正的意思是五年。_
 <a name="other-request-information"></a>
 ## 其他的请求信息
 
-`Request` 类别提供很多方法检查 HTTP 请求，它继承了 `Symfony\Component\HttpFoundation\Request` 类别，下面是一些使用方式。
+`Request` 类提供很多方法检查 HTTP 请求，它继承了 `Symfony\Component\HttpFoundation\Request` 类，下面是一些使用方式。
 
 #### 取得请求 URI
 

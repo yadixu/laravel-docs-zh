@@ -7,9 +7,9 @@
 <a name="basic-usage"></a>
 ## 基本用法
 
-Laravel 的 event 功能提供一个简单的观察者实作，允许你在应用程序里订阅与监听事件。事件类别通常被保存在 `app/Events` 目录下，而它们的处理程序则被保存在 `app/Handlers/Events` 目录下。
+Laravel 的 event 功能提供一个简单的观察者实作，允许你在应用程序里订阅与监听事件。事件类通常被保存在 `app/Events` 目录下，而它们的处理程序则被保存在 `app/Handlers/Events` 目录下。
 
-你可以使用 Artisan 命令行工具产生一个新的事件类别：
+你可以使用 Artisan 命令行工具产生一个新的事件类：
 
 	php artisan make:event PodcastWasPurchased
 
@@ -50,7 +50,7 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 
 #### 监听器闭包
 
-你甚至可以不需对事件建立对应的处理类别。举个例子，在你的 `EventServiceProvider` 的 `boot` 方法里，你可以做下面这件事：
+你甚至可以不需对事件建立对应的处理类。举个例子，在你的 `EventServiceProvider` 的 `boot` 方法里，你可以做下面这件事：
 
 	Event::listen('App\Events\PodcastWasPurchased', function($event)
 	{
@@ -75,7 +75,7 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 
 	php artisan handler:event SendPurchaseConfirmation --event=PodcastWasPurchased --queued
 
-这将会产生一个实作了 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口的处理程序类别。这样就可以了！现在当这个处理程序因为事件发生被调用，它将会被事件配送器自动地排进队列。
+这将会产生一个实作了 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口的处理程序类。这样就可以了！现在当这个处理程序因为事件发生被调用，它将会被事件配送器自动地排进队列。
 
 当处理程序被队列执行，如果没有例外被丢出，在执行后该队列中的任务将会自动被删除。你也可以手动取用队列中的任务的 `delete` 和 `release` 方法。队列处理程序默认会引入的 `Illuminate\Queue\InteractsWithQueue` trait，让你可以取用这些方法：
 
@@ -87,14 +87,14 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 		}
 	}
 
-如果你想要把一个已存在的处理程序转换成一个队列的处理程序，简单地手动添加 `ShouldBeQueued` 接口到类别。
+如果你想要把一个已存在的处理程序转换成一个队列的处理程序，简单地手动添加 `ShouldBeQueued` 接口到类。
 
 <a name="event-subscribers"></a>
 ## 事件订阅者
 
 #### 定义事件订阅者
 
-事件订阅者是个可以从类别自身里面订阅多个事件的类别。订阅者应该定义 `subscribe` 方法，事件配送器实体将会被传递到这个方法：
+事件订阅者是个可以从类自身里面订阅多个事件的类。订阅者应该定义 `subscribe` 方法，事件配送器实体将会被传递到这个方法：
 
 	class UserEventHandler {
 
@@ -131,7 +131,7 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 
 #### 注册事件订阅者
 
-当定义了订阅者后，可以使用 `Event` 类别注册。
+当定义了订阅者后，可以使用 `Event` 类注册。
 
 	$subscriber = new UserEventHandler;
 

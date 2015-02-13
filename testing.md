@@ -19,9 +19,9 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 <a name="defining-and-running-tests"></a>
 ## 定义并执行测试
 
-要建立一个测试案例，只要在 `tests` 文件夹建立新的测试文件。测试类别必须继承自 `TestCase`，接着你可以如你平常使用 PHPUnit 一般去定义测试方法。
+要建立一个测试案例，只要在 `tests` 文件夹建立新的测试文件。测试类必须继承自 `TestCase`，接着你可以如你平常使用 PHPUnit 一般去定义测试方法。
 
-#### 测试类别例子
+#### 测试类例子
 
 	class FooTest extends TestCase {
 
@@ -66,7 +66,7 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 
 	$response = $this->action('GET', 'UserController@profile', array('user' => 1));
 
-> **注意:** 当使用 `action` 方法的时候，你不需要指定完整的控制器命名空间。只需要指定 `App\Http\Controllers` 命名空间后面的类别名称部分。
+> **注意:** 当使用 `action` 方法的时候，你不需要指定完整的控制器命名空间。只需要指定 `App\Http\Controllers` 命名空间后面的类名称部分。
 
 `getContent` 方法会返回求值后的字串内容回应。如果你的路由返回一个 `View`，你可以透过 `original` 属性访问它：
 
@@ -90,7 +90,7 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 		return 'All done!';
 	}
 
-我们可以在 facade 上使用 `shouldReceive` 方法，来仿真调用 `Event` 类别，它将会返回一个 [Mockery](https://github.com/padraic/mockery) mock 对象实例。
+我们可以在 facade 上使用 `shouldReceive` 方法，来仿真调用 `Event` 类，它将会返回一个 [Mockery](https://github.com/padraic/mockery) mock 对象实例。
 
 #### 仿真 Facade
 
@@ -176,7 +176,7 @@ Laravel 附带几个 `assert` 方法，让测试更简单一点：
 <a name="helper-methods"></a>
 ## 辅助方法
 
-`TestCase` 类别包含几个辅助方法让应用程序的测试更为简单。
+`TestCase` 类包含几个辅助方法让应用程序的测试更为简单。
 
 #### 从测试里设置和刷新 Sessions
 
@@ -205,4 +205,4 @@ Laravel 附带几个 `assert` 方法，让测试更简单一点：
 <a name="refreshing-the-application"></a>
 ## 重置应用程序
 
-你可能已经知道，你可以透过 `$this->app` 在任何测试方法中访问你的 Laravel `应用程序本体` / IoC 容器。这个应用程序对象实例会在每个测试类别被重置。如果你希望在给定的方法手动强制重置应用程序，你可以从你的测试方法使用 `refreshApplication` 方法。这将会重置任何额外的绑定，例如那些从测试案例执行开始被放到 IoC 容器的 mocks。
+你可能已经知道，你可以透过 `$this->app` 在任何测试方法中访问你的 Laravel `应用程序本体` / IoC 容器。这个应用程序对象实例会在每个测试类被重置。如果你希望在给定的方法手动强制重置应用程序，你可以从你的测试方法使用 `refreshApplication` 方法。这将会重置任何额外的绑定，例如那些从测试案例执行开始被放到 IoC 容器的 mocks。

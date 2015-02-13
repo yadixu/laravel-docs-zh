@@ -12,15 +12,15 @@
 <a name="building-a-command"></a>
 ## 建立自订指令
 
-### 自动创建类别（Class）
+### 自动创建类（Class）
 
 要创建一个新的自订指令，您可以使用 `make:console` 这个 Artisan 指令，这将会自动产生一个 Command stub 协助您开始创建您的自订指令：
 
-#### 自动创建一个新的指令类别
+#### 自动创建一个新的指令类
 
 	php artisan make:console FooCommand
 
-上面的指令将会协助你自动创建一个类别，并保存为文件 `app/Console/FooCommand.php`。
+上面的指令将会协助你自动创建一个类，并保存为文件 `app/Console/FooCommand.php`。
 
 在创建自订指令时，加上 `--command` 这个选项，将可以指定之后在终端机使用此自订指令时，所要输入的自订指令名称：
 

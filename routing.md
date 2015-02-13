@@ -12,7 +12,7 @@
 <a name="basic-routing"></a>
 ## 基本路由
 
-您将在您应用中的 `app/Http/routes.php` 的文件加载了 `App\Providers\RouteServiceProvider` 类别来定义大多数的路由。大多数基本的 Laravel 路由都只透过 URI 和 `闭包(Closure)`：
+您将在您应用中的 `app/Http/routes.php` 的文件加载了 `App\Providers\RouteServiceProvider` 类来定义大多数的路由。大多数基本的 Laravel 路由都只透过 URI 和 `闭包(Closure)`：
 
 #### 基本 GET 路由
 
@@ -257,9 +257,9 @@ Laravel 路由一样可以处理万用字符的子网域，并且从网域中传
 <a name="route-model-binding"></a>
 ## 路由模型绑定
 
-Laravel 模型绑定提供方便的方式将模型实体注入到您的路由中。例如，比起注入 User ID ，你可以选择注入符合给定 ID 的 User 类别实体。
+Laravel 模型绑定提供方便的方式将模型实体注入到您的路由中。例如，比起注入 User ID ，你可以选择注入符合给定 ID 的 User 类实体。
 
-首先，使用路由的 `model` 方法指定特定参数要对应的类别，您应该在 `RouteServiceProvider::boot` 方法定义您的模型绑定：
+首先，使用路由的 `model` 方法指定特定参数要对应的类，您应该在 `RouteServiceProvider::boot` 方法定义您的模型绑定：
 
 #### 绑定参数至模型
 
@@ -288,7 +288,7 @@ Laravel 模型绑定提供方便的方式将模型实体注入到您的路由中
 		throw new NotFoundHttpException;
 	});
 
-如果您想要使用您自己决定的逻辑，您应该使用 `Router::bind`方法。闭包透过 `bind` 方法将传递 URI 区段数值，并应该返回您想要被注入路由的类别实体：
+如果您想要使用您自己决定的逻辑，您应该使用 `Router::bind`方法。闭包透过 `bind` 方法将传递 URI 区段数值，并应该返回您想要被注入路由的类实体：
 
 	Route::bind('user', function($value)
 	{

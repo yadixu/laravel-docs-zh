@@ -92,4 +92,4 @@ http://example.com/custom/url?page=2
 <a name="converting-to-json"></a>
 ## 转换至 JSON
 
-`Paginator` 类别实作 `Illuminate\Contracts\Support\JsonableInterface` 接口的 `toJson` 方法。由路由返回的值，您可能将 `Paginator` 实体传换成 JSON。JSON 表单的实体会包含一些「后设」信息，例如 `total`、`current_page`、`last_page`。该实体数据将可透过在 JSON 数组中 `data` 的键取得。
+`Paginator` 类实作 `Illuminate\Contracts\Support\JsonableInterface` 接口的 `toJson` 方法。由路由返回的值，您可能将 `Paginator` 实体传换成 JSON。JSON 表单的实体会包含一些「后设」信息，例如 `total`、`current_page`、`last_page`。该实体数据将可透过在 JSON 数组中 `data` 的键取得。

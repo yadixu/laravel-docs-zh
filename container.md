@@ -11,7 +11,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异想天开的词，真正意思是类别依赖透过构造器或 "setter" 方法注入。
+Laravel 服务容器是管理类依赖的强力工具。依赖注入是个异想天开的词，真正意思是类依赖透过构造器或 "setter" 方法注入。
 
 让我们来看一个简单的例子：
 
@@ -69,7 +69,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 
 在服务提供者里，总是透过 `$this->app` 实例变量使用容器。
 
-服务容器注册依赖有几种方式，包括闭包回调和绑定实例的接口。首先，探讨闭包回调方式，具有键值(通常是类别名称)和返值闭包的闭包解析器，被注册至容器:
+服务容器注册依赖有几种方式，包括闭包回调和绑定实例的接口。首先，探讨闭包回调方式，具有键值(通常是类名称)和返值闭包的闭包解析器，被注册至容器:
 
 	$this->app->bind('FooBar', function($app)
 	{
@@ -147,7 +147,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 
 ### 注入具体依赖
 
-服务容器有个非常强大特色，能够绑定特定实例的接口。举例，假设我们应用程序要集成 [Pusher](https://pusher.com) 服务去收发即时事件，如果使用 Pusher 的 PHP SDK，可以在类别注入一个 Pusher 客户端实例：
+服务容器有个非常强大特色，能够绑定特定实例的接口。举例，假设我们应用程序要集成 [Pusher](https://pusher.com) 服务去收发即时事件，如果使用 Pusher 的 PHP SDK，可以在类注入一个 Pusher 客户端实例：
 
 	<?php namespace App\Handlers\Commands;
 
@@ -210,7 +210,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 
 	$this->app->bind('App\Contracts\EventPusher', 'App\Services\PusherEventPusher');
 
-当有类别需要 `EventPusher` 接口时，会告诉容器应该注入 `PusherEventPusher`，现在就可以在构造器中“类型指定”一个 `EventPusher` 接口：
+当有类需要 `EventPusher` 接口时，会告诉容器应该注入 `PusherEventPusher`，现在就可以在构造器中“类型指定”一个 `EventPusher` 接口：
 
 		/**
 		 * Create a new order handler instance.
@@ -235,7 +235,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 <a name="tagging"></a>
 ## 标签
 
-偶尔你可能需要解析绑定中的某个“类别”。例如你正在建设一个汇总报表，它需要接收实现了 `Report` 接口的不同实现的数组。在注册了 `Report` 的这些实现之后，你可以用 `tag` 方法来给他们赋予一个标签：
+偶尔你可能需要解析绑定中的某个“类”。例如你正在建设一个汇总报表，它需要接收实现了 `Report` 接口的不同实现的数组。在注册了 `Report` 的这些实现之后，你可以用 `tag` 方法来给他们赋予一个标签：
 
 	$this->app->bind('SpeedReport', function()
 	{

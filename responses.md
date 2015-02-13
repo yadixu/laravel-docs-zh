@@ -19,7 +19,7 @@
 
 #### 建立自订回应
 
-但是以大部分的路由及控制器所执行的动作来说，你需要返回完整的 `Illuminate\Http\Response` 实例或是一个[视图](/docs/5.0/views)。返回一个完整的 `Response` 实例时，你能够自订回应的 HTTP 状态码以及标头。`Response` 实例继承了 `Symfony\Component\HttpFoundation\Response` 类别，其提供了很多方法建立 HTTP 回应。
+但是以大部分的路由及控制器所执行的动作来说，你需要返回完整的 `Illuminate\Http\Response` 实例或是一个[视图](/docs/5.0/views)。返回一个完整的 `Response` 实例时，你能够自订回应的 HTTP 状态码以及标头。`Response` 实例继承了 `Symfony\Component\HttpFoundation\Response` 类，其提供了很多方法建立 HTTP 回应。
 
 	use Illuminate\Http\Response;
 
@@ -35,7 +35,7 @@
 
 #### 在回应送出视图
 
-如果想要使用 `Response` 类别的方法，但最终返回视图给用户，你可以使用简便的 `view` 方法：
+如果想要使用 `Response` 类的方法，但最终返回视图给用户，你可以使用简便的 `view` 方法：
 
 	return response()->view('hello')->header('Content-Type', $type);
 
@@ -53,7 +53,7 @@
 <a name="redirects"></a>
 ## 重导
 
-重导回应通常是类别 `Illuminate\Http\RedirectResponse` 的实例，并且包含用户要重导至另一个 URL 所需的标头。
+重导回应通常是类 `Illuminate\Http\RedirectResponse` 的实例，并且包含用户要重导至另一个 URL 所需的标头。
 
 #### 返回重导
 

@@ -84,7 +84,7 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 		$message->to('foo@example.com')->cc('bar@example.com');
 	});
 
-> **注意：** 传递至 `Mail::send` 闭包的 message 实例是继承了 SwiftMailer 的 message  类别，你可以调用该类别的任何方法来建立电子邮件消息。
+> **注意：** 传递至 `Mail::send` 闭包的 message 实例是继承了 SwiftMailer 的 message  类，你可以调用该类的任何方法来建立电子邮件消息。
 
 <a name="embedding-inline-attachments"></a>
 ## 内嵌附件
@@ -107,14 +107,14 @@ Laravel 也包含了 Mailgun 及 Mandrill HTTP API 的驱动。这些 API 通常
 		<img src="<?php echo $message->embedData($data, $name); ?>">
 	</body>
 
-请注意 `Mail` 类别总是会将 `$message` 变量传递给电子邮件视图。
+请注意 `Mail` 类总是会将 `$message` 变量传递给电子邮件视图。
 
 <a name="queueing-mail"></a>
 ## 邮件队列
 
 #### 将邮件消息加入队列
 
-发送电子邮件消息会大幅延长应用程序的回应时间，因此许多开发者选择将邮件消息加入队列并于后台发送。 Laravel  使用内置 [统一的 queue API](/docs/5.0/queues) ，让您轻松地完成此工作。要将邮件消息加入队列，只要使用 `Mail` 类别的 `queue` 方法：
+发送电子邮件消息会大幅延长应用程序的回应时间，因此许多开发者选择将邮件消息加入队列并于后台发送。 Laravel  使用内置 [统一的 queue API](/docs/5.0/queues) ，让您轻松地完成此工作。要将邮件消息加入队列，只要使用 `Mail` 类的 `queue` 方法：
 
 	Mail::queue('emails.welcome', $data, function($message)
 	{

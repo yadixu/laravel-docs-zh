@@ -26,7 +26,7 @@
 
 接下来，进入应用程序的请求的会被送往 HTTP 核心或终端核心，视该请求的种类而定。这两种核心是所有请求流向的中心位置。现在开始，我们只将焦点放在 HTTP 核心，它位于 `app/Http/Kernel.php`。
 
-HTTP 核心扩展了 `Illuminate\Foundation\Http\Kernel` 此一类别，它定义了一个 `bootstrappers` 数组，在请求被执行前会先行运作。这些启动器（bootstrappers）设置错误处理，日志记录，侦测应用程序环境，并执行在请求真正被处理之前，需要完成的其他工作。
+HTTP 核心扩展了 `Illuminate\Foundation\Http\Kernel` 此一类，它定义了一个 `bootstrappers` 数组，在请求被执行前会先行运作。这些启动器（bootstrappers）设置错误处理，日志记录，侦测应用程序环境，并执行在请求真正被处理之前，需要完成的其他工作。
 
 HTTP 核心也定义了一份 HTTP [中间层](/docs/5.0/middleware)清单，所有的请求在被应用程序处理之前都必须经过它们。这些中间层负责处理 HTTP session 的读写，决定应用程序是否处于维护模式，查验跨站请求伪造（CSRF）标记，以及其他更多任务作。
 

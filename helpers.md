@@ -223,7 +223,7 @@
 
 ### class_basename
 
-取得给定类别的类别名称，不含任何命名空间的名称。
+取得给定类的类名称，不含任何命名空间的名称。
 
 	$class = class_basename('Foo\Bar\Baz');
 
