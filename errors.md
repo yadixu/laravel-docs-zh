@@ -8,11 +8,11 @@
 <a name="configuration"></a>
 ## 设置
 
-应用程序的日志功能设置在 `Illuminate\Foundation\Bootstrap\ConfigureLogging` 启动类别中。这个类别使用 `config/app.php` 设置档的 `log` 设置选项。
+应用程序的日志功能设置在 `Illuminate\Foundation\Bootstrap\ConfigureLogging` 启动类别中。这个类别使用 `config/app.php` 配置文件的 `log` 设置选项。
 
 日志工具默认使用每天的日志文件；然而，你可以依照需求客制化这个行为。因为 Laravel 使用受欢迎的 [Monolog](https://github.com/Seldaek/monolog) 日志函式库，你可以利用很多 Monolog 提供的处理进程。
 
-例如，如果你想要使用单一日志档，而不是每天一个日志档，你可以对 `config/app.php` 设置档做下面的变更：
+例如，如果你想要使用单一日志档，而不是每天一个日志档，你可以对 `config/app.php` 配置文件做下面的变更：
 
 	'log' => 'single'
 
@@ -20,7 +20,7 @@ Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。�
 
 ### 错误细节
 
-`config/app.php` 设置档的 `app.debug` 设置选项控制应用程序透过浏览器显示错误细节。设置选项默认参照 `.env` 文件的 `APP_DEBUG` 环境变量。
+`config/app.php` 配置文件的 `app.debug` 设置选项控制应用程序透过浏览器显示错误细节。设置选项默认参照 `.env` 文件的 `APP_DEBUG` 环境变量。
 
 进行本地开发时，你应该设置 `APP_DEBUG` 环境变量为 `true` 。 **在上线环境，这个值应该永远为 `false` 。**
 

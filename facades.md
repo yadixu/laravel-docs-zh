@@ -12,7 +12,7 @@
 
 Facades 提供一个静态接口给在应用程序的 [IoC 容器](/docs/5.0/container) 中可以取用的类别。Laravel 附带许多 facades，甚至你可能已经在不知情的状况下使用过它们！Laravel 的「facades」作为在 IoC 容器里面的基底类别的静态代理，提供的语法有简洁、易表达的优点，同时维持比传统的静态方法更高的可测试性和弹性。
 
-有时，你或许会希望为应用程序和套件建立自己的 facades，所以让我们来探索这些类别的概念、开发和用法。
+有时，你或许会希望为应用程序和扩展包建立自己的 facades，所以让我们来探索这些类别的概念、开发和用法。
 
 > **注意：** 在深入了解 facades 之前，强烈建议你先熟悉 Laravel [IoC 容器](/docs/5.0/container).
 
@@ -80,7 +80,7 @@ Cache 类别继承基本的 `Facade` 类别并定义一个 `getFacadeAccessor()`
 <a name="creating-facades"></a>
 ## 建立 Facades
 
-为你自己的应用程序或套件建立 facade 是很简单的。你只需要 3 个东西：
+为你自己的应用程序或扩展包建立 facade 是很简单的。你只需要 3 个东西：
 
 - 一个 IoC 绑定。
 - 一个 facade 类别。
@@ -106,7 +106,7 @@ Cache 类别继承基本的 `Facade` 类别并定义一个 `getFacadeAccessor()`
 		return new \PaymentGateway\Payment;
 	});
 
-注册这个绑定的好方式是建立新的 [服务提供者](/docs/5.0/container#service-providers) 命名为 `PaymentServiceProvider`，并把这个绑定加到 `register` 方法。再来你可以设置 Laravel 从 `config/app.php` 设置档加载你的服务提供者。
+注册这个绑定的好方式是建立新的 [服务提供者](/docs/5.0/container#service-providers) 命名为 `PaymentServiceProvider`，并把这个绑定加到 `register` 方法。然后你可以设置 Laravel 从 `config/app.php` 配置文件加载你的服务提供者。
 
 接下来，我们可以建立我们自己的 facade 类别：
 
@@ -118,7 +118,7 @@ Cache 类别继承基本的 `Facade` 类别并定义一个 `getFacadeAccessor()`
 
 	}
 
-最后，如果我们希望，可以在 `config/app.php` 设置档为 facade 加个别名到 `aliases` 数组。现在我们可以在 `Payment` 类别的实例上调用 `process` 方法。
+最后，如果我们希望，可以在 `config/app.php` 配置文件为 facade 加个别名到 `aliases` 数组。现在我们可以在 `Payment` 类别的实例上调用 `process` 方法。
 
 	Payment::process();
 

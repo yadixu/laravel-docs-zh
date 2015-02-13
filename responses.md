@@ -137,7 +137,7 @@
 
 	return response()->download($pathToFile, $name, $headers);
 
-> **提醒：**管理文件下载的套件，Symfony HttpFoundation，要求下载文件名必须为 ASCII。
+> **提醒：**管理文件下载的扩展包，Symfony HttpFoundation，要求下载文件名必须为 ASCII。
 
 <a name="response-macros"></a>
 ## 回应巨集

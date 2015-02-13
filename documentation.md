@@ -36,7 +36,7 @@
     - [辅助方法](/docs/5.0/helpers)
     - [在地化](/docs/5.0/localization)
     - [邮件](/docs/5.0/mail)
-    - [套件开发](/docs/5.0/packages)
+    - [扩展包开发](/docs/5.0/packages)
     - [分页](/docs/5.0/pagination)
     - [队列](/docs/5.0/queues)
     - [Session](/docs/5.0/session)

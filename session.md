@@ -11,9 +11,9 @@
 
 由于 HTTP 协定是无状态（Stateless）的，所以 session 提供一种保存用户数据的方法。Laravel 支持了多种 session 后端驱动，并透过清楚、统一的 API 提供使用。也内置支持像是 [Memcached](http://memcached.org)、[Redis](http://redis.io) 和数据库的后端驱动。
 
-session 的设置档配置在 `config/session.php` 中，请务必看一下 session 设置档中可用的选项设置及注解。Laravel 默认使用 `file` 的 session 驱动，它在大多的应用中可以良好运作。
+session 的配置文件配置在 `config/session.php` 中，请务必看一下 session 配置文件中可用的选项设置及注解。Laravel 默认使用 `file` 的 session 驱动，它在大多的应用中可以良好运作。
 
-如果你想在 Laravel 中使用 `Redis` sessions，你需要先透过 Composer 安装 `predis/predis` 套件 (~1.0)。
+如果你想在 Laravel 中使用 `Redis` sessions，你需要先透过 Composer 安装 `predis/predis` 扩展包 (~1.0)。
 
 > **注意：** 如果你需要加密所有的 session 数据，就将选项 `encrypt` 设置为 `true` 。
 
@@ -107,7 +107,7 @@ Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该
 <a name="session-drivers"></a>
 ## Session 驱动
 
-session 设置档中的「driver」定义了 session 数据将以哪种方式被保存。Laravel 提供了许多良好的驱动：
+session 配置文件中的「driver」定义了 session 数据将以哪种方式被保存。Laravel 提供了许多良好的驱动：
 
 - `file` - sessions 将保存在 `app/storage/sessions`。
 - `cookie` - sessions 将安全保存在加密的 cookies 中。

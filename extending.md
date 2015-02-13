@@ -25,7 +25,7 @@ Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。�
 		return Cache::repository(new MongoStore);
 	});
 
-传递到 `extend` 方法的第一个参数是驱动的名称。这将会对应到你的 `config/cache.php` 设置档里的 `driver` 选项。第二个参数是个应该返回 `Illuminate\Cache\Repository` 实例的闭包。 `$app` 将会被传递到闭包，它是 `Illuminate\Foundation\Application` 和 IoC 容器的实例。
+传递到 `extend` 方法的第一个参数是驱动的名称。这将会对应到你的 `config/cache.php` 配置文件里的 `driver` 选项。第二个参数是个应该返回 `Illuminate\Cache\Repository` 实例的闭包。 `$app` 将会被传递到闭包，它是 `Illuminate\Foundation\Application` 和 IoC 容器的实例。
 
 `Cache::extend` 的调用可以在新的 Laravel 应用程序默认附带的 `App\Providers\AppServiceProvider` 的 `boot` 方法中完成，或者你可以建立自己的服务提供者来放置这个扩展 - 记得不要忘记在 `config/app.php` 的提供者数组注册提供者。
 
@@ -97,7 +97,7 @@ Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。�
 		return new MongoHandler;
 	});
 
-当 session 驱动已经被注册，我们可以在 `config/session.php` 设置档使用 `mongo` 驱动。
+当 session 驱动已经被注册，我们可以在 `config/session.php` 配置文件使用 `mongo` 驱动。
 
 > **注意：** 记住，如果你写了个客制化 session 处理器，请在 Packagist 分享它！
 
@@ -156,12 +156,12 @@ Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。�
 		return new RiakUserProvider($app['riak.connection']);
 	});
 
-用 `extend` 方法注册驱动之后，在你的 `config/auth.php` 设置档切换到新驱动。
+用 `extend` 方法注册驱动之后，在你的 `config/auth.php` 配置文件切换到新驱动。
 
 <a name="ioc-based-extension"></a>
 ## 基于 IoC 的扩展
 
-几乎每个 Laravel 框架引入的服务提供者都会绑定对象到 IoC 容器中。你可以在 `config/app.php` 设置档中找到应用程序的服务提供者清单。如果你有时间，你应该浏览过这里面每一个提供者的源代码。借由这样做，你将会更了解每一个提供者添加什么到框架，以及用什么键值来绑定各种服务到 IoC 容器。
+几乎每个 Laravel 框架引入的服务提供者都会绑定对象到 IoC 容器中。你可以在 `config/app.php` 配置文件中找到应用程序的服务提供者清单。如果你有时间，你应该浏览过这里面每一个提供者的源代码。借由这样做，你将会更了解每一个提供者添加什么到框架，以及用什么键值来绑定各种服务到 IoC 容器。
 
 例如， `HashServiceProvider` 绑定 `hash` 做为键值到 IoC 容器，它将解析成 `Illuminate\Hashing\BcryptHasher` 实例。你可以在应用程序中覆写这个 IoC 绑定，轻松地扩展并覆写这个类别。例如：
 
@@ -181,6 +181,6 @@ Laravel 有几个 `Manager` 类别，用来管理创建基于驱动的组件。�
 
 	}
 
-要注意的是这个类别扩展 `HashServiceProvider`，不是默认的 `ServiceProvider` 基底类别。当你扩展了服务提供者，在 `config/app.php` 设置档把 `HashServiceProvider` 换成你扩展的提供者名称。
+要注意的是这个类别扩展 `HashServiceProvider`，不是默认的 `ServiceProvider` 基底类别。当你扩展了服务提供者，在 `config/app.php` 配置文件把 `HashServiceProvider` 换成你扩展的提供者名称。
 
 这是被绑定在容器的所有核心类别的一般扩展方法。实际上，每个以这种方式绑定在容器的核心类别都可以被覆写。再次强调，看过每个框架引入的服务提供者将会使你熟悉：每个类别被绑在容器的哪里、它们是用什么键值绑定。这是个好方法可以了解更多关于 Laravel 如何结合它们。

@@ -12,7 +12,7 @@ Laravel 的 Contracts 是一组定义了框架核心服务的接口（ interface
 
 在 Laravel 框架里，每个 contract 都提供了一个对应的实作。例如， Laravel 提供了有多种驱动的 `Queue` 的实作，而根据 [SwiftMailer](http://swiftmailer.org/) 实作了 `Mailer`。
 
-Laravel 所有的 contracts 都放在[各自的 Github repository](https://github.com/illuminate/contracts)。除了提供了所有可用的 contracts 一个快速的参考，也可以单独作为一个低耦合的套件让其他套件开发者使用。
+Laravel 所有的 contracts 都放在[各自的 Github repository](https://github.com/illuminate/contracts)。除了提供了所有可用的 contracts 一个快速的参考，也可以单独作为一个低耦合的扩展包让其他扩展包开发者使用。
 
 <a name="why-contracts"></a>
 ## 为什么用 Contracts？
@@ -61,11 +61,11 @@ Laravel 所有的 contracts 都放在[各自的 Github repository](https://githu
 
 	}
 
-在上面的类别里，代码跟缓存实作之间是强耦合。理由是它会依赖于套件库（ package vendor ）的特定缓存类别。一旦这个套件的 API 更改了，我们的代码也要跟着改变。
+在上面的类别里，代码跟缓存实作之间是强耦合。理由是它会依赖于扩展包库（ package vendor ）的特定缓存类别。一旦这个扩展包的 API 更改了，我们的代码也要跟着改变。
 
 同样的，如果想要将底层的缓存技术（比如 Memcached ）抽换成另一种（像 Redis ），又一次的我们必须修改这个 repository 类别。我们的 repository 不应该知道这么多关于谁提供了数据，或是如何提供等等细节。
 
-**比起上面的做法，我们可以改用一个简单、和套件无关的接口来改进程式码：**
+**比起上面的做法，我们可以改用一个简单、和扩展包无关的接口来改进程式码：**
 
 	<?php namespace App\Orders;
 
@@ -86,7 +86,7 @@ Laravel 所有的 contracts 都放在[各自的 Github repository](https://githu
 
 	}
 
-现在上面的代码没有跟任何套件耦合，甚至是 Laravel。既然 contracts 套件没有包含实作和任何依赖，你可以很简单的对任何 contract 进行实作，你可以很简单的写一个替换的实作，甚至是替换 contracts，让你可以替换缓存实作而不用修改任何用到缓存的代码。
+现在上面的代码没有跟任何扩展包耦合，甚至是 Laravel。既然 contracts 扩展包没有包含实作和任何依赖，你可以很简单的对任何 contract 进行实作，你可以很简单的写一个替换的实作，甚至是替换 contracts，让你可以替换缓存实作而不用修改任何用到缓存的代码。
 
 ### 简单性
 

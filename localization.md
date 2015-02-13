@@ -5,7 +5,7 @@
 - [基本用法](#basic-usage)
 - [复数](#pluralization)
 - [验证本地化](#validation)
-- [覆写套件的语言档](#overriding-package-language-files)
+- [覆写扩展包的语言档](#overriding-package-language-files)
 
 <a name="introduction"></a>
 ## 介绍
@@ -36,13 +36,13 @@ Laravel 的 `Lang` facade 提供方便的方法来取得多种语言的字串，
 
 #### 在执行时变换默认语言
 
-应用进程的默认语言被保存在 `config/app.php` 设置档。你可以在任何时候用 `App::setLocale` 方法变换现行语言：
+应用进程的默认语言被保存在 `config/app.php` 配置文件。你可以在任何时候用 `App::setLocale` 方法变换现行语言：
 
 	App::setLocale('es');
 
 #### 设置备用语言
 
-你也可以设置「备用语言」，它将会在当现行语言没有给定的语句时被使用。就像默认语言，备用语言也可以在 `config/app.php` 设置档设置：
+你也可以设置「备用语言」，它将会在当现行语言没有给定的语句时被使用。就像默认语言，备用语言也可以在 `config/app.php` 配置文件设置：
 
 	'fallback_locale' => 'en',
 
@@ -104,6 +104,6 @@ Laravel 的 `Lang` facade 提供方便的方法来取得多种语言的字串，
 要验证本地化的错误和消息，可以看一下<a href="/docs/5.0/validation#localization">验证的文档</a>.
 
 <a name="overriding-package-language-files"></a>
-## 覆写套件的语言档
+## 覆写扩展包的语言档
 
-许多套件附带它们自有的语句。你可以借由放置文档在 `resources/lang/packages/{locale}/{package}` 文档夹来覆写它们，而不是改变套件的核心文档来调整这些句子。所以，举个例子，如果你需要覆写 `skyrim/hearthfire` 套件在 `messages.php` 的英文语句，你可以放置语言档在： `resources/lang/packages/en/hearthfire/messages.php`。你可以只定义你想要覆写的语句在这个文档里，任何你没有覆写的语句将会仍从套件的语言档加载。
+许多扩展包附带它们自有的语句。你可以借由放置文档在 `resources/lang/packages/{locale}/{package}` 文档夹来覆写它们，而不是改变扩展包的核心文档来调整这些句子。所以，举个例子，如果你需要覆写 `skyrim/hearthfire` 扩展包在 `messages.php` 的英文语句，你可以放置语言档在： `resources/lang/packages/en/hearthfire/messages.php`。你可以只定义你想要覆写的语句在这个文档里，任何你没有覆写的语句将会仍从扩展包的语言档加载。

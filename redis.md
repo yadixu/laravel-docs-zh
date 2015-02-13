@@ -1,7 +1,7 @@
 # Redis
 
 - [介绍](#introduction)
-- [设置档](#configuration)
+- [配置文件](#configuration)
 - [使用方式](#usage)
 - [管线](#pipelining)
 
@@ -10,14 +10,14 @@
 
 [Redis](http://redis.io) 是开源，先进的键值对保存库。由于它可用的键包含了 [字串](http://redis.io/topics/data-types#strings)、[哈希](http://redis.io/topics/data-types#hashes)、[列表](http://redis.io/topics/data-types#lists)、[集合](http://redis.io/topics/data-types#sets) 和 [有序集合](http://redis.io/topics/data-types#sorted-sets)，因此常被称作数据结构服务器。
 
-在使用 Redis 之前，你需要经由 Composer 将 `predis/predis` 套件装在 Laravel 中。
+在使用 Redis 之前，你需要经由 Composer 将 `predis/predis` 扩展包装在 Laravel 中。
 
 > **提醒：** 如果你用 PECL 安装了 Redis PHP extension，则需要重命名 `config/app.php` 里的 Redis 别名。
 
 <a name="configuration"></a>
-## 设置档
+## 配置文件
 
-应用程序的 Redis 设置档在 `config/database.php`。在这个文件里，你会看到 **redis** 数组，里面有应用程序使用的 Redis 服务器数据：
+应用程序的 Redis 配置文件在 `config/database.php`。在这个文件里，你会看到 **redis** 数组，里面有应用程序使用的 Redis 服务器数据：
 
 	'redis' => array(
 
@@ -31,7 +31,7 @@
 
 `cluster` 选项会让 Laravel 的 Redis 客户端在所有 Redis 节点间执行客户端分片（ client-side sharding ），让你建立节点池，并因此拥有大量的 RAM 可用。然而，客户端分片的节点不能执行容错转移；因此，这主要适合用可以从另一台主要数据保存库取得的缓存数据。
 
-如果你的 Redis 服务器需要认证，你可以在 Redis 服务器设置档里加入 `password` 为键值的参数设置。
+如果你的 Redis 服务器需要认证，你可以在 Redis 服务器配置文件里加入 `password` 为键值的参数设置。
 
 <a name="usage"></a>
 ## 使用方式
@@ -40,7 +40,7 @@
 
 	$redis = Redis::connection();
 
-你会得到一个使用 Redis 默认服务器的实例。如果你没有使用服务器集群，你可以在 `connection` 方法传入定义在 Redis 设置档的服务器名称，以连到特定服务器：
+你会得到一个使用 Redis 默认服务器的实例。如果你没有使用服务器集群，你可以在 `connection` 方法传入定义在 Redis 配置文件的服务器名称，以连到特定服务器：
 
 	$redis = Redis::connection('other');
 

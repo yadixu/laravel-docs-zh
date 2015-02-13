@@ -56,7 +56,7 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 	git clone https://github.com/laravel/homestead.git Homestead
 
-一旦你安装完 Homestead CLI 工具，即可执行 `bash init.sh` 指令来创建 `Homestead.yaml` 设置档:
+一旦你安装完 Homestead CLI 工具，即可执行 `bash init.sh` 指令来创建 `Homestead.yaml` 配置文件:
 
 	bash init.sh
 
@@ -70,7 +70,7 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 请务必确认 `homestead` 有被放置在目录 `~/.composer/vendor/bin` 之中，如此一来你才能在终端机中顺利执行 `homestead` 指令。
 
-一旦你安装完 Homestead CLI 工具，即可执行 `init` 指令来创建 `Homestead.yaml` 设置档:
+一旦你安装完 Homestead CLI 工具，即可执行 `init` 指令来创建 `Homestead.yaml` 配置文件:
 
 	homestead init
 
@@ -80,7 +80,7 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 ### 设置你的 SSH 密钥
 
-再来你要编辑 `Homestead.yaml`。可以在文件中设置你的 SSH 公开密钥，以及主要机器与 Homestead 虚拟机之间的共享目录。
+然后你要编辑 `Homestead.yaml`。可以在文件中设置你的 SSH 公开密钥，以及主要机器与 Homestead 虚拟机之间的共享目录。
 
 你没有 SSH 密钥？在 Mac 和 Linux 下，你可以利用下面的指令来创建一个 SSH 密钥组:
 
@@ -144,7 +144,7 @@ Vagrant 会将虚拟机开机，并且自动设置你的共享目录和 Nginx �
 
 如果想要从本机上透过 Navicat 或者是 Sequel Pro 连接 MySQL 或者 Postgres 数据库，你可以连接 `127.0.0.1` 的端口 33060 (MySQL) 或 54320 (Postgres)。而帐号密码分别是 `homestead` / `secret`。
 
-> **附注：** 从本机端你应该只能使用这些非标准的连接端口来连接数据库。因为当 Laravel 运行在虚拟机时，在 Laravel 的数据库设置档中依然是设置使用默认的 3306 及 5432 连接端口。
+> **附注：** 从本机端你应该只能使用这些非标准的连接端口来连接数据库。因为当 Laravel 运行在虚拟机时，在 Laravel 的数据库配置文件中依然是设置使用默认的 3306 及 5432 连接端口。
 
 ### 增加更多的站台
 

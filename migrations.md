@@ -1,7 +1,7 @@
 # 迁移和数据填充
 
 - [介绍](#introduction)
-- [建立迁移档](#creating-migrations)
+- [建立迁移文件](#creating-migrations)
 - [执行迁移](#running-migrations)
 - [推回迁移](#rolling-back-migrations)
 - [数据填充](#database-seeding)
@@ -12,19 +12,19 @@
 迁移是一种数据库的版本控制。可以让团队在修改数据库结构的同时，保持彼此的进度一致。迁移通常会和 [结构生成器](/docs/5.0/schema) 一起使用，可以简单的管理数据库结构。
 
 <a name="creating-migrations"></a>
-## 建立迁移档
+## 建立迁移文件
 
-使用 Artisan CLI 的 `make:migrate` 命令建立迁移档：
+使用 Artisan CLI 的 `make:migrate` 命令建立迁移文件：
 
     php artisan make:migration create_users_table
 
-迁移档会建立在 `database/migrations` 目录下，文件名会包含时间戳记，在执行迁移时用来决定顺序。
+迁移文件会建立在 `database/migrations` 目录下，文件名会包含时间戳记，在执行迁移时用来决定顺序。
 
 你也可以在建立迁移命令加上 `--path` 参数。路径要相对于应用程序所在的根目录。
 
     php artisan make:migration foo --path=app/migrations
 
-`--table` 和 `--create` 参数可以用来指定数据表名称，以及迁移档是否要建立新的数据表。
+`--table` 和 `--create` 参数可以用来指定数据表名称，以及迁移文件是否要建立新的数据表。
 
     php artisan make:migration add_votes_to_user_table --table=users
 

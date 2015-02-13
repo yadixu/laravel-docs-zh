@@ -270,7 +270,7 @@ Laravel 模型绑定提供方便的方式将模型实体注入到您的路由中
 		$router->model('user', 'App\User');
 	}
 
-再来定义一个有 `{user}` 参数的路由：
+然后定义一个有 `{user}` 参数的路由：
 
 	Route::get('profile/{user}', function(App\User $user)
 	{
