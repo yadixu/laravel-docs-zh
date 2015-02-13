@@ -111,9 +111,9 @@ Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vanc
 
 	php artisan up
 
-### 维护模式的回应模板
+### 维护模式的响应模板
 
-维护模式回应的默认模板放在 `resources/views/errors/503.blade.php`。
+维护模式响应的默认模板放在 `resources/views/errors/503.blade.php`。
 
 ### 维护模式与队列
 

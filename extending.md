@@ -11,14 +11,14 @@
 
 Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这些类包括缓存、session 、认证和队列组件。管理者类负责基于应用程序的配置建立一个特定的驱动实现。例如，`CacheManager` 类可以建立 APC 、 Memcached 、文件和各种其他的缓存驱动实现。
 
-这些管理者都拥有 `extend` 方法，可以简单地用它来注入新的驱动解析功能到管理者。我们将会在下面的例子，随着如何注入客制化驱动支持给它们，涵盖这些管理者的内容。
+这些管理者都拥有 `extend` 方法，可以简单地用它来注入新的驱动解析功能到管理者。我们将会在下面的例子，随着如何注入自定义驱动支持给它们，涵盖这些管理者的内容。
 
 > **注意：** 建议花点时间来探索 Laravel 附带的各种 `Manager` 类，例如：`CacheManager` 和 `SessionManager`。看过这些类将会让你更彻底了解 Laravel 表面下是如何运作。所有的管理者类继承  `Illuminate\Support\Manager` 基底类，它提供一些有用、常见的功能给每一个管理者。
 
 <a name="cache"></a>
 ## 缓存
 
-为了扩展 Laravel 缓存功能，我们将会使用 `CacheManager` 的 `extend` 方法，这方法可以用来绑定一个客制化驱动解析器到管理者，并且是全部的管理者类通用的。例如，注册一个新的缓存驱动名为「mongo」，我们将执行以下操作：
+为了扩展 Laravel 缓存功能，我们将会使用 `CacheManager` 的 `extend` 方法，这方法可以用来绑定一个自定义驱动解析器到管理者，并且是全部的管理者类通用的。例如，注册一个新的缓存驱动名为「mongo」，我们将执行以下操作：
 
 	Cache::extend('mongo', function($app)
 	{
@@ -29,7 +29,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 `Cache::extend` 的调用可以在新的 Laravel 应用程序默认附带的 `App\Providers\AppServiceProvider` 的 `boot` 方法中完成，或者你可以建立自己的服务提供者来放置这个扩展 - 记得不要忘记在 `config/app.php` 的提供者数组注册提供者。
 
-要建立客制化缓存驱动，首先需要实现 `Illuminate\Contracts\Cache\Store` contract 。所以，我们的 MongoDB 缓存实现将会看起来像这样：
+要建立自定义缓存驱动，首先需要实现 `Illuminate\Contracts\Cache\Store` contract 。所以，我们的 MongoDB 缓存实现将会看起来像这样：
 
 	class MongoStore implements Illuminate\Contracts\Cache\Store {
 
@@ -43,19 +43,19 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 	}
 
-我们只需要使用 MongoDB 连接来实现这些方法。当实现完成，就可以完成客制化驱动注册：
+我们只需要使用 MongoDB 连接来实现这些方法。当实现完成，就可以完成自定义驱动注册：
 
 	Cache::extend('mongo', function($app)
 	{
 		return Cache::repository(new MongoStore);
 	});
 
-如果你正在考虑要把客制化缓存驱动代码放在哪里，请考虑把它放上  Packagist ！或者，你可以在 `app` 的目录中建立 `Extensions` 命名空间。记得 Laravel 没有严格的应用程序架构，你可以依照喜好自由的组织应用程序。
+如果你正在考虑要把自定义缓存驱动代码放在哪里，请考虑把它放上  Packagist ！或者，你可以在 `app` 的目录中建立 `Extensions` 命名空间。记得 Laravel 没有严格的应用程序架构，你可以依照喜好自由的组织应用程序。
 
 <a name="session"></a>
 ## Session
 
-以客制化 session 驱动来扩展 Laravel 跟扩展缓存系统一样简单。再一次的，我们将会使用 `extend` 方法来注册客制化代码：
+以自定义 session 驱动来扩展 Laravel 跟扩展缓存系统一样简单。再一次的，我们将会使用 `extend` 方法来注册自定义代码：
 
 	Session::extend('mongo', function($app)
 	{
@@ -68,7 +68,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 ### 实现 Session 扩展
 
-要注意我们的客制化缓存驱动应该要实现 `SessionHandlerInterface` 。这个接口只包含少数需要实现的简单方法。一个基本的 MongoDB 实现会看起来像这样：
+要注意我们的自定义缓存驱动应该要实现 `SessionHandlerInterface` 。这个接口只包含少数需要实现的简单方法。一个基本的 MongoDB 实现会看起来像这样：
 
 	class MongoHandler implements SessionHandlerInterface {
 
@@ -99,7 +99,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 当 session 驱动已经被注册，我们可以在 `config/session.php` 配置文件使用 `mongo` 驱动。
 
-> **注意：** 记住，如果你写了个客制化 session 处理器，请在 Packagist 分享它！
+> **注意：** 记住，如果你写了个自定义 session 处理器，请在 Packagist 分享它！
 
 <a name="authentication"></a>
 ## 认证

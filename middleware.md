@@ -10,7 +10,7 @@
 
 HTTP 中间层提供一个方便的机制来过滤进入应用程序的 HTTP 请求，例如，Laravel 本身使用中间层来检验用户身份验证，如果用户经过身份验证，中间层会将用户导向登录页面，然而，如果用户通过身份验证，中间层将会允许这个请求进一步继续前进。
 
-当然，除了身份验证之外，中间层也可以被用来执行各式各样的任务，CORS 中间层负责替所有即将离开程序的回应加入适当的标头，一个日志中间层可以记录所有传入应用程序的请求。
+当然，除了身份验证之外，中间层也可以被用来执行各式各样的任务，CORS 中间层负责替所有即将离开程序的响应加入适当的标头，一个日志中间层可以记录所有传入应用程序的请求。
 Laravel 框架已经内置一些中间层，包括维护、身份验证、CSRF 保护，等等。所有的中间层都位于 `app/Http/Middleware`  目录内。
 
 <a name="defining-middleware"></a>
@@ -68,7 +68,7 @@ HTTP 请求在实际碰触到应用程序之前，最好是可以层层通过许
 <a name="terminable-middleware"></a>
 ## Terminable 中间层
 
-有些时候中间层需要在 HTTP 回应已被发送到用户端之后才执行，例如，Laravel 内置的 "session" 中间层，保存 session 数据是在回应已被发送到用户端 _之后_ 才执行。为了做到这一点，你需要定义中间层为“terminable”。
+有些时候中间层需要在 HTTP 响应已被发送到用户端之后才执行，例如，Laravel 内置的 "session" 中间层，保存 session 数据是在响应已被发送到用户端 _之后_ 才执行。为了做到这一点，你需要定义中间层为“terminable”。
 
 	use Illuminate\Contracts\Routing\TerminableMiddleware;
 
@@ -86,4 +86,4 @@ HTTP 请求在实际碰触到应用程序之前，最好是可以层层通过许
 
 	}
 
-如你所见，除了定义 `handle` 方法之外， `TerminableMiddleware` 定义一个 `terminate`  方法。这个方法接收请求和回应。一旦定义了 terminable 中间层，你需要将它增加到 HTTP kernel 文件的全局中间层清单列表中。
+如你所见，除了定义 `handle` 方法之外， `TerminableMiddleware` 定义一个 `terminate`  方法。这个方法接收请求和响应。一旦定义了 terminable 中间层，你需要将它增加到 HTTP kernel 文件的全局中间层清单列表中。

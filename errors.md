@@ -2,7 +2,7 @@
 
 - [配置](#configuration)
 - [错误处理](#handling-errors)
-- [HTTP 例外](#http-exceptions)
+- [HTTP 异常](#http-exceptions)
 - [日志](#logging)
 
 <a name="configuration"></a>
@@ -10,13 +10,13 @@
 
 应用程序的日志功能配置在 `Illuminate\Foundation\Bootstrap\ConfigureLogging` 启动类中。这个类使用 `config/app.php` 配置文件的 `log` 配置选项。
 
-日志工具默认使用每天的日志文件；然而，你可以依照需求客制化这个行为。因为 Laravel 使用受欢迎的 [Monolog](https://github.com/Seldaek/monolog) 日志函数库，你可以利用很多 Monolog 提供的处理进程。
+日志工具默认使用每天的日志文件；然而，你可以依照需求自定义这个行为。因为 Laravel 使用受欢迎的 [Monolog](https://github.com/Seldaek/monolog) 日志函数库，你可以利用很多 Monolog 提供的处理进程。
 
 例如，如果你想要使用单一日志档，而不是每天一个日志档，你可以对 `config/app.php` 配置文件做下面的变更：
 
 	'log' => 'single'
 
-Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。然而，你可以借由覆写 `ConfigureLogging` 启动类，依照需求自由地客制化应用程序的日志。
+Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。然而，你可以借由覆写 `ConfigureLogging` 启动类，依照需求自由地自定义应用程序的日志。
 
 ### 错误细节
 
@@ -27,14 +27,14 @@ Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。�
 <a name="handling-errors"></a>
 ## 错误处理
 
-所有的例外都由 `App\Exceptions\Handler` 类处理。这个类包含两个方法： `report` 和 `render` 。
+所有的异常都由 `App\Exceptions\Handler` 类处理。这个类包含两个方法： `report` 和 `render` 。
 
-`report` 方法用来纪录例外或把例外传递到外部服务，例如： [BugSnag](https://bugsnag.com) 。默认情况下， `report`  方法只基本实现简单地传递例外到父类并于父类纪录例外。然而，你可以依你所需自由地纪录例外。如果你需要使用不同的方法来回报不同类型的例外，你可以使用 PHP 的 `instanceof` 比较运算子：
+`report` 方法用来纪录异常或把异常传递到外部服务，例如： [BugSnag](https://bugsnag.com) 。默认情况下， `report`  方法只基本实现简单地传递异常到父类并于父类纪录异常。然而，你可以依你所需自由地纪录异常。如果你需要使用不同的方法来回报不同类型的异常，你可以使用 PHP 的 `instanceof` 比较运算符：
 
 	/**
-	 * 回报或纪录例外。
+	 * 回报或纪录异常。
 	 *
-	 * 这是一个送例外到 Sentry、Bugsnag 等服务的好地方。
+	 * 这是一个送异常到 Sentry、Bugsnag 等服务的好地方。
 	 *
 	 * @param  \Exception  $e
 	 * @return void
@@ -49,26 +49,26 @@ Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。�
 		return parent::report($e);
 	}
 
-`render` 方法负责把例外转换成应该被传递回浏览器的 HTTP 回应。默认情况下，例外会被传递到基底类并帮你产生回应。然而，你可以自由的检查例外类型或返回客制化的回应。
+`render` 方法负责把异常转换成应该被传递回浏览器的 HTTP 响应。默认情况下，异常会被传递到基底类并帮你产生响应。然而，你可以自由的检查异常类型或返回自定义的响应。
 
-例外处理进程的 `dontReport` 属性是个数组，包含应该不要被纪录的例外类型。由 404 错误导致的例外默认不会被写到日志档。你可以依照需求添加其他类型的例外到这个数组。
+异常处理进程的 `dontReport` 属性是个数组，包含应该不要被纪录的异常类型。由 404 错误导致的异常默认不会被写到日志档。你可以依照需求添加其他类型的异常到这个数组。
 
 <a name="http-exceptions"></a>
-## HTTP 例外
+## HTTP 异常
 
-有一些例外是描述来自服务器的 HTTP 错误码。例如，这可能是个「找不到页面」错误 (404)、「未授权错误」(401)，或甚至是工程师导致的 500 错误。使用下面的方法来返回这样一个回应：
+有一些异常是描述来自服务器的 HTTP 错误码。例如，这可能是个「找不到页面」错误 (404)、「未授权错误」(401)，或甚至是工程师导致的 500 错误。使用下面的方法来返回这样一个响应：
 
 	abort(404);
 
-或是你可以选择提供一个回应：
+或是你可以选择提供一个响应：
 
 	abort(403, 'Unauthorized action.');
 
 你可以在请求的生命周期中任何时间点使用这个方法。
 
-### 客制化 404 错误页面
+### 自定义 404 错误页面
 
-要让所有的 404 错误返回客制化的视图，请建立一个 `resources/views/errors/404.blade.php` 文件。应用程序将会使用这个视图处理所有发生的 404 错误。
+要让所有的 404 错误返回自定义的视图，请建立一个 `resources/views/errors/404.blade.php` 文件。应用程序将会使用这个视图处理所有发生的 404 错误。
 
 <a name="logging"></a>
 ## 日志

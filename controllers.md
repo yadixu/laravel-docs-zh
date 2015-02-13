@@ -108,7 +108,7 @@ Laravel 让你能轻易地定义单一路由来处理控制器中的每一项行
 
 	Route::controller('users', 'UserController');
 
-`Controller` 方法接受两个参数。第一个参数是控制器欲处理的 base URI，第二个是控制器的类名称。接着只要在你的控制器中加入方法，并在名称前冠上它们所回应的 HTTP 动词。
+`Controller` 方法接受两个参数。第一个参数是控制器欲处理的 base URI，第二个是控制器的类名称。接着只要在你的控制器中加入方法，并在名称前冠上它们所响应的 HTTP 动词。
 
 	class UserController extends BaseController {
 
@@ -129,9 +129,9 @@ Laravel 让你能轻易地定义单一路由来处理控制器中的每一项行
 
 	}
 
-`index` 方法会回应控制器处理的根 URI ，在这个例子中是 `users` 。
+`index` 方法会响应控制器处理的根 URI ，在这个例子中是 `users` 。
 
-如果你的控制器行为包含多个字词，你可以在 URI 中使用「破折号」语法来访问此行为。例如，下面这个在 `UserController` 中的控制器动作会回应 `users/admin-profile` 此一 URI ：
+如果你的控制器行为包含多个字词，你可以在 URI 中使用「破折号」语法来访问此行为。例如，下面这个在 `UserController` 中的控制器动作会响应 `users/admin-profile` 此一 URI ：
 
 	public function getAdminProfile() {}
 

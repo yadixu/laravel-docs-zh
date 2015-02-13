@@ -45,7 +45,7 @@
 		return 'Hello World';
 	});
 
-#### 注册路由回应所有 HTTP 动作
+#### 注册路由响应所有 HTTP 动作
 
 	Route::any('foo', function()
 	{
@@ -306,4 +306,4 @@ Laravel 模型绑定提供方便的方式将模型实体注入到您的路由中
 
 第二，您可以手动抛出 `Symfony\Component\HttpKernel\Exception\NotFoundHttpException` 的实体。
 
-有关如何处理 404 例外状况和自定回应的更多信息，可以参考[错误](/docs/5.0/errors#http-exceptions)章节内的文档。
+有关如何处理 404 异常状况和自定响应的更多信息，可以参考[错误](/docs/5.0/errors#http-exceptions)章节内的文档。

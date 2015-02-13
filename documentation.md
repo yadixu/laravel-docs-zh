@@ -11,7 +11,7 @@
     - [中间层](/docs/5.0/middleware)
     - [控制器](/docs/5.0/controllers)
     - [请求](/docs/5.0/requests)
-    - [回应](/docs/5.0/responses)
+    - [响应](/docs/5.0/responses)
     - [视图](/docs/5.0/views)
 - 系统架构
     - [服务提供者](/docs/5.0/providers)

@@ -145,9 +145,9 @@ Laravel 所建立的 cookie 会加密并且加上认证记号，这代表着被�
 
 	$value = Request::cookie('name');
 
-#### 加上新的 Cookie 到回应
+#### 加上新的 Cookie 到响应
 
-辅助方法 `cookie` 提供一个简易的工厂方法来产生新的 `Symfony\Component\HttpFoundation\Cookie` 实例。可以在 `Response` 实例之后连接 `withCookie` 方法带入 cookie 至回应：
+辅助方法 `cookie` 提供一个简易的工厂方法来产生新的 `Symfony\Component\HttpFoundation\Cookie` 实例。可以在 `Response` 实例之后连接 `withCookie` 方法带入 cookie 至响应：
 
 	$response = new Illuminate\Http\Response('Hello World');
 

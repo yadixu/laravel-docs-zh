@@ -1,25 +1,25 @@
-# HTTP 回应
+# HTTP 响应
 
-- [基本回应](#basic-responses)
+- [基本响应](#basic-responses)
 - [重导](#redirects)
-- [其他回应](#other-responses)
-- [回应巨集](#response-macros)
+- [其他响应](#other-responses)
+- [响应巨集](#response-macros)
 
 <a name="basic-responses"></a>
-## 基本回应
+## 基本响应
 
 #### 从路由返回字串
 
-最基本的回应就是从 Laravel 的路由返回字串：
+最基本的响应就是从 Laravel 的路由返回字串：
 
 	Route::get('/', function()
 	{
 		return 'Hello World';
 	});
 
-#### 建立自定义回应
+#### 建立自定义响应
 
-但是以大部分的路由及控制器所执行的动作来说，你需要返回完整的 `Illuminate\Http\Response` 实例或是一个[视图](/docs/5.0/views)。返回一个完整的 `Response` 实例时，你能够自定义回应的 HTTP 状态码以及标头。`Response` 实例继承了 `Symfony\Component\HttpFoundation\Response` 类，其提供了很多方法建立 HTTP 回应。
+但是以大部分的路由及控制器所执行的动作来说，你需要返回完整的 `Illuminate\Http\Response` 实例或是一个[视图](/docs/5.0/views)。返回一个完整的 `Response` 实例时，你能够自定义响应的 HTTP 状态码以及标头。`Response` 实例继承了 `Symfony\Component\HttpFoundation\Response` 类，其提供了很多方法建立 HTTP 响应。
 
 	use Illuminate\Http\Response;
 
@@ -33,19 +33,19 @@
 
 > **提示：** 有关 `Response` 方法的完整列表可以参照 [API 文档](http://laravel.com/api/5.0/Illuminate/Http/Response.html) 以及 [Symfony API 文档](http://api.symfony.com/2.5/Symfony/Component/HttpFoundation/Response.html).
 
-#### 在回应送出视图
+#### 在响应送出视图
 
 如果想要使用 `Response` 类的方法，但最终返回视图给用户，你可以使用简便的 `view` 方法：
 
 	return response()->view('hello')->header('Content-Type', $type);
 
-#### 附加 Cookies 到回应
+#### 附加 Cookies 到响应
 
 	return response($content)->withCookie(cookie('name', 'value'));
 
 #### 方法连接
 
-切记，大多数的 `Response` 方法都是可连接的，用以建立流畅的回应：
+切记，大多数的 `Response` 方法都是可连接的，用以建立流畅的响应：
 
 	return response()->view('hello')->header('Content-Type', $type)
                      ->withCookie(cookie('name', 'value'));
@@ -53,11 +53,11 @@
 <a name="redirects"></a>
 ## 重导
 
-重导回应通常是类 `Illuminate\Http\RedirectResponse` 的实例，并且包含用户要重导至另一个 URL 所需的标头。
+重导响应通常是类 `Illuminate\Http\RedirectResponse` 的实例，并且包含用户要重导至另一个 URL 所需的标头。
 
 #### 返回重导
 
-有几种方法可以产生 `RedirectResponse` 的实例，最简单的方式就是透过辅助方法 `redirect`。当在测试时，建立一个仿真重导回应的测试并不常见，所以使用辅助方法通常是可行的：
+有几种方法可以产生 `RedirectResponse` 的实例，最简单的方式就是透过辅助方法 `redirect`。当在测试时，建立一个仿真重导响应的测试并不常见，所以使用辅助方法通常是可行的：
 
 	return redirect('user/login');
 
@@ -116,22 +116,22 @@
 	return redirect()->action('App\Http\Controllers\UserController@profile', ['user' => 1]);
 
 <a name="other-responses"></a>
-## 其他回应
+## 其他响应
 
-使用辅助方法 `response` 可以轻松的产生其他类型的回应实例。当你调用辅助方法 `response` 且不带任何参数时，将会返回 `Illuminate\Contracts\Routing\ResponseFactory` [Contract](/docs/5.0/contracts) 的实做。Contract 提供了一些有用的方法来产生回应。
+使用辅助方法 `response` 可以轻松的产生其他类型的响应实例。当你调用辅助方法 `response` 且不带任何参数时，将会返回 `Illuminate\Contracts\Routing\ResponseFactory` [Contract](/docs/5.0/contracts) 的实做。Contract 提供了一些有用的方法来产生响应。
 
-#### 建立 JSON 回应
+#### 建立 JSON 响应
 
 `json` 方法会自动将标头的 `Content-Type` 配置为 `application/json`：
 
 	return response()->json(['name' => 'Abigail', 'state' => 'CA']);
 
-#### 建立 JSONP 回应
+#### 建立 JSONP 响应
 
 	return response()->json(['name' => 'Abigail', 'state' => 'CA'])
 	                 ->setCallback($request->input('callback'));
 
-#### 建立文件下载的回应
+#### 建立文件下载的响应
 
 	return response()->download($pathToFile);
 
@@ -140,9 +140,9 @@
 > **提醒：**管理文件下载的扩展包，Symfony HttpFoundation，要求下载文件名必须为 ASCII。
 
 <a name="response-macros"></a>
-## 回应巨集
+## 响应巨集
 
-如果你想要自定义可以在很多路由和控制器重复使用的回应，你可以使用 `Illuminate\Contracts\Routing\ResponseFactory` 实做的方法 `macro`。
+如果你想要自定义可以在很多路由和控制器重复使用的响应，你可以使用 `Illuminate\Contracts\Routing\ResponseFactory` 实做的方法 `macro`。
 
 举个例子，来自[服务提供者的](/docs/5.0/providers) `boot` 方法:
 

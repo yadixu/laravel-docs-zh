@@ -82,7 +82,7 @@
 
 	$users = $query->addSelect('age')->get();
 
-#### 使用 where 及运算子
+#### 使用 where 及运算符
 
 	$users = DB::table('users')->where('votes', '>', 100)->get();
 

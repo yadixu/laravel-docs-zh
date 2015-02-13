@@ -68,7 +68,7 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 
 > **注意:** 当使用 `action` 方法的时候，你不需要指定完整的控制器命名空间。只需要指定 `App\Http\Controllers` 命名空间后面的类名称部分。
 
-`getContent` 方法会返回求值后的字串内容回应。如果你的路由返回一个 `View`，你可以透过 `original` 属性访问它：
+`getContent` 方法会返回求值后的字串内容响应。如果你的路由返回一个 `View`，你可以透过 `original` 属性访问它：
 
 	$view = $response->original;
 
@@ -108,7 +108,7 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 
 Laravel 附带几个 `assert` 方法，让测试更简单一点：
 
-#### Assert 回应为 OK
+#### Assert 响应为 OK
 
 	public function testMethod()
 	{
@@ -117,11 +117,11 @@ Laravel 附带几个 `assert` 方法，让测试更简单一点：
 		$this->assertResponseOk();
 	}
 
-#### Assert 回应的状态码
+#### Assert 响应的状态码
 
 	$this->assertResponseStatus(403);
 
-#### Assert 回应为重导向
+#### Assert 响应为重导向
 
 	$this->assertRedirectedTo('foo');
 
@@ -129,7 +129,7 @@ Laravel 附带几个 `assert` 方法，让测试更简单一点：
 
 	$this->assertRedirectedToAction('Controller@method');
 
-#### Assert 回应的视图包含一些数据
+#### Assert 响应的视图包含一些数据
 
 	public function testMethod()
 	{

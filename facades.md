@@ -19,7 +19,7 @@ Facades 提供一个静态接口给在应用程序的 [IoC 容器](/docs/5.0/con
 <a name="explanation"></a>
 ## 解释
 
-在 Laravel 应用程序的环境中，facade 是个提供从容器访问对象的类。`Facade` 类是让这个机制可以运作的原因。Laravel 的 facades 和你建立的任何客制化 facades，将会继承基本的 `Facade` 类。
+在 Laravel 应用程序的环境中，facade 是个提供从容器访问对象的类。`Facade` 类是让这个机制可以运作的原因。Laravel 的 facades 和你建立的任何自定义 facades，将会继承基本的 `Facade` 类。
 
 你的 facade 类只需要去实现一个方法：`getFacadeAccessor`。`getFacadeAccessor` 方法的工作是定义要从容器解析什么。基本的 `Facade` 类利用 `__callStatic()` 魔术方法来从你的 facade 调用到解析出来的对象。
 
@@ -124,7 +124,7 @@ Cache 类继承基本的 `Facade` 类并定义一个 `getFacadeAccessor()` 方�
 
 ### 自动加载别名的附注
 
-在 `aliases` 数组中的类在某些实例中不能使用，因为 [PHP 将不会尝试去自动加载未定义的类型暗示类](https://bugs.php.net/bug.php?id=39003)。如果 `\ServiceWrapper\ApiTimeoutException` 命别名为 `ApiTimeoutException`，即便有例外被抛出，在 `\ServiceWrapper` 命名空间外面的 `catch(ApiTimeoutException $e)` 将永远捕捉不到例外。类似的问题在有类型暗示的别名类一样会发生。唯一的替代方案就是放弃别名并用 `use` 在每一个文件的最上面引入你希望暗示类型的类。
+在 `aliases` 数组中的类在某些实例中不能使用，因为 [PHP 将不会尝试去自动加载未定义的类型暗示类](https://bugs.php.net/bug.php?id=39003)。如果 `\ServiceWrapper\ApiTimeoutException` 命别名为 `ApiTimeoutException`，即便有异常被抛出，在 `\ServiceWrapper` 命名空间外面的 `catch(ApiTimeoutException $e)` 将永远捕捉不到异常。类似的问题在有类型暗示的别名类一样会发生。唯一的替代方案就是放弃别名并用 `use` 在每一个文件的最上面引入你希望暗示类型的类。
 
 <a name="mocking-facades"></a>
 ## 仿真 Facades
