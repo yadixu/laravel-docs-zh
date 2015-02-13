@@ -17,7 +17,7 @@ Laravel 让链接数据库和执行查找变得相当容易。数据库相关配
 <a name="read-write-connections"></a>
 ## 读取/写入连接
 
-有时候你可能希望使用特定数据库连接进行 SELECT 操作，同时使用另外的连接作 INSERT 、 UPDATE 、以及 DELETE 。 Laravel 让这些变得轻松简单，并确保你不论在使用原始查找、查找建立器、或者是 Eloquent ORM 使用的都是正确的连接。
+有时候你可能希望使用特定数据库连接进行 SELECT 操作，同时使用另外的连接作 INSERT 、 UPDATE 、以及 DELETE 。 Laravel 让这些变得轻松简单，并确保你不论在使用原始查找、查找构建器、或者是 Eloquent ORM 使用的都是正确的连接。
 
 来看看如何配置读取/写入连接，让我们来看以下的例子：
 
