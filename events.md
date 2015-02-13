@@ -7,7 +7,7 @@
 <a name="basic-usage"></a>
 ## 基本用法
 
-Laravel 的 event 功能提供一个简单的观察者实作，允许你在应用程序里订阅与监听事件。事件类通常被保存在 `app/Events` 目录下，而它们的处理程序则被保存在 `app/Handlers/Events` 目录下。
+Laravel 的 event 功能提供一个简单的观察者实现，允许你在应用程序里订阅与监听事件。事件类通常被保存在 `app/Events` 目录下，而它们的处理程序则被保存在 `app/Handlers/Events` 目录下。
 
 你可以使用 Artisan 命令行工具产生一个新的事件类：
 
@@ -75,7 +75,7 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 
 	php artisan handler:event SendPurchaseConfirmation --event=PodcastWasPurchased --queued
 
-这将会产生一个实作了 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口的处理程序类。这样就可以了！现在当这个处理程序因为事件发生被调用，它将会被事件配送器自动地排进队列。
+这将会产生一个实现了 `Illuminate\Contracts\Queue\ShouldBeQueued` 接口的处理程序类。这样就可以了！现在当这个处理程序因为事件发生被调用，它将会被事件配送器自动地排进队列。
 
 当处理程序被队列执行，如果没有例外被丢出，在执行后该队列中的任务将会自动被删除。你也可以手动取用队列中的任务的 `delete` 和 `release` 方法。队列处理程序默认会引入的 `Illuminate\Queue\InteractsWithQueue` trait，让你可以取用这些方法：
 

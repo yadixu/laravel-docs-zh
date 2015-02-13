@@ -21,7 +21,7 @@ Facades 提供一个静态接口给在应用程序的 [IoC 容器](/docs/5.0/con
 
 在 Laravel 应用程序的环境中，facade 是个提供从容器访问对象的类。`Facade` 类是让这个机制可以运作的原因。Laravel 的 facades 和你建立的任何客制化 facades，将会继承基本的 `Facade` 类。
 
-你的 facade 类只需要去实作一个方法：`getFacadeAccessor`。`getFacadeAccessor` 方法的工作是定义要从容器解析什么。基本的 `Facade` 类利用 `__callStatic()` 魔术方法来从你的 facade 调用到解析出来的对象。
+你的 facade 类只需要去实现一个方法：`getFacadeAccessor`。`getFacadeAccessor` 方法的工作是定义要从容器解析什么。基本的 `Facade` 类利用 `__callStatic()` 魔术方法来从你的 facade 调用到解析出来的对象。
 
 所以当你对 facade 调用，例如 `Cache::get`，Laravel 从 IoC 容器解析缓存管理类出来，并对该类调用 `get` 方法。用科技术语来说，Laravel Facades 是使用 Laravel IoC 容器作为服务定位器的便捷语法。
 

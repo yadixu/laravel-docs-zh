@@ -8,7 +8,7 @@
 <a name="configuration"></a>
 ## 配置
 
-在其他的框架中，实作分页是令人感到苦恼的事，但是 Laravel 令它实作起来变得轻松。 Laravel 可以产生基于当前页面的智能「范围」链接，所产生的 HTML 兼容 Bootstrap CSS 框架.
+在其他的框架中，实现分页是令人感到苦恼的事，但是 Laravel 令它实现起来变得轻松。 Laravel 可以产生基于当前页面的智能「范围」链接，所产生的 HTML 兼容 Bootstrap CSS 框架.
 
 <a name="usage"></a>
 ## 使用
@@ -92,4 +92,4 @@ http://example.com/custom/url?page=2
 <a name="converting-to-json"></a>
 ## 转换至 JSON
 
-`Paginator` 类实作 `Illuminate\Contracts\Support\JsonableInterface` 接口的 `toJson` 方法。由路由返回的值，您可能将 `Paginator` 实体传换成 JSON。JSON 表单的实体会包含一些「后设」信息，例如 `total`、`current_page`、`last_page`。该实体数据将可透过在 JSON 数组中 `data` 的键取得。
+`Paginator` 类实现 `Illuminate\Contracts\Support\JsonableInterface` 接口的 `toJson` 方法。由路由返回的值，您可能将 `Paginator` 实体传换成 JSON。JSON 表单的实体会包含一些「后设」信息，例如 `total`、`current_page`、`last_page`。该实体数据将可透过在 JSON 数组中 `data` 的键取得。

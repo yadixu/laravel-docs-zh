@@ -9,7 +9,7 @@
 <a name="managers-and-factories"></a>
 ## 管理者和工厂
 
-Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这些类包括缓存、session 、认证和队列组件。管理者类负责基于应用程序的配置建立一个特定的驱动实作。例如，`CacheManager` 类可以建立 APC 、 Memcached 、文件和各种其他的缓存驱动实作。
+Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这些类包括缓存、session 、认证和队列组件。管理者类负责基于应用程序的配置建立一个特定的驱动实现。例如，`CacheManager` 类可以建立 APC 、 Memcached 、文件和各种其他的缓存驱动实现。
 
 这些管理者都拥有 `extend` 方法，可以简单地用它来注入新的驱动解析功能到管理者。我们将会在下面的例子，随着如何注入客制化驱动支持给它们，涵盖这些管理者的内容。
 
@@ -29,7 +29,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 `Cache::extend` 的调用可以在新的 Laravel 应用程序默认附带的 `App\Providers\AppServiceProvider` 的 `boot` 方法中完成，或者你可以建立自己的服务提供者来放置这个扩展 - 记得不要忘记在 `config/app.php` 的提供者数组注册提供者。
 
-要建立客制化缓存驱动，首先需要实作 `Illuminate\Contracts\Cache\Store` contract 。所以，我们的 MongoDB 缓存实作将会看起来像这样：
+要建立客制化缓存驱动，首先需要实现 `Illuminate\Contracts\Cache\Store` contract 。所以，我们的 MongoDB 缓存实现将会看起来像这样：
 
 	class MongoStore implements Illuminate\Contracts\Cache\Store {
 
@@ -43,7 +43,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 	}
 
-我们只需要使用 MongoDB 连接来实作这些方法。当实作完成，就可以完成客制化驱动注册：
+我们只需要使用 MongoDB 连接来实现这些方法。当实现完成，就可以完成客制化驱动注册：
 
 	Cache::extend('mongo', function($app)
 	{
@@ -66,9 +66,9 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 你应该把 session 扩展代码放置在 `AppServiceProvider` 的 `boot` 方法里。
 
-### 实作 Session 扩展
+### 实现 Session 扩展
 
-要注意我们的客制化缓存驱动应该要实作 `SessionHandlerInterface` 。这个接口只包含少数需要实作的简单方法。一个基本的 MongoDB 实作会看起来像这样：
+要注意我们的客制化缓存驱动应该要实现 `SessionHandlerInterface` 。这个接口只包含少数需要实现的简单方法。一个基本的 MongoDB 实现会看起来像这样：
 
 	class MongoHandler implements SessionHandlerInterface {
 
@@ -83,14 +83,14 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 因为这些方法不像缓存的 `StoreInterface` 一样容易理解，让我们快速地看过这些方法做些什么：
 
-- `open` 方法通常会被用在基于文件的 session 保存系统。因为 Laravel 附带一个 `file` session 驱动，几乎不需要在这个方法放任何东西。你可以让它留空。PHP 要求我们去实作这个方法，事实上明显是个差劲的接口设计 (我们将会晚点讨论它)。
+- `open` 方法通常会被用在基于文件的 session 保存系统。因为 Laravel 附带一个 `file` session 驱动，几乎不需要在这个方法放任何东西。你可以让它留空。PHP 要求我们去实现这个方法，事实上明显是个差劲的接口设计 (我们将会晚点讨论它)。
 - `close` 方法，就像 `open` 方法，通常也可以忽略。对大部份的驱动来说，并不需要它。
 - `read` 方法应该返回与给定 `$sessionId` 关联的 session 数据的字串形态。当你的驱动取回或保存 session 数据时不需要做任何串行化或进行其他编码，因为 Laravel 将会为你进行串行化
 - `write` 方法应该写入给定 `$data` 字串与 `$sessionId` 的关联到一些永久存储系统，例如：MongoDB、 Dynamo、等等。
 - `destroy` 方法应该从永久存储移除与 `$sessionId` 关联的数据。
 - `gc` 方法应该销毁所有比给定 `$lifetime` UNIX 时间戳记还旧的 session 数据。对于会自己过期的系统如 Memcached 和 Redis，这个方法可以留空。
 
-当 `SessionHandlerInterface` 实作完成，我们准备好要用 Session 管理者注册它：
+当 `SessionHandlerInterface` 实现完成，我们准备好要用 Session 管理者注册它：
 
 	Session::extend('mongo', function($app)
 	{
@@ -108,10 +108,10 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 	Auth::extend('riak', function($app)
 	{
-		// 返回 Illuminate\Contracts\Auth\UserProvider 的实作
+		// 返回 Illuminate\Contracts\Auth\UserProvider 的实现
 	});
 
-`UserProvider` 实作只负责从永久存储系统抓取 `Illuminate\Contracts\Auth\Authenticatable` 实作，存储系统例如： MySQL 、 Riak ，等等。这两个接口让 Laravel 认证机制无论用户数据如何保存或用什么种类的类来代表它都能继续运作。
+`UserProvider` 实现只负责从永久存储系统抓取 `Illuminate\Contracts\Auth\Authenticatable` 实现，存储系统例如： MySQL 、 Riak ，等等。这两个接口让 Laravel 认证机制无论用户数据如何保存或用什么种类的类来代表它都能继续运作。
 
 让我们来看一下 `UserProvider` contract ：
 
@@ -125,9 +125,9 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 	}
 
-`retrieveById` 函式通常接收一个代表用户的数字键，例如：MySQL 数据库的自动递增 ID。这方法应该取得符合 ID 的 `Authenticatable` 实作并返回。
+`retrieveById` 函式通常接收一个代表用户的数字键，例如：MySQL 数据库的自动递增 ID。这方法应该取得符合 ID 的 `Authenticatable` 实现并返回。
 
-`retrieveByToken` 函式用用户唯一的 `$identifier` 和保存在 `remember_token` 字段的「记住我」 `$token` 来取得用户。跟前面的方法一样，应该返回 `Authenticatable` 的实作。
+`retrieveByToken` 函式用用户唯一的 `$identifier` 和保存在 `remember_token` 字段的「记住我」 `$token` 来取得用户。跟前面的方法一样，应该返回 `Authenticatable` 的实现。
 
 `updateRememberToken` 方法用新的 `$token` 更新 `$user` 的 `remember_token` 字段。新 token 可以是在「记住我」成功地登录时，传入一个新的 token，或当用户注销时传入一个 null。
 
@@ -135,7 +135,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 `validateCredentials` 方法应该借由比较给定的 `$user` 与 `$credentials` 来验证用户。举例来说，这个方法可以比较 `$user->getAuthPassword()` 字串跟 `Hash::make` 后的 `$credentials['password']`。
 
-现在我们已经看过 `UserProvider` 的每个方法，接着来看一下 `Authenticatable`。记住，提供者应该从 `retrieveById` 和 `retrieveByCredentials` 方法返回这个接口的实作：
+现在我们已经看过 `UserProvider` 的每个方法，接着来看一下 `Authenticatable`。记住，提供者应该从 `retrieveById` 和 `retrieveByCredentials` 方法返回这个接口的实现：
 
 	interface Authenticatable {
 
@@ -147,9 +147,9 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 	}
 
-这个接口很简单。 The `getAuthIdentifier` 方法应该返回用户的「主键」。在 MySQL 后台，同样，这将会是个自动递增的主键。`getAuthPassword` 应该返回用户哈希过的密码。这个接口让认证系统可以与任何用户类一起运作，无论你使用什么 ORM 或保存抽象层。默认，Laravel 包含一个实作这个接口的 `User` 类在 `app` 文件夹里，所以你可以参考这个类当作实作的例子。
+这个接口很简单。 The `getAuthIdentifier` 方法应该返回用户的「主键」。在 MySQL 后台，同样，这将会是个自动递增的主键。`getAuthPassword` 应该返回用户哈希过的密码。这个接口让认证系统可以与任何用户类一起运作，无论你使用什么 ORM 或保存抽象层。默认，Laravel 包含一个实现这个接口的 `User` 类在 `app` 文件夹里，所以你可以参考这个类当作实现的例子。
 
-最后，当我们已经实作了 `UserProvider`，我们准备好用 `Auth` facade 来注册扩展：
+最后，当我们已经实现了 `UserProvider`，我们准备好用 `Auth` facade 来注册扩展：
 
 	Auth::extend('riak', function($app)
 	{

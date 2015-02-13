@@ -29,7 +29,7 @@ Laravel 提供立即可用的 `single` 、 `daily` 和 `syslog` 日志模式。�
 
 所有的例外都由 `App\Exceptions\Handler` 类处理。这个类包含两个方法： `report` 和 `render` 。
 
-`report` 方法用来纪录例外或把例外传递到外部服务，例如： [BugSnag](https://bugsnag.com) 。默认情况下， `report`  方法只基本实作简单地传递例外到父类并于父类纪录例外。然而，你可以依你所需自由地纪录例外。如果你需要使用不同的方法来回报不同类型的例外，你可以使用 PHP 的 `instanceof` 比较运算子：
+`report` 方法用来纪录例外或把例外传递到外部服务，例如： [BugSnag](https://bugsnag.com) 。默认情况下， `report`  方法只基本实现简单地传递例外到父类并于父类纪录例外。然而，你可以依你所需自由地纪录例外。如果你需要使用不同的方法来回报不同类型的例外，你可以使用 PHP 的 `instanceof` 比较运算子：
 
 	/**
 	 * 回报或纪录例外。
