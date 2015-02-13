@@ -83,7 +83,7 @@
 		'uses' => 'UserController@showProfile'
 	]);
 
-此外，你也可以在控制器建构式中指定中间层 ：
+此外，你也可以在控制器构造器中指定中间层 ：
 
 	class UserController extends Controller {
 
@@ -210,9 +210,9 @@ DELETE    | /resource/{resource}        | 删除         | resource.destroy
 <a name="dependency-injection-and-controllers"></a>
 ## 依赖注入和控制器
 
-#### 建构式注入
+#### 构造器注入
 
-Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制器。因此，你可以在控制器所需要的建构式中，对依赖作任何的类型限制。
+Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制器。因此，你可以在控制器所需要的构造器中，对依赖作任何的类型限制。
 
 	<?php namespace App\Http\Controllers;
 
