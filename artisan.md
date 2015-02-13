@@ -3,7 +3,7 @@
 - [介绍](#introduction)
 - [用法](#usage)
 - [在命令行接口以外的地方调用命令](#calling-commands-outside-of-cli)
-- [调度 Artisan 命令](#scheduling-artisan-commands)
+- [调用 Artisan 命令](#scheduling-artisan-commands)
 
 <a name="introduction"></a>
 ## 介绍
@@ -25,9 +25,9 @@ Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的指令
 
 	php artisan help migrate
 
-#### 指定环境设置
+#### 指定环境配置
 
-您可以指定要使用的环境设置，只要在执行指令时加上 `--env` 即可切换：
+您可以指定要使用的环境配置，只要在执行指令时加上 `--env` 即可切换：
 
 	php artisan migrate --env=local
 
@@ -59,21 +59,21 @@ Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的指令
 	});
 
 <a name="scheduling-artisan-commands"></a>
-## 调度 Artisan 命令
+## 调用 Artisan 命令
 
-过去，开发者会对每个他们想要调度的主控台命令建立 Cron 项目。然而，这很令人头痛。你的主控台调度不再包含在版本控制里面，并且你必须 SSH 进入你的服务器以添加 Cron 项目。让我们来让生活变得更轻松。Laravel 命令调度器允许你顺畅地且语义化地定义命令调度在 Laravel 里面，而且你的服务器只需要一个 Cron 项目。
+过去，开发者会对每个他们想要调用的主控台命令建立 Cron 项目。然而，这很令人头痛。你的主控台调用不再包含在版本控制里面，并且你必须 SSH 进入你的服务器以添加 Cron 项目。让我们来让生活变得更轻松。Laravel 命令调用器允许你顺畅地且语义化地定义命令调用在 Laravel 里面，而且你的服务器只需要一个 Cron 项目。
 
-你的命令调度保存在 `app/Console/Kernel.php` 文件。你会在这个类别里看到一个 `schedule` 方法。为了帮助您开始，方法里面包含一个简单的例子。你可以依照你需要的自由地添加任何数量的预定工作到 `Schedule` 对象。你只需要添加这个 Cron 项目到服务器：
+你的命令调用保存在 `app/Console/Kernel.php` 文件。你会在这个类别里看到一个 `schedule` 方法。为了帮助您开始，方法里面包含一个简单的例子。你可以依照你需要的自由地添加任何数量的预定工作到 `Schedule` 对象。你只需要添加这个 Cron 项目到服务器：
 
 	* * * * * php /path/to/artisan schedule:run 1>> /dev/null 2>&1
 
-这个 Cron 将会每分钟调用 Laravel 命令调度器。接着，Laravel 评估你的预定工作并在时间到时执行工作。这不能再更简单了！
+这个 Cron 将会每分钟调用 Laravel 命令调用器。接着，Laravel 评估你的预定工作并在时间到时执行工作。这不能再更简单了！
 
-### 更多调度的例子
+### 更多调用的例子
 
-让我们来多看几个调度的例子：
+让我们来多看几个调用的例子：
 
-#### 调度闭包
+#### 调用闭包
 
 	$schedule->call(function()
 	{
@@ -81,7 +81,7 @@ Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的指令
 
 	})->hourly();
 
-#### 调度终端机命令
+#### 调用终端机命令
 
 	$schedule->exec('composer self-update')->daily();
 
@@ -117,7 +117,7 @@ Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的指令
 
 	$schedule->command('foo')->weekly();
 
-	// 调度每周一次在特定的日子 (0-6) 和时间的工作...
+	// 调用每周一次在特定的日子 (0-6) 和时间的工作...
 	$schedule->command('foo')->weeklyOn(1, '8:00');
 
 #### 每月一次的工作

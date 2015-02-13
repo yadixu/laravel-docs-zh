@@ -3,7 +3,7 @@
 - [简介](#introduction)
 - [完成安装后](#after-installation)
 - [取得设置值](#accessing-configuration-values)
-- [环境设置](#environment-configuration)
+- [环境配置](#environment-configuration)
 - [设置缓存](#configuration-caching)
 - [维护模式](#maintenance-mode)
 - [优雅链接](#pretty-urls)
@@ -53,7 +53,7 @@ Laravel 框架有一个目录需要额外设置权限：`storage` 目录必须�
 	$value = config('app.timezone');
 
 <a name="environment-configuration"></a>
-## 环境设置
+## 环境配置
 
 通常应用程序常常需要根据不同的执行环境而有不同的设置值。例如，你会希望在你的本机开发环境上会有与正式环境不同的暂存驱动（cache driver），通过设置文件，就可以轻松完成。
 
@@ -61,7 +61,7 @@ Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vanc
 
 当你的应用程序收到请求，这个文件所有的变量会被加载到 `$_ENV` PHP 超级全局变量里。你可以使用辅助方法 `env` 查看这些变量。事实上，如果你检阅过 Laravel 设置文件，你会注意到几个选项已经在使用这个辅助方法！
 
-根据你的本机服务器或者上线环境需求，你可以自由的修改你的环境变量。然而， 你的 `.env`  文件不应该被提交到应用程序的版本控制系统，因为每个开发人员或服务器使用你的应用程序可能需要不同的环境设置。
+根据你的本机服务器或者上线环境需求，你可以自由的修改你的环境变量。然而， 你的 `.env`  文件不应该被提交到应用程序的版本控制系统，因为每个开发人员或服务器使用你的应用程序可能需要不同的环境配置。
 
 如果你是一个团队的开发者，不妨将 `.env.example` 文件包含到你的应用程序。通过范例设置档里的预留值，你的团队中其他开发人员可以清楚地看到执行你的应用程序所需的哪些环境变量。
 
