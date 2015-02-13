@@ -212,7 +212,7 @@ DELETE    | /resource/{resource}        | 删除         | resource.destroy
 
 #### 建构式注入
 
-Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制器。因此，你可以在控制器所需要的建构式中，对相依作任何的型别限制。
+Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制器。因此，你可以在控制器所需要的建构式中，对相依作任何的类型限制。
 
 	<?php namespace App\Http\Controllers;
 
@@ -239,11 +239,11 @@ Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制
 
 	}
 
-当然了，你也可以对任何的 [Laravel contract](/docs/5.0/contracts) 作型别限制。只要容器能解析它，你就可以对它作型别限制。
+当然了，你也可以对任何的 [Laravel contract](/docs/5.0/contracts) 作类型限制。只要容器能解析它，你就可以对它作类型限制。
 
 #### 方法注入
 
-除了建构器注入外，你也可以对控制器方法的相依作型别限制。例如，让我们对某个方法的 `Request` 实例作型别限制：
+除了建构器注入外，你也可以对控制器方法的相依作类型限制。例如，让我们对某个方法的 `Request` 实例作类型限制：
 
 	<?php namespace App\Http\Controllers;
 
