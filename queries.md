@@ -253,7 +253,7 @@
 
 > **注意:** 当使用 PostgreSQL 时，insertGetId 方法会预期自动增加的字段是以「id」为命名。
 
-#### 添加多笔数据进数据表
+#### 添加多个数据进数据表
 
 	DB::table('users')->insert(array(
 		array('email' => 'taylor@example.com', 'votes' => 0),

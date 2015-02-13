@@ -57,37 +57,37 @@ Laravel 的结构生成器 (`Schema`) 提供一个与数据库无关的数据表
 		$table->string('email');
 	});
 
-数据表产生器提供多种字段型态可使用，在您建立数据表时也许会用到：
+数据表产生器提供多种字段类型可使用，在您建立数据表时也许会用到：
 
 命令  | 功能描述
 ------------- | -------------
-`$table->bigIncrements('id');`  |  ID 自动增量，使用相当于「big integer」型态
-`$table->bigInteger('votes');`  |  相当于 BIGINT 型态
-`$table->binary('data');`  |  相当于 BLOB 型态
-`$table->boolean('confirmed');`  |  相当于 BOOLEAN 型态
-`$table->char('name', 4);`  |  相当于 CHAR 型态，并带有长度
-`$table->date('created_at');`  |  相当于 DATE 型态
-`$table->dateTime('created_at');`  |  相当于 DATETIME 型态
-`$table->decimal('amount', 5, 2);`  |  相当于 DECIMAL 型态，并带有精度与基数
-`$table->double('column', 15, 8);`  |  相当于 DOUBLE 型态，总共有 15 位数，在小数点后面有 8 位数
-`$table->enum('choices', array('foo', 'bar'));` | 相当于 ENUM 型态
-`$table->float('amount');`  |  相当于 FLOAT 型态
-`$table->increments('id');`  |  相当于 Incrementing 型态 (数据表主键)
-`$table->integer('votes');`  |  相当于 INTEGER 型态
-`$table->json('options');`  |  相当于 JSON 型态
-`$table->longText('description');`  |  相当于 LONGTEXT 型态
-`$table->mediumInteger('numbers');`  |  相当于 MEDIUMINT 型态
-`$table->mediumText('description');`  |  相当于 MEDIUMTEXT 型态
+`$table->bigIncrements('id');`  |  ID 自动增量，使用相当于「big integer」类型
+`$table->bigInteger('votes');`  |  相当于 BIGINT 类型
+`$table->binary('data');`  |  相当于 BLOB 类型
+`$table->boolean('confirmed');`  |  相当于 BOOLEAN 类型
+`$table->char('name', 4);`  |  相当于 CHAR 类型，并带有长度
+`$table->date('created_at');`  |  相当于 DATE 类型
+`$table->dateTime('created_at');`  |  相当于 DATETIME 类型
+`$table->decimal('amount', 5, 2);`  |  相当于 DECIMAL 类型，并带有精度与基数
+`$table->double('column', 15, 8);`  |  相当于 DOUBLE 类型，总共有 15 位数，在小数点后面有 8 位数
+`$table->enum('choices', array('foo', 'bar'));` | 相当于 ENUM 类型
+`$table->float('amount');`  |  相当于 FLOAT 类型
+`$table->increments('id');`  |  相当于 Incrementing 类型 (数据表主键)
+`$table->integer('votes');`  |  相当于 INTEGER 类型
+`$table->json('options');`  |  相当于 JSON 类型
+`$table->longText('description');`  |  相当于 LONGTEXT 类型
+`$table->mediumInteger('numbers');`  |  相当于 MEDIUMINT 类型
+`$table->mediumText('description');`  |  相当于 MEDIUMTEXT 类型
 `$table->morphs('taggable');`  |  加入整数 `taggable_id` 与字串 `taggable_type`
 `$table->nullableTimestamps();`  |  与 `timestamps()` 相同，但允许 NULL
-`$table->smallInteger('votes');`  |  相当于 SMALLINT 型态
-`$table->tinyInteger('numbers');`  |  相当于 TINYINT 型态
+`$table->smallInteger('votes');`  |  相当于 SMALLINT 类型
+`$table->tinyInteger('numbers');`  |  相当于 TINYINT 类型
 `$table->softDeletes();`  |  加入 **deleted\_at** 字段于软删除使用
-`$table->string('email');`  |  相当于 VARCHAR 型态
-`$table->string('name', 100);`  |  相当于 VARCHAR 型态，并指定长度
-`$table->text('description');`  |  相当于 TEXT 型态
-`$table->time('sunrise');`  |  相当于 TIME 型态
-`$table->timestamp('added_on');`  |  相当于 TIMESTAMP 型态
+`$table->string('email');`  |  相当于 VARCHAR 类型
+`$table->string('name', 100);`  |  相当于 VARCHAR 类型，并指定长度
+`$table->text('description');`  |  相当于 TEXT 类型
+`$table->time('sunrise');`  |  相当于 TIME 类型
+`$table->timestamp('added_on');`  |  相当于 TIMESTAMP 类型
 `$table->timestamps();`  |  加入 **created\_at** 和 **updated\_at** 字段
 `$table->rememberToken();`  |  加入 `remember_token` 使用 VARCHAR(100) NULL
 `->nullable()`  |  标示此字段允许 NULL
@@ -141,7 +141,7 @@ Laravel 的结构生成器 (`Schema`) 提供一个与数据库无关的数据表
 		$table->dropColumn('votes');
 	});
 
-#### 移除数据表多笔字段
+#### 移除数据表多个字段
 
 	Schema::table('users', function($table)
 	{
@@ -203,7 +203,7 @@ Laravel 也支持数据表的外键约束：
 
 	$table->dropForeign('posts_user_id_foreign');
 
-> **注意:** 当外键有参照到自动增量时，记得配置外键为 `unsigned` 型态。
+> **注意:** 当外键有参照到自动增量时，记得配置外键为 `unsigned` 类型。
 
 <a name="dropping-indexes"></a>
 ## 移除索引
@@ -219,7 +219,7 @@ Laravel 也支持数据表的外键约束：
 <a name="dropping-timestamps"></a>
 ## 移除时间戳记和软删除
 
-要移除 `timestamps`、`nullableTimestamps` 或 `softDeletes` 字段型态，您可以使用以下方法：
+要移除 `timestamps`、`nullableTimestamps` 或 `softDeletes` 字段类型，您可以使用以下方法：
 
 命令  | 功能描述
 ------------- | -------------
