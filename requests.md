@@ -16,7 +16,7 @@
 
 	$name = Request::input('name');
 
-切记，如果你在一个命名空间中，你必须导入 `Request` facade，接着在类的上方宣告 `use Request;`。
+切记，如果你在一个命名空间中，你必须导入 `Request` facade，接着在类的上方声明 `use Request;`。
 
 ### 透过依赖注入
 

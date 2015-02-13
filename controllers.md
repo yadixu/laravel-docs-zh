@@ -146,7 +146,7 @@ Laravel 让你能轻易地定义单一路由来处理控制器中的每一项行
 
 	Route::resource('photo', 'PhotoController');
 
-此单一路由宣告创建了多个路由，用来处理各式各样和相片资源相关的 RESTful 行为。同样地，产生的控制器已有各种和这些行为绑定的方法，包含用来通知你它们处理了那些 URI 及动词。
+此单一路由声明创建了多个路由，用来处理各式各样和相片资源相关的 RESTful 行为。同样地，产生的控制器已有各种和这些行为绑定的方法，包含用来通知你它们处理了那些 URI 及动词。
 
 #### 由资源控制器处理的行为
 
@@ -177,7 +177,7 @@ DELETE    | /resource/{resource}        | 删除         | resource.destroy
 
 #### 处理嵌套资源控制器
 
-在你的路由宣告中使用「点」号来「嵌套化」资源控制器：
+在你的路由声明中使用「点」号来「嵌套化」资源控制器：
 
 	Route::resource('photos.comments', 'PhotoCommentController');
 

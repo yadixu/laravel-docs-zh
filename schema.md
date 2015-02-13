@@ -91,7 +91,7 @@ Laravel 的结构生成器 (`Schema`) 提供一个与数据库无关的数据表
 `$table->timestamps();`  |  加入 **created\_at** 和 **updated\_at** 字段
 `$table->rememberToken();`  |  加入 `remember_token` 使用 VARCHAR(100) NULL
 `->nullable()`  |  标示此字段允许 NULL
-`->default($value)`  |  宣告此字段的默认值
+`->default($value)`  |  声明此字段的默认值
 `->unsigned()`  |  配置整数是无分正负
 
 #### 在 MySQL 使用 After 方法
