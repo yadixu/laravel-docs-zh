@@ -23,7 +23,7 @@ Facades 提供一个静态接口给在应用程序的 [IoC 容器](/docs/5.0/con
 
 你的 facade 类只需要去实现一个方法：`getFacadeAccessor`。`getFacadeAccessor` 方法的工作是定义要从容器解析什么。基本的 `Facade` 类利用 `__callStatic()` 魔术方法来从你的 facade 调用到解析出来的对象。
 
-所以当你对 facade 调用，例如 `Cache::get`，Laravel 从 IoC 容器解析缓存管理类出来，并对该类调用 `get` 方法。用科技术语来说，Laravel Facades 是使用 Laravel IoC 容器作为服务定位器的便捷语法。
+所以当你对 facade 调用，例如 `Cache::get`，Laravel 从 IoC 容器解析缓存管理类出来，并对该类调用 `get` 方法。用专业口吻来说，Laravel Facades 是使用 Laravel IoC 容器作为服务定位器的便捷语法。
 
 <a name="practical-usage"></a>
 ## 实际用法
@@ -129,7 +129,7 @@ Cache 类继承基本的 `Facade` 类并定义一个 `getFacadeAccessor()` 方�
 <a name="mocking-facades"></a>
 ## 仿真 Facades
 
-单元测试是为什么现在 facades 采用这样的工作方式的重要面向。事实上，可测试性甚至是 facades 存在的主要理由。想要获得更多信息，请查看文档的 [仿真 facades](/docs/testing#mocking-facades) 章节。
+单元测试是为什么现在 facades 采用这样的工作方式的主要因素。事实上，可测试性甚至是 facades 存在的主要理由。想要获得更多信息，请查看文档的 [仿真 facades](/docs/testing#mocking-facades) 章节。
 
 <a name="facade-class-reference"></a>
 ## Facade 类参考
