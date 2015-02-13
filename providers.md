@@ -88,7 +88,7 @@ Artisan 命令行接口可以很容易地透过 `make:provider` 产生新的提�
 
 	}
 
-我们可以对 `boot` 方法中的相依作型别暗示。服务容器会自动注入任何你所需要的相依：
+我们可以对 `boot` 方法中的相依作类型暗示。服务容器会自动注入任何你所需要的相依：
 
 	use Illuminate\Contracts\Events\Dispatcher;
 

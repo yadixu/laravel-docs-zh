@@ -61,7 +61,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 
 ### 绑定
 
-几乎你所有服务容器将与已注册的[服务提供者](/doc/5.0/providers)绑定，这些例子都在情境(context)使用容器做说明，如果应用程序其它地方需要容器实例，像是工厂(factory)，能以型别提示 `Illuminate\Contracts\Container\Container` 注入一个容器实例。另外，你可以使用 `App` facade 访问容器。
+几乎你所有服务容器将与已注册的[服务提供者](/doc/5.0/providers)绑定，这些例子都在情境(context)使用容器做说明，如果应用程序其它地方需要容器实例，像是工厂(factory)，能以类型提示 `Illuminate\Contracts\Container\Container` 注入一个容器实例。另外，你可以使用 `App` facade 访问容器。
 
 #### 注册基本解析器
 
@@ -76,7 +76,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 
 #### 注册共享
 
-有时候，你可能希望绑定到容器的型别只会被解析一次，之后的调用都返回相同的实例：
+有时候，你可能希望绑定到容器的类型只会被解析一次，之后的调用都返回相同的实例：
 
 	$this->app->singleton('FooBar', function($app)
 	{
@@ -101,7 +101,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 
 	$fooBar = $this->app['FooBar'];
 
-最后，重点是你可以简单地在类别建构子注入"型别提示"依赖，包含控制器、事件监听者、工作队列、筛选器等，容器将会自动注入依赖：
+最后，重点是你可以简单地在类别建构子注入"类型提示"依赖，包含控制器、事件监听者、工作队列、筛选器等，容器将会自动注入依赖：
 
 	<?php namespace App\Http\Controllers;
 
@@ -207,7 +207,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 
 	$this->app->bind('App\Contracts\EventPusher', 'App\Services\PusherEventPusher');
 
-当有类别需要 `EventPusher` 实作时，会告诉容器应该注入 `PusherEventPusher`，现在可以在建构子做型别提示 `EventPusher` 接口：
+当有类别需要 `EventPusher` 实作时，会告诉容器应该注入 `PusherEventPusher`，现在可以在建构子做类型提示 `EventPusher` 接口：
 
 		/**
 		 * Create a new order handler instance.
@@ -256,7 +256,7 @@ Laravel 服务容器是管理类别依赖的强力工具。依赖注入是个异
 <a name="practical-applications"></a>
 ## 实际应用
 
-Laravel 提供几个使用服务容器，提高应用程序弹性和可测试性的机会，主要例子是解析控制器时，所有控制器都是透过服务容器解析，意思是你可在控制器建构子做型别提示依赖，它们将会自动注入。
+Laravel 提供几个使用服务容器，提高应用程序弹性和可测试性的机会，主要例子是解析控制器时，所有控制器都是透过服务容器解析，意思是你可在控制器建构子做类型提示依赖，它们将会自动注入。
 
 	<?php namespace App\Http\Controllers;
 
@@ -299,7 +299,7 @@ Laravel 提供几个使用服务容器，提高应用程序弹性和可测试性
 
 #### 其他容器使用范例
 
-当然，如上面所述，控制器不是唯一透过服务容器 Laravel 类别解析，你也可以在路由闭包、筛选器、工作队列、事件聆听等，做型别提示依赖，对于在这些情境使用服务容器的例子，请参考相关文档。
+当然，如上面所述，控制器不是唯一透过服务容器 Laravel 类别解析，你也可以在路由闭包、筛选器、工作队列、事件聆听等，做类型提示依赖，对于在这些情境使用服务容器的例子，请参考相关文档。
 
 <a name="container-events"></a>
 ## 容器事件
