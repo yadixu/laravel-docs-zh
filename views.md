@@ -47,7 +47,7 @@
 
 #### 把数据共享给所有视图
 
-有时候你可能需要共享一些数据给你的所有视图，你有很多个选择：`view` 辅助方法；`Illuminate\Contracts\View\Factory` [公约 \(contract\)](/docs/5.0/contracts)；在 [视图组件 \(view composer\)](#view-composers) 内使用通配符。
+有时候你可能需要共享一些数据给你的所有视图，你有很多个选择：`view` 辅助方法；`Illuminate\Contracts\View\Factory` [合约 \(contract\)](/docs/5.0/contracts)；在 [视图组件 \(view composer\)](#view-composers) 内使用通配符。
 
 这里有个 `view` 辅助方法的例子：
 
@@ -59,7 +59,7 @@
 
 通常你应该在服务提供者的 `boot` 方法内使用 `share` 方法。你可以选择加在 `AppServiceProvider` 或者是新建一个单独的服务提供者来容纳这些代码。
 
-> **备注：** 当 `view` 辅助方法没有带入任何参数调用时，它将会返回一个的 `Illuminate\Contracts\View\Factory` 公约 (contract) 的实现 (implementation)。
+> **备注：** 当 `view` 辅助方法没有带入任何参数调用时，它将会返回一个的 `Illuminate\Contracts\View\Factory` 合约 (contract) 的实现 (implementation)。
 
 #### 确认视图是否存在
 

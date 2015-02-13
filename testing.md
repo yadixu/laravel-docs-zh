@@ -4,7 +4,7 @@
 - [定义并执行测试](#defining-and-running-tests)
 - [测试环境](#test-environment)
 - [从测试调用路由](#calling-routes-from-tests)
-- [仿真 Facades](#mocking-facades)
+- [模拟 Facades](#mocking-facades)
 - [框架 Assertions](#framework-assertions)
 - [辅助方法](#helper-methods)
 - [重置应用程序](#refreshing-the-application)
@@ -79,9 +79,9 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 	$response = $this->callSecure('GET', 'foo/bar');
 
 <a name="mocking-facades"></a>
-## 仿真 Facades
+## 模拟 Facades
 
-当测试的时候，你或许常会想要仿真调用 Laravel 静态 facade。举个例子，思考下面的控制器行为：
+当测试的时候，你或许常会想要模拟调用 Laravel 静态 facade。举个例子，思考下面的控制器行为：
 
 	public function getIndex()
 	{
@@ -90,9 +90,9 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 		return 'All done!';
 	}
 
-我们可以在 facade 上使用 `shouldReceive` 方法，来仿真调用 `Event` 类，它将会返回一个 [Mockery](https://github.com/padraic/mockery) mock 对象实例。
+我们可以在 facade 上使用 `shouldReceive` 方法，来模拟调用 `Event` 类，它将会返回一个 [Mockery](https://github.com/padraic/mockery) mock 对象实例。
 
-#### 仿真 Facade
+#### 模拟 Facade
 
 	public function testGetIndex()
 	{
@@ -101,7 +101,7 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 		$this->call('GET', '/');
 	}
 
-> **注意:** 你不应该仿真 `Request` facade。取而代之，当执行你的测试，传递想要的输入数据进去 `call` 方法。
+> **注意:** 你不应该模拟 `Request` facade。取而代之，当执行你的测试，传递想要的输入数据进去 `call` 方法。
 
 <a name="framework-assertions"></a>
 ## 框架 Assertions
