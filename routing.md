@@ -157,7 +157,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 		//
 	}
 
-你也可以使用 `Illuminate\Http\Request` 实体取得路由参数。当前请求的实体可以透过 `Request` facade  取得，或透过型别暗示 `Illuminate\Http\Request` 注入依赖：
+你也可以使用 `Illuminate\Http\Request` 实体取得路由参数。当前请求的实体可以透过 `Request` facade  取得，或透过类型暗示 `Illuminate\Http\Request` 注入依赖：
 
 	use Illuminate\Http\Request;
 
