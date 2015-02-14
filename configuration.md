@@ -126,7 +126,7 @@ Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vanc
 
 Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.php`。如果你的服务器是使用，请确认是否有开启 `mod_rewrite` 模块。
 
-假设 Laravel 附带的 `.htaccess` 文件在 Apache 无法作用的话，请尝试下面的方法：
+假设 Laravel 附带的 `.htaccess` 文件在 Apache 无法生效的话，请尝试下面的方法：
 
 	Options +FollowSymLinks
 	RewriteEngine On

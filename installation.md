@@ -47,7 +47,7 @@ Laravel 框架有一些系统上的需求：
 
 在你安装完 Laravel 后，首先需要做的事情是配置一个随机字串到应用程序密钥。假设你安装 Laravel 是通过 Composer，这个密钥会通过 `key:generate` 命令帮你配置完成。
 
-通常这个密钥应该有 32 字符长。这个密钥可以被配置在 `.env` 环境文件中。 **如果这要密钥没有被配置的话，你的用户 sessions 和其他的加密数据都是不安全的！**
+通常这个密钥应该有 32 字符长。这个密钥可以被配置在 `.env` 环境文件中。 **如果这密钥没有被配置的话，你的用户 sessions 和其他的加密数据都是不安全的！**
 
 Laravel 几乎不需配置就可以马上使用。你可以自由的开始开发！然而，你可以查看 `config/app.php` 文件和其他的文档。你可能希望依据你的应用程序而做更改，文件包含数个选项如 `时区` 和 `语言环境`。
 
@@ -67,7 +67,7 @@ Laravel 框架有一个目录需要额外配置权限：`storage` 要让服务�
 
 Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.php`。如果你网页服务器是使用 Apache 的话，请确认是否有开启 `mod_rewrite` 模块。
 
-假设 Laravel 附带的 `.htaccess` 文件在 Apache无法作用的话，请尝试下面的方法：
+假设 Laravel 附带的 `.htaccess` 文件在 Apache无法生效的话，请尝试下面的方法：
 
 	Options +FollowSymLinks
 	RewriteEngine On
