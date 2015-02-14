@@ -18,7 +18,7 @@
 
 ### 命名你的应用程序
 
-在安装完成 Laravel 后，你可以「命名」你的应用程序。默认情况下，`app` 的目录是命名在 `App` 下，通过 Composer 使用 [PSR-4 autoloading standard](http://www.php-f通过ig.org/psr/psr-4/) 自动加载。不过，你可以轻松地通过 Artisan 命令 `app:name` 来修改命名空间，以配合你的应用程序名称。
+在安装完成 Laravel 后，你可以「命名」你的应用程序。默认情况下，`app` 的目录是命名在 `App` 下，通过 Composer 使用 [PSR-4 autoloading standard](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-4-autoloader-cn.md) 自动加载。不过，你可以轻松地通过 Artisan 命令 `app:name` 来修改命名空间，以配合你的应用程序名称。
 
 举例来说，假设你的应用程序叫做「 Horsefly 」，你可以从安装的根目录执行下面的命令：
 
