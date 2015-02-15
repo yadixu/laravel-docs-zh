@@ -15,17 +15,17 @@
 
 开始在您的本机环境安装全新的目录结构，[安装全新的 Laravel 5 应用程序](/docs/5.0/installation)，我们将详细探讨迁移各部分的过程。 
 
-### Composer 相依与套件
+### Composer 依赖与组件
 
-别忘了将任何附加于 Composer 的相依套件加入 5.0 应用程序内，包含第三方代码(例如 SDKs)
+别忘了将任何附加于 Composer 的依赖组件加入 5.0 应用程序内，包含第三方代码(例如 SDKs)
 
-部分套件也许不兼容刚发布的 Laravel 5 版本，请向套件管理者确认该套件支持 Laravel 5的版本，当您在 Composer 内加入任何套件，请执行 `composer update`。
+部分组件也许不兼容刚发布的 Laravel 5 版本，请向组件管理者确认该组件支持 Laravel 5的版本，当您在 Composer 内加入任何组件，请执行 `composer update`。
 
 ### 命名空间
+I
+默认情况下，Laravel 4 并不会使用您程序代码内的命名空间，所以，举例来说，所有的 Eloquent 模型和控制器仅简单存在"全局"的命名空间，为了更快速的迁移，Laravel 5 也允许您可以将这些类别一样保留在「全局」的命名空间。
 
-缺省情况下，Laravel 4 并不会使用您程序代码内的命名空间，所以，举例来说，所有的 Eloquent 模型和控制器仅简单存在"全域"的命名空间，为了更快速的迁移，Laravel 5 也允许您可以将这些类别一样保留在"全域"的命名空间。
-
-### 设置档
+### 设置文件
 
 #### 迁移环境变量
 
@@ -37,11 +37,11 @@
 
 > **注意:** 在部署 Laravel 5 应用程序之前，您需要在正式主机上放置适当的 `.env` 文件与设置值。
 
-#### 设置档
+#### 设置文件
 
-Laravel 5.0 不再使用 `app/config/{environmentName}/` 目录结构来提供对应该环境的设置档，取而代之的是，将环境对应的设置值移到 `.env`，然后在设置文件使用 `env('key', 'default value')` 来访问，您可以在 `config/database.php` 文件内看到相关范例。
+Laravel 5.0 不再使用 `app/config/{environmentName}/` 目录结构来提供对应该环境的设置文件，取而代之的是，将环境对应的设置值移到 `.env`，然后在设置文件使用 `env('key', 'default value')` 来访问，您可以在 `config/database.php` 文件内看到相关范例。
 
-将设置档放在 `config/` 目录下，来表示所有环境共用的设置档，或是在文件内使用 `env()` 来取得对应该环境的设置值。
+将设置文件放在 `config/` 目录下，来表示所有环境共用的设置文件，或是在文件内使用 `env()` 来取得对应该环境的设置值。
 
 请记住，若您在 `.env` 文件内增加 key 值，同时也要对应增加到 `.env.example` 文件中，这将可以帮助团队成员去修改它们的 `.env` 文件。
 
@@ -59,13 +59,13 @@ Laravel 5.0 不再使用 `app/config/{environmentName}/` 目录结构来提供�
 
 将筛选器从原本的 `app/filters.php` 复制到 `app/Providers/RouteServiceProvider.php` 的 `boot()` 方法中，并在 `app/Providers/RouteServiceProvider.php` 加入 `use Illuminate\Support\Facades\Route;` 来继续使用 `Route` Facade。
 
-您不需要移动任何 Laravel 4.0 缺省的过滤器，像是 `auth` 和 `csrf` 。他们已经内置，只是换作以中介层形式出现。那些在路由或控制器内有参照到旧有的过滤器 (例如 `['before' => 'auth']`) 请修改参照到新的中介层 (例如 `['middleware' => 'auth'].`)
+您不需要移动任何 Laravel 4.0 默认的过滤器，像是 `auth` 和 `csrf` 。他们已经内置，只是换作以中间层形式出现。那些在路由或控制器内有参照到旧有的过滤器 (例如 `['before' => 'auth']`) 请修改参照到新的中间层 (例如 `['middleware' => 'auth'].`)
 
 Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `after` 绑定和使用您自订的过滤器。
 
-### 全域 CSRF
+### 全局 CSRF
 
-缺省情况下，[CSRF 保护](/docs/5.0/routing#csrf-protection) 在所有路由下是开启的。若您想关闭他们，或是在特定路由手动开启，请移除 `App\Http\Kernel` 的 `middleware` 数组内的这一行：
+默认情况下，[CSRF 保护](/docs/5.0/routing#csrf-protection) 在所有路由下是开启的。若您想关闭他们，或是在特定路由手动开启，请移除 `App\Http\Kernel` 的 `middleware` 数组内的这一行：
 
 	'App\Http\Middleware\VerifyCsrfToken',
 
@@ -73,7 +73,7 @@ Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `afte
 
 	'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
 
-现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中介层到路由/控制器。了解更多关于中介层，请见[完整文档](/docs/5.0/middleware).
+现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间层到路由/控制器。了解更多关于中间层，请见[完整文档](/docs/5.0/middleware).
 
 ### Eloquent 模型
 
@@ -107,7 +107,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 **移除 UserInterface 和 RemindableInterface 接口.**
 
-**让类别实作以下接口：**
+**让类别实现以下接口：**
 
 ```php
 implements AuthenticatableContract, CanResetPasswordContract
@@ -135,7 +135,7 @@ use Authenticatable, CanResetPassword;
 
 将所有的迁移档从旧的 `app/database/migrations` 目录移到新的 `database/migrations` 。所有的数据填充档也要从 `app/database/seeds` 移到 `database/seeds`。
 
-### 全域 IoC 绑定
+### 全局 IoC 绑定
 
 若您在 `start/global.php` 有绑定任何 [IoC](/docs/5.0/container)  ，请将它们移到 `app/Providers/AppServiceProvider.php` 文件内的 `register` 方法，您需要引入 `App` facade。
 
@@ -173,9 +173,9 @@ use Authenticatable, CanResetPassword;
 
 ### 各式各样的文件
 
-复制专案内其他各式各样的文件，例如：`.scrutinizer.yml`, `bower.json` 以及其他类似工具的设置档。
+复制专案内其他各式各样的文件，例如：`.scrutinizer.yml`, `bower.json` 以及其他类似工具的设置文件。
 
-您可以将 Sass，Less 或 CoffeeScript 移动到任何您想放置的地方。 `resources/assets` 目录是一个不错的缺省位置。
+您可以将 Sass，Less 或 CoffeeScript 移动到任何您想放置的地方。 `resources/assets` 目录是一个不错的默认位置。
 
 ### 表单和 HTML 辅助函数
 
@@ -217,15 +217,15 @@ Remote 组件已不再使用。
 
 Laravel 4.2 需要 PHP 5.4.0 以上。
 
-### 缺省加密
+### 默认加密
 
-增加一个新的 `cipher` 选项在你的 `app/config/app.php` 设置档中。其选项值应为 `MCRYPT_RIJNDAEL_256`。
+增加一个新的 `cipher` 选项在你的 `app/config/app.php` 设置文件中。其选项值应为 `MCRYPT_RIJNDAEL_256`。
 
 	'cipher' => MCRYPT_RIJNDAEL_256
 
-该设置可用于设置所使用的 Laravel 加密工具的缺省加密方法。
+该设置可用于设置所使用的 Laravel 加密工具的默认加密方法。
 
-> **附注:** 在 Laravel 4.2，缺省加密方法为`MCRYPT_RIJNDAEL_128` (AES)，被认为是最安全的加密。必须将加密改回`MCRYPT_RIJNDAEL_256` 来解密在 Laravel <= 4.1 下加密的 cookies/values
+> **附注:** 在 Laravel 4.2，默认加密方法为`MCRYPT_RIJNDAEL_128` (AES)，被认为是最安全的加密。必须将加密改回`MCRYPT_RIJNDAEL_256` 来解密在 Laravel <= 4.1 下加密的 cookies/values
 
 ### 软删除模型现在改使用特性
 
@@ -261,7 +261,7 @@ Laravel 4.2 需要 PHP 5.4.0 以上。
 
 ### Iron.Io Queue 加密
 
-如果你使用 Iron.io queue 驱动，你将需要增加一个新的 `encrypt` 选项到你的 queue 设置档中：
+如果你使用 Iron.io queue 驱动，你将需要增加一个新的 `encrypt` 选项到你的 queue 设置文件中：
 
     'encrypt' => true
 
@@ -302,9 +302,9 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 > **附注:** 所有现存的「记得我」sessions 在此更新后将会失效，所以应用程序的所有用户将会被迫重新登录。
 
-### 套件管理者
+### 组件管理者
 
-两个新的方法被加入到 `Illuminate\Auth\UserProviderInterface` 接口。范例实作方式可以在缺省驱动中找到：
+两个新的方法被加入到 `Illuminate\Auth\UserProviderInterface` 接口。范例实现方式可以在默认驱动中找到：
 
 	public function retrieveByToken($identifier, $token);
 
@@ -315,7 +315,7 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 <a name="upgrade-4.1"></a>
 ## 从 4.0 升级到 4.1
 
-### 升级你的 Composer 相依性
+### 升级你的 Composer 依赖性
 
 升级你的应用程序至 Laravel 4.1，将 `composer.json` 里的 `laravel/framework` 版本更改至 `4.1.*`。
 
@@ -327,7 +327,7 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 ### 添加设置文件及选项
 
-更新你在设置档 `app/config/app.php` 里的 `aliases` 和 `providers` 数组。而更新的选项值可以在 [这个文件](https://github.com/laravel/laravel/blob/master/app/config/app.php) 中找到。请确定将你后来加入自定和套件所需的 providers / aliases 加回数组中。
+更新你在设置文件 `app/config/app.php` 里的 `aliases` 和 `providers` 数组。而更新的选项值可以在 [这个文件](https://github.com/laravel/laravel/blob/master/app/config/app.php) 中找到。请确定将你后来加入自定和组件所需的 providers / aliases 加回数组中。
 
 从 [这个 repository](https://github.com/laravel/laravel/blob/master/app/config/remote.php) 增加 `app/config/remote.php` 文件。
 
