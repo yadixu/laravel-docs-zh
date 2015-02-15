@@ -2,7 +2,7 @@
 
 - [简介](#introduction)
 - [基础控制器](#basic-controllers)
-- [控制器中间层](#controller-middleware)
+- [控制器中间件](#controller-middleware)
 - [内隐控制器](#implicit-controllers)
 - [RESTful 资源控制器](#restful-resource-controllers)
 - [依赖注入和控制器](#dependency-injection-and-controllers)
@@ -74,16 +74,16 @@
 	$action = Route::currentRouteAction();
 
 <a name="controller-middleware"></a>
-## 控制器中间层
+## 控制器中间件
 
-[中间层](/docs/5.0/middleware) 可在控制器路由中指定，例如：
+[中间件](/docs/5.0/middleware) 可在控制器路由中指定，例如：
 
 	Route::get('profile', [
 		'middleware' => 'auth',
 		'uses' => 'UserController@showProfile'
 	]);
 
-此外，你也可以在控制器构造器中指定中间层 ：
+此外，你也可以在控制器构造器中指定中间件 ：
 
 	class UserController extends Controller {
 

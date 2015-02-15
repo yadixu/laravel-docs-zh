@@ -59,7 +59,7 @@ Laravel 5.0 不再使用 `app/config/{environmentName}/` 目录结构来提供�
 
 将筛选器从原本的 `app/filters.php` 复制到 `app/Providers/RouteServiceProvider.php` 的 `boot()` 方法中，并在 `app/Providers/RouteServiceProvider.php` 加入 `use Illuminate\Support\Facades\Route;` 来继续使用 `Route` Facade。
 
-您不需要移动任何 Laravel 4.0 默认的过滤器，像是 `auth` 和 `csrf` 。他们已经内置，只是换作以中间层形式出现。那些在路由或控制器内有参照到旧有的过滤器 (例如 `['before' => 'auth']`) 请修改参照到新的中间层 (例如 `['middleware' => 'auth'].`)
+您不需要移动任何 Laravel 4.0 默认的过滤器，像是 `auth` 和 `csrf` 。他们已经内置，只是换作以中间件形式出现。那些在路由或控制器内有参照到旧有的过滤器 (例如 `['before' => 'auth']`) 请修改参照到新的中间件 (例如 `['middleware' => 'auth'].`)
 
 Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `after` 绑定和使用您自订的过滤器。
 
@@ -73,7 +73,7 @@ Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `afte
 
 	'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
 
-现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间层到路由/控制器。了解更多关于中间层，请见[完整文档](/docs/5.0/middleware).
+现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间件到路由/控制器。了解更多关于中间件，请见[完整文档](/docs/5.0/middleware).
 
 ### Eloquent 模型
 

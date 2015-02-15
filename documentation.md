@@ -8,7 +8,7 @@
     - [Homestead](/docs/5.0/homestead)
 - 基本功能
     - [路由](/docs/5.0/routing)
-    - [中间层](/docs/5.0/middleware)
+    - [中间件](/docs/5.0/middleware)
     - [控制器](/docs/5.0/controllers)
     - [请求](/docs/5.0/requests)
     - [响应](/docs/5.0/responses)
