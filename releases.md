@@ -7,13 +7,13 @@
 <a name="laravel-5.0"></a>
 ## Laravel 5.0
 
-Laravel 5.0 在缺省的专案上引进了新的应用程序架构。新的架构提供了更好的功能建立强健的 Laravel 应用程序，以及在应用程序中全面采用新的自动加载标准（ PSR-4 ）。首先，来查看一些主要更动：
+Laravel 5.0 在默认的项目上引进了新的应用程序架构。新的架构提供了更好的功能建立强健的 Laravel 应用程序，以及在应用程序中全面采用新的自动加载标准（ PSR-4 ）。首先，来查看一些主要更动：
 
 ### 新的目录结构
 
-旧的 `app/models` 目录已经完全被移除。相对的，你所有的代码都放在 `app` 目录下，以及缺省上使用 `App` 命名空间。这个缺省的命名空间可以快速的被更改，使用新的 `app:name` Artisan 命令。
+旧的 `app/models` 目录已经完全被移除。相对的，你所有的代码都放在 `app` 目录下，以及默认上使用 `App` 命名空间。这个默认的命名空间可以快速的被更改，使用新的 `app:name` Artisan 命令。
 
-控制器（ controller ），中介层（ middleware ），以及请求（ requests，Laravel 5.0 中新型态的类别），现在分门别类的放在 `app/Http` 目录下，因为他们都与应用程序的 HTTP 传输层相关。除了一个路由设置的文件外，所有的中介层现在都分开成为独自的类别档。
+控制器（ controller ），中间件（ middleware ），以及请求（ requests，Laravel 5.0 中新型态的类别），现在分门别类的放在 `app/Http` 目录下，因为他们都与应用程序的 HTTP 传输层相关。除了一个路由设置的文件外，所有的中间件现在都分开成为独自的类别档。
 
 新的 `app/Providers` 目录取代了旧版 Laravel 4.x `app/start` 里的文件。这些服务提供者有很多启动应用程序相关的方法，像是错误处理，日志纪录，路由加载，以及更多。当然，你可以自由的建立新的服务提供者到应用程序。
 
@@ -21,7 +21,7 @@ Laravel 5.0 在缺省的专案上引进了新的应用程序架构。新的架�
 
 ### Contracts
 
-所有 Laravel 主要组件实作所用的接口都放在 `illuminate/contracts` 专案下。这个专案没有其他的外部相依。这些方便、集成的接口，可以让你用来让依赖注入变得低耦合，将可以简单作为 Laravel Facades 的替代选项。
+所有 Laravel 主要组件实现所用的接口都放在 `illuminate/contracts` 项目下。这个项目没有其他的外部相依。这些方便、集成的接口，可以让你用来让依赖注入变得低耦合，将可以简单作为 Laravel Facades 的替代选项。
 
 更多关于 contracts 的信息，参考[完整文档](/docs/5.0/contracts)。
 
@@ -29,15 +29,15 @@ Laravel 5.0 在缺省的专案上引进了新的应用程序架构。新的架�
 
 如果你的应用程序全部都是使用控制器路由，你可以使用新的 `route:cache` Artisan 命令大幅度地加快路由注册。这对于有 100 个以上路由规则的应用程序很有用，可以**大幅度地**加快应用程序这部分的处理速度。
 
-### 路由中介层（ Middleware ）
+### 路由中间件（ Middleware ）
 
-除了像 Laravel 4 风格的路由「过滤器（ filters ）」，Laravel 5 现在有 HTTP 中介层，而原本的认证和 CSRF 「过滤器」已经改写成中介层。中介层提供了单一、一致的接口取代了各种过滤器，让你在请求进到应用程序前，可以简单地检查甚至拒绝请求。
+除了像 Laravel 4 风格的路由「过滤器（ filters ）」，Laravel 5 现在有 HTTP 中间件，而原本的认证和 CSRF 「过滤器」已经改写成中间件。中间件提供了单一、一致的接口取代了各种过滤器，让你在请求进到应用程序前，可以简单地检查甚至拒绝请求。
 
-更多关于中介层的信息，参考[完整文档](/docs/5.0/middleware)。
+更多关于中间件的信息，参考[完整文档](/docs/5.0/middleware)。
 
 ### 控制器方法依赖注入
 
-除了之前有的控制器依赖注入，你现在可以在控制器方法使用型别提示（ type-hint ）进行依赖注入。[服务容器](/docs/5.0/container)会自动注入依赖，即使路由包含了其他参数也不成问题：
+除了之前有的控制器依赖注入，你现在可以在控制器方法使用类型提示（ type-hint ）进行依赖注入。[服务容器](/docs/5.0/container)会自动注入依赖，即使路由包含了其他参数也不成问题：
 
 	public function createPost(Request $request, PostRepository $posts)
 	{
@@ -46,7 +46,7 @@ Laravel 5.0 在缺省的专案上引进了新的应用程序架构。新的架�
 
 ### 认证基本架构
 
-用户注册，认证，以及重设密码的控制器现在已经缺省含括了，包含相对应的视图，放在 `resources/views/auth`。除此之外， "users" 数据表迁移也已经缺省存在框架中了。这些简单的资源，可以让你快速开发应用程序的点子，而不用陷在撰写认证模板的泥淖上。认证相关的视图可以经由 `auth/login` 以及 `auth/register` 路由访问。`App\Services\Auth\Registrar` 服务会负责处理用户认证和添加的相关逻辑。
+用户注册，认证，以及重设密码的控制器现在已经默认含括了，包含相对应的视图，放在 `resources/views/auth`。除此之外， 「users」 数据表迁移也已经默认存在框架中了。这些简单的资源，可以让你快速开发应用程序的点子，而不用陷在撰写认证模板的泥淖上。认证相关的视图可以经由 `auth/login` 以及 `auth/register` 路由访问。`App\Services\Auth\Registrar` 服务会负责处理用户认证和添加的相关逻辑。
 
 ### 事件对象
 
@@ -199,7 +199,7 @@ Laravel 5.0 使用了 **form requests**，是继承了 `Illuminate\Foundation\Ht
 
 	}
 
-定义好类别后，我们可以在控制器动作里使用型别提示：
+定义好类别后，我们可以在控制器动作里使用类型提示：
 
 	public function register(RegisterRequest $request)
 	{
@@ -226,7 +226,7 @@ Laravel 5 基底控制器包含一个 `ValidatesRequests` trait。这个 trait �
 
 ### 新的 Generators
 
-因应新的应用程序缺省架构，框架添加了 Artisan generator 命令。使用 `php artisan list` 瞧瞧更多细节。
+因应新的应用程序默认架构，框架添加了 Artisan generator 命令。使用 `php artisan list` 瞧瞧更多细节。
 
 ### 设置档缓存
 
@@ -234,7 +234,7 @@ Laravel 5 基底控制器包含一个 `ValidatesRequests` trait。这个 trait �
 
 ### Symfony VarDumper
 
-出名的 `dd` 辅助函示，其可以在除错时印出变量信息，已经升级成使用令人惊艳的 Symfony VarDumper。它提供了颜色标记的输出，甚至数组可以自动缩合。在专案中试试下列代码：
+出名的 `dd` 辅助函示，其可以在除错时印出变量信息，已经升级成使用令人惊艳的 Symfony VarDumper。它提供了颜色标记的输出，甚至数组可以自动缩合。在项目中试试下列代码：
 
 	dd([1, 2, 3]);
 
@@ -253,7 +253,7 @@ Laravel 4.2 需要 PHP 5.4 以上的版本。此 PHP 更新版本让我们可以
 
 Larvel Forge，一个网页应用程序，提供一个简单的接口去建立管理你云端上的 PHP 服务器，像是 Linode、DigitalOcean、Rackspace 和 Amazon EC2。支持自动化 nginx 设置、SSH 密钥管理、Cron job 自动化、透过 NewRelic & Papertrail 服务器监控、「推送部署」、Laravel queue worker 设置等等。Forge 提供最简单且更实惠的方式来部署所有你的 Laravel 应用程序。
 
-缺省 Laravel 4.2 的安装里，`app/config/database.php` 设置档缺省已为 Forge 设置完成，让在平台上的全新应用程序更方便部署。
+默认 Laravel 4.2 的安装里，`app/config/database.php` 设置档默认已为 Forge 设置完成，让在平台上的全新应用程序更方便部署。
 
 关于 Laravel Forge 的更多信息可以在[官方 Forge 网站](https://forge.laravel.com)上找到。
 
@@ -261,7 +261,7 @@ Larvel Forge，一个网页应用程序，提供一个简单的接口去建立�
 
 Laravel Homestead 是一个为部署健全的 Laravel 和 PHP 应用程序的官方 Vagrant 环境。绝大多数的封装包的相依与软件在发布前已经部署处理完成，让封装包可以极快的被启用。Homestead 包含 Nginx 1.6、PHP 5.5.12、MySQL、Postres、Redis、Memcached、Beanstalk、Node、Gulp、Grunt 和 Bower。Homestead 包含一个简单的 `Homestead.yaml` 设置档，让你在单一个封装包中管理多个 Laravel 应用程序。
 
-缺省的 Laravel 4.2 安装中包含的 `app/config/local/database.php` 设置档使用 Homestead 的数据库作为缺省。让 Laravel 初始化安装与设置更为方便。
+默认的 Laravel 4.2 安装中包含的 `app/config/local/database.php` 设置档使用 Homestead 的数据库作为默认。让 Laravel 初始化安装与设置更为方便。
 
 官方文档已经更新并包含在 [Homestead 文档](/docs/homestead) 中。
 
@@ -352,4 +352,4 @@ Laravel 4.1 拥有一个完全重新编写的路由层。API 一样不变。然�
 
 ### Doctrine DBAL
 
-如果你有在你的迁移中使用到 `renameColumn`，之后你必须在 `composer.json` 里加 `doctrine/dbal` 进相依套件中。此套件不再缺省包含在 Laravel 之中。
+如果你有在你的迁移中使用到 `renameColumn`，之后你必须在 `composer.json` 里加 `doctrine/dbal` 进相依套件中。此套件不再默认包含在 Laravel 之中。
