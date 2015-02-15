@@ -32,7 +32,7 @@
 
 此外，复制原先您自定义的 `.env.php` 文件，并修改为 `.env` (本机环境的真实值) 和 `.env.example` (给其他团队成员的示例).
 
-更多关于环境设置值，请见[完整文件](/docs/5.0/configuration#environment-configuration)。
+更多关于环境设置值，请见[完整文档](/docs/5.0/configuration#environment-configuration)。
 
 > **注意:** 在部署 Laravel 5 应用程序之前，您需要在正式主机上放置适当的 `.env` 文件与设置值。
 
@@ -72,7 +72,7 @@ Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `afte
 
     'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
 
-现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间件到路由/控制器。了解更多关于中间件，请见[完整文件](/docs/5.0/middleware).
+现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间件到路由/控制器。了解更多关于中间件，请见[完整文档](/docs/5.0/middleware).
 
 ### Eloquent 模型
 
@@ -82,7 +82,7 @@ Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `afte
 
 #### Eloquent 缓存
 
-Eloquent 不再提供 `remember` 方法来缓存查找字串。若需要缓存字串，您可手动使用 `Cache::remember` 函数。了解更多关于缓存，请见[完整文件](/docs/5.0/cache).
+Eloquent 不再提供 `remember` 方法来缓存查找字串。若需要缓存字串，您可手动使用 `Cache::remember` 函数。了解更多关于缓存，请见[完整文档](/docs/5.0/cache).
 
 ### 会员认证模型
 
