@@ -7,7 +7,7 @@
 <a name="laravel-5.0"></a>
 ## Laravel 5.0
 
-Laravel 5.0 在默认的项目上引进了新的应用程序架构。新的架构提供了更好的功能建立强健的 Laravel 应用程序，以及在应用程序中全面采用新的自动加载标准（ PSR-4 ）。首先，来查看一些主要更动：
+Laravel 5.0 在默认的项目上引进了新的应用程序架构。新的架构提供了更好的功能来构建健壮的 Laravel 应用程序，以及在应用程序中全面采用新的自动加载标准（ PSR-4 ）。首先，来查看一些主要变更：
 
 ### 新的目录结构
 
@@ -39,44 +39,44 @@ Laravel 5.0 在默认的项目上引进了新的应用程序架构。新的架�
 
 除了之前有的控制器依赖注入，你现在可以在控制器方法使用类型提示（ type-hint ）进行依赖注入。[服务容器](/docs/5.0/container)会自动注入依赖，即使路由包含了其他参数也不成问题：
 
-	public function createPost(Request $request, PostRepository $posts)
-	{
-		//
-	}
+    public function createPost(Request $request, PostRepository $posts)
+    {
+        //
+    }
 
 ### 认证基本架构
 
-用户注册，认证，以及重设密码的控制器现在已经默认含括了，包含相对应的视图，放在 `resources/views/auth`。除此之外， 「users」 数据表迁移也已经默认存在框架中了。这些简单的资源，可以让你快速开发应用程序的点子，而不用陷在撰写认证模板的泥淖上。认证相关的视图可以经由 `auth/login` 以及 `auth/register` 路由访问。`App\Services\Auth\Registrar` 服务会负责处理用户认证和添加的相关逻辑。
+用户注册，认证，以及重设密码的控制器现在已经默认含括了，包含相对应的视图，放在 `resources/views/auth`。除此之外， 「users」 数据表迁移也已经默认存在框架中了。这些简单的资源，可以让你快速开发应用程序的业务逻辑，而不用陷在撰写认证模板的泥潭上。认证相关的视图可以经由 `auth/login` 以及 `auth/register` 路由访问。`App\Services\Auth\Registrar` 服务会负责处理用户认证和添加的相关逻辑。
 
 ### 事件对象
 
-你现在可以将事件定义成对象，而不是仅使用字串。例如，瞧瞧以下的事件：
+你现在可以将事件定义成对象，而不是仅使用字串。例如，查看以下的事件：
 
-	class PodcastWasPurchased {
+    class PodcastWasPurchased {
 
-		public $podcast;
+        public $podcast;
 
-		public function __construct(Podcast $podcast)
-		{
-			$this->podcast = $podcast;
-		}
+        public function __construct(Podcast $podcast)
+        {
+            $this->podcast = $podcast;
+        }
 
-	}
+    }
 
 这个事件可以像一般使用那样被派发：
 
-	Event::fire(new PodcastWasPurchased($podcast));
+    Event::fire(new PodcastWasPurchased($podcast));
 
 当然，你的事件处理会收到事件的对象而不是数据的列表：
 
-	class ReportPodcastPurchase {
+    class ReportPodcastPurchase {
 
-		public function handle(PodcastWasPurchased $event)
-		{
-			//
-		}
+        public function handle(PodcastWasPurchased $event)
+        {
+            //
+        }
 
-	}
+    }
 
 更多关于使用事件的信息，参考[完整文档](/docs/5.0/events)。
 
@@ -84,40 +84,40 @@ Laravel 5.0 在默认的项目上引进了新的应用程序架构。新的架�
 
 除了 Laravel 4 形式的队列任务，Laravel 5 以简单的命令对象作为队列任务。这些命令放在 `app/Commands` 目录下。下面是个简单的命令：
 
-	class PurchasePodcast extends Command implements SelfHandling, ShouldBeQueued {
+    class PurchasePodcast extends Command implements SelfHandling, ShouldBeQueued {
 
-		use SerializesModels;
+        use SerializesModels;
 
-		protected $user, $podcast;
+        protected $user, $podcast;
 
-		/**
-		 * Create a new command instance.
-		 *
-		 * @return void
-		 */
-		public function __construct(User $user, Podcast $podcast)
-		{
-			$this->user = $user;
-			$this->podcast = $podcast;
-		}
+        /**
+         * Create a new command instance.
+         *
+         * @return void
+         */
+        public function __construct(User $user, Podcast $podcast)
+        {
+            $this->user = $user;
+            $this->podcast = $podcast;
+        }
 
-		/**
-		 * Execute the command.
-		 *
-		 * @return void
-		 */
-		public function handle()
-		{
-			// Handle the logic to purchase the podcast...
+        /**
+         * Execute the command.
+         *
+         * @return void
+         */
+        public function handle()
+        {
+            // Handle the logic to purchase the podcast...
 
-			event(new PodcastWasPurchased($this->user, $this->podcast));
-		}
+            event(new PodcastWasPurchased($this->user, $this->podcast));
+        }
 
-	}
+    }
 
 Laravel 的基底控制器使用了新的 `DispatchesCommands` trait，让你可以简单的派发命令执行。
 
-	$this->dispatch(new PurchasePodcastCommand($user, $podcast));
+    $this->dispatch(new PurchasePodcastCommand($user, $podcast));
 
 当然，你也可以将命令视为同步执行（而不会被放到队列里）的任务。事实上，使用命令是个好方式，让你可以封装应用程序需要执行的复杂任务。更多相关的信息，参考 [command bus](/docs/5.0/bus) 文档。
 
@@ -125,25 +125,27 @@ Laravel 的基底控制器使用了新的 `DispatchesCommands` trait，让你可
 
 `database` 队列驱动现在已经包含在 Laravel 中了，提供了简单的本地端队列驱动，让你除了数据库相关软件外不需安装其他套件。
 
-### Laravel 调度（ Scheduler ）
+### Laravel 调用（ Scheduler ）
 
-过去，开发者可以产生 Cron 设置，用以调度所有他们想要执行的命令行指令。然而，这是件很头痛的事情，你的命令行调度不再属于版本控制的一部分，而你必须 SSH 到服务器里加入 Cron 设置。让生活变得简单点。Laravel 命令行调度，让你可以流畅而且具有表达性的定义在 Laravel 里面，定义你的命令调度，而且服务器只需要单一个 Cron 设置。
+过去，开发者可以产生 Cron 设置，用以调用所有他们想要执行的命令行指令。然而，这是件很头痛的事情，你的命令行调用不再属于版本控制的一部分，而你必须 SSH 到服务器里加入 Cron 设置。
+
+为了让生活变得简单点, 让你可以流畅而且具有表达性的在 Laravel 里面定义你的命令调用，而且服务器只需要单一个 Cron 设置。
 
 它会看起来如下：
 
-	$schedule->command('artisan:command')->dailyAt('15:00');
+    $schedule->command('artisan:command')->dailyAt('15:00');
 
-当然，快参考[完整文档](/docs/5.0/artisan#scheduling-artisan-commands)学习所有调度相关知识。
+当然，快参考[完整文档](/docs/5.0/artisan#scheduling-artisan-commands)学习所有调用相关知识。
 
 ### Tinker、Psysh
 
 `php artisan tinker` 命令现在使用 Justin Hileman 的 [Psysh](https://github.com/bobthecow/psysh)，一个 PHP 更强大的 REPL。如果你喜欢 Laravel 4 的 Boris，你也会喜欢上 Psysh。更好的是，它可以跑在 Windows！要开始使用，只要输入：
 
-	php artisan tinker
+    php artisan tinker
 
 ### DotEnv
 
-比起一堆令人困惑的、嵌套的环境设置档目录，Laravel 5 现在使用了 Vance Lucas 的 [DotEnv](https://github.com/vlucas/phpdotenv)。这个套件提供了超级简单的方式管理设置档，并且让 Laravel 5 环境侦测变得轻松。更多的细节，参考完整的[设置档文档](/docs/5.0/configuration#environment-configuration)。
+比起一堆令人困惑的、嵌套的环境配置文件目录，Laravel 5 现在使用了 Vance Lucas 的 [DotEnv](https://github.com/vlucas/phpdotenv)。这个套件提供了超级简单的方式管理配置文件，并且让 Laravel 5 环境侦测变得轻松。更多的细节，参考完整的[配置文件文档](/docs/5.0/configuration#environment-configuration)。
 
 ### Laravel Elixir
 
@@ -155,15 +157,15 @@ Jeffrey Way 的 Laravel Elixir 提供了一个流畅、口语的接口，可以�
 
 Laravel Socialite 是个选用的，Laravel 5.0 以上兼容的套件，提供了无痛的 OAuth 认证。目前 Socialite 支持 Facebook、Twitter、Google 以及 GitHub。它写起来可能像这样：
 
-	public function redirectForAuth()
-	{
-		return Socialize::with('twitter')->redirect();
-	}
+    public function redirectForAuth()
+    {
+        return Socialize::with('twitter')->redirect();
+    }
 
-	public function getUserFromProvider()
-	{
-		$user = Socialize::with('twitter')->user();
-	}
+    public function getUserFromProvider()
+    {
+        $user = Socialize::with('twitter')->user();
+    }
 
 不用再花上数小时撰写 OAuth 的认证流程。数分钟就可开始！查看[完整文档](/docs/5.0/authentication#social-authentication) 里有所有的细节。
 
@@ -172,39 +174,39 @@ Laravel Socialite 是个选用的，Laravel 5.0 以上兼容的套件，提供�
 Laravel 现在包含了强大的 [Flysystem](https://github.com/thephpleague/flysystem)（一个文件系统的抽象函式库），提供了无痛的集成，把本地端文件系统、Amazon S3 和 Rackspace 云存储集成在一起，
 有统一且优雅的 API！现在要将文件存到 Amazon S3 相当简单：
 
-	Storage::put('file.txt', 'contents');
+    Storage::put('file.txt', 'contents');
 
 更多关于 Laravel 文件系统集成，参考[完整文档](/docs/5.0/filesystem)。
 
 ### Form Requests
 
-Laravel 5.0 使用了 **form requests**，是继承了 `Illuminate\Foundation\Http\FormRequest` 的类别。这些 request 对象可以和控制器方法依赖注入结合，提供一个不需样板的方法，可以验证用户输入。让我们深入点，看一个 `FormRequest` 的范例：
+Laravel 5.0 使用了 **form requests**，是继承了 `Illuminate\Foundation\Http\FormRequest` 的类别。这些 request 对象可以和控制器方法依赖注入结合，提供一个不需样板的方法，可以验证用户输入。让我们深入点，看一个 `FormRequest` 的示例：
 
-	<?php namespace App\Http\Requests;
+    <?php namespace App\Http\Requests;
 
-	class RegisterRequest extends FormRequest {
+    class RegisterRequest extends FormRequest {
 
-		public function rules()
-		{
-			return [
-				'email' => 'required|email|unique:users',
-				'password' => 'required|confirmed|min:8',
-			];
-		}
+        public function rules()
+        {
+            return [
+                'email' => 'required|email|unique:users',
+                'password' => 'required|confirmed|min:8',
+            ];
+        }
 
-		public function authorize()
-		{
-			return true;
-		}
+        public function authorize()
+        {
+            return true;
+        }
 
-	}
+    }
 
 定义好类别后，我们可以在控制器动作里使用类型提示：
 
-	public function register(RegisterRequest $request)
-	{
-		var_dump($request->input());
-	}
+    public function register(RegisterRequest $request)
+    {
+        var_dump($request->input());
+    }
 
 当 Laravel 的服务容器辨别出要注入的类别是个 `FormRequest` 实例，请求会被**自动验证**。意味着，当你的控制器动作被调用了，你可以安全的假设 HTTP 的请求输入己经被验证过，根据你在 form request 类别里自定的规则。甚至，若这个请求验证不通过，一个 HTTP 重导（可以自定），会自动发出，错误消息可以被闪存到 session 或是转换成 JSON 返回。**表单验证再简单不过如此。**更多关于 `FormRequest` 验证，参考[文档](/docs/5.0/validation#form-request-validation)。
 
@@ -212,13 +214,13 @@ Laravel 5.0 使用了 **form requests**，是继承了 `Illuminate\Foundation\Ht
 
 Laravel 5 基底控制器包含一个 `ValidatesRequests` trait。这个 trait 包含了一个简单的 `validate` 方法可以验证请求。如果对应用程序来说 `FormRequests` 太复杂了，参考这个：
 
-	public function createPost(Request $request)
-	{
-		$this->validate($request, [
-			'title' => 'required|max:255',
-			'body' => 'required',
-		]);
-	}
+    public function createPost(Request $request)
+    {
+        $this->validate($request, [
+            'title' => 'required|max:255',
+            'body' => 'required',
+        ]);
+    }
 
 如果验证失败，会抛出例外以及回传适当的 HTTP 回应到浏览器。验证错误信息会被闪存到 session！而如果请求是 AJAX 请求，Laravel 会自动回传 JSON 格式的验证错误信息。
 
@@ -226,22 +228,22 @@ Laravel 5 基底控制器包含一个 `ValidatesRequests` trait。这个 trait �
 
 ### 新的 Generators
 
-因应新的应用程序默认架构，框架添加了 Artisan generator 命令。使用 `php artisan list` 瞧瞧更多细节。
+因应新的应用程序默认架构，框架添加了 Artisan generator 命令。使用 `php artisan list` 查看更多细节。
 
-### 设置档缓存
+### 配置文件缓存
 
-你现在可以在单一文件里缓存所有设置档了，使用 `config:cache` 命令。
+你现在可以在单一文件里缓存所有配置文件了，使用 `config:cache` 命令。
 
 ### Symfony VarDumper
 
 出名的 `dd` 辅助函示，其可以在除错时印出变量信息，已经升级成使用令人惊艳的 Symfony VarDumper。它提供了颜色标记的输出，甚至数组可以自动缩合。在项目中试试下列代码：
 
-	dd([1, 2, 3]);
+    dd([1, 2, 3]);
 
 <a name="laravel-4.2"></a>
 ## Laravel 4.2
 
-此发行版本的完整更动列表可以从一个 4.2 的完整安装下，执行 `php artisan changes` 命令，或者 [Github 上的更动纪录](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json)。此纪录仅含括主要的强化更新和此发行的更动部分。
+此发行版本的完整变更列表可以从一个 4.2 的完整安装下，执行 `php artisan changes` 命令，或者 [Github 上的变更纪录](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json)。此纪录仅含括主要的强化更新和此发行的变更部分。
 
 > **附注:** 在 4.2 发布周期间，许多小的臭虫修正与功能强化被整并至各个 4.1 的子发行版本中。所以最好确认 Laravel 4.1 版本的更新列表。
 
@@ -253,15 +255,15 @@ Laravel 4.2 需要 PHP 5.4 以上的版本。此 PHP 更新版本让我们可以
 
 Larvel Forge，一个网页应用程序，提供一个简单的接口去建立管理你云端上的 PHP 服务器，像是 Linode、DigitalOcean、Rackspace 和 Amazon EC2。支持自动化 nginx 设置、SSH 密钥管理、Cron job 自动化、透过 NewRelic & Papertrail 服务器监控、「推送部署」、Laravel queue worker 设置等等。Forge 提供最简单且更实惠的方式来部署所有你的 Laravel 应用程序。
 
-默认 Laravel 4.2 的安装里，`app/config/database.php` 设置档默认已为 Forge 设置完成，让在平台上的全新应用程序更方便部署。
+默认 Laravel 4.2 的安装里，`app/config/database.php` 配置文件默认已为 Forge 设置完成，让在平台上的全新应用程序更方便部署。
 
 关于 Laravel Forge 的更多信息可以在[官方 Forge 网站](https://forge.laravel.com)上找到。
 
 ### Laravel Homestead
 
-Laravel Homestead 是一个为部署健全的 Laravel 和 PHP 应用程序的官方 Vagrant 环境。绝大多数的封装包的相依与软件在发布前已经部署处理完成，让封装包可以极快的被启用。Homestead 包含 Nginx 1.6、PHP 5.5.12、MySQL、Postres、Redis、Memcached、Beanstalk、Node、Gulp、Grunt 和 Bower。Homestead 包含一个简单的 `Homestead.yaml` 设置档，让你在单一个封装包中管理多个 Laravel 应用程序。
+Laravel Homestead 是一个为部署健全的 Laravel 和 PHP 应用程序的官方 Vagrant 环境。绝大多数的封装包的相依与软件在发布前已经部署处理完成，让封装包可以极快的被启用。Homestead 包含 Nginx 1.6、PHP 5.5.12、MySQL、Postres、Redis、Memcached、Beanstalk、Node、Gulp、Grunt 和 Bower。Homestead 包含一个简单的 `Homestead.yaml` 配置文件，让你在单一个封装包中管理多个 Laravel 应用程序。
 
-默认的 Laravel 4.2 安装中包含的 `app/config/local/database.php` 设置档使用 Homestead 的数据库作为默认。让 Laravel 初始化安装与设置更为方便。
+默认的 Laravel 4.2 安装中包含的 `app/config/local/database.php` 配置文件使用 Homestead 的数据库作为默认。让 Laravel 初始化安装与设置更为方便。
 
 官方文档已经更新并包含在 [Homestead 文档](/docs/homestead) 中。
 
@@ -301,9 +303,9 @@ PHP 5.4 的 `traits` 提供了一个更加简洁的软删除架构和全局作�
 <a name="laravel-4.1"></a>
 ## Laravel 4.1
 
-### 完整更动列表
+### 完整变更列表
 
-此发行版本的完整更动列表，可以在版本 4.1 的安装中命令行执行 `php artisan changes` 取得，或者浏览 [Github 更动档](https://github.com/laravel/framework/blob/4.1/src/Illuminate/Foundation/changes.json) 中了解。其中只记录了该版本比较主要的强化功能和更动。
+此发行版本的完整变更列表，可以在版本 4.1 的安装中命令行执行 `php artisan changes` 取得，或者浏览 [Github 变更档](https://github.com/laravel/framework/blob/4.1/src/Illuminate/Foundation/changes.json) 中了解。其中只记录了该版本比较主要的强化功能和变更。
 
 ### 新的 SSH 组件
 
