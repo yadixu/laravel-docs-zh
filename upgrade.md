@@ -11,7 +11,7 @@
 
 ### 全新安装，然后迁移
 
-推荐的升级方式是建立一个全新的 Laravel `5.0` 专案，然后复制您在 `4.2` 的文件到此新的应用程序，这将包含控制器，路由，Eloquent 模型，Artisan 命令，资产，和关于此应用程序的其他特定文件。
+推荐的升级方式是建立一个全新的 Laravel `5.0` 项目，然后复制您在 `4.2` 的文件到此新的应用程序，这将包含控制器，路由，Eloquent 模型，Artisan 命令，资产，和关于此应用程序的其他特定文件。
 
 开始在您的本机环境安装全新的目录结构，[安装全新的 Laravel 5 应用程序](/docs/5.0/installation)，我们将详细探讨迁移各部分的过程。 
 
@@ -19,10 +19,9 @@
 
 别忘了将任何附加于 Composer 的依赖组件加入 5.0 应用程序内，包含第三方代码(例如 SDKs)
 
-部分组件也许不兼容刚发布的 Laravel 5 版本，请向组件管理者确认该组件支持 Laravel 5的版本，当您在 Composer 内加入任何组件，请执行 `composer update`。
+部分组件也许不兼容刚发布的 Laravel 5 版本，请向组件管理者确认该组件支持 Laravel 5 的版本，当您在 Composer 内加入任何组件，请执行 `composer update`。
 
 ### 命名空间
-I
 默认情况下，Laravel 4 并不会使用您程序代码内的命名空间，所以，举例来说，所有的 Eloquent 模型和控制器仅简单存在"全局"的命名空间，为了更快速的迁移，Laravel 5 也允许您可以将这些类别一样保留在「全局」的命名空间。
 
 ### 设置文件
@@ -31,9 +30,9 @@ I
 
 复制新的 `.env.example` 文件到 `.env`，这是 `5.0` 等同于原有 `.env.php` 的文件。并设置适当的值，像是您的 `APP_ENV` 和 `APP_KEY` (您的加密钥匙)数据库认证和您的缓存与 session 驱动。
 
-此外，复制原先您自订的 `.env.php` 文件，并修改为 `.env` (本机环境的真实值) 和 `.env.example` (给其他团队成员的范本教学).
+此外，复制原先您自定义的 `.env.php` 文件，并修改为 `.env` (本机环境的真实值) 和 `.env.example` (给其他团队成员的示例).
 
-更多关于环境设置值，请见[完整文档](/docs/5.0/configuration#environment-configuration)。
+更多关于环境设置值，请见[完整文文件](/docs/5.0/configuration#environment-configuration)。
 
 > **注意:** 在部署 Laravel 5 应用程序之前，您需要在正式主机上放置适当的 `.env` 文件与设置值。
 
@@ -61,19 +60,19 @@ Laravel 5.0 不再使用 `app/config/{environmentName}/` 目录结构来提供�
 
 您不需要移动任何 Laravel 4.0 默认的过滤器，像是 `auth` 和 `csrf` 。他们已经内置，只是换作以中间件形式出现。那些在路由或控制器内有参照到旧有的过滤器 (例如 `['before' => 'auth']`) 请修改参照到新的中间件 (例如 `['middleware' => 'auth'].`)
 
-Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `after` 绑定和使用您自订的过滤器。
+Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `after` 绑定和使用您自定义的过滤器。
 
 ### 全局 CSRF
 
 默认情况下，[CSRF 保护](/docs/5.0/routing#csrf-protection) 在所有路由下是开启的。若您想关闭他们，或是在特定路由手动开启，请移除 `App\Http\Kernel` 的 `middleware` 数组内的这一行：
 
-	'App\Http\Middleware\VerifyCsrfToken',
+    'App\Http\Middleware\VerifyCsrfToken',
 
 如果您想在其他地方使用它，加入这一行到 `$routeMiddleware`:
 
-	'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
+    'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
 
-现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间件到路由/控制器。了解更多关于中间件，请见[完整文档](/docs/5.0/middleware).
+现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间件到路由/控制器。了解更多关于中间件，请见[完整文文件](/docs/5.0/middleware).
 
 ### Eloquent 模型
 
@@ -83,7 +82,7 @@ Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `afte
 
 #### Eloquent 缓存
 
-Eloquent 不再提供 `remember` 方法来缓存查找字串。若需要缓存字串，您可手动使用 `Cache::remember` 函数。了解更多关于缓存，请见[完整文档](/docs/5.0/cache).
+Eloquent 不再提供 `remember` 方法来缓存查找字串。若需要缓存字串，您可手动使用 `Cache::remember` 函数。了解更多关于缓存，请见[完整文文件](/docs/5.0/cache).
 
 ### 会员认证模型
 
@@ -113,7 +112,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 implements AuthenticatableContract, CanResetPasswordContract
 ```
 
-**在类别宣告引入以下特征机制：**
+**在类别声明引入以下特征机制：**
 
 ```php
 use Authenticatable, CanResetPassword;
@@ -131,9 +130,9 @@ use Authenticatable, CanResetPassword;
 
 ### 数据库迁移和数据填充
 
-如果在您的数据库内已经有 users 表，请移除 Laravel 5 内置的两个迁移档。
+如果在您的数据库内已经有 users 表，请移除 Laravel 5 内置的两个迁移文件。
 
-将所有的迁移档从旧的 `app/database/migrations` 目录移到新的 `database/migrations` 。所有的数据填充档也要从 `app/database/seeds` 移到 `database/seeds`。
+将所有的迁移文件从旧的 `app/database/migrations` 目录移到新的 `database/migrations` 。所有的数据填充文件也要从 `app/database/seeds` 移到 `database/seeds`。
 
 ### 全局 IoC 绑定
 
@@ -159,9 +158,9 @@ use Authenticatable, CanResetPassword;
 
 可别轻忽上述设置，这将使您的应用进程更加容易暴露于 XSS 攻击，而且注解 `{{--` 将无作用。
 
-### 语系档
+### 多语言配置文件
 
-将所有的语系档从旧的 `app/lang` 目录移动到新的`resources/lang` 目录。
+将所有的多语言配置文件从旧的 `app/lang` 目录移动到新的`resources/lang` 目录。
 
 ### 公开目录
 
@@ -173,7 +172,7 @@ use Authenticatable, CanResetPassword;
 
 ### 各式各样的文件
 
-复制专案内其他各式各样的文件，例如：`.scrutinizer.yml`, `bower.json` 以及其他类似工具的设置文件。
+复制项目内其他各式各样的文件，例如：`.scrutinizer.yml`, `bower.json` 以及其他类似工具的设置文件。
 
 您可以将 Sass，Less 或 CoffeeScript 移动到任何您想放置的地方。 `resources/assets` 目录是一个不错的默认位置。
 
@@ -221,7 +220,7 @@ Laravel 4.2 需要 PHP 5.4.0 以上。
 
 增加一个新的 `cipher` 选项在你的 `app/config/app.php` 设置文件中。其选项值应为 `MCRYPT_RIJNDAEL_256`。
 
-	'cipher' => MCRYPT_RIJNDAEL_256
+    'cipher' => MCRYPT_RIJNDAEL_256
 
 该设置可用于设置所使用的 Laravel 加密工具的默认加密方法。
 
@@ -231,19 +230,19 @@ Laravel 4.2 需要 PHP 5.4.0 以上。
 
 如果你在模型下有使用软删除，现在 `softDeletes` 的属性已经被移除。你现在要使用 `SoftDeletingTrait` 如下：
 
-	use Illuminate\Database\Eloquent\SoftDeletingTrait;
+    use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-	class User extends Eloquent {
-		use SoftDeletingTrait;
-	}
+    class User extends Eloquent {
+        use SoftDeletingTrait;
+    }
 
 你一样必须手动增加 `deleted_at` 字段到你的 `dates` 属性中：
 
-	class User extends Eloquent {
-		use SoftDeletingTrait;
+    class User extends Eloquent {
+        use SoftDeletingTrait;
 
-		protected $dates = ['deleted_at'];
-	}
+        protected $dates = ['deleted_at'];
+    }
 
 而所有软删除的 API 使用方式维持相同。
 
@@ -257,7 +256,7 @@ Laravel 4.2 需要 PHP 5.4.0 以上。
 
 如果你扩展了 `Illuminate\Pagination\Presenter` 类别，抽象方法 `getPageLinkWrapper` 参数表变成要加上 `rel` 参数：
 
-	abstract public function getPageLinkWrapper($url, $page, $rel = null);
+    abstract public function getPageLinkWrapper($url, $page, $rel = null);
 
 ### Iron.Io Queue 加密
 
@@ -285,20 +284,20 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 然后，如果你使用 Eloquent 认证驱动，依照下面更新你的 `User` 类别的三个方法：
 
-	public function getRememberToken()
-	{
-		return $this->remember_token;
-	}
+    public function getRememberToken()
+    {
+        return $this->remember_token;
+    }
 
-	public function setRememberToken($value)
-	{
-		$this->remember_token = $value;
-	}
+    public function setRememberToken($value)
+    {
+        $this->remember_token = $value;
+    }
 
-	public function getRememberTokenName()
-	{
-		return 'remember_token';
-	}
+    public function getRememberTokenName()
+    {
+        return 'remember_token';
+    }
 
 > **附注:** 所有现存的「记得我」sessions 在此更新后将会失效，所以应用程序的所有用户将会被迫重新登录。
 
@@ -306,9 +305,9 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 两个新的方法被加入到 `Illuminate\Auth\UserProviderInterface` 接口。范例实现方式可以在默认驱动中找到：
 
-	public function retrieveByToken($identifier, $token);
+    public function retrieveByToken($identifier, $token);
 
-	public function updateRememberToken(UserInterface $user, $token);
+    public function updateRememberToken(UserInterface $user, $token);
 
 `Illuminate\Auth\UserInterface` 也加了三个新方法描述在「升级路径」。
 
@@ -335,9 +334,9 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 在你的 `app/config/queue.php` 文件里添加 `failed` 设置区块。以下为区块的默认值：
 
-	'failed' => array(
-		'database' => 'mysql', 'table' => 'failed_jobs',
-	),
+    'failed' => array(
+        'database' => 'mysql', 'table' => 'failed_jobs',
+    ),
 
 **（非必要）** 在你的 `app/config/view.php` 里，将 `pagination` 设置选项更新为 `pagination::slider-3`。
 
@@ -347,7 +346,7 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 ### 更新密码提醒
 
-密码提醒功能已经大幅修正拥有更大的弹性。你可以执行 Artisan 指令 `php artisan auth:reminders-controller` 来检查新的存根控制器。你也可以浏览 [更新文档](/docs/security#password-reminders-and-reset) 然后相应的更新你的应用程序。
+密码提醒功能已经大幅修正拥有更大的弹性。你可以执行 Artisan 指令 `php artisan auth:reminders-controller` 来检查新的存根控制器。你也可以浏览 [更新文文件](/docs/security#password-reminders-and-reset) 然后相应的更新你的应用程序。
 
 更新你的 `app/lang/en/reminders.php` 语系文件来符合 [这个新版文件](https://github.com/laravel/laravel/blob/master/app/lang/en/reminders.php)。
 
@@ -357,9 +356,9 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 （译按：的确原有方式有安全性考量，但对于现行 VirtualHost 大量使用下，反而这样改会造成不便）
 
-### 更简单的日志文档
+### 更简单的日志文文件
 
-Laravel 目前只会产生单一的日志文档：`app/storage/logs/laravel.log`。然而，你还是可以透过设置你的 `app/start/global.php` 文件来更改他的行为。
+Laravel 目前只会产生单一的日志文文件：`app/storage/logs/laravel.log`。然而，你还是可以透过设置你的 `app/start/global.php` 文件来更改他的行为。
 
 ### 删除重定向结尾的斜线
 
