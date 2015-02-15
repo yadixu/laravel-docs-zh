@@ -1,102 +1,102 @@
-# Upgrade Guide
+# 升级导引
 
-- [Upgrading To 5.0 From 4.2](#upgrade-5.0)
-- [Upgrading To 4.2 From 4.1](#upgrade-4.2)
-- [Upgrading To 4.1.29 From <= 4.1.x](#upgrade-4.1.29)
-- [Upgrading To 4.1.26 From <= 4.1.25](#upgrade-4.1.26)
-- [Upgrading To 4.1 From 4.0](#upgrade-4.1)
+- [从 4.2 升级到 5.0](#upgrade-5.0)
+- [从 4.1 升级到 4.2](#upgrade-4.2)
+- [从 4.1.x 升级到 4.1.29](#upgrade-4.1.29)
+- [从 4.1.25 升级到 4.1.26](#upgrade-4.1.26)
+- [从 4.0 升级到 4.1](#upgrade-4.1)
 
 <a name="upgrade-5.0"></a>
-## Upgrading To 5.0 From 4.2
+## 从 4.2 升级到 5.0
 
-### Fresh Install, Then Migrate
+### 全新安装，然后迁移
 
-The recommended method of upgrading is to create a new Laravel `5.0` install and then to copy your `4.2` site's unique application files into the new application. This would include controllers, routes, Eloquent models, Artisan commands, assets, and other code specific to your application.
+推荐的升级方式是建立一个全新的 Laravel `5.0` 专案，然后复制您在 `4.2` 的文件到此新的应用程序，这将包含控制器，路由，Eloquent 模型，Artisan 命令，资产，和关于此应用程序的其他特定文件。
 
-To start, [install a new Laravel 5 application](/docs/5.0/installation) into a fresh directory in your local environment. We'll discuss each piece of the migration process in further detail below.
+开始在您的本机环境安装全新的目录结构，[安装全新的 Laravel 5 应用程序](/docs/5.0/installation)，我们将详细探讨迁移各部分的过程。 
 
-### Composer Dependencies & Packages
+### Composer 相依与套件
 
-Don't forget to copy any additional Composer dependencies into your 5.0 application. This includes third-party code such as SDKs.
+别忘了将任何附加于 Composer 的相依套件加入 5.0 应用程序内，包含第三方代码(例如 SDKs)
 
-Some Laravel-specific packages may not be compatible with Laravel 5 on initial release. Check with your package's maintainer to determine the proper version of the package for Laravel 5. Once you have added any additional Composer dependencies your application needs, run `composer update`.
+部分套件也许不兼容刚发布的 Laravel 5 版本，请向套件管理者确认该套件支持 Laravel 5的版本，当您在 Composer 内加入任何套件，请执行 `composer update`。
 
-### Namespacing
+### 命名空间
 
-By default, Laravel 4 applications did not utilize namespacing within your application code. So, for example, all Eloquent models and controllers simply lived in the "global" namespace. For a quicker migration, you can simply leave these classes in the global namespace in Laravel 5 as well.
+缺省情况下，Laravel 4 并不会使用您程序代码内的命名空间，所以，举例来说，所有的 Eloquent 模型和控制器仅简单存在"全域"的命名空间，为了更快速的迁移，Laravel 5 也允许您可以将这些类别一样保留在"全域"的命名空间。
 
-### Configuration
+### 设置档
 
-#### Migrating Environment Variables
+#### 迁移环境变量
 
-Copy the new `.env.example` file to `.env`, which is the `5.0` equivalent of the old `.env.php` file. Set any appropriate values there, like your `APP_ENV` and `APP_KEY` (your encryption key), your database credentials, and your cache and session drivers.
+复制新的 `.env.example` 文件到 `.env`，这是 `5.0` 等同于原有 `.env.php` 的文件。并设置适当的值，像是您的 `APP_ENV` 和 `APP_KEY` (您的加密钥匙)数据库认证和您的缓存与 session 驱动。
 
-Additionally, copy any custom values you had in your old `.env.php` file and place them in both `.env` (the real value for your local environment) and `.env.example` (a sample instructional value for other team members).
+此外，复制原先您自订的 `.env.php` 文件，并修改为 `.env` (本机环境的真实值) 和 `.env.example` (给其他团队成员的范本教学).
 
-For more information on environment configuration, view the [full documentation](/docs/5.0/configuration#environment-configuration).
+更多关于环境设置值，请见[完整文档](/docs/5.0/configuration#environment-configuration)。
 
-> **Note:** You will need to place the appropriate `.env` file and values on your production server before deploying your Laravel 5 application.
+> **注意:** 在部署 Laravel 5 应用程序之前，您需要在正式主机上放置适当的 `.env` 文件与设置值。
 
-#### Configuration Files
+#### 设置档
 
-Laravel 5.0 no longer uses `app/config/{environmentName}/` directories to provide specific configuration files for a given environment. Instead, move any configuration values that vary by environment into `.env`, and then access them in your configuration files using `env('key', 'default value')`. You will see examples of this in the `config/database.php` configuration file.
+Laravel 5.0 不再使用 `app/config/{environmentName}/` 目录结构来提供对应该环境的设置档，取而代之的是，将环境对应的设置值移到 `.env`，然后在设置文件使用 `env('key', 'default value')` 来访问，您可以在 `config/database.php` 文件内看到相关范例。
 
-Set the config files in the `config/` directory to represent either the values that are consistent across all of your environments, or set them to use `env()` to load values that vary by environment.
+将设置档放在 `config/` 目录下，来表示所有环境共用的设置档，或是在文件内使用 `env()` 来取得对应该环境的设置值。
 
-Remember, if you add more keys to `.env` file, add sample values to the `.env.example` file as well. This will help your other team members create their own `.env` files.
+请记住，若您在 `.env` 文件内增加 key 值，同时也要对应增加到 `.env.example` 文件中，这将可以帮助团队成员去修改它们的 `.env` 文件。
 
-### Routes
+### 路由
 
-Copy and paste your old `routes.php` file into your new `app/Http/routes.php`.
+复制原本的 `routes.php` 文件到 `app/Http/routes.php`.
 
-### Controllers
+### 控制器
 
-Next, move all of your controllers into the `app/Http/Controllers` directory. Since we are not going to migrate to full namespacing in this guide, add the `app/Http/Controllers` directory to the `classmap` directive of your `composer.json` file. Next, you can remove the namespace from the abstract `app/Http/Controllers/Controller.php` base class. Verify that your migrated controllers are extending this base class.
+请将所有的控制器移到 `app/Http/Controllers` 目录中，因为在本指南中我们不打算迁移到完整的命名空间，请将 `app/Http/Controllers` 添加到 `composer.json` 的 `classmap`，接下来，您可以从抽象的 `app/Http/Controllers/Controller.php` 基础类别中移除该命名空间，请验证您迁移的控制器是扩充这个基础类别。
 
-In your `app/Providers/RouteServiceProvider.php` file, set the `namespace` property to `null`.
+在 `app/Providers/RouteServiceProvider.php` 文件中，将 `namespace` 属性设置为 `null`.
 
-### Route Filters
+### 路由筛选器
 
-Copy your filter bindings from `app/filters.php` and place them into the `boot()` method of `app/Providers/RouteServiceProvider.php`. Add `use Illuminate\Support\Facades\Route;` in the `app/Providers/RouteServiceProvider.php` in order to continue using the `Route` Facade.
+将筛选器从原本的 `app/filters.php` 复制到 `app/Providers/RouteServiceProvider.php` 的 `boot()` 方法中，并在 `app/Providers/RouteServiceProvider.php` 加入 `use Illuminate\Support\Facades\Route;` 来继续使用 `Route` Facade。
 
-You do not need to move over any of the default Laravel 4.0 filters such as `auth` and `csrf`; they're all here, but as middleware. Edit any routes or controllers that reference the old default filters (e.g. `['before' => 'auth']`) and change them to reference the new middleware (e.g. `['middleware' => 'auth'].`)
+您不需要移动任何 Laravel 4.0 缺省的过滤器，像是 `auth` 和 `csrf` 。他们已经内置，只是换作以中介层形式出现。那些在路由或控制器内有参照到旧有的过滤器 (例如 `['before' => 'auth']`) 请修改参照到新的中介层 (例如 `['middleware' => 'auth'].`)
 
-Filters are not removed in Laravel 5. You can still bind and use your own custom filters using `before` and `after`.
+Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `after` 绑定和使用您自订的过滤器。
 
-### Global CSRF
+### 全域 CSRF
 
-By default, [CSRF protection](/docs/5.0/routing#csrf-protection) is enabled on all routes. If you'd like to disable this, or only manually enable it on certain routes, remove this line from `App\Http\Kernel`'s `middleware` array:
+缺省情况下，[CSRF 保护](/docs/5.0/routing#csrf-protection) 在所有路由下是开启的。若您想关闭他们，或是在特定路由手动开启，请移除 `App\Http\Kernel` 的 `middleware` 数组内的这一行：
 
 	'App\Http\Middleware\VerifyCsrfToken',
 
-If you want to use it elsewhere, add this line to `$routeMiddleware`:
+如果您想在其他地方使用它，加入这一行到 `$routeMiddleware`:
 
 	'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
 
-Now you can add the middleware to individual routes / controllers using `['middleware' => 'csrf']` on the route. For more information on middleware, consult the [full documentation](/docs/5.0/middleware).
+现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中介层到路由/控制器。了解更多关于中介层，请见[完整文档](/docs/5.0/middleware).
 
-### Eloquent Models
+### Eloquent 模型
 
-Feel free to create a new `app/Models` directory to house your Eloquent models. Again, add this directory to the `classmap` directive of your `composer.json` file.
+请建立新的 `app/Models` 目录来管理您的 Eloquent 模型。再次开启 `composer.json` 并将此目录添加到 `classmap` 内。
 
-Update any models using `SoftDeletingTrait` to use `Illuminate\Database\Eloquent\SoftDeletes`.
+在模型内加入 `SoftDeletingTrait` 来使用`Illuminate\Database\Eloquent\SoftDeletes`.
 
-#### Eloquent Caching
+#### Eloquent 缓存
 
-Eloquent no longer provides the `remember` method for caching queries. You now are responsible for caching your queries manually using the `Cache::remember` function. For more information on caching, consult the [full documentation](/docs/5.0/cache).
+Eloquent 不再提供 `remember` 方法来缓存查找字串。若需要缓存字串，您可手动使用 `Cache::remember` 函数。了解更多关于缓存，请见[完整文档](/docs/5.0/cache).
 
-### User Authentication Model
+### 会员认证模型
 
-To upgrade your `User` model for Laravel 5's authentication system, follow these instructions:
+要使用 Laravel 5 的会员认证系统，请遵循以下指引来升级您的 `User` 模型：
 
-**Delete the following from your `use` block:**
+**从 `use` 区块删除以下内容：**
 
 ```php
 use Illuminate\Auth\UserInterface;
 use Illuminate\Auth\Reminders\RemindableInterface;
 ```
 
-**Add the following to your `use` block:**
+**添加以下内容到 `use` 区块：**
 
 ```php
 use Illuminate\Auth\Authenticatable;
@@ -105,53 +105,51 @@ use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 ```
 
-**Remove the UserInterface and RemindableInterface interfaces.**
+**移除 UserInterface 和 RemindableInterface 接口.**
 
-**Mark the class as implementing the following interfaces:**
+**让类别实作以下接口：**
 
 ```php
 implements AuthenticatableContract, CanResetPasswordContract
 ```
 
-**Include the following traits within the class declaration:**
+**在类别宣告引入以下特征机制：**
 
 ```php
 use Authenticatable, CanResetPassword;
 ```
 
-**If you used them, remove `Illuminate\Auth\Reminders\RemindableTrait`  and `Illuminate\Auth\UserTrait` from your use block and your class declaration.**
+### Cashier 的用户需要的修改
 
-### Cashier User Changes
+[Laravel Cashier](/docs/5.0/billing) 的特征机制名称和接口名称已作修改。特征机制请改用 `Laravel\Cashier\Billable` 取代 `BillableTrait`。接口请改用 `Laravel\Cashier\Contracts\Billable` 取代`Larave\Cashier\BillableInterface` 。只有这些部分需要修改。 
 
-The name of the trait and interface used by [Laravel Cashier](/docs/5.0/billing) has changed. Instead of using `BillableTrait`, use the `Laravel\Cashier\Billable` trait. And, instead of `Laravel\Cashier\BillableInterface` implement the `Laravel\Cashier\Contracts\Billable` interface instead. No other method changes are required.
+### Artisan 命令
 
-### Artisan Commands
+将所有的命令从旧的 `app/commands` 目录移到新的`app/Console/Commands` 目录。接下来，把`app/Console/Commands` 目录添加到 `composer.json` 文件的`classmap` 中。
 
-Move all of your command classes from your old `app/commands` directory to the new `app/Console/Commands` directory. Next, add the `app/Console/Commands` directory to the `classmap` directive of your `composer.json` file.
+然后，复制 Artisan 命令清单从 `start/artisan.php` 到 `app/Console/Kernel.php` 文件的 `command` 数组内。
 
-Then, copy your list of Artisan commands from `start/artisan.php` into the `command` array of the `app/Console/Kernel.php` file.
+### 数据库迁移和数据填充
 
-### Database Migrations & Seeds
+如果在您的数据库内已经有 users 表，请移除 Laravel 5 内置的两个迁移档。
 
-Delete the two migrations included with Laravel 5.0, since you should already have the users table in your database.
+将所有的迁移档从旧的 `app/database/migrations` 目录移到新的 `database/migrations` 。所有的数据填充档也要从 `app/database/seeds` 移到 `database/seeds`。
 
-Move all of your migration classes from the old `app/database/migrations` directory to the new `database/migrations`. All of your seeds should be moved from `app/database/seeds` to `database/seeds`.
+### 全域 IoC 绑定
 
-### Global IoC Bindings
+若您在 `start/global.php` 有绑定任何 [IoC](/docs/5.0/container)  ，请将它们移到 `app/Providers/AppServiceProvider.php` 文件内的 `register` 方法，您需要引入 `App` facade。
 
-If you have any [IoC](/docs/5.0/container) bindings in `start/global.php`, move them all to the `register` method of the `app/Providers/AppServiceProvider.php` file. You may need to import the `App` facade.
+您也可以随意地将这些绑定依照服务提供者的目录来拆解。
 
-Optionally, you may break these bindings up into separate service providers by category.
+### 视图
 
-### Views
+将所有的视图从旧的 `app/views` 移到新的`resources/views` 目录内。
 
-Move your views from `app/views` to the new `resources/views` directory.
+### Blade 标签修改
 
-### Blade Tag Changes
+为了更安全地考量，Laravel 5.0 会过滤所有输出，不论您使用 `{{ }}` 或 `{{{ }}}` 标签。您可以使用 `{!! !!}` 新的标签来取消输出过滤。请务必 **确定** 输出内容是安全地才使用 `{!! !!}` 标签。
 
-For better security by default, Laravel 5.0 escapes all output from both the `{{ }}` and `{{{ }}}` Blade directives. A new `{!! !!}` directive has been introduced to display raw, unescaped output. The most secure option when upgrading your application is to only use the new `{!! !!}` directive when you are **certain** that it is safe to display raw output.
-
-However, if you **must** use the old Blade syntax, add the following lines at the bottom of `AppServiceProvider@register`:
+然而，如果您 **仍然必须** 使用旧的 Blade 语法，请在 `AppServiceProvider@register` 开头加入以下内容：
 
 ```php
 \Blade::setRawTags('{{', '}}');
@@ -159,79 +157,79 @@ However, if you **must** use the old Blade syntax, add the following lines at th
 \Blade::setEscapedContentTags('{{{', '}}}');
 ```
 
-This should not be done lightly, and may make your application more vulnerable to XSS exploits. Also, comments with `{{--` will no longer work.
+可别轻忽上述设置，这将使您的应用进程更加容易暴露于 XSS 攻击，而且注解 `{{--` 将无作用。
 
-### Translation Files
+### 语系档
 
-Move your language files from `app/lang` to the new `resources/lang` directory.
+将所有的语系档从旧的 `app/lang` 目录移动到新的`resources/lang` 目录。
 
-### Public Directory
+### 公开目录
 
-Copy your application's public assets from your `4.2` application's `public` directory to your new application's `public` directory. Be sure to keep the `5.0` version of `index.php`.
+将 `4.2` 版公开目录内的资产移到新应用程序内的`public` 目录内。并确认保留 `5.0` 版的 `index.php` 文件。
 
-### Tests
+### 测试
 
-Move your tests from `app/tests` to the new `tests` directory.
+将所有的测试从旧的 `app/tests` 移到 `tests` 目录。
 
-### Misc. Files
+### 各式各样的文件
 
-Copy in any other files in your project. For example, `.scrutinizer.yml`, `bower.json` and other similar tooling configuration files.
+复制专案内其他各式各样的文件，例如：`.scrutinizer.yml`, `bower.json` 以及其他类似工具的设置档。
 
-You may move your Sass, Less, or CoffeeScript to any location you wish. The `resources/assets` directory could be a good default location.
+您可以将 Sass，Less 或 CoffeeScript 移动到任何您想放置的地方。 `resources/assets` 目录是一个不错的缺省位置。
 
-### Form & HTML Helpers
+### 表单和 HTML 辅助函数
 
-If you're using Form or HTML helpers, you will see an error stating `class 'Form' not found` or `class 'Html' not found`. To fix this, add `"illuminate/html": "~5.0"` to your `composer.json` file's `require` section.
+如果您使用表单或 HTML 辅助函数，您将会看到以下错误 `class 'Form' not found` 或 `class 'Html' not found` 。请加入 `"illuminate/html": "~5.0"` 到 `composer.json` 的 `require` 部分，以修正此错误。
 
-You'll also need to add the Form and HTML facades and service provider. Edit `config/app.php`, and add this line to the 'providers' array:
+您也需要添加表单和 HTML 的 facades 以及服务提供者， 编辑 `config/app.php` 文件，添加此行到 'providers' 数组内：
 
     'Illuminate\Html\HtmlServiceProvider',
 
-Next, add these lines to the 'aliases' array:
+接着，添加以下到 'aliases' 数组内：
 
     'Form'      => 'Illuminate\Html\FormFacade',
     'Html'      => 'Illuminate\Html\HtmlFacade',
 
-### CacheManager
+### 缓存管理员
 
-If your application code was injecting `Illuminate\Cache\CacheManager` to get a non-Facade version of Laravel's cache, inject `Illuminate\Contracts\Cache\Repository` instead.
+如果您的程序注入 `Illuminate\Cache\CacheManager` 来取得非 Facade 版本的 Laravel 缓存，请改用 `Illuminate\Contracts\Cache\Repository` 注入。
 
-### Pagination
+### 分页
 
-Replace any calls to `$paginator->links()` with `$paginator->render()`.
+请将所有的 `$paginator->links()` 以 `$paginator->render()` 取代。
 
-### Beanstalk Queuing
+### Beanstalk 队列
 
-Laravel 5.0 now requires `"pda/pheanstalk": "~3.0"` instead of `"pda/pheanstalk": "~2.1"`.
+Laravel 5.0 使用 `"pda/pheanstalk": "~3.0"` 取代原本的 `"pda/pheanstalk": "~2.1"`。 
 
 ### Remote
 
-The Remote component has been deprecated.
+Remote 组件已不再使用。
 
-### Workbench
+### 工作区
 
-The Workbench component has been deprecated.
+工作区组件已不再使用。
 
 <a name="upgrade-4.2"></a>
-## Upgrading To 4.2 From 4.1
+## 从 4.1 升级到 4.2
 
 ### PHP 5.4+
 
-Laravel 4.2 requires PHP 5.4.0 or greater.
+Laravel 4.2 需要 PHP 5.4.0 以上。
 
-### Encryption Defaults
+### 缺省加密
 
-Add a new `cipher` option in your `app/config/app.php` configuration file. The value of this option should be `MCRYPT_RIJNDAEL_256`.
+增加一个新的 `cipher` 选项在你的 `app/config/app.php` 设置档中。其选项值应为 `MCRYPT_RIJNDAEL_256`。
 
 	'cipher' => MCRYPT_RIJNDAEL_256
 
-This setting may be used to control the default cipher used by the Laravel encryption facilities.
+该设置可用于设置所使用的 Laravel 加密工具的缺省加密方法。
 
-> **Note:** In Laravel 4.2, the default cipher is `MCRYPT_RIJNDAEL_128` (AES), which is considered to be the most secure cipher. Changing the cipher back to `MCRYPT_RIJNDAEL_256` is required to decrypt cookies/values that were encrypted in Laravel <= 4.1
+> **附注:** 在 Laravel 4.2，缺省加密方法为`MCRYPT_RIJNDAEL_128` (AES)，被认为是最安全的加密。必须将加密改回`MCRYPT_RIJNDAEL_256` 来解密在 Laravel <= 4.1 下加密的 cookies/values
 
-### Soft Deleting Models Now Use Traits
+### 软删除模型现在改使用特性
 
-If you are using soft deleting models, the `softDeletes` property has been removed. You must now use the `SoftDeletingTrait` like so:
+如果你在模型下有使用软删除，现在 `softDeletes` 的属性已经被移除。你现在要使用 `SoftDeletingTrait` 如下：
 
 	use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
@@ -239,7 +237,7 @@ If you are using soft deleting models, the `softDeletes` property has been remov
 		use SoftDeletingTrait;
 	}
 
-You must also manually add the `deleted_at` column to your `dates` property:
+你一样必须手动增加 `deleted_at` 字段到你的 `dates` 属性中：
 
 	class User extends Eloquent {
 		use SoftDeletingTrait;
@@ -247,45 +245,45 @@ You must also manually add the `deleted_at` column to your `dates` property:
 		protected $dates = ['deleted_at'];
 	}
 
-The API for all soft delete operations remains the same.
+而所有软删除的 API 使用方式维持相同。
 
-> **Note:** The `SoftDeletingTrait` can not be applied on a base model. It must be used on an actual model class.
+> **附注:** `SoftDeletingTrait` 无法在基本模型下被使用。他只能在一个实际模型类别中使用。
 
-### View / Pagination Environment Renamed
+### 视图 / 分页 / 环境 类别改名
 
-If you are directly referencing the `Illuminate\View\Environment` class or `Illuminate\Pagination\Environment` class, update your code to reference `Illuminate\View\Factory` and `Illuminate\Pagination\Factory` instead. These two classes have been renamed to better reflect their function.
+如果你直接使用 `Illuminate\View\Environment` 或 `Illuminate\Pagination\Environment` 类别，请更新你的代码将其改为参照 `Illuminate\View\Factory` 和 `Illuminate\Pagination\Factory`。改名后的这两个类别更可以代表他们的功能。
 
 ### Additional Parameter On Pagination Presenter
 
-If you are extending the `Illuminate\Pagination\Presenter` class, the abstract method `getPageLinkWrapper` signature has changed to add the `rel` argument:
+如果你扩展了 `Illuminate\Pagination\Presenter` 类别，抽象方法 `getPageLinkWrapper` 参数表变成要加上 `rel` 参数：
 
 	abstract public function getPageLinkWrapper($url, $page, $rel = null);
 
-### Iron.Io Queue Encryption
+### Iron.Io Queue 加密
 
-If you are using the Iron.io queue driver, you will need to add a new `encrypt` option to your queue configuration file:
+如果你使用 Iron.io queue 驱动，你将需要增加一个新的 `encrypt` 选项到你的 queue 设置档中：
 
     'encrypt' => true
 
 <a name="upgrade-4.1.29"></a>
-## Upgrading To 4.1.29 From <= 4.1.x
+## 从 4.1.x 升级到 4.1.29
 
-Laravel 4.1.29 improves the column quoting for all database drivers. This protects your application from some mass assignment vulnerabilities when **not** using the `fillable` property on models. If you are using the `fillable` property on your models to protect against mass assignment, your application is not vulnerable. However, if you are using `guarded` and are passing a user controlled array into an "update" or "save" type function, you should upgrade to `4.1.29` immediately as your application may be at risk of mass assignment.
+Laravel 4.1.29 对于所有的数据库驱动加强了 column quoting 的部分。当你的模型中**没有**使用 `fillable` 属性，他保护你的应用程序不会受到 mass assignment 漏洞影响。如果你在模型中使用 `fillable` 属性来防范 mass assignment，你的应用程序将不会有漏洞。如果你使用 `guarded` 且在「更新」或「保存」类型的函式中，传递了末端用户控制的数组，那你应该立即升级到 `4.1.29` 以避免 mass assignment 的风险。
 
-To upgrade to Laravel 4.1.29, simply `composer update`. No breaking changes are introduced in this release.
+升级到 Laravel 4.1.29，只要 `composer update` 即可。在这个发行版本中没有重大的更新。
 
 <a name="upgrade-4.1.26"></a>
-## Upgrading To 4.1.26 From <= 4.1.25
+## 从 4.1.25 升级到 4.1.26
 
-Laravel 4.1.26 introduces security improvements for "remember me" cookies. Before this update, if a remember cookie was hijacked by another malicious user, the cookie would remain valid for a long period of time, even after the true owner of the account reset their password, logged out, etc.
+Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此更新之前，如果一个记得我的 cookies 被恶意用户劫持，该 cookie 将还可以生存很长一段时间，即使真实用户重设密码或者注销亦同。
 
-This change requires the addition of a new `remember_token` column to your `users` (or equivalent) database table. After this change, a fresh token will be assigned to the user each time they login to your application. The token will also be refreshed when the user logs out of the application. The implications of this change are: if a "remember me" cookie is hijacked, simply logging out of the application will invalidate the cookie.
+此更动需要在你的 `users` (或者类似的) 的数据表中增加一个额外的 `remember_token` 字段。在更新之后，当用户每次登录你的应用程序将会有一个全新的 token 将会被指派。这个 token 也会在用户注销应用程序后被更新。这个更新的影响为：如果一个「记得我」的 cookie 被劫持，只要用户注销应用程序将会废除该 cookie。
 
-### Upgrade Path
+### 升级路径
 
-First, add a new, nullable `remember_token` of VARCHAR(100), TEXT, or equivalent to your `users` table.
+首先，增加一个新的字段，可空值、属性为 VARCHAR(100)、TEXT 或同类型的字段 `remember_token` 到你的 `users` 数据表中。
 
-Next, if you are using the Eloquent authentication driver, update your `User` class with the following three methods:
+然后，如果你使用 Eloquent 认证驱动，依照下面更新你的 `User` 类别的三个方法：
 
 	public function getRememberToken()
 	{
@@ -302,79 +300,81 @@ Next, if you are using the Eloquent authentication driver, update your `User` cl
 		return 'remember_token';
 	}
 
-> **Note:** All existing "remember me" sessions will be invalidated by this change, so all users will be forced to re-authenticate with your application.
+> **附注:** 所有现存的「记得我」sessions 在此更新后将会失效，所以应用程序的所有用户将会被迫重新登录。
 
-### Package Maintainers
+### 套件管理者
 
-Two new methods were added to the `Illuminate\Auth\UserProviderInterface` interface. Sample implementations may be found in the default drivers:
+两个新的方法被加入到 `Illuminate\Auth\UserProviderInterface` 接口。范例实作方式可以在缺省驱动中找到：
 
 	public function retrieveByToken($identifier, $token);
 
 	public function updateRememberToken(UserInterface $user, $token);
 
-The `Illuminate\Auth\UserInterface` also received the three new methods described in the "Upgrade Path".
+`Illuminate\Auth\UserInterface` 也加了三个新方法描述在「升级路径」。
 
 <a name="upgrade-4.1"></a>
-## Upgrading To 4.1 From 4.0
+## 从 4.0 升级到 4.1
 
-### Upgrading Your Composer Dependency
+### 升级你的 Composer 相依性
 
-To upgrade your application to Laravel 4.1, change your `laravel/framework` version to `4.1.*` in your `composer.json` file.
+升级你的应用程序至 Laravel 4.1，将 `composer.json` 里的 `laravel/framework` 版本更改至 `4.1.*`。
 
-### Replacing Files
+### 文件置换
 
-Replace your `public/index.php` file with [this fresh copy from the repository](https://github.com/laravel/laravel/blob/master/public/index.php).
+将你的 `public/index.php` 置换成 [这个 repository 的干净版本](https://github.com/laravel/laravel/blob/master/public/index.php)。
 
-Replace your `artisan` file with [this fresh copy from the repository](https://github.com/laravel/laravel/blob/master/artisan).
+同样的，将你的 `artisan` 置换成 [这个 repository 的干净版本](https://github.com/laravel/laravel/blob/master/artisan)。
 
-### Adding Configuration Files & Options
+### 添加设置文件及选项
 
-Update your `aliases` and `providers` arrays in your `app/config/app.php` configuration file. The updated values for these arrays can be found [in this file](https://github.com/laravel/laravel/blob/master/app/config/app.php). Be sure to add your custom and package service providers / aliases back to the arrays.
+更新你在设置档 `app/config/app.php` 里的 `aliases` 和 `providers` 数组。而更新的选项值可以在 [这个文件](https://github.com/laravel/laravel/blob/master/app/config/app.php) 中找到。请确定将你后来加入自定和套件所需的 providers / aliases 加回数组中。
 
-Add the new `app/config/remote.php` file [from the repository](https://github.com/laravel/laravel/blob/master/app/config/remote.php).
+从 [这个 repository](https://github.com/laravel/laravel/blob/master/app/config/remote.php) 增加 `app/config/remote.php` 文件。
 
-Add the new `expire_on_close` configuration option to your `app/config/session.php` file. The default value should be `false`.
+在你的 `app/config/session.php` 增加新的选项 `expire_on_close`。而默认值为 `false`。
 
-Add the new `failed` configuration section to your `app/config/queue.php` file. Here are the default values for the section:
+在你的 `app/config/queue.php` 文件里添加 `failed` 设置区块。以下为区块的默认值：
 
 	'failed' => array(
 		'database' => 'mysql', 'table' => 'failed_jobs',
 	),
 
-**(Optional)** Update the `pagination` configuration option in your `app/config/view.php` file to `pagination::slider-3`.
+**（非必要）** 在你的 `app/config/view.php` 里，将 `pagination` 设置选项更新为 `pagination::slider-3`。
 
-### Controller Updates
+### 更新控制器（Controllers）
 
-If `app/controllers/BaseController.php` has a `use` statement at the top, change `use Illuminate\Routing\Controllers\Controller;` to `use Illuminate\Routing\Controller;`.
+如果 `app/controllers/BaseController.php` 有 `use` 语句在最上面，将 `use Illuminate\Routing\Controllers\Controller;` 改为 `use Illuminate\Routing\Controller;`。
 
-### Password Reminders Updates
+### 更新密码提醒
 
-Password reminders have been overhauled for greater flexibility. You may examine the new stub controller by running the `php artisan auth:reminders-controller` Artisan command. You may also browse the [updated documentation](/docs/security#password-reminders-and-reset) and update your application accordingly.
+密码提醒功能已经大幅修正拥有更大的弹性。你可以执行 Artisan 指令 `php artisan auth:reminders-controller` 来检查新的存根控制器。你也可以浏览 [更新文档](/docs/security#password-reminders-and-reset) 然后相应的更新你的应用程序。
 
-Update your `app/lang/en/reminders.php` language file to match [this updated file](https://github.com/laravel/laravel/blob/master/app/lang/en/reminders.php).
+更新你的 `app/lang/en/reminders.php` 语系文件来符合 [这个新版文件](https://github.com/laravel/laravel/blob/master/app/lang/en/reminders.php)。
 
-### Environment Detection Updates
+### 更新环境侦测
 
-For security reasons, URL domains may no longer be used to detect your application environment. These values are easily spoofable and allow attackers to modify the environment for a request. You should convert your environment detection to use machine host names (`hostname` command on Mac, Linux, and Windows).
+为了安全因素，不再使用网域网址来侦测辨别应用程序的环境。因为这些直很容易被伪造欺骗，继而让攻击者透过请求来达到变更环境。所以你必须改为使用机器的 hostname（在 Mac & Ubuntu 下执行 `hostname` 出来的值）
 
-### Simpler Log Files
+（译按：的确原有方式有安全性考量，但对于现行 VirtualHost 大量使用下，反而这样改会造成不便）
 
-Laravel now generates a single log file: `app/storage/logs/laravel.log`. However, you may still configure this behavior in your `app/start/global.php` file.
+### 更简单的日志文档
 
-### Removing Redirect Trailing Slash
+Laravel 目前只会产生单一的日志文档：`app/storage/logs/laravel.log`。然而，你还是可以透过设置你的 `app/start/global.php` 文件来更改他的行为。
 
-In your `bootstrap/start.php` file, remove the call to `$app->redirectIfTrailingSlash()`. This method is no longer needed as this functionality is now handled by the `.htaccess` file included with the framework.
+### 删除重定向结尾的斜线
 
-Next, replace your Apache `.htaccess` file with [this new one](https://github.com/laravel/laravel/blob/master/public/.htaccess) that handles trailing slashes.
+在你的 `bootstrap/start.php` 文件中，移除调用 `$app->redirectIfTrailingSlash()`。这个方法已不再需要了，因为之后将会改以框架内的 `.htaccess` 来处理。
 
-### Current Route Access
+然后，用 [新版](https://github.com/laravel/laravel/blob/master/public/.htaccess) 替换掉你 Apache 中的 `.htaccess` 文件，来处理结尾的斜线问题。
 
-The current route is now accessed via `Route::current()` instead of `Route::getCurrentRoute()`.
+### 取得目前路由
 
-### Composer Update
+取得目前路由的方法由 `Route::getCurrentRoute()` 改为 `Route::current()`。
 
-Once you have completed the changes above, you can run the `composer update` function to update your core application files! If you receive class load errors, try running the `update` command with the `--no-scripts` option enabled like so: `composer update --no-scripts`.
+### Composer 更新
 
-### Wildcard Event Listeners
+一旦你完成以上的更新，你可以执行 `composer update` 来更新应用程序的核心文件。如果有 class load 错误，请在 `update` 之后加上 `--no-scripts`，如：`composer update --no-scripts`。
 
-The wildcard event listeners no longer append the event to your handler functions parameters. If you require finding the event that was fired you should use `Event::firing()`.
+### 万用字符事件监听者
+
+万用字符事件监听者不再添加事件为参数到你的处理函数。如果你需要寻找你触发的事件你应该用 `Event::firing()`.
