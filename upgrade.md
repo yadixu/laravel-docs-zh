@@ -32,7 +32,7 @@
 
 此外，复制原先您自定义的 `.env.php` 文件，并修改为 `.env` (本机环境的真实值) 和 `.env.example` (给其他团队成员的示例).
 
-更多关于环境设置值，请见[完整文文件](/docs/5.0/configuration#environment-configuration)。
+更多关于环境设置值，请见[完整文件](/docs/5.0/configuration#environment-configuration)。
 
 > **注意:** 在部署 Laravel 5 应用程序之前，您需要在正式主机上放置适当的 `.env` 文件与设置值。
 
@@ -72,7 +72,7 @@ Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `afte
 
     'csrf' => 'App\Http\Middleware\VerifyCsrfToken',
 
-现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间件到路由/控制器。了解更多关于中间件，请见[完整文文件](/docs/5.0/middleware).
+现在，您可于路由内使用 `['middleware' => 'csrf']` 即可个别添加中间件到路由/控制器。了解更多关于中间件，请见[完整文件](/docs/5.0/middleware).
 
 ### Eloquent 模型
 
@@ -82,7 +82,7 @@ Laravel 5 并没有将过滤器移除，您一样可以使用 `before` 和 `afte
 
 #### Eloquent 缓存
 
-Eloquent 不再提供 `remember` 方法来缓存查找字串。若需要缓存字串，您可手动使用 `Cache::remember` 函数。了解更多关于缓存，请见[完整文文件](/docs/5.0/cache).
+Eloquent 不再提供 `remember` 方法来缓存查找字串。若需要缓存字串，您可手动使用 `Cache::remember` 函数。了解更多关于缓存，请见[完整文件](/docs/5.0/cache).
 
 ### 会员认证模型
 
@@ -346,7 +346,7 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 ### 更新密码提醒
 
-密码提醒功能已经大幅修正拥有更大的弹性。你可以执行 Artisan 指令 `php artisan auth:reminders-controller` 来检查新的存根控制器。你也可以浏览 [更新文文件](/docs/security#password-reminders-and-reset) 然后相应的更新你的应用程序。
+密码提醒功能已经大幅修正拥有更大的弹性。你可以执行 Artisan 指令 `php artisan auth:reminders-controller` 来检查新的存根控制器。你也可以浏览 [更新文件](/docs/security#password-reminders-and-reset) 然后相应的更新你的应用程序。
 
 更新你的 `app/lang/en/reminders.php` 语系文件来符合 [这个新版文件](https://github.com/laravel/laravel/blob/master/app/lang/en/reminders.php)。
 
@@ -356,9 +356,9 @@ Laravel 4.1.26 采用了针对「记得我」cookies 的安全性更新。在此
 
 （译按：的确原有方式有安全性考量，但对于现行 VirtualHost 大量使用下，反而这样改会造成不便）
 
-### 更简单的日志文文件
+### 更简单的日志文件
 
-Laravel 目前只会产生单一的日志文文件：`app/storage/logs/laravel.log`。然而，你还是可以透过设置你的 `app/start/global.php` 文件来更改他的行为。
+Laravel 目前只会产生单一的日志文件：`app/storage/logs/laravel.log`。然而，你还是可以透过设置你的 `app/start/global.php` 文件来更改他的行为。
 
 ### 删除重定向结尾的斜线
 
