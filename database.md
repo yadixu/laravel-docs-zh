@@ -125,9 +125,9 @@ Laravel 让链接数据库和执行查找变得相当容易。数据库相关配
 <a name="query-logging"></a>
 ## 查找日志记录
 
-默认情况下，Laravel 会在内存里访问这次请求中所有的查找语句。然而，在有些例子下，比如一次添加 大量的数据，可能会导致应用程序耗损过多内存。 如果要禁用日志，可以使用 `disableQueryLog` 方法：
+Laravel 可以在内存里访问这次请求中所有的查找语句。然而在有些例子下要注意，比如一次添加 大量的数据，可能会导致应用程序耗损过多内存。 如果要启用日志，可以使用 `enableQueryLog` 方法：
 
-	DB::connection()->disableQueryLog();
+	DB::connection()->enableQueryLog();
 
 要得到执行过的查找纪录数组，你可以使用 `getQueryLog` 方法：
 
