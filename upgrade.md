@@ -54,7 +54,7 @@ Laravel 5.0 不再使用 `app/config/{environmentName}/` 目录结构来提供�
 
 在 `app/Providers/RouteServiceProvider.php` 文件中，将 `namespace` 属性设置为 `null`。
 
-### 路由筛选器
+### 路由过滤器
 
 将筛选逻辑绑定从原本的 `app/filters.php` 复制到 `app/Providers/RouteServiceProvider.php` 的 `boot()` 方法中，并在 `app/Providers/RouteServiceProvider.php` 加入 `use Illuminate\Support\Facades\Route;` 来继续使用 `Route` Facade。
 
