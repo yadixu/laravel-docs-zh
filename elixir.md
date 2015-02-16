@@ -190,6 +190,19 @@ elixir(function(mix) {
 
 程序的作用下，`elixir()` 函数会将参数内的源文件名转换成被哈希后的文件名并加载。是否有如释重担的感觉呢？
 
+您也可以传给一个数组给 `version` 方法来为多个文件进行版本管理：
+
+```javascript
+elixir(function(mix) {
+    mix.version(["css/all.css", "js/app.js"]);
+});
+```
+
+```html
+<link rel="stylesheet" href="{{ elixir("css/all.css") }}">
+<script src="{{ elixir("js/app.js") }}"></script>
+```
+
 #### 复制文件到新的位置
 
 ```javascript
