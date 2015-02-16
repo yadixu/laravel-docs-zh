@@ -46,11 +46,11 @@
 - `currentPage`
 - `lastPage`
 - `perPage`
-- `total`
-- `count`
 - `hasMorePages`
 - `url`
 - `nextPageUrl`
+- `total`
+- `count`
 
 #### 「简单分页」
 
