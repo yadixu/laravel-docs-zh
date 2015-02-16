@@ -291,9 +291,9 @@ Laravel 提供了几个机会来使用服务容器以提高应用程序的灵活
 		 */
 		public function index()
 		{
-			$all = $this->orders->all();
+			$orders = $this->orders->all();
 
-			return view('orders', ['all' => $all]);
+			return view('orders', ['orders' => $orders]);
 		}
 
 	}
