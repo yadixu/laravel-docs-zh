@@ -48,6 +48,9 @@
 - `perPage`
 - `total`
 - `count`
+- `hasMorePages`
+- `url`
+- `nextPageUrl`
 
 #### 「简单分页」
 
