@@ -48,6 +48,10 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 	vagrant box add laravel/homestead
 
+如果这个命令失败了, 你可能安装的是一个老版本的 Vagrant 需要指定一个完整的 URL：
+
+	vagrant box add laravel/homestead https://atlas.hashicorp.com/laravel/boxes/homestead
+
 ### 安装 Homestead
 
 #### 手动透过 Git 安装（本地端没有 PHP）
