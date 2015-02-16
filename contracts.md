@@ -37,7 +37,7 @@ Laravel 所有的 contracts 都放在[各自的 Github repository](https://githu
 		/**
 		 * Create a new repository instance.
 		 *
-		 * @param  \Package\Cache\Memcached  $cache
+		 * @param  \SomePackage\Cache\Memcached  $cache
 		 * @return void
 		 */
 		public function __construct(\SomePackage\Cache\Memcached $cache)
