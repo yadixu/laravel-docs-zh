@@ -1,4 +1,4 @@
-# Installation
+# Laravel 安装指南
 
 - [安装 Composer](#install-composer)
 - [安装 Laravel](#install-laravel)
