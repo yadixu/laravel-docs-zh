@@ -1,21 +1,22 @@
-# Contribution Guide
+# 贡献指南
 
-- [Bug Reports](#bug-reports)
-- [Core Development Discussion](#core-development-discussion)
-- [Which Branch?](#which-branch)
-- [Security Vulnerabilities](#security-vulnerabilities)
-- [Coding Style](#coding-style)
+- [缺陷报告](#bug-reports)
+- [核心开发讨论区](#core-development-discussion)
+- [如何选取分支?](#which-branch)
+- [安全缺陷](#security-vulnerabilities)
+- [代码风格](#coding-style)
 
 <a name="bug-reports"></a>
-## Bug Reports
+## 缺陷报告
 
-To encourage active collaboration, Laravel strongly encourages pull requests, not just bug reports. "Bug reports" may also be sent in the form of a pull request containing a failing unit test.
+为了促进有效积极的合作，相对于仅提交 缺陷报告 来说， Laravel 团队更鼓励使用 GitHub的 拉拽请求。 当然也可以用 拉拽请求 的方式发送含有失败单元测试的「缺陷报告」。
 
-However, if you file a bug report, your issue should contain a title and a clear description of the issue. You should also include as much relevant information as possible and a code sample that demonstrates the issue. The goal of a bug report is to make it easy for yourself - and others - to replicate the bug and develop a fix.
+当您在呈递缺陷报告的时候，请确保您所提交的问题含有标题和清晰的描述。同时应该附带尽可能详细的与问题相关的信息和代码示例。 缺陷报告的目标是尽可能的方便您与他人去重现错误并修复它。
 
-Remember, bug reports are created in the hope that others with the same problem will be able to collaborate with you on solving it. Do not expect that the bug report will automatically see any activity or that others will jump to fix it. Creating a bug report serves to help yourself and others start on the path of fixing the problem.
 
-The Laravel source code is managed on Github, and there are repositories for each of the Laravel projects:
+请谨记，建立缺陷报告是希望您与其他遇到同样问题的人一起解决这个问题。 但请不要期望其他人会主动的过来修复它。 创建缺陷报告是为了给您和他人提供一个修复问题的切入点。
+
+Laravel 框架的源代码托管在 Github， 以下列出了每个 Laravel 相关项目仓库的连接:
 
 - [Laravel Framework](https://github.com/laravel/framework)
 - [Laravel Application](https://github.com/laravel/laravel)
@@ -28,34 +29,38 @@ The Laravel source code is managed on Github, and there are repositories for eac
 - [Laravel Art](https://github.com/laravel/art)
 
 <a name="core-development-discussion"></a>
-## Core Development Discussion
+## 核心开发讨论区
 
-Discussion regarding bugs, new features, and implementation of existing features takes place in the `#laravel-dev` IRC channel (Freenode). Taylor Otwell, the maintainer of Laravel, is typically present in the channel on weekdays from 8am-5pm (UTC-06:00 or America/Chicago), and sporadically present in the channel at other times.
+讨论区在 (Freenode) 上的 \#laravel-dev IRC 频道， 讨论内容包括缺陷，新特性和计划实施的已有特性. Laravel 项目维护者 Taylor Otwell 通常会在周一至周五的美国芝加哥时间 8am-5am 上线 (UTC-06:00 or America/Chicago)， 当然其它时间他也会偶尔出现。
 
-The `#laravel-dev` IRC channel is open to all. All are welcome to join the channel either to participate or simply observe the discussions!
+\#laravel-dev IRC 频道是对所有人开放的，欢迎任何有兴趣的朋友参与进来讨论或哪怕只是围观!
 
 <a name="which-branch"></a>
-## Which Branch?
+## 如何选择分支?
 
-**All** bug fixes should be sent to the latest stable branch. Bug fixes should **never** be sent to the `master` branch unless they fix features that exist only in the upcoming release.
+**所有的** 缺陷修正都应该提交到最后一版的稳定分支。 **永远** 不要把缺陷修正提交到 `master` 分支除非这些正是在下个发行版本中他们要修复的特性。
 
-**Minor** features that are **fully backwards compatible** with the current Laravel release may be sent to the latest stable branch.
+那些 **完全向后兼容** 并随当前 Laravel 版发行的 **非重要** 特性也许可以提交到最后一版的稳定分支。
 
-**Major** new features should always be sent to the `master` branch, which contains the upcoming Laravel release.
+那些在下一个 Laravel 发行版中将要出现的 **重要的** 新特性应该总是被提交到 `master` 分支。
 
-If you are unsure if your feature qualifies as a major or minor, please ask Taylor Otwell in the `#laravel-dev` IRC channel (Freenode).
+如果您也不确定你写的特性是否重要时，请到 (Freenode) 的 #laravel-dev IRC 频道 问一下 Taylor Otwell。
+
 
 <a name="security-vulnerabilities"></a>
-## Security Vulnerabilities
+## 安全缺陷
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at <a href="mailto:taylorotwell@gmail.com">taylorotwell@gmail.com</a>. All security vulnerabilities will be promptly addressed.
+如果你在 Laravel 中发现安全缺陷，烦请以电子邮件的方式发送给 Taylor Otwell <a href="mailto:taylorotwell@gmail.com">taylorotwell@gmail.com</a>。所有的安全缺陷都将会被及时的处理掉。
 
 <a name="coding-style"></a>
-## Coding Style
+## 代码风格
 
-Laravel follows the [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) and [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) coding standards. In addition to these standards, the following coding standards should be followed:
+Laravel 框架遵循 [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) 和 [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) 代码标准。除了这些以外，如下的代码标准也应该被遵守:
 
-- The class namespace declaration must be on the same line as `<?php`.
-- A class' opening `{` must be on the same line as the class name.
-- Functions and control structures must use Allman style braces.
-- Indent with tabs, align with spaces.
+- 类命名空间的声明必须与 `<?php` 处在同一行。
+
+- 类的起始花括号 `{` 必须与类名处在同一行。
+
+- 函数和控制结构必须使用 [Allman 样式](http://en.wikipedia.org/wiki/Indent_style#Allman_style) 括起来。
+
+- 缩进使用制表符，对齐使用空格。
