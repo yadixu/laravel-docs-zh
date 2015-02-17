@@ -6,7 +6,7 @@
 <a name="introduction"></a>
 ## 介绍
 
-Laravel 透过 Mcrypt PHP 扩充扩展包提供功能强大的 AES 加密功能。
+Laravel 通过 Mcrypt PHP 扩充扩展包提供功能强大的 AES 加密功能。
 
 <a name="basic-usage"></a>
 ## 基本用法
