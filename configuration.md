@@ -18,13 +18,13 @@
 
 ### 命名你的应用程序
 
-在安装完成 Laravel 后，你可以「命名」你的应用程序。默认情况下，`app` 的目录是命名在 `App` 下，通过 Composer 使用 [PSR-4 autoloading standard](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-4-autoloader-cn.md) 自动加载。不过，你可以轻松地通过 Artisan 命令 `app:name` 来修改命名空间，以配合你的应用程序名称。
+在安装 Laravel 后，你可以「命名」你的应用程序。默认情况下，`app` 的目录是在 `App` 的命名空间 下，通过 Composer 使用 [PSR-4 自动载入规范](https://github.com/PizzaLiu/PHP-FIG/blob/master/PSR-4-autoloader-cn.md) 自动加载。不过，你可以轻松地通过 Artisan 命令 `app:name` 来修改命名空间，以配合你的应用程序名称。
 
 举例来说，假设你的应用程序叫做「 Horsefly 」，你可以从安装的根目录执行下面的命令：
 
 	php artisan app:name Horsefly
 
-重命名你的应用程序是完全自由的，如果你希望的话也可以保持命名空间为 `App` 。
+重命名你的应用程序是完全可选的，你也可以保留原有的命名空间 `App` 。
 
 ### 其他配置
 
@@ -55,13 +55,13 @@ Laravel 框架有一个目录需要额外权限：`storage` 目录必须让服�
 <a name="environment-configuration"></a>
 ## 环境配置
 
-通常应用程序常常需要根据不同的执行环境而有不同的配置值。例如，你会希望在你的本机开发环境上会有与正式环境不同的暂存驱动（cache driver），通过配置文件，就可以轻松完成。
+通常应用程序常常需要根据不同的执行环境而有不同的配置值。例如，你会希望在你的本机开发环境上会有与正式环境不同的缓存驱动（cache driver），通过配置文件，就可以轻松完成。
 
-Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vance Lucas。 在全新安装好的 Laravel 里，你的应用程序的根目录下会包含一个 `.env.example` 文件。如果你通过 Composer 安装 Laravel，这个文件将自动被命名为 `.env`，不然你应该手动更改文件名。
+Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) Vance Lucas 写的一个 PHP 类库。 在全新安装好的 Laravel 里，你的应用程序的根目录下会包含一个 `.env.example` 文件。如果你通过 Composer 安装 Laravel，这个文件将自动被命名为 `.env`，不然你应该手动更改文件名。
 
-当你的应用程序收到请求，这个文件所有的变量会被加载到 `$_ENV` PHP 超级全局变量里。你可以使用辅助方法 `env` 查看这些变量。事实上，如果你检阅过 Laravel 配置文件，你会注意到几个选项已经在使用这个辅助方法！
+当你的应用程序收到请求，这个文件所有的变量会被加载到 `$_ENV` 这个 PHP 超级全局变量里。你可以使用辅助方法 `env` 查看这些变量。事实上，如果你查看过 Laravel 配置文件，你会注意到几个选项已经在使用这个辅助方法！
 
-根据你的本机服务器或者上线环境需求，你可以自由的修改你的环境变量。然而， 你的 `.env`  文件不应该被提交到应用程序的版本控制系统，因为每个开发人员或服务器使用你的应用程序可能需要不同的环境配置。
+根据你的本机服务器或者线上环境需求，你可以自由的修改你的环境变量。然而， 你的 `.env`  文件不应该被提交到应用程序的版本控制系统，因为每个开发人员或服务器使用你的应用程序可能需要不同的环境配置。
 
 如果你是一个团队的开发者，不妨将 `.env.example` 文件包含到你的应用程序。通过例子配置文件里的预留值，你的团队中其他开发人员可以清楚地看到执行你的应用程序所需的哪些环境变量。
 
@@ -94,14 +94,14 @@ Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vanc
 <a name="configuration-caching"></a>
 ## 配置缓存
 
-为了让你的的应用程序提升一些速度，你可以使用 Artisan 命令 `config:cache`  将所有的配置文件暂存到单一文件。通过命令会将所有的配置选项合并成一个文件，让框架能够快速加载。
+为了让你的的应用程序提升一些速度，你可以使用 Artisan 命令 `config:cache`  将所有的配置文件缓存到单一文件。通过命令会将所有的配置选项合并成一个文件，让框架能够快速加载。
 
 通常来说，你应该将执行 `config:cache` 命令作为部署工作的一部分。
 
 <a name="maintenance-mode"></a>
 ## 维护模式
 
-当你的应用程序处于维护模式时，所有的路由都会指向一个自定的视图。当你要更新或进行维护作业时，「关闭」整个网站是很简单的。维护模式会检查包含在应用程序的默认中间件堆叠。如果应用程序处于维护模式，`HttpException` 会抛出 503 的状态码。
+当你的应用程序处于维护模式时，所有的路由都会指向一个自定的视图。当你要更新或维护网站时，「关闭」整个网站是很简单的。维护模式会检查包含在应用程序的默认中间件堆栈。如果应用程序处于维护模式，`HttpException` 会抛出 503 的状态码。
 
 启用维护模式，只需要执行 Artisan 命令 `down`：
 
@@ -124,7 +124,7 @@ Laravel 通过 [DotEnv](https://github.com/vlucas/phpdotenv) PHP library by Vanc
 
 ### Apache
 
-Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.php`。如果你的服务器是使用，请确认是否有开启 `mod_rewrite` 模块。
+Laravel 框架通过 `public/.htaccess` 文件来让网址中不需要 `index.php`。如果你的服务器是使用 Apache ，请确认是否有开启 `mod_rewrite` 模块。
 
 假设 Laravel 附带的 `.htaccess` 文件在 Apache 无法生效的话，请尝试下面的方法：
 
