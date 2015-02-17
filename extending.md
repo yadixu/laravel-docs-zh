@@ -11,7 +11,7 @@
 
 Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这些类包括缓存、session 、认证和队列组件。管理者类负责基于应用程序的配置建立一个特定的驱动实现。例如，`CacheManager` 类可以建立 APC 、 Memcached 、文件和各种其他的缓存驱动实现。
 
-这些管理者都拥有 `extend` 方法，可以简单地用它来注入新的驱动解析功能到管理者。我们将会在下面的例子，随着如何注入自定义驱动支持给它们，涵盖这些管理者的内容。
+这些管理者都拥有 `extend` 方法，可以简单地用它来注入新的驱动解析功能到管理者。我们将会在下面的例子，随着讲解如何为它们注入自定义驱动支持，涵盖这些管理者的内容。
 
 > **注意：** 建议花点时间来探索 Laravel 附带的各种 `Manager` 类，例如：`CacheManager` 和 `SessionManager`。看过这些类将会让你更彻底了解 Laravel 表面下是如何运作。所有的管理者类继承  `Illuminate\Support\Manager` 基础类，它提供一些有用、常见的功能给每一个管理者。
 
@@ -55,7 +55,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 <a name="session"></a>
 ## Session
 
-以自定义 session 驱动来扩展 Laravel 跟扩展缓存系统一样简单。再一次的，我们将会使用 `extend` 方法来注册自定义代码：
+自定义 session 驱动来扩展 Laravel 和扩展缓存系统一样简单。我们将会再一次使用 `extend` 方法来注册自定义代码：
 
 	Session::extend('mongo', function($app)
 	{
