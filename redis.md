@@ -3,7 +3,7 @@
 - [介绍](#introduction)
 - [配置文件](#configuration)
 - [使用方式](#usage)
-- [管线](#pipelining)
+- [管道](#pipelining)
 
 <a name="introduction"></a>
 ## 介绍
@@ -64,12 +64,12 @@
 
 	$values = Redis::lrange('names', 5, 10);
 
-> **提示：** 也可以使用 Redis 作为 Laravel 的 [缓存](/docs/5.0/cache) 和 [session](/docs/5.0/session) 驱动。
+> **提示：** 也可以使用 Redis 作为 Laravel 的 [缓存](/docs/5.0/cache) 和 [会话](/docs/5.0/session) 驱动。
 
 <a name="pipelining"></a>
-## 管线
+## 管道
 
-当你想要一次发送很多命令到服务器时可以使用管线。使用 `pipeline` 方法：
+当你想要一次发送很多命令到服务器时可以使用管道。使用 `pipeline` 方法：
 
 #### 发送多个命令到服务器
 
