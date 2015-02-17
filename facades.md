@@ -124,7 +124,7 @@ Cache 类继承基本的 `Facade` 类并定义一个 `getFacadeAccessor()` 方�
 
 ### 自动加载别名的附注
 
-在 `aliases` 数组中的类在某些实例中不能使用，因为 [PHP 将不会尝试去自动加载未定义的类型暗示类](https://bugs.php.net/bug.php?id=39003)。如果 `\ServiceWrapper\ApiTimeoutException` 命别名为 `ApiTimeoutException`，即便有异常被抛出，在 `\ServiceWrapper` 命名空间外面的 `catch(ApiTimeoutException $e)` 将永远捕捉不到异常。类似的问题在有类型暗示的别名类一样会发生。唯一的替代方案就是放弃别名并用 `use` 在每一个文件的最上面引入你希望暗示类型的类。
+在 `aliases` 数组中的类在某些实例中不能使用，因为 [PHP 将不会尝试去自动加载未定义的类型提示类](https://bugs.php.net/bug.php?id=39003)。如果 `\ServiceWrapper\ApiTimeoutException` 命别名为 `ApiTimeoutException`，即便有异常被抛出，在 `\ServiceWrapper` 命名空间外面的 `catch(ApiTimeoutException $e)` 将永远捕捉不到异常。类似的问题在有类型提示的别名类一样会发生。唯一的替代方案就是放弃别名并用 `use` 在每一个文件的最上面引入你希望类型提示的类。
 
 <a name="mocking-facades"></a>
 ## 模拟 Facades
