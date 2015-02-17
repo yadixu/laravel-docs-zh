@@ -4,7 +4,7 @@
 - [建立命令](#creating-commands)
 - [调用命令](#dispatching-commands)
 - [命令队列](#queued-commands)
-- [命令管线](#command-pipeline)
+- [命令管道](#command-pipeline)
 
 <a name="introduction"></a>
 ## 简介
@@ -13,7 +13,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 
 用户购买 podcasts 的过程中需要做很多事。例如，我们需要从用户的信用卡扣款，将纪录添加到数据库以表示购买，并发送购买确认的电子邮件，或许，我们还需要进行许多验证来确认用户是否可以购买。
 
-我们可以将这些逻辑通通放在控制器的方法内，然而，这样做会有一些缺点，首先，控制器可能还需要处理许多其他的 HTTP 动作，包含复杂的逻辑，这会让控制器变得很臃肿且难易阅读，第二点，这些逻辑无法在这个控制器以外被重复使用，第三，这些命令无法被单元测试，为此我们还得额外产生一个 HTTP 请求，并向网站进行完整购买 podcast 的流程。
+我们可以将这些逻辑通通放在控制器的方法内，然而，这样做会有一些缺点，首先，控制器可能还需要处理许多其他的 HTTP 请求，包含复杂的逻辑，这会让控制器变得很臃肿且难易阅读，第二点，这些逻辑无法在这个控制器以外被重复使用，第三，这些命令无法被单元测试，为此我们还得额外产生一个 HTTP 请求，并向网站进行完整购买 podcast 的流程。
 
 比起将逻辑放在控制器内，我们可以选择使用一个「命令」对象来封装它，如 `PurchasePodcast` 命令。
 
@@ -55,7 +55,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 
 	}
 	
-`handle` 方法也可以使用类型暗示依赖，并且通过 [IoC 容器](/docs/5.0/container) 机制自动进行依赖注入。例如：
+`handle` 方法也可以使用类型提示依赖，并且通过 [IoC 容器](/docs/5.0/container) 机制自动进行依赖注入。例如：
 
 		/**
 		 * Execute the command.
@@ -83,7 +83,7 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 
 Command bus 将会负责执行命令和调用 IoC 容器来将所需的依赖注入到 `handle` 方法。
 
-你也可以将 `Illuminate\Foundation\Bus\DispatchesCommands` trait 加入任何要使用的类内。若你想要在任何类的构造器内接收 command bus 的实体 ，你可以使用类型暗示 `Illuminate\Contracts\Bus\Dispatcher` 这个接口。
+你也可以将 `Illuminate\Foundation\Bus\DispatchesCommands` trait 加入任何要使用的类内。若你想要在任何类的构造器内接收 command bus 的实体 ，你可以使用类型提示 `Illuminate\Contracts\Bus\Dispatcher` 这个接口。
 最后，你也可以使用 `Bus` facade 来快速派发命令：
 
 		Bus::dispatch(
@@ -120,15 +120,15 @@ Command bus 不仅仅作为当下请求的同步作业，也可以作为 Laravel
 想了解更多关于队列命令的方法，请见[队列文档](/docs/5.0/queues).
 
 <a name="command-pipeline"></a>
-## 命令管线
+## 命令管道
 
-在命令被派发到处理器之前，你也可以将它通过"命令管线"传递到其他类去。命令管线操作上如 HTTP 中间件，除了是专门来给命令用的，例如，一个命令管线能够在数据库交易期间包装全部的命令操作，或者仅作为执行纪录。
+在命令被派发到处理器之前，你也可以将它通过"命令管道"传递到其他类去。命令管道操作上如 HTTP 中间件，除了是专门来给命令用的，例如，一个命令管道能够在数据库事务处理期间包装全部的命令操作，或者仅作为执行纪录。
 
-要将管线添加到 bus，只要从`App\Providers\BusServiceProvider::boot` 方法调用调用员的`pipeThrough` 方法：
+要将管道添加到 bus，只要从`App\Providers\BusServiceProvider::boot` 方法调用调用员的`pipeThrough` 方法：
 
 	$dispatcher->pipeThrough(['UseDatabaseTransactions', 'LogCommand']);
 
-一个命令管线被定义在 `handle` 方法，就如个中间件：
+一个命令管道被定义在 `handle` 方法，就如个中间件：
 
 	class UseDatabaseTransactions {
 
@@ -142,9 +142,9 @@ Command bus 不仅仅作为当下请求的同步作业，也可以作为 Laravel
 
 	}
 
-命令管线是透过 IoC 容器来达成，所以请自行在构造器类型暗示所需的依赖。
+命令管道是透过 IoC 容器来达成，所以请自行在构造器类型提示所需的依赖。
 
-你甚至可以定义一个 `闭包` 来作为命令管线：
+你甚至可以定义一个 `闭包` 来作为命令管道：
 
 	$dispatcher->pipeThrough([function($command, $next)
 	{
