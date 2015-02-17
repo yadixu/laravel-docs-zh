@@ -358,30 +358,6 @@
 
 	$url = asset('img/photo.jpg');
 
-### link_to
-
-产生给定网址的 HTML 链接。
-
-	echo link_to('foo/bar', $title, $attributes = array(), $secure = null);
-
-### link_to_asset
-
-产生给定资源的 HTML 链接。
-
-	echo link_to_asset('foo/bar.zip', $title, $attributes = array(), $secure = null);
-
-### link_to_route
-
-产生给定路由的 HTML 链接。
-
-	echo link_to_route('route.name', $title, $parameters = array(), $attributes = array());
-
-### link_to_action
-
-产生给定控制器行为的 HTML 链接。
-
-	echo link_to_action('HomeController@getIndex', $title, $parameters = array(), $attributes = array());
-
 ### secure_asset
 
 产生给定资源的 HTTPS HTML 链接。
