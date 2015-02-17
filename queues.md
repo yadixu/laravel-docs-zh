@@ -78,13 +78,13 @@ Laravel 队列组件提供一个统一的 API 集成了许多不同的队列服�
 
     Queue::later($date, new SendEmail($message));
 
-在这个例子中，我们使用 [Carbon](https://github.com/briannesbitt/Carbon) 日期函式库来指定我们希望队列工作希望延迟的时间，另外你也可发送一个整数来设置你希望延迟的秒数。
+在这个例子中，我们使用 [Carbon](https://github.com/briannesbitt/Carbon) 日期类库来指定我们希望队列工作希望延迟的时间，另外你也可发送一个整数来设置你希望延迟的秒数。
 
 > **注意:** 在 Amazon SQS 服务中，有最大 900 秒（ 15 分钟 ）的限制。
 
 #### 将 Eloquent 模型放进队列
 
-如果你队列工作的建构式接收一个 Eloquent 模型，只有这个模型的标记（ identifier ） 会被序列化后放到队列中。当工作真正开始被处理的时候，队列系统会自动从数据库中重新取得完整的模型实例。这个对你的网站应用程序来说是完全透明的，并且预防一些在序列化完整 Eloquent 模型实例时可能遇到的问题。
+如果你队列工作的构造器接收一个 Eloquent 模型，只有这个模型的标记（ identifier ） 会被序列化后放到队列中。当工作真正开始被处理的时候，队列系统会自动从数据库中重新取得完整的模型实例。这个对你的网站应用程序来说是完全透明的，并且预防一些在序列化完整 Eloquent 模型实例时可能遇到的问题。
 
 #### 删除一个处理中的工作
 
@@ -129,7 +129,7 @@ Laravel 队列组件提供一个统一的 API 集成了许多不同的队列服�
         $job->delete();
     });
 
-> **注意:** 要让一个组件变量可以在队列闭包中可以使用我们会透过 `use` 命令，试着发送主键及重复使用的相关模块在你的队列工作中，这可以避免其他的序列化行为。
+> **注意:** 要让一个组件变量可以在队列闭包中可以使用我们会通过 `use` 命令，试着发送主键及重复使用的相关模块在你的队列工作中，这可以避免其他的序列化行为。
 
 当使用 Iron.io [push queues](#push-queues) 时,你应该在队列闭包中采取一些其他的预防措施，我们应该在执行工作收到队列数据时检查token是否真来自 Iron.io，举例来说你推送一个队列工作到 `https://yourapp.com/queue/receive?token=SecretToken`，接下来在你的工作收到队列的请求时，你就可以检查token的值是否正确。
 
@@ -154,7 +154,7 @@ Laravel 内含一个 Artisan 命令，它将推送到队列的工作拉来下执
 
 在这个范列中，总是会优先处理 `high-connection` 中的工作，然后才处理 `low-connection`。
 
-#### 指定工作逾时参数
+#### 指定工作超时参数
 
 你也可以设置给每个工作允许执行的秒数：
 
@@ -240,7 +240,7 @@ Laravel 内含一个 Artisan 命令，它将推送到队列的工作拉来下执
 
     php artisan queue:listen connection-name --tries=3
 
-假如你会想注册一个事件，这个事件会将会在队列失败时被调用，你可以使用 `Queue::failing` 方法，这个事件是一个很好的机会让你可以通知你的团队透过 e-mail 或 [HipChat](https://www.hipchat.com)。
+假如你会想注册一个事件，这个事件会将会在队列失败时被调用，你可以使用 `Queue::failing` 方法，这个事件是一个很好的机会让你可以通知你的团队通过 e-mail 或 [HipChat](https://www.hipchat.com)。
 
     Queue::failing(function($connection, $job, $data)
     {
