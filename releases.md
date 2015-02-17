@@ -1,4 +1,4 @@
-# Release Notes
+# 发行说明
 
 - [Laravel 5.0](#laravel-5.0)
 - [Laravel 4.2](#laravel-4.2)
@@ -11,17 +11,17 @@ Laravel 5.0 在默认的项目上引进了新的应用程序架构。新的架�
 
 ### 新的目录结构
 
-旧的 `app/models` 目录已经完全被移除。相对的，你所有的代码都放在 `app` 目录下，以及默认上使用 `App` 命名空间。这个默认的命名空间可以快速的被更改，使用新的 `app:name` Artisan 命令。
+旧的 `app/models` 目录已经完全被移除。相对的，你所有的代码都放在 `app` 目录下，以及默认使用 `App` 命名空间。这个默认的命名空间可以使用新的 `app:name` Artisan 命令来快速更改。
 
-控制器（ controller ），中间件（ middleware ），以及请求（ requests，Laravel 5.0 中新型态的类别），现在分门别类的放在 `app/Http` 目录下，因为他们都与应用程序的 HTTP 传输层相关。除了一个路由设置的文件外，所有的中间件现在都分开成为独自的类别档。
+控制器（ controller ），中间件（ middleware ），以及请求（ requests，Laravel 5.0 中新型态的类别），现在都存放在 `app/Http` 的对应目录下，因为他们都与应用程序的 HTTP 传输层相关。除了一个路由设置的文件外，所有的中间件现在都拆分开成单独的类文件。
 
-新的 `app/Providers` 目录取代了旧版 Laravel 4.x `app/start` 里的文件。这些服务提供者有很多启动应用程序相关的方法，像是错误处理，日志纪录，路由加载，以及更多。当然，你可以自由的建立新的服务提供者到应用程序。
+新的 `app/Providers` 目录取代了旧版 Laravel 4.x `app/start` 里的文件。这些服务提供者有很多启动应用程序相关的方法，像是错误处理，日志记录，路由加载，以及更多。当然，你可以自由的建立新的服务提供者到应用程序。
 
 应用程序的语言文件和视图都移到 `resources` 目录下。
 
 ### Contracts
 
-所有 Laravel 主要组件实现所用的接口都放在 `illuminate/contracts` 项目下。这个项目没有其他的外部相依。这些方便、集成的接口，可以让你用来让依赖注入变得低耦合，将可以简单作为 Laravel Facades 的替代选项。
+所有 Laravel 主要组件实现所用的接口都放在 `illuminate/contracts` 项目下。这个项目没有其他的外部依赖。这些方便、集成的接口，可以让你用来让依赖注入变得低耦合，将可以简单作为 Laravel Facades 的替代选项。
 
 更多关于 contracts 的信息，参考[完整文档](/docs/5.0/contracts)。
 
@@ -31,7 +31,7 @@ Laravel 5.0 在默认的项目上引进了新的应用程序架构。新的架�
 
 ### 路由中间件（ Middleware ）
 
-除了像 Laravel 4 风格的路由「过滤器（ filters ）」，Laravel 5 现在有 HTTP 中间件，而原本的认证和 CSRF 「过滤器」已经改写成中间件。中间件提供了单一、一致的接口取代了各种过滤器，让你在请求进到应用程序前，可以简单地检查甚至拒绝请求。
+除了像 Laravel 4 风格的路由「过滤器（ filters ）」，Laravel 5 现在也支持 HTTP 中间件，而原本的认证和 CSRF 「过滤器」已经改写成中间件。中间件提供了单一、一致的接口取代了各种过滤器，让你在请求进到应用程序前，可以方便地检查甚至拒绝请求。
 
 更多关于中间件的信息，参考[完整文档](/docs/5.0/middleware)。
 
@@ -145,17 +145,17 @@ Laravel 的基底控制器使用了新的 `DispatchesCommands` trait，让你可
 
 ### DotEnv
 
-比起一堆令人困惑的、嵌套的环境配置文件目录，Laravel 5 现在使用了 Vance Lucas 的 [DotEnv](https://github.com/vlucas/phpdotenv)。这个套件提供了超级简单的方式管理配置文件，并且让 Laravel 5 环境侦测变得轻松。更多的细节，参考完整的[配置文件文档](/docs/5.0/configuration#environment-configuration)。
+比起一堆令人困惑的、嵌套的环境配置文件目录，Laravel 5 现在使用了 Vance Lucas 的 [DotEnv](https://github.com/vlucas/phpdotenv)。这个套件提供了超级简单的方式管理配置文件，并且让 Laravel 5 环境检测变得轻松。更多的细节，参考完整的[配置文件文档](/docs/5.0/configuration#environment-configuration)。
 
 ### Laravel Elixir
 
-Jeffrey Way 的 Laravel Elixir 提供了一个流畅、口语的接口，可以编译以及合并 assets。如果你曾经在学习 Grunt 或 Gulp 被吓到，不必再害怕了。Elixir 让使用 Gulp 编译 Less、Sass 及 CoffeeScript 变得简单。它甚至可以帮你执行测试！
+Jeffrey Way 的 Laravel Elixir 提供了一个流畅、语义化的接口，可以编译以及合并 assets。如果你曾经在学习 Grunt 或 Gulp 被吓到，不必再害怕了。Elixir 让使用 Gulp 编译 Less、Sass 及 CoffeeScript 变得简单。它甚至可以帮你执行测试！
 
 更多关于 Elixir 的信息，参考[完整文档](/docs/5.0/elixir)。
 
 ### Laravel Socialite
 
-Laravel Socialite 是个选用的，Laravel 5.0 以上兼容的套件，提供了无痛的 OAuth 认证。目前 Socialite 支持 Facebook、Twitter、Google 以及 GitHub。它写起来可能像这样：
+Laravel Socialite 是个可选的，Laravel 5.0 以上兼容的套件，提供了无痛的 OAuth 认证。目前 Socialite 支持 Facebook、Twitter、Google 以及 GitHub。它写起来可能像这样：
 
     public function redirectForAuth()
     {
@@ -171,7 +171,7 @@ Laravel Socialite 是个选用的，Laravel 5.0 以上兼容的套件，提供�
 
 ### Flysystem 集成
 
-Laravel 现在包含了强大的 [Flysystem](https://github.com/thephpleague/flysystem)（一个文件系统的抽象函式库），提供了无痛的集成，把本地端文件系统、Amazon S3 和 Rackspace 云存储集成在一起，
+Laravel 现在包含了强大的 [Flysystem](https://github.com/thephpleague/flysystem)（一个文件系统的抽象类库），提供了无痛的集成，把本地端文件系统、Amazon S3 和 Rackspace 云存储集成在一起，
 有统一且优雅的 API！现在要将文件存到 Amazon S3 相当简单：
 
     Storage::put('file.txt', 'contents');
@@ -180,7 +180,7 @@ Laravel 现在包含了强大的 [Flysystem](https://github.com/thephpleague/fly
 
 ### Form Requests
 
-Laravel 5.0 使用了 **form requests**，是继承了 `Illuminate\Foundation\Http\FormRequest` 的类别。这些 request 对象可以和控制器方法依赖注入结合，提供一个不需样板的方法，可以验证用户输入。让我们深入点，看一个 `FormRequest` 的示例：
+Laravel 5.0 使用了 **form requests**，是继承了 `Illuminate\Foundation\Http\FormRequest` 的类。这些 request 对象可以和控制器方法依赖注入结合，提供一个不需样板的方法，可以验证用户输入。让我们深入点，看一个 `FormRequest` 的示例：
 
     <?php namespace App\Http\Requests;
 
@@ -201,18 +201,18 @@ Laravel 5.0 使用了 **form requests**，是继承了 `Illuminate\Foundation\Ht
 
     }
 
-定义好类别后，我们可以在控制器动作里使用类型提示：
+定义好类后，我们可以在控制器动作里使用类型提示：
 
     public function register(RegisterRequest $request)
     {
         var_dump($request->input());
     }
 
-当 Laravel 的服务容器辨别出要注入的类别是个 `FormRequest` 实例，请求会被**自动验证**。意味着，当你的控制器动作被调用了，你可以安全的假设 HTTP 的请求输入己经被验证过，根据你在 form request 类别里自定的规则。甚至，若这个请求验证不通过，一个 HTTP 重导（可以自定），会自动发出，错误消息可以被闪存到 session 或是转换成 JSON 返回。**表单验证再简单不过如此。**更多关于 `FormRequest` 验证，参考[文档](/docs/5.0/validation#form-request-validation)。
+当 Laravel 的服务容器辨别出要注入的类别是个 `FormRequest` 实例，请求会被**自动验证**。意味着，当你的控制器动作被调用了，你可以安全的假设 HTTP 的请求输入己经被验证过，根据你在 form request 类别里自定的规则。甚至，若这个请求验证不通过，一个 HTTP 重定向（可以自定），会自动发出，错误消息可以被闪存到 session 或是转换成 JSON 返回。**表单验证就是如此的简单。**更多关于 `FormRequest` 验证，参考[文档](/docs/5.0/validation#form-request-validation)。
 
 ### 简易控制器请求验证
 
-Laravel 5 基底控制器包含一个 `ValidatesRequests` trait。这个 trait 包含了一个简单的 `validate` 方法可以验证请求。如果对应用程序来说 `FormRequests` 太复杂了，参考这个：
+Laravel 5 基类控制器包含一个 `ValidatesRequests` trait。这个 trait 包含了一个简单的 `validate` 方法可以验证请求。如果对应用程序来说 `FormRequests` 太复杂了，参考这个：
 
     public function createPost(Request $request)
     {
@@ -222,13 +222,13 @@ Laravel 5 基底控制器包含一个 `ValidatesRequests` trait。这个 trait �
         ]);
     }
 
-如果验证失败，会抛出例外以及回传适当的 HTTP 回应到浏览器。验证错误信息会被闪存到 session！而如果请求是 AJAX 请求，Laravel 会自动回传 JSON 格式的验证错误信息。
+如果验证失败，会抛出异常并且返回对应的 HTTP 回应到浏览器。验证错误信息会被闪存到 session！而如果请求是 AJAX 请求，Laravel 会自动返回 JSON 格式的验证错误信息。
 
 更多关于这个新方法的信息，参考[这个文档](/docs/5.0/validation#controller-validation)。
 
 ### 新的 Generators
 
-因应新的应用程序默认架构，框架添加了 Artisan generator 命令。使用 `php artisan list` 查看更多细节。
+因采用了新的应用程序默认架构，框架也添加了 Artisan generator 命令。使用 `php artisan list` 查看更多细节。
 
 ### 配置文件缓存
 
@@ -236,7 +236,7 @@ Laravel 5 基底控制器包含一个 `ValidatesRequests` trait。这个 trait �
 
 ### Symfony VarDumper
 
-出名的 `dd` 辅助函示，其可以在除错时印出变量信息，已经升级成使用令人惊艳的 Symfony VarDumper。它提供了颜色标记的输出，甚至数组可以自动缩合。在项目中试试下列代码：
+常用的 `dd` 辅助函数，其可以在除错时印出变量信息，已经升级成使用令人惊艳的 Symfony VarDumper。它提供了颜色标记的输出，甚至数组可以自动缩合。在项目中试试下列代码：
 
     dd([1, 2, 3]);
 
@@ -245,7 +245,7 @@ Laravel 5 基底控制器包含一个 `ValidatesRequests` trait。这个 trait �
 
 此发行版本的完整变更列表可以从一个 4.2 的完整安装下，执行 `php artisan changes` 命令，或者 [Github 上的变更纪录](https://github.com/laravel/framework/blob/4.2/src/Illuminate/Foundation/changes.json)。此纪录仅含括主要的强化更新和此发行的变更部分。
 
-> **附注:** 在 4.2 发布周期间，许多小的臭虫修正与功能强化被整并至各个 4.1 的子发行版本中。所以最好确认 Laravel 4.1 版本的更新列表。
+> **附注:** 在 4.2 发布周期间，许多小的 bug 修正与功能强化被整并至各个 4.1 的子发行版本中。所以最好确认 Laravel 4.1 版本的更新列表。
 
 ### PHP 5.4 需求
 
