@@ -21,7 +21,7 @@
 
 所有的服务提供者都应继承 `Illuminate\Support\ServiceProvider` 此一类。在这个抽象类中，至少必须定义一个方法： `register` 。在 `register` 方法中，应该**只绑定服务到[服务容器](/docs/5.0/container)之中**。你永远不该试图在 `register` 方法中注册任何事件监听器、路由或任何其他功能。
 
-Artisan 命令行接口可以很容易地透过 `make:provider` 产生新的提供者：
+Artisan 命令行接口可以很容易地通过 `make:provider` 产生新的提供者：
 
 	php artisan make:provider RiakServiceProvider
 
@@ -88,7 +88,7 @@ Artisan 命令行接口可以很容易地透过 `make:provider` 产生新的提�
 
 	}
 
-我们可以对 `boot` 方法中的依赖作类型暗示。服务容器会自动注入任何你所需要的依赖：
+我们可以对 `boot` 方法中的依赖作类型提示。服务容器会自动注入任何你所需要的依赖：
 
 	use Illuminate\Contracts\Events\Dispatcher;
 
@@ -156,4 +156,4 @@ Artisan 命令行接口可以很容易地透过 `make:provider` 产生新的提�
 
 	}
 
-Laravel 编译并保存所有由延缓服务提供者所提供的服务清单，以及其服务提供者的类名称。只有在当你企图解析其中的服务时， Laravel 才会加载服务提供者。
+Laravel 编译并保存所有由延缓服务提供者所提供的服务清单，以及其服务提供者的类名称。只有在当你尝试解析其中的服务时， Laravel 才会加载服务提供者。
