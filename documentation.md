@@ -42,7 +42,7 @@
     - [会话](/docs/5.0/session)
     - [模板](/docs/5.0/templates)
     - [单元测试](/docs/5.0/testing)
-    - [用户认证](/docs/5.0/validation)
+    - [表单验证](/docs/5.0/validation)
 - 数据库
     - [基本用法](/docs/5.0/database)
     - [查找架构器](/docs/5.0/queries)
