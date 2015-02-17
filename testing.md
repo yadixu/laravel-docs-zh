@@ -68,7 +68,7 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 
 > **注意:** 当使用 `action` 方法的时候，你不需要指定完整的控制器命名空间。只需要指定 `App\Http\Controllers` 命名空间后面的类名称部分。
 
-`getContent` 方法会返回求值后的字串内容响应。如果你的路由返回一个 `View`，你可以透过 `original` 属性访问它：
+`getContent` 方法会返回求值后的字串内容响应。如果你的路由返回一个 `View`，你可以通过 `original` 属性访问它：
 
 	$view = $response->original;
 
@@ -121,7 +121,7 @@ Laravel 附带几个 `assert` 方法，让测试更简单一点：
 
 	$this->assertResponseStatus(403);
 
-#### Assert 响应为重导向
+#### Assert 响应为重定向
 
 	$this->assertRedirectedTo('foo');
 
@@ -205,4 +205,4 @@ Laravel 附带几个 `assert` 方法，让测试更简单一点：
 <a name="refreshing-the-application"></a>
 ## 重置应用程序
 
-你可能已经知道，你可以透过 `$this->app` 在任何测试方法中访问你的 Laravel `应用程序本体` / IoC 容器。这个应用程序对象实例会在每个测试类被重置。如果你希望在给定的方法手动强制重置应用程序，你可以从你的测试方法使用 `refreshApplication` 方法。这将会重置任何额外的绑定，例如那些从测试案例执行开始被放到 IoC 容器的 mocks。
+你可能已经知道，你可以通过 `$this->app` 在任何测试方法中访问你的 Laravel `应用程序本体` / IoC 容器。这个应用程序对象实例会在每个测试类被重置。如果你希望在给定的方法手动强制重置应用程序，你可以从你的测试方法使用 `refreshApplication` 方法。这将会重置任何额外的绑定，例如那些从测试案例执行开始被放到 IoC 容器的 mocks。
