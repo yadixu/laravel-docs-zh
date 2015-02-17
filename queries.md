@@ -1,4 +1,4 @@
-# 查找产生器
+# 查询构造器
 
 - [介绍](#introduction)
 - [Selects](#selects)
