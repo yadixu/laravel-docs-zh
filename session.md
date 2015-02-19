@@ -109,7 +109,7 @@ Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该
 
 session 配置文件中的「driver」定义了 session 数据将以哪种方式被保存。Laravel 提供了许多良好的驱动：
 
-- `file` - sessions 将保存在 `app/storage/sessions`。
+- `file` - sessions 将保存在 `storage/framework/sessions`。
 - `cookie` - sessions 将安全保存在加密的 cookies 中。
 - `database` - sessions 将保存在你的应用程序数据库中。
 - `memcached` / `redis` - sessions 将保存在一个高速缓存的系统中。
