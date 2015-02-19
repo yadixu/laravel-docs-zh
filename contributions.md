@@ -55,7 +55,7 @@ Laravel 框架的源代码托管在 Github， 以下列出了每个 Laravel 相�
 <a name="coding-style"></a>
 ## 代码风格
 
-Laravel 框架遵循 [PSR-0](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-0.md) 和 [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) 代码标准。除了这些以外，如下的代码标准也应该被遵守:
+Laravel 框架遵循 [PSR-4](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md) 和 [PSR-1](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md) 代码标准。除了这些以外，如下的代码标准也应该被遵守:
 
 - 类命名空间的声明必须与 `<?php` 处在同一行。
 
