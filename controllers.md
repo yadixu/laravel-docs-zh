@@ -152,13 +152,13 @@ Laravel 让你能轻易地定义单一路由来处理控制器中的每一项行
 
 动词      | 路径                        | 行为         | 路由名称
 ----------|-----------------------------|--------------|---------------------
-GET       | /resource                   | 索引         | resource.index
-GET       | /resource/create            | 创建         | resource.create
-POST      | /resource                   | 保存         | resource.store
-GET       | /resource/{resource}        | 显示         | resource.show
-GET       | /resource/{resource}/edit   | 编辑         | resource.edit
-PUT/PATCH | /resource/{resource}        | 更新         | resource.update
-DELETE    | /resource/{resource}        | 删除         | resource.destroy
+GET       | /photo                   | 索引         | photo.index
+GET       | /photo/create            | 创建         | photo.create
+POST      | /photo                   | 保存         | photo.store
+GET       | /photo/{photo}        | 显示         | photo.show
+GET       | /photo/{photo}/edit   | 编辑         | photo.edit
+PUT/PATCH | /photo/{photo}        | 更新         | photo.update
+DELETE    | /photo/{photo}        | 删除         | photo.destroy
 
 #### 自定义资源路由
 
