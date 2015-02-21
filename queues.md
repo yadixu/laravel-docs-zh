@@ -210,7 +210,7 @@ Laravel 内含一个 Artisan 命令，它将推送到队列的工作拉来下执
 <a name="push-queues"></a>
 ## 推送队列
 
-你可以利用强大的 Laravel 4 队列架构来进行推送队列工作，不需要执行任何的常驻或背景监听，目前只支持 [Iron.io](http://iron.io) 驱动，在你开始前建立一个 Iron.io 帐号及添加你的 Iron 凭证到 `config/queue.php` 配置文件。
+你可以利用强大的 Laravel 5 队列架构来进行推送队列工作，不需要执行任何的常驻或背景监听，目前只支持 [Iron.io](http://iron.io) 驱动，在你开始前建立一个 Iron.io 帐号及添加你的 Iron 凭证到 `config/queue.php` 配置文件。
 
 #### 注册一个推送队列订阅
 
