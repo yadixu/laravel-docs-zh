@@ -74,16 +74,25 @@ Laravel 会自动在每一位用户的 session 中放置随机的 `token` ，这
 
 您不需要手动验证在 POST、PUT、DELETE 请求的 CSRF token。 `VerifyCsrfToken` [HTTP  中间件](/docs/5.0/middleware)将保存在 session 中的请求输入的 token 配对来验证 token 。
 
-除了寻找 CSRF token 作为「POST」参数，中间件也检查 `X-XSRF-TOKEN` 请求头，比如，你可以把 token 存放在 meta 标签中, 然后在发送请求前使用 jQuery 加入到请求头中：
+#### X-CSRF-TOKEN
+
+除了寻找 CSRF token 作为「POST」参数，中间件也检查 `X-XSRF-TOKEN` 请求头，比如，你可以把 token 存放在 meta 标签中, 然后使用 jQuery 将它加入到所有的请求头中：
 
 	<meta name="csrf-token" content="{{ csrf_token() }}" />
 	
+	$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+现在所有的 AJAX 请求会自动加入 CSRF token：
+
 	$.ajax({
 	  url: "/foo/bar",
-	  beforeSend: function( xhr ) {
-	    xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'))
-	  }
 	})
+
+#### X-XSRF-TOKEN
 
 Laravel 也在 cookie 中存放了名为 `XSRF-TOKEN` 的 CSRF token。你可以使用这个 cookie 值来设置 `X-XSRF-TOKEN` 请求头。一些 Javascript 框架，比如 Angular ，会自动设置这个值。
 
