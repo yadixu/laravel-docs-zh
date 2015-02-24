@@ -24,7 +24,7 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 	 */
 	protected $listen = [
 		'App\Events\PodcastWasPurchased' => [
-			'App\Handlers\Events\EmailPurchaseConfirmation@handle',
+			'App\Handlers\Events\EmailPurchaseConfirmation',
 		],
 	];
 
