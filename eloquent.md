@@ -20,7 +20,7 @@
 - [属性类型转换](#attribute-casting)
 - [模型事件](#model-events)
 - [模型观察者](#model-observers)
-- [Model URL Generation](#model-url-generation)
+- [模型 URL 生成](#model-url-generation)
 - [转换数组 / JSON](#converting-to-arrays-or-json)
 
 <a name="introduction"></a>
