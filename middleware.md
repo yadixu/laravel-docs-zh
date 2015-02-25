@@ -48,6 +48,38 @@ Laravel 框架已经内置一些中间件，包括维护、身份验证、CSRF �
 如你所见，若是 `年龄` 小于 `200` ，中间件将会返回 HTTP 重定向给客户端，否则，请求将会进一步传递到应用程序。只需调用带有 `$request` 的 `$next` 方法，即可将请求传递到更深层的应用程序(允许跳过中间件)
 HTTP 请求在实际碰触到应用程序之前，最好是可以层层通过许多中间件，每一层都可以对请求进行检查，甚至是完全拒绝请求。
 
+### *Before* / *After* 中间件
+
+在一个请求前后指定某个中间件取决于这个中间件自身。这个中间件可以执行在请求前执行一些 **前置** 操作：
+
+	<?php namespace App\Http\Middleware;
+
+	class BeforeMiddleware implements Middleware {
+
+		public function handle($request, Closure $next)
+		{
+			// Perform action
+
+			return $next($request);
+		}
+	}
+
+然后，这个中间件也可以在请求后执行一些 **后置** 操作：
+
+	<?php namespace App\Http\Middleware;
+
+	class AfterMiddleware implements Middleware {
+
+		public function handle($request, Closure $next)
+		{
+			$response = $next($request);
+
+			// Perform action
+
+			return $response;
+		}
+	}
+
 <a name="registering-middleware"></a>
 ## 注册中间件
 
