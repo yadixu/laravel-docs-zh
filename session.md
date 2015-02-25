@@ -24,9 +24,15 @@ Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该
 <a name="session-usage"></a>
 ## 使用 Session
 
+获取 session 有很多种方式，可以通过 HTTP request 类的 `session` 方法，`Session` facade 或者 `session` 辅助函数。如果在调用 `session` 辅助函数时没有传入参数，会返回整个 session 对象。比如：
+
+	session()->regenerate();
+
 #### 保存对象到 Session 中
 
 	Session::put('key', 'value');
+
+	session(['key' => 'value']);
 
 #### 保存对象进 Session 数组值中
 
@@ -35,6 +41,8 @@ Laravel 框架在内部有使用 `flash` 作为 session 的键值，所以应该
 #### 从 Session 取回对象
 
 	$value = Session::get('key');
+
+	$value = session('key');
 
 #### 从 Session 取回对象，若无则返回默认值
 
