@@ -135,6 +135,14 @@ Laravel 让你能轻易地定义单一路由来处理控制器中的每一项行
 
 	public function getAdminProfile() {}
 
+#### 设定路由名字
+
+如果你想“命名”一些控制器的路由，你可以给 `controller` 方法传入第三个参数：
+
+	Route::controller('users', 'UserController', [
+		'anyLogin' => 'user.login',
+	]);
+
 <a name="restful-resource-controllers"></a>
 ## RESTful 资源控制器
 
