@@ -245,6 +245,14 @@ elixir(function(mix) {
 
     gulp watch
 
+#### 仅编译 javascript
+
+    gulp scripts
+
+#### 仅编译 css 样式
+
+    gulp styles
+
 #### 监控测试以及 PHP 类的变更
 
     gulp tdd
