@@ -4,6 +4,7 @@
 - [视图](#views)
 - [语言](#translations)
 - [配置文件](#configuration)
+- [公共资源](#public-assets)
 - [发布分类文件](#publishing-file-groups)
 - [路由](#routing)
 
@@ -103,6 +104,21 @@
 	$this->mergeConfigFrom(
 		__DIR__.'/path/to/config/courier.php', 'courier'
 	);
+
+<a name="public-assets"></a>
+## 公共资源
+
+您的扩展包也许会有一些资源文件比如 JavaScript，CSS，和图片。如果要发布资源，可以在您的服务提供商的 `boot` 方法中使用 `publishes` 方法。在这个例子中，我们同样增加了 “public” 资源的分区标记。
+
+	$this->publishes([
+		__DIR__.'/path/to/assets' => public_path('vendor/courier'),
+	], 'public');
+
+现在当扩展包的用户执行 `vendor:publish` 命令，您的文件将会被复制到特定的位置。由于每次扩展更新时都会覆盖这些资源，你可以使用 `--force` 标识：
+
+	php artisan vendor:publish --tag=public --force
+
+如果你想确保你的公共资源始终是最新的，你可以把这条命名添加到 `composer.json` 文件中的 `post-update-cmd` 列表中。
 
 <a name="publishing-file-groups"></a>
 ## 发布分类文件
