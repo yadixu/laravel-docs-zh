@@ -12,7 +12,8 @@
 <a name="basic-routing"></a>
 ## 基本路由
 
-您将在您应用中的 `app/Http/routes.php` 的文件加载了 `App\Providers\RouteServiceProvider` 类来定义大多数的路由。大多数基本的 Laravel 路由都只透过 URI 和 `闭包(Closure)`：
+您将在 `app/Http/routes.php` 中定义应用中的大多数路由，这个文件加载了 `App\Providers\RouteServiceProvider` 类。
+大多数基本的 Laravel 路由都只接受一个 URI 和 一个 `闭包(Closure)` 参数：
 
 #### 基本 GET 路由
 
@@ -38,14 +39,14 @@
 		//
 	});
 
-#### 为复数动作注册路由
+#### 为多种请求注册路由
 
 	Route::match(['get', 'post'], '/', function()
 	{
 		return 'Hello World';
 	});
 
-#### 注册路由响应所有 HTTP 动作
+#### 注册路由响应所有 HTTP 请求
 
 	Route::any('foo', function()
 	{
@@ -73,14 +74,36 @@ Laravel 会自动在每一位用户的 session 中放置随机的 `token` ，这
 
 您不需要手动验证在 POST、PUT、DELETE 请求的 CSRF token。 `VerifyCsrfToken` [HTTP  中间件](/docs/5.0/middleware)将保存在 session 中的请求输入的 token 配对来验证 token 。
 
-除了寻找 CSRF token 作为「POST」参数，中间件也检查 `X-XSRF-TOKEN` 请求标头，这在多数 Javascript framework  常被拿来使用。
+#### X-CSRF-TOKEN
+
+除了寻找 CSRF token 作为「POST」参数，中间件也检查 `X-XSRF-TOKEN` 请求头，比如，你可以把 token 存放在 meta 标签中, 然后使用 jQuery 将它加入到所有的请求头中：
+
+	<meta name="csrf-token" content="{{ csrf_token() }}" />
+	
+	$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+现在所有的 AJAX 请求会自动加入 CSRF token：
+
+	$.ajax({
+	  url: "/foo/bar",
+	})
+
+#### X-XSRF-TOKEN
+
+Laravel 也在 cookie 中存放了名为 `XSRF-TOKEN` 的 CSRF token。你可以使用这个 cookie 值来设置 `X-XSRF-TOKEN` 请求头。一些 Javascript 框架，比如 Angular ，会自动设置这个值。
+
+> 注意： `X-CSRF-TOKEN` 和 `X-XSRF-TOKEN` 的不同点在于前者使用的是纯文本而后者是一个加密的值，因为在 Laravel 中 cookies 始终是被加密过的。如果你使用 `csrf_token()` 函数来作为 token 的值， 你需要设置 `X-CSRF-TOKEN` 请求头。
 
 <a name="method-spoofing"></a>
 ## 方法欺骗
 
-HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `DELETE` 路由并在 HTML 表单中被调用的时候，您将需要添加隐藏 `_method` 字段在表单中。
+HTML 表单没有支持 `PUT` 或 `DELETE` 请求。所以当定义 `PUT` 或 `DELETE` 路由并在 HTML 表单中被调用的时候，您将需要添加隐藏 `_method` 字段在表单中。
 
-将数值同 `_method` 字段发送使用 HTTP 请求方法。举例来说：
+发送的 `_method` 字段对应的值会被当做 HTTP 请求方法。举例来说：
 
 	<form action="/foo/bar" method="POST">
 		<input type="hidden" name="_method" value="PUT">
@@ -113,7 +136,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 		return $name;
 	});
 
-#### 使用正规表达式限制参数
+#### 使用正则表达式限制参数
 
 	Route::get('user/{name}', function($name)
 	{
@@ -137,7 +160,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 
 #### 定义全局模式
 
-如果你想让特定路由参数总是遵询特定的正规表达式，可以使用 `pattern` 方法。在 `RouteServiceProvider` 的 `before` 方法里定义模式：
+如果你想让特定路由参数总是遵询特定的正则表达式，可以使用 `pattern` 方法。在 `RouteServiceProvider` 的 `before` 方法里定义模式：
 
 	$router->pattern('id', '[0-9]+');
 
@@ -157,7 +180,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 		//
 	}
 
-你也可以使用 `Illuminate\Http\Request` 实体取得路由参数。当前请求的实体可以透过 `Request` facade  取得，或透过类型暗示 `Illuminate\Http\Request` 注入依赖：
+你也可以使用 `Illuminate\Http\Request` 实体取得路由参数。当前请求的实例可以通过 `Request` facade  取得，或透过类型提示 `Illuminate\Http\Request` 注入依赖：
 
 	use Illuminate\Http\Request;
 
@@ -172,7 +195,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 <a name="named-routes"></a>
 ## 命名路由
 
-命名路由让你更方便于产生 URL 与重导特定路由。您可以用 `as` 的数组键值指定名称给路由：
+命名路由让你更方便于产生 URL 与重定向特定路由。您可以用 `as` 的数组键值指定名称给路由：
 
 	Route::get('user/profile', ['as' => 'profile', function()
 	{
@@ -185,7 +208,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
         'as' => 'profile', 'uses' => 'UserController@showProfile'
 	]);
 
-现在你可以使用路由名称产生 URL 或进行重导：
+现在你可以使用路由名称产生 URL 或进行重定向：
 
 	$url = route('profile');
 
@@ -198,7 +221,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 动作。所以当定义 `PUT` 或 `D
 <a name="route-groups"></a>
 ## 路由群组
 
-有时候您需要嵌套筛选器到群组的路由上。不需要为每个路由去嵌套筛选器，您只需使用路由群组：
+有时候您需要嵌套过滤器到群组的路由上。不需要为每个路由去嵌套过滤器，您只需使用路由群组：
 
 	Route::group(['before' => 'auth'], function()
 	{
@@ -242,7 +265,7 @@ Laravel 路由一样可以处理通配符的子域名，并且从域名中传递
 <a name="route-prefixing"></a>
 ### 路由前缀
 
-群组路由可以透过群组的描述数组中使用 `prefix` 选项，将群组内的路由加上前缀：
+群组路由可以通过群组的描述数组中使用 `prefix` 选项，将群组内的路由加上前缀：
 
 	Route::group(['prefix' => 'admin'], function()
 	{
@@ -288,7 +311,7 @@ Laravel 模型绑定提供方便的方式将模型实体注入到您的路由中
 		throw new NotFoundHttpException;
 	});
 
-如果您想要使用您自己决定的逻辑，您应该使用 `Router::bind`方法。闭包透过 `bind` 方法将传递 URI 区段数值，并应该返回您想要被注入路由的类实体：
+如果您想要使用您自己决定的逻辑，您应该使用 `Router::bind`方法。闭包通过 `bind` 方法将传递 URI 区段数值，并应该返回您想要被注入路由的类实体：
 
 	Route::bind('user', function($value)
 	{

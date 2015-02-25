@@ -1,11 +1,11 @@
-# 查找产生器
+# 查询构造器
 
 - [介绍](#introduction)
 - [Selects](#selects)
 - [Joins](#joins)
 - [高级 Wheres](#advanced-wheres)
 - [聚合](#aggregates)
-- [Raw Expressions](#raw-expressions)
+- [原生表达式](#raw-expressions)
 - [添加](#inserts)
 - [更新](#updates)
 - [删除](#deletes)
@@ -15,9 +15,9 @@
 <a name="introduction"></a>
 ## 介绍
 
-数据库查找产生器 (query builder) 提供方便、流畅的接口，用来建立及执行数据库查找语法。在你的应用程序里面，它可以被使用在大部分的数据库操作，而且它在所有支持的数据库系统上都可以执行。
+数据库查询构造器 (query builder) 提供方便、流畅的接口，用来建立及执行数据库查找语法。在你的应用程序里面，它可以被使用在大部分的数据库操作，而且它在所有支持的数据库系统上都可以执行。
 
-> **注意:** Laravel 查找产生器使用 PDO 参数绑定，以保护应用程序免于数据隐码攻击 (SQL injection)，因此传入的参数不需额外跳脱特殊字符。
+> **注意:** Laravel 查询构造器使用 PDO 参数绑定，以保护应用程序免于 SQL 注入，因此传入的参数不需额外转义特殊字符。
 
 <a name="selects"></a>
 ## Selects
@@ -41,7 +41,7 @@
 		}
 	});
 
-通过在 `Closure` 中返回 `false` 来停止处理接下来的数据列：
+通过在 `闭包` 中返回 `false` 来停止处理接下来的数据列：
 
 	DB::table('users')->chunk(100, function($users)
 	{
@@ -64,11 +64,11 @@
 
 	$roles = DB::table('roles')->lists('title');
 
-这个方法将会返回数据表 role 的 title 字段值的数组。你也可以透过下面的方法，为返回的数组指定自定义键值。
+这个方法将会返回数据表 role 的 title 字段值的数组。你也可以通过下面的方法，为返回的数组指定自定义键值。
 
 	$roles = DB::table('roles')->lists('title', 'name');
 
-#### 指定查找子句 (Select Clause)
+#### 指定查询子句 (Select Clause)
 
 	$users = DB::table('users')->select('name', 'email')->get();
 
@@ -76,7 +76,7 @@
 
 	$users = DB::table('users')->select('name as user_name')->get();
 
-#### 增加查找子句到既存的查找中
+#### 增加查询子句到现有的查询中
 
 	$query = DB::table('users')->select('name');
 
@@ -131,7 +131,7 @@
 <a name="joins"></a>
 ## Joins
 
-查找产生器也可以使用 join 语法，看看下面的例子：
+查询构造器也可以使用 join 语法，看看下面的例子：
 
 #### 基本的 Join 语法
 
@@ -171,7 +171,7 @@
 
 #### 群组化参数
 
-有些时候你需要更高级的 where 子句，如「where exists」或嵌套的群组化参数。Laravel 的查找产生器也可以处理这样的情况：
+有些时候你需要更高级的 where 子句，如「where exists」或嵌套的群组化参数。Laravel 的查询构造器也可以处理这样的情况：
 
 	DB::table('users')
 	            ->where('name', '=', 'John')
@@ -222,11 +222,11 @@
 	$total = DB::table('users')->sum('votes');
 
 <a name="raw-expressions"></a>
-## Raw Expressions
+## 原生表达式
 
-有些时候你需要使用 raw expression 在查找语句里，这样的表达式会成为字串插入至查找，因此要小心勿建立任何 SQL 隐码攻击点。要建立 raw expression，你可以使用 `DB::raw` 方法：
+有些时候你需要使用原生表达式在查找语句里，这样的表达式会成为字串插入至查找，因此要小心勿建立任何 SQL 注入点。要建立原生表达式，你可以使用 `DB::raw` 方法：
 
-#### 使用 Raw Expression
+#### 使用原生表达式
 
 	$users = DB::table('users')
 	                     ->select(DB::raw('count(*) as user_count, status'))
@@ -237,7 +237,7 @@
 <a name="inserts"></a>
 ## 添加
 
-#### 添加一笔数据进数据表
+#### 添加数据进数据表
 
 	DB::table('users')->insert(
 		array('email' => 'john@example.com', 'votes' => 0)
@@ -301,7 +301,7 @@
 <a name="unions"></a>
 ## Unions
 
-查找产生器也提供一个快速的方法去「合并 (union)」两个查找的结果：
+查询构造器也提供一个快速的方法去「合并 (union)」两个查找的结果：
 
 	$first = DB::table('users')->whereNull('first_name');
 
@@ -312,7 +312,7 @@
 <a name="pessimistic-locking"></a>
 ## 悲观锁定 (Pessimistic Locking)
 
-查找产生器提供了少数函数协助你在 SELECT 语句中做到「悲观锁定」。
+查询构造器提供了少数函数协助你在 SELECT 语句中做到「悲观锁定」。
 
 想要在 SELECT 语句中加上「Shard lock」，只要在查找语句中使用 `sharedLock` 函数：
 

@@ -10,7 +10,7 @@
 <a name="obtaining-a-request-instance"></a>
 ## 取得请求实例
 
-### 透过 Facade
+### 通过 Facade
 
 `Request` facade 允许你访问当前绑定容器的请求。例如：
 
@@ -18,9 +18,9 @@
 
 切记，如果你在一个命名空间中，你必须导入 `Request` facade，接着在类的上方声明 `use Request;`。
 
-### 透过依赖注入
+### 通过依赖注入
 
-要透过依赖注入的方式取得 HTTP 请求的实例，你必须在控制器中的构造函数或方法对该类使用类型提示。当前请求的实例将会自动由[服务容器](/docs/5.0/master/container)注入：
+要通过依赖注入的方式取得 HTTP 请求的实例，你必须在控制器中的构造函数或方法对该类使用类型提示。当前请求的实例将会自动由[服务容器](/docs/5.0/master/container)注入：
 
 	<?php namespace App\Http\Controllers;
 
@@ -72,7 +72,7 @@
 
 #### 取得特定输入数据
 
-你可以透过 `Illuminate\Http\Request` 的实例，经由几个简洁的方法取得所有的用户输入数据。不需要担心发出请求时使用的 HTTP 动词，取得输入数据的方式都是相同的。
+你可以通过 `Illuminate\Http\Request` 的实例，经由几个简洁的方法取得所有的用户输入数据。不需要担心发出请求时使用的 HTTP 请求，取得输入数据的方式都是相同的。
 
 	$name = Request::input('name');
 
@@ -118,9 +118,9 @@ Laravel 可以让你保留这次的输入数据，直到下一次请求发送前
 
 	Request::flashExcept('password');
 
-#### 快闪及重导
+#### 快闪及重定向
 
-你很可能常常需要在重导至前一页，并将输入数据存成一次性 Session。只要在重导方法串接的方法中传入输入数据，就能简单地完成。
+你很可能常常需要在重定向至前一页，并将输入数据存成一次性 Session。只要在重定向方法后的链式调用方法中传入输入数据，就能简单地完成。
 
 	return redirect('form')->withInput();
 

@@ -1,4 +1,4 @@
-# Events
+# 事件
 
 - [基本用法](#basic-usage)
 - [事件处理队列](#queued-event-handlers)
@@ -24,7 +24,7 @@ Laravel 里的 `EventServiceProvider` 提供了一个方便的地方注册所有
 	 */
 	protected $listen = [
 		'App\Events\PodcastWasPurchased' => [
-			'App\Handlers\Events\EmailPurchaseConfirmation@handle',
+			'App\Handlers\Events\EmailPurchaseConfirmation',
 		],
 	];
 

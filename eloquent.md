@@ -407,7 +407,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 如果一个 Eloquent 模型引入了一个 trait ，而这个 trait 中带有符合 `bootNameOfTrait` 惯例命名的方法 ,那么这个方法会在 Eloquent 模型启动的时候调用，
 您可以在此时注册 global scope ，或者做一些其他您想要的操作。定义的 scope 必须实现 `ScopeInterface` 接口，这个接口提供了两个方法：`apply` 和 `remove`。
 
-`apply` 方法接受一个 `Illuminate\Database\Eloquent\Builder` 查询构造器对象，用来添加这个 scope 所需的额外的 `where` 子句。而`remove` 方法同样接受一个 `Builder` 对象，用来反向的执行 `apply` 操作。也就是说，`remove` 方法应该移除已经添加的 `where` 子句 (或者其他查询子句)。因此，我们的 `SoftDeletingScope` 的方法应该如下：
+`apply` 方法接受一个 `Illuminate\Database\Eloquent\Builder` 查询构造器对象以及它所应用的 `Model`，用来添加这个 scope 所需的额外的 `where` 子句。而`remove` 方法同样接受一个 `Builder` 对象以及 `Model` ，用来反向的执行 `apply` 操作。也就是说，`remove` 方法应该移除已经添加的 `where` 子句 (或者其他查询子句)。因此，我们的 `SoftDeletingScope` 的方法应该如下：
 
 	/**
 	 * Apply the scope to a given Eloquent query builder.
@@ -415,7 +415,7 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 	 * @param  \Illuminate\Database\Eloquent\Builder  $builder
 	 * @return void
 	 */
-	public function apply(Builder $builder)
+	public function apply(Builder $builder, Model $model)
 	{
 		$model = $builder->getModel();
 
@@ -428,9 +428,9 @@ Laravel 的 Eloquent ORM 提供了漂亮、简洁的 ActiveRecord 实现来和�
 	 * @param  \Illuminate\Database\Eloquent\Builder  $builder
 	 * @return void
 	 */
-	public function remove(Builder $builder)
+	public function remove(Builder $builder, Model $model)
 	{
-		$column = $builder->getModel()->getQualifiedDeletedAtColumn();
+		$column = $model->getQualifiedDeletedAtColumn();
 
 		$query = $builder->getQuery();
 

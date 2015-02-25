@@ -3,7 +3,7 @@
 - [简介](#introduction)
 - [基础控制器](#basic-controllers)
 - [控制器中间件](#controller-middleware)
-- [内隐控制器](#implicit-controllers)
+- [隐式控制器](#implicit-controllers)
 - [RESTful 资源控制器](#restful-resource-controllers)
 - [依赖注入和控制器](#dependency-injection-and-controllers)
 - [路由缓存](#route-caching)
@@ -37,7 +37,7 @@
 
 	}
 
-我们可以路由前往控制器动作，就像这样：
+我们可以通过如下方式引导路由至对应的控制器动作：
 
 	Route::get('user/{id}', 'UserController@showProfile');
 
@@ -45,7 +45,7 @@
 
 #### 控制器和命名空间
 
-有一点非常重要，那就是我们毋需指明完整的控制器命名空间，在类名称中 `App\Http\Controllers` 之后的部分即可用于表示「根」命名空间。 `RouteServiceProvider` 默认会在包含根控制器命名空间的路由群组中，加载 `routes.php` 此一文件。
+有一点非常重要，那就是我们无需指明完整的控制器命名空间，在类名称中 `App\Http\Controllers` 之后的部分即可用于表示「根」命名空间。 `RouteServiceProvider` 默认会在包含根控制器命名空间的路由群组中，加载 `routes.php` 此文件。
 
 若你要在 `App\Http\Controllers` 此目录深层使用 PHP 命名空间以嵌套化或组织你的控制器，只要使用相对于 `App\Http\Controllers` 根命名空间的特定类名称即可。因此，若你的控制器类全名为 `App\Http\Controllers\Photos\AdminController`，你可以像这样注册一个路由：
 
@@ -53,7 +53,7 @@
 
 #### 命名控制器路由
 
-和封闭路由一样，你也可以指定控制器路由的名称。
+和闭包路由一样，你也可以指定控制器路由的名称。
 
 	Route::get('foo', ['uses' => 'FooController@method', 'as' => 'name']);
 
@@ -69,7 +69,7 @@
 
 	$url = action('FooController@method');
 
-你可以使用 `currentRouteAction` 方法来访问正在执行的控制器行为名称：
+你可以使用 `currentRouteAction` 方法来获取正在执行的控制器行为名称：
 
 	$action = Route::currentRouteAction();
 
@@ -102,13 +102,13 @@
 	}
 
 <a name="implicit-controllers"></a>
-## 内隐控制器
+## 隐式控制器
 
 Laravel 让你能轻易地定义单一路由来处理控制器中的每一项行为。首先，用 `Route::controller` 方法定义一个路由：
 
 	Route::controller('users', 'UserController');
 
-`Controller` 方法接受两个参数。第一个参数是控制器欲处理的 base URI，第二个是控制器的类名称。接着只要在你的控制器中加入方法，并在名称前冠上它们所响应的 HTTP 动词。
+`Controller` 方法接受两个参数。第一个参数是控制器欲处理的 base URI，第二个是控制器的类名称。接着只要在你的控制器中加入方法，并在名称前加上它们所对应的 HTTP 请求。
 
 	class UserController extends BaseController {
 
@@ -152,15 +152,15 @@ Laravel 让你能轻易地定义单一路由来处理控制器中的每一项行
 
 动词      | 路径                        | 行为         | 路由名称
 ----------|-----------------------------|--------------|---------------------
-GET       | /resource                   | 索引         | resource.index
-GET       | /resource/create            | 创建         | resource.create
-POST      | /resource                   | 保存         | resource.store
-GET       | /resource/{resource}        | 显示         | resource.show
-GET       | /resource/{resource}/edit   | 编辑         | resource.edit
-PUT/PATCH | /resource/{resource}        | 更新         | resource.update
-DELETE    | /resource/{resource}        | 删除         | resource.destroy
+GET       | /photo                   | 索引         | photo.index
+GET       | /photo/create            | 创建         | photo.create
+POST      | /photo                   | 保存         | photo.store
+GET       | /photo/{photo}        | 显示         | photo.show
+GET       | /photo/{photo}/edit   | 编辑         | photo.edit
+PUT/PATCH | /photo/{photo}        | 更新         | photo.update
+DELETE    | /photo/{photo}        | 删除         | photo.destroy
 
-#### 自定资源路由
+#### 自定义资源路由
 
 除此之外，你也可以指定让路由仅处理一部分的行为：
 
@@ -295,7 +295,7 @@ Laravel [服务容器](/docs/5.0/container) 用于解析所有的 Laravel 控制
 <a name="route-caching"></a>
 ## 路由缓存
 
-若控制器路由只由你的应用程序专用，你可利用 Laravel 的路由缓存。使用路由缓存，将大幅降低注册应用程序所有路由所需要的时间。某些情况下，路由注册甚至可以快上 100 倍。要产生路由缓存，只要执行 `route:cache` Artisan 命令：
+若您的应用只使用了控制器路由，你可利用 Laravel 的路由缓存。使用路由缓存，将大幅降低注册应用程序所有路由所需要的时间。某些情况下，路由注册甚至可以快上 100 倍。要产生路由缓存，只要执行 `route:cache` Artisan 命令：
 
 	php artisan route:cache
 

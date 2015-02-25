@@ -11,13 +11,13 @@
 
 Laravel 致力于让 PHP 开发体验更愉快，也包含你的本地开发环境。[Vagrant](http://vagrantup.com) 提供了一个简单、优雅的方式来管理与供应虚拟机。
 
-Laravel Homestead 是一个官方预载的 Vagrant「封装包」，提供你一个美好的开发环境，你不需要在你的本机端安装 PHP、HHVM、网页服务器或任何服务器软件。不用担心搞乱你的系统！Vagrant 封装包可以搞定一切。如果有什么地方烂掉了，你可以在几分钟内快速的砍掉并重建虚拟机。
+Laravel Homestead 是一个官方预载的 Vagrant「封装包」，提供你一个美好的开发环境，你不需要在你的本机端安装 PHP、HHVM、网页服务器或任何服务器软件。不用担心搞乱你的系统！Vagrant 封装包可以搞定一切。如果有什么地方出现故障，你可以在几分钟内快速的销毁并重建虚拟机。
 
 Homestead 可以在任何 Windows、Mac 或 Linux 上面运行，里面包含了 Nginx 网页服务器、PHP 5.6、MySQL、Postgres、Redis、Memcached 还有所有你要开发精彩的 Laravel 应用程序所需的软件。
 
-> **附注：** 如果您是 Windows 的用户，您可能需要启用硬件虚拟化（VT-x）。通常需要透过 BIOS 来启用它。
+> **附注：** 如果您是 Windows 的用户，您可能需要启用硬件虚拟化（VT-x）。通常需要通过 BIOS 来启用它。
 
-Homestead 目前是建置且测试于 Vagrant 1.6。
+Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 
 <a name="included-software"></a>
 ## 内置软件
@@ -48,9 +48,13 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 	vagrant box add laravel/homestead
 
+如果这个命令失败了, 你可能安装的是一个老版本的 Vagrant 需要指定一个完整的 URL：
+
+	vagrant box add laravel/homestead https://atlas.hashicorp.com/laravel/boxes/homestead
+
 ### 安装 Homestead
 
-#### 手动透过 Git 安装（本地端没有 PHP）
+#### 手动通过 Git 安装（本地端没有 PHP）
 
 如果你不希望在你的本机上安装 PHP ，你可以简单地透过手动复制资源库的方式来安装 Homestead。建议可将资源库复制至你的 "home" 目录中的 `Homestead` 文件夹，如此一来 Homestead 封装包将能提供主机服务给你所有的 Laravel（及 PHP）应用:
 
@@ -62,7 +66,7 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 此 `Homestead.yaml` 文件，将会被放置在你的 `~/.homestead` 目录中。
 
-#### 透过 Composer + PHP 工具
+#### 通过 Composer + PHP 工具
 
 一旦封装包已经安装进你的 Vagrant 安装程序，你就可以准备透过 Composer `global` 命令来安装 Homestead CLI 工具：
 
@@ -80,9 +84,9 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 ### 配置你的 SSH 密钥
 
-然后你要编辑 `Homestead.yaml`。可以在文件中配置你的 SSH 公开密钥，以及主要机器与 Homestead 虚拟机之间的共享目录。
+然后你需要编辑 `Homestead.yaml`。可以在文件中配置你的 SSH 公开密钥，以及主要机器与 Homestead 虚拟机之间的共享目录。
 
-你没有 SSH 密钥？在 Mac 和 Linux 下，你可以利用下面的命令来创建一个 SSH 密钥组:
+如果没有 SSH 密钥的话， 在 Mac 和 Linux 下，你可以利用下面的命令来创建一个 SSH 密钥组:
 
 	ssh-keygen -t rsa -C "you@homestead"
 
@@ -92,13 +96,13 @@ Homestead 目前是建置且测试于 Vagrant 1.6。
 
 ### 配置你的共享文件夹
 
-`Homestead.yaml` 文件中的 `folders` 属性列出所有你想跟你的 Homestead 环境共享的文件夹列表。这些文件夹中的文件若有更动，他们将会同步在你的本机与 Homestead 环境里。你可以将你需要的共享文件夹都配置进去。
+`Homestead.yaml` 文件中的 `folders` 属性列出了所有你想跟 Homestead 环境共享的文件夹列表。这些文件夹中的文件若有更动，他们将会同步在你的本机与 Homestead 环境里。你可以将你需要的共享文件夹都配置进去。
 
 ### 配置你的 Nginx 站点
 
 对 Nginx 不熟悉？没关系。`sites` 属性允许你简单的对应一个 `域名` 到一个 homestead 环境中的目录。一个例子的站点被配置在 `Homestead.yaml` 文件中。同样的，你可以加任何你需要的站点到你的 Homestead 环境中。Homestead 可以为你每个进行中的 Laravel 应用提供方便的虚拟化环境。
 
-你可以透过配置 `hhvm` 属性为 `true` 来让虚拟站点支持 [HHVM](http://hhvm.com):
+你可以通过配置 `hhvm` 属性为 `true` 来让虚拟站点支持 [HHVM](http://hhvm.com):
 
 	sites:
 	    - map: homestead.app
@@ -119,30 +123,30 @@ Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx �
 
 	192.168.10.10  homestead.app
 
-务必确认 IP 位置与你的 `Homestead.yaml` 文件中的相同。一旦你将域名加进你的 `hosts` 文件中，你就可以透过网页浏览器 访问到你的站点。
+务必确认 IP 位置与你的 `Homestead.yaml` 文件中的相同。一旦你将域名加进你的 `hosts` 文件中，你就可以通过网页浏览器 访问到你的站点。
 
 	http://homestead.app
 
-继续读下去，你会学到如何链接到数据库！
+继续读下去，你会学到如何连接到数据库！
 
 <a name="daily-usage"></a>
 ## 常见用法
 
-### 透过 SSH 连接
+### 通过 SSH 连接
 
-要透过 SSH 连接上您的 Homestead 环境，在终端机里进入你的 Homestead 目录并执行  `vagrant ssh` 命令。
+要通过 SSH 连接上您的 Homestead 环境，在终端机里进入你的 Homestead 目录并执行  `vagrant ssh` 命令。
 
 因为你可能会经常需要透过 SSH 进入你的 Homestead 虚拟机，可以考虑在你的主要机器上创建一个"别名":
 
 	alias vm="ssh vagrant@127.0.0.1 -p 2222"
 
-一旦你创建了这个别名，无论你在主要机器的哪个目录，都可以简单地使用 "vm" 命令来透过 SSH 进入你的 Homestead 虚拟机。
+一旦你创建了这个别名，无论你在主要机器的哪个目录，都可以简单地使用 "vm" 命令来通过 SSH 进入你的 Homestead 虚拟机。
 
-### 链接数据库
+### 连接数据库
 
-在 `Homestead` 封装包中，MySQL 与 Postgres 两套数据库都已预装其中。为了更简便，Laravel 的 `local` 数据库配置已经默认将其配置完成。
+在 `Homestead` 封装包中，MySQL 与 Postgres 两套数据库都已经预装。为了更简便，Laravel 的 `local` 数据库配置已经默认将其配置完成。
 
-如果想要从本机上透过 Navicat 或者是 Sequel Pro 连接 MySQL 或者 Postgres 数据库，你可以连接 `127.0.0.1` 的端口 33060 (MySQL) 或 54320 (Postgres)。而帐号密码分别是 `homestead` / `secret`。
+如果想要从本机上通过 Navicat 或者是 Sequel Pro 连接 MySQL 或者 Postgres 数据库，你可以连接 `127.0.0.1` 的端口 33060 (MySQL) 或 54320 (Postgres)。而帐号密码分别是 `homestead` / `secret`。
 
 > **附注：** 从本机端你应该只能使用这些非标准的连接端口来连接数据库。因为当 Laravel 运行在虚拟机时，在 Laravel 的数据库配置文件中依然是配置使用默认的 3306 及 5432 连接端口。
 
@@ -159,7 +163,7 @@ Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx �
 <a name="ports"></a>
 ## 连接端口
 
-以下的端口将会被重导至 Homestead 环境：
+以下的端口将会被转发至 Homestead 环境：
 
 - **SSH:** 2222 &rarr; Forwards To 22
 - **HTTP:** 8000 &rarr; Forwards To 80

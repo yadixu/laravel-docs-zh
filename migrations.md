@@ -3,7 +3,7 @@
 - [介绍](#introduction)
 - [建立迁移文件](#creating-migrations)
 - [执行迁移](#running-migrations)
-- [推回迁移](#rolling-back-migrations)
+- [回滚迁移](#rolling-back-migrations)
 - [数据填充](#database-seeding)
 
 <a name="introduction"></a>
@@ -33,30 +33,30 @@
 <a name="running-migrations"></a>
 ## 执行迁移
 
-#### 执行所有未执行迁移
+#### 执行所有未执行的迁移
 
     php artisan migrate
 
 > **注意:** 如果在执行迁移时发生「class not found」错误，试着先执行 `composer dump-autoload` 命令后再进行一次。
 
-### 在上线环境 (Production) 中强制执行迁移
+### 在线上环境 (Production) 中强制执行迁移
 
 有些迁移操作是具有破坏性的，意味着可能让你遗失原本保存的数据。为了防止你在上线环境执行到这些迁移命令，你会被提示要在执行迁移前进行确认。加上 `--force` 参数执行强制迁移：
 
     php artisan migrate --force
 
 <a name="rolling-back-migrations"></a>
-## 推回迁移
+## 回滚迁移
 
-#### 推回上一次的迁移
+#### 回滚上一次的迁移
 
     php artisan migrate:rollback
 
-#### 推回所有迁移
+#### 回滚所有迁移
 
     php artisan migrate:reset
 
-#### 推回所有迁移并且再执行一次
+#### 回滚所有迁移并且再执行一次
 
     php artisan migrate:refresh
 
@@ -99,6 +99,6 @@ Laravel 可以简单的使用 seed 类，填充测试数据到数据库。所有
 
     php artisan db:seed --class=UserTableSeeder
 
-你可以也使用 `migrate:refresh` 命令填充数据，它会推回并且再次执行所有迁移：
+你也可以使用 `migrate:refresh` 命令填充数据，它会回滚并且再次执行所有迁移：
 
     php artisan migrate:refresh --seed

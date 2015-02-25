@@ -25,7 +25,7 @@
 
 ### 视图
 
-扩展包的视图基本上的指定使用两个双冒号:
+扩展包的视图基本上使用两个双冒号来指定:
 
 	return view('package::view.name');
 
@@ -66,7 +66,7 @@
 <a name="translations"></a>
 ## 语言
 
-扩展包的语言文件基本上的指定使用两个双冒号:
+扩展包的语言文件基本上使用两个双冒号来指定:
 
 	return trans('package::file.line');
 
@@ -107,11 +107,11 @@
 <a name="publishing-file-groups"></a>
 ## 发布分类文件
 
-您可能想要分别的发布一些分类的文件。举例，您可能想要您的用户可以分别发布扩展包的配置文件与资产文件。您可以使用 `tagging` 来达成:
+您可能想要分别的发布一些分类的文件。举例，您可能想要您的用户可以分别发布扩展包的配置文件与静态资源文件。您可以使用 `tagging` 来达成:
 
 	// Publish a config file
 	$this->publishes([
-		__DIR__.'/../config/package.php', config_path('package.php')
+		__DIR__.'/../config/package.php' => config_path('package.php')
 	], 'config');
 
 	// Publish your migrations
