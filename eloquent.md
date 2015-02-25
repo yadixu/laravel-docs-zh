@@ -20,6 +20,7 @@
 - [属性类型转换](#attribute-casting)
 - [模型事件](#model-events)
 - [模型观察者](#model-observers)
+- [Model URL Generation](#model-url-generation)
 - [转换数组 / JSON](#converting-to-arrays-or-json)
 
 <a name="introduction"></a>
@@ -1291,6 +1292,22 @@ Eloquent 模型有很多事件可以触发，让您可以在模型操作的生�
 可以使用 `observe` 方法注册一个观察者实例：
 
 	User::observe(new UserObserver);
+
+<a name="model-url-generation"></a>
+## 模型 URL 生成
+
+当你把一个模型实例传递给 `route` 或者 `action` 方法时，模型的主键会被插入到生成的 URI 中。比如：
+
+	Route::get('user/{user}', 'UserController@show');
+
+	action('UserController@show', [$user]);
+
+在这个例子中 `$user->id` 属性会被插入到生成的 URL 的 `{user}` 这个占位符中。不过，如果你想使用其他的属性而不是 ID 的话，你可以覆盖模型的 `getRouteKey` 方法：
+
+    public function getRouteKey()
+    {
+        return $this->slug;
+    }
 
 <a name="converting-to-arrays-or-json"></a>
 ## 转换成数组 / JSON
