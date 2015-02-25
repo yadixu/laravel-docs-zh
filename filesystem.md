@@ -3,6 +3,7 @@
 - [简介](#introduction)
 - [配置文件](#configuration)
 - [基本用法](#basic-usage)
+- [自定义文件系统](#custom-filesystems)
 
 <a name="introduction"></a>
 ## 简介
@@ -106,3 +107,38 @@ Laravel 有很棒的文件系统抽象层，是基于 Frank de Jonge 的 [Flysys
 #### 删除目录
 
 	Storage::deleteDirectory($directory);
+
+<a name="custom-filesystems"></a>
+## 自定义文件系统
+
+Laravel 的文件系统默认已经集成了不少驱动。不过，文件系统并不仅限于这些，还有针对其他存储系统的一些适配器。如果你想使用这些适配器，你可以创建一个自定义的驱动。不用担心，它没有那么复杂！
+
+如果要创建一个自定义的文件系统，你需要创建一个服务提供者，比如 `DropboxFilesystemServiceProvider`。在提供者的 `boot` 方法中，你可以注入一个实现了 `Illuminate\Contracts\Filesystem\Factory` 接口的实例并且调用注入实例的 `extend` 方法。
+或者你也可以使用 `Disk` facade 的 `extend` 方法。
+
+`extend` 方法的第一个参数是驱动的名字，第二个参数是一个闭包，接受 `$app` 和 `$config` 变量。这个闭包的返回值必须是 `League\Flysystem\Filesystem` 的一个实例。
+
+> **注意：** $config 变量已经包含了定义在 `config/filesystems.php` 中特定硬盘的配置。
+
+#### Dropbox 示例
+
+	<?php namespace App\Providers;
+
+	use Disk;
+	use League\Flysystem\Filesystem;
+	use Dropbox\Client as DropboxClient;
+	use League\Flysystem\Dropbox\DropboxAdapter;
+
+	class DropboxFilesystemServiceProvider {
+
+		public function boot()
+		{
+			Disk::extend('dropbox', function($app, $config)
+			{
+				$client = new DropboxClient($config['accessToken'], $config['clientIdentifier']);
+
+				return new Filesystem(new DropboxAdapter($client));
+			});
+		}
+
+	}
