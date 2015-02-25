@@ -899,6 +899,14 @@ Eloquent 可以经由动态属性取得关联对象。 Eloquent 会自动进行�
 
 	$books->load('author', 'publisher');
 
+你可以传入一个闭包来对查询构建器进行条件限制：
+
+	$books->load(['author' => function($query)
+	{
+		$query->orderBy('published_date', 'asc');
+	}]);
+
+
 <a name="inserting-related-models"></a>
 ## 新增关联模型
 
