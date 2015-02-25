@@ -203,7 +203,7 @@ DELETE    | /photo/{photo}        | 删除         | photo.destroy
 
 除了默认的资源路由外，若你还需要在资源控制器中加入其他路由，应该在调用 `Route::resource` 之前先定义它们：
 
-	Route::get('photos/popular');
+	Route::get('photos/popular', 'PhotoController@method');
 
 	Route::resource('photos', 'PhotoController');
 
