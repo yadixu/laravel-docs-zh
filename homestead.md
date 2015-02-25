@@ -98,6 +98,13 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 
 `Homestead.yaml` 文件中的 `folders` 属性列出了所有你想跟 Homestead 环境共享的文件夹列表。这些文件夹中的文件若有更动，他们将会同步在你的本机与 Homestead 环境里。你可以将你需要的共享文件夹都配置进去。
 
+如果要开启 [NFS](http://docs.vagrantup.com/v2/synced-folders/nfs.html)，只需要在 `folders` 中加入一个标识：
+
+	folders:
+	    - map: ~/Code
+	      to: /home/vagrant/Code
+	      type: "nfs"
+
 ### 配置你的 Nginx 站点
 
 对 Nginx 不熟悉？没关系。`sites` 属性允许你简单的对应一个 `域名` 到一个 homestead 环境中的目录。一个例子的站点被配置在 `Homestead.yaml` 文件中。同样的，你可以加任何你需要的站点到你的 Homestead 环境中。Homestead 可以为你每个进行中的 Laravel 应用提供方便的虚拟化环境。
