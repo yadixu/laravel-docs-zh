@@ -176,3 +176,14 @@ Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx �
 - **HTTP:** 8000 &rarr; Forwards To 80
 - **MySQL:** 33060 &rarr; Forwards To 3306
 - **Postgres:** 54320 &rarr; Forwards To 5432
+
+### 增加额外端口
+
+你也可以自定义转发额外的端口至 Vagrant box，只需要指定协议：
+
+	ports:
+	    - send: 93000
+	      to: 9300
+	    - send: 7777
+	      to: 777
+	      protocol: udp
