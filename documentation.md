@@ -1,7 +1,7 @@
 - 前言
     - [发行说明](/docs/5.0/releases)
-    - [升级导引](/docs/5.0/upgrade)
-    - [贡献导引](/docs/5.0/contributions)
+    - [升级向导](/docs/5.0/upgrade)
+    - [贡献向导](/docs/5.0/contributions)
 - 环境配置
     - [安装](/docs/5.0/installation)
     - [配置](/docs/5.0/configuration)
