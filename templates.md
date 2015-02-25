@@ -151,7 +151,7 @@ Blade 的编译器带有一些辅助方法 `createMatcher` 及 `createPlainMatch
 
 	Blade::extend(function($view, $compiler)
 	{
-		$pattern = $compiler->createMatcher('datetime');
+		$pattern = $compiler->createOpenMatcher('datetime');
 
-		return preg_replace($pattern, '$1<?php echo $2->format(\'m/d/Y H:i\'); ?>', $view);
+		return preg_replace($pattern, '$1<?php echo $2->format(\'m/d/Y H:i\')); ?>', $view);
 	});
