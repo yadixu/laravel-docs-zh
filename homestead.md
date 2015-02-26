@@ -5,6 +5,7 @@
 - [安装与配置](#installation-and-setup)
 - [常见用法](#daily-usage)
 - [连接端口](#ports)
+- [Blackfire Profiler](#blackfire-profiler)
 
 <a name="introduction"></a>
 ## 介绍
@@ -187,3 +188,16 @@ Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx �
 	    - send: 7777
 	      to: 777
 	      protocol: udp
+
+<a name="blackfire-profiler"></a>
+## Blackfire Profiler
+
+[Blackfire Profiler](https://blackfire.io) 是由 SensioLabs 创建的一个分析工具，它会自动的收集代码执行期间的相关数据，比如 RAM, CPU time, 和 disk I/O. 如果你使用 Homestead ，那么使用这个分析工具会变得非常简单。
+
+blackfire 所需的包已经安装在 Homestead box 中，你只需要在 `Homestead.yaml` 文件中设置 Blackfire ID 和 token ：
+
+	blackfire:
+	    - id: your-id
+	      token: your-token
+
+当你设定完 Blackfire 的凭证信息，使用 `homestead provision` 或者 `vagrant provision` 来使配置生效。当然，你也需要通过阅读[Blackfire 文档](https://blackfire.io/getting-started) 来学习如何在你的浏览器中安装 Blackfire 扩展。
