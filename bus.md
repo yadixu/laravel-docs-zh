@@ -54,8 +54,8 @@ Command bus 提供一个简便的方法来封装任务，使你的程序更加�
 		}
 
 	}
-	
-`handle` 方法也可以使用类型提示依赖，并且通过 [IoC 容器](/docs/5.0/container) 机制自动进行依赖注入。例如：
+
+`handle` 方法也可以使用类型提示依赖，并且通过 [服务容器](/docs/5.0/container) 机制自动进行依赖注入。例如：
 
 		/**
 		 * Execute the command.

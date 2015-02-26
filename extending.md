@@ -4,7 +4,7 @@
 - [缓存](#cache)
 - [Session](#session)
 - [认证](#authentication)
-- [基于 IoC 的扩展](#ioc-based-extension)
+- [基于服务容器的扩展](#container-based-extension)
 
 <a name="managers-and-factories"></a>
 ## 管理者和工厂
@@ -25,7 +25,7 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 		return Cache::repository(new MongoStore);
 	});
 
-传递到 `extend` 方法的第一个参数是驱动的名称。这将会对应到你的 `config/cache.php` 配置文件里的 `driver` 选项。第二个参数是个应该返回 `Illuminate\Cache\Repository` 实例的闭包。 `$app` 将会被传递到闭包，它是 `Illuminate\Foundation\Application` 和 IoC 容器的实例。
+传递到 `extend` 方法的第一个参数是驱动的名称。这将会对应到你的 `config/cache.php` 配置文件里的 `driver` 选项。第二个参数是个应该返回 `Illuminate\Cache\Repository` 实例的闭包。 `$app` 将会被传递到闭包，它是 `Illuminate\Foundation\Application` 和服务容器的实例。
 
 `Cache::extend` 的调用可以在新的 Laravel 应用程序默认附带的 `App\Providers\AppServiceProvider` 的 `boot` 方法中完成，或者你可以建立自己的服务提供者来放置这个扩展 - 记得不要忘记在 `config/app.php` 的提供者数组注册提供者。
 
@@ -158,12 +158,12 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 用 `extend` 方法注册驱动之后，在你的 `config/auth.php` 配置文件切换到新驱动。
 
-<a name="ioc-based-extension"></a>
-## 基于 IoC 的扩展
+<a name="container-based-extension"></a>
+## 基于服务容器的扩展
 
-几乎每个 Laravel 框架引入的服务提供者都会绑定对象到 IoC 容器中。你可以在 `config/app.php` 配置文件中找到应用程序的服务提供者清单。如果你有时间，你应该浏览过这里面每一个提供者的源代码。通过这样做，你将会更了解每一个提供者添加什么到框架，以及用什么键值来绑定各种服务到 IoC 容器。
+几乎每个 Laravel 框架引入的服务提供者都会绑定对象到服务容器中。你可以在 `config/app.php` 配置文件中找到应用程序的服务提供者清单。如果你有时间，你应该浏览过这里面每一个提供者的源代码。通过这样做，你将会更了解每一个提供者添加什么到框架，以及用什么键值来绑定各种服务到服务容器。
 
-例如， `HashServiceProvider` 绑定 `hash` 做为键值到 IoC 容器，它将解析成 `Illuminate\Hashing\BcryptHasher` 实例。你可以在应用程序中覆写这个 IoC 绑定，轻松地扩展并覆写这个类。例如：
+例如， `HashServiceProvider` 绑定 `hash` 做为键值到服务容器，它将解析成 `Illuminate\Hashing\BcryptHasher` 实例。你可以在应用程序中覆写这个 IoC 绑定，轻松地扩展并覆写这个类。例如：
 
 	<?php namespace App\Providers;
 
