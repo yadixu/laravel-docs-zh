@@ -13,7 +13,7 @@
 
 推荐的升级方式是建立一个全新的 Laravel `5.0` 项目，然后复制您在 `4.2` 的文件到此新的应用程序，这将包含控制器、路由、Eloquent 模型、Artisan 命令（Asset）、资源和关于此应用程序的其他特定文件。
 
-最开始，[安装新的 Laravel 5 应用程序](/docs/5.0/installation)到新的本地目录下，我们将详细探讨迁移各部分的过程。 
+最开始，[安装新的 Laravel 5 应用程序](/docs/5.0/installation)到新的本地目录下，我们将详细探讨迁移各部分的过程。
 
 ### Composer 依赖与组件
 
@@ -122,7 +122,7 @@ use Authenticatable, CanResetPassword;
 
 ### Cashier 的用户需要的修改
 
-[Laravel Cashier](/docs/5.0/billing) 的 trait 和接口名称已作修改。trait 请改用 `Laravel\Cashier\Billable` 取代 `BillableTrait`。接口请改用 `Laravel\Cashier\Contracts\Billable` 取代 `Larave\Cashier\BillableInterface` 。不需要修改任何方法。 
+[Laravel Cashier](/docs/5.0/billing) 的 trait 和接口名称已作修改。trait 请改用 `Laravel\Cashier\Billable` 取代 `BillableTrait`。接口请改用 `Laravel\Cashier\Contracts\Billable` 取代 `Larave\Cashier\BillableInterface` 。不需要修改任何方法。
 
 ### Artisan 命令
 
@@ -180,16 +180,18 @@ use Authenticatable, CanResetPassword;
 
 ### 表单和 HTML 辅助函数
 
-如果您使用表单或 HTML 辅助函数，您将会看到以下错误 `class 'Form' not found` 或 `class 'Html' not found` 。请加入 `"illuminate/html": "~5.0"` 到 `composer.json` 的 `require` 部分，以修正此错误。
+如果您使用表单或 HTML 辅助函数，您将会看到以下错误 `class 'Form' not found` 或 `class 'Html' not found` 。Form 类以及 HTML 辅助函数在 Laravel 5.0 中已经废弃了；不过，这里有一些替代方法，比如基于社区驱动的，由 [Laravel Collective]([LaravelCollective.com](http://laravelcollective.com/docs/5.0/html) 维护。
 
-您也需要添加表单和 HTML 的 facades 以及服务提供者， 编辑 `config/app.php` 文件，添加此行到 'providers' 数组内：
+比如，你可以在 `composer.json` 文件中的 `require` 区块增加 `"laravelcollective/html": "~5.0"`。
 
-    'Illuminate\Html\HtmlServiceProvider',
+您也需要添加表单和 HTML 的 facades 以及服务提供者。 编辑 `config/app.php` 文件，添加此行到 'providers' 数组内：
+
+    'Collective\Html\HtmlServiceProvider',
 
 接着，添加以下到 'aliases' 数组内：
 
-    'Form'      => 'Illuminate\Html\FormFacade',
-    'Html'      => 'Illuminate\Html\HtmlFacade',
+    'Form' => 'Collective\Html\FormFacade',
+    'Html' => 'Collective\Html\HtmlFacade',
 
 ### 缓存管理员
 
@@ -201,7 +203,7 @@ use Authenticatable, CanResetPassword;
 
 ### Beanstalk 队列
 
-Laravel 5.0 使用 `"pda/pheanstalk": "~3.0"` 取代原本的 `"pda/pheanstalk": "~2.1"`。 
+Laravel 5.0 使用 `"pda/pheanstalk": "~3.0"` 取代原本的 `"pda/pheanstalk": "~2.1"`。
 
 ### Remote
 
