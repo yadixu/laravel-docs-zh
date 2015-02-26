@@ -124,7 +124,7 @@ Laravel 的文件系统默认已经集成了不少驱动。不过，文件系统
 
 	<?php namespace App\Providers;
 
-	use Disk;
+	use Storage;
 	use League\Flysystem\Filesystem;
 	use Dropbox\Client as DropboxClient;
 	use League\Flysystem\Dropbox\DropboxAdapter;
@@ -133,7 +133,7 @@ Laravel 的文件系统默认已经集成了不少驱动。不过，文件系统
 
 		public function boot()
 		{
-			Disk::extend('dropbox', function($app, $config)
+			Storage::extend('dropbox', function($app, $config)
 			{
 				$client = new DropboxClient($config['accessToken'], $config['clientIdentifier']);
 
