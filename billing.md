@@ -97,7 +97,7 @@ Laravel Cashier 提供语义化，流畅的接口和 [Stripe](https://stripe.com
 
 	$user->charge(100);
 
-`charge` 方法接受一个用最低单位货币的数量参数。 比如，上面的例子中会付款 100 美分 或者 1.00 美元，而不是用户的信用卡。
+`charge` 方法接受一个用**最低单位货币**的数量参数。 比如，上面的例子中会付款 100 美分 或者 1.00 美元，而不是用户的信用卡。
 
 `charge` 方法也接受一个数组作为第二个参数，允许你传入一些创建 Stripe 订购的选项：
 
@@ -106,7 +106,7 @@ Laravel Cashier 提供语义化，流畅的接口和 [Stripe](https://stripe.com
 		'receipt_email' => $user->email,
 	]);
 
-如果付款失败，charge 方法会返回 `false`。一般来说，这意味着付款被拒绝：
+如果付款失败，`charge` 方法会返回 `false`。一般来说，这意味着付款被拒绝：
 
 	if ( ! $user->charge(100))
 	{
