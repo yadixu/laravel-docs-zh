@@ -113,6 +113,7 @@ Laravel Cashier 提供语义化，流畅的接口和 [Stripe](https://stripe.com
 		// The charge was denied...
 	}
 
+如果付款成功, 一个完整的 Stripe 响应会从这个方法返回。
 
 <a name="no-card-up-front"></a>
 ## 免信用卡试用
