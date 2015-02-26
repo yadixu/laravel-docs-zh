@@ -109,9 +109,21 @@
 			});
 		}
 
+		/**
+		 * Register
+		 *
+		 * @return void
+		 */
+		public function register()
+		{
+			//
+		}
+
 	}
 
 > **备注：** Laravel 没有默认的文件夹来放置类形式的视图组件。你可以自由的把它们放在你想要的地方。举例来说，你可以放在 `App\Http\ViewComposers` 文件夹内。
+
+记得要把这个服务提供者添加到 `config/app.php` 配置文件的 `providers` 数组中。
 
 现在我们已经注册了视图组件，并且在每次 `profile` 视图渲染的时候，`ProfileComposer@compose` 都将会被执行。接下来我们来看看这个类要如何定义：
 
