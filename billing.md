@@ -3,6 +3,7 @@
 - [介绍](#introduction)
 - [配置文件](#configuration)
 - [订购方案](#subscribing-to-a-plan)
+- [一次性付款](#single-charges)
 - [免信用卡试用](#no-card-up-front)
 - [订购转换](#swapping-subscriptions)
 - [订购数量](#subscription-quantity)
@@ -88,6 +89,30 @@ Laravel Cashier 提供语义化，流畅的接口和 [Stripe](https://stripe.com
 	]);
 
 想知道更多 Stripe 支持的额外字段，可以查看 Stripe 的在线文档 [建立客户](https://stripe.com/docs/api#create_customer)。
+
+<a name="single-charges"></a>
+## 一次性付款
+
+如果你想使用一次性付款而不是信用卡订购方案，你可以使用 `charge` 方法：
+
+	$user->charge(100);
+
+`charge` 方法接受一个用最低单位货币的数量参数。 比如，上面的例子中会付款 100 美分 或者 1.00 美元，而不是用户的信用卡。
+
+`charge` 方法也接受一个数组作为第二个参数，允许你传入一些创建 Stripe 订购的选项：
+
+	$user->charge(100, [
+		'source' => $token,
+		'receipt_email' => $user->email,
+	]);
+
+如果付款失败，charge 方法会返回 `false`。一般来说，这意味着付款被拒绝：
+
+	if ( ! $user->charge(100))
+	{
+		// The charge was denied...
+	}
+
 
 <a name="no-card-up-front"></a>
 ## 免信用卡试用
