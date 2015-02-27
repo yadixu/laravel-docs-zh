@@ -30,6 +30,12 @@ Laravel 框架使用 [Composer](http://getcomposer.org) 来管理其依赖性。
 
 	composer create-project laravel/laravel --prefer-dist
 
+### 脚手架
+
+Laravel 自带了用户注册和认证的脚手架。如果你想要移除这个脚手架，使用 `fresh` 命令即可：
+
+   php artisan fresh
+
 <a name="server-requirements"></a>
 ## 环境需求
 
