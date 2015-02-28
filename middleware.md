@@ -20,7 +20,7 @@ Laravel 框架已经内置一些中间件，包括维护、身份验证、CSRF �
 
 	php artisan make:middleware OldMiddleware
 
-此命令将会 在 `app/Http/Middleware` 目录内置立一个名称为 `OldMiddleware` 的类。在这个中间件内我们只允许 `年龄` 大于 200 的才能访问路由，否则，我们会将用户重新导向 "home" 的 URI 。
+此命令将会 在 `app/Http/Middleware` 目录内置立一个名称为 `OldMiddleware` 的类。在这个中间件内我们只允许 `年龄` 大于 200 的才能访问路由，否则，我们会将用户重新导向 「home」 的 URI 。
 
 	<?php namespace App\Http\Middleware;
 
@@ -100,7 +100,7 @@ HTTP 请求在实际碰触到应用程序之前，最好是可以层层通过许
 <a name="terminable-middleware"></a>
 ## 可终止中间件
 
-有些时候中间件需要在 HTTP 响应已被发送到用户端之后才执行，例如，Laravel 内置的 "session" 中间件，保存 session 数据是在响应已被发送到用户端 _之后_ 才执行。为了做到这一点，你需要定义中间件为“可终止的”。
+有些时候中间件需要在 HTTP 响应已被发送到用户端之后才执行，例如，Laravel 内置的 「session」 中间件，保存 session 数据是在响应已被发送到用户端 _之后_ 才执行。为了做到这一点，你需要定义中间件为「可终止的」。
 
 	use Illuminate\Contracts\Routing\TerminableMiddleware;
 
