@@ -52,6 +52,17 @@ elixir(function(mix) {
 
 在上述例子中，Elixir 会假设你的 Less 文件保存在 `resources/assets/less` 里。
 
+#### 编译多个 Less 文件
+
+```javascript
+elixir(function(mix) {
+    mix.less([
+        'app.less',
+        'something-else.less'
+    ]);
+});
+```
+
 #### 编译 Sass
 
 ```javascript
