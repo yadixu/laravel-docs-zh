@@ -180,7 +180,7 @@ use Authenticatable, CanResetPassword;
 
 ### 表单和 HTML 辅助函数
 
-如果您使用表单或 HTML 辅助函数，您将会看到以下错误 `class 'Form' not found` 或 `class 'Html' not found` 。Form 类以及 HTML 辅助函数在 Laravel 5.0 中已经废弃了；不过，这里有一些替代方法，比如基于社区驱动的，由 [Laravel Collective]([LaravelCollective.com](http://laravelcollective.com/docs/5.0/html) 维护。
+如果您使用表单或 HTML 辅助函数，您将会看到以下错误 `class 'Form' not found` 或 `class 'Html' not found` 。Form 类以及 HTML 辅助函数在 Laravel 5.0 中已经废弃了；不过，这里有一些替代方法，比如基于社区驱动的，由 [Laravel Collective](http://laravelcollective.com/docs/5.0/html) 维护。
 
 比如，你可以在 `composer.json` 文件中的 `require` 区块增加 `"laravelcollective/html": "~5.0"`。
 
