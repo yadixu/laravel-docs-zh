@@ -194,7 +194,7 @@ Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx �
 
 [Blackfire Profiler](https://blackfire.io) 是由 SensioLabs 创建的一个分析工具，它会自动的收集代码执行期间的相关数据，比如 RAM, CPU time, 和 disk I/O. 如果你使用 Homestead ，那么使用这个分析工具会变得非常简单。
 
-blackfire 所需的包已经安装在 Homestead box 中，你只需要在 `Homestead.yaml` 文件中设置 Blackfire ID 和 token ：
+blackfire 所需的包已经安装在 Homestead box 中，你只需要在 `Homestead.yaml` 文件中设置 Server ID 和 token ：
 
 	blackfire:
 	    - id: your-id
