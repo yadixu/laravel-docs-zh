@@ -171,12 +171,12 @@ Laravel 有几个 `Manager` 类，用来管理创建基于驱动的组件。这�
 
 		public function boot()
 		{
+			parent::boot();
+
 			$this->app->bindShared('hash', function()
 			{
 				return new \Snappy\Hashing\ScryptHasher;
 			});
-
-			parent::boot();
 		}
 
 	}
