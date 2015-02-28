@@ -391,11 +391,35 @@
 
 	dd($value);
 
+### elixir
+
+获取带版本号的 Elixir 文件的路径
+
+	elixir($file);
+
+### env
+
+获取一个环境变量的值，如果没有则返回一个默认值。
+
+	env('APP_ENV', 'production')
+
+### event
+
+触发一个事件。
+
+	event('my.event');
+
 ### value
 
 如果给定的值是个 `闭包`，返回 `闭包` 的返回值。不是的话，则返回值。
 
 	$value = value(function() { return 'bar'; });
+
+### view
+
+Get a View instance for the given view path.
+
+	return view('auth.login');
 
 ### with
 
