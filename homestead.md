@@ -123,7 +123,7 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 
 ### 启动 Vagrant 封装包
 
-当你根据你的喜好编辑完 `Homestead.yaml` 后，在终端机里进入你的 Homestead 文件夹并执行 `vagrant up` 命令。
+当你根据你的喜好编辑完 `Homestead.yaml` 后，在终端机里进入你的 Homestead 文件夹并执行 `homestead up` 命令。
 
 Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx 站点。如果要移除虚拟机，可以使用 `vagrant destroy --force` 命令。
 
