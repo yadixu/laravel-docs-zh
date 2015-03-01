@@ -40,7 +40,7 @@ Laravel Elixir 提供了简洁流畅的 API，让你能够为你的 Laravel 应�
 <a name="usage"></a>
 ## 使用方式
 
-现在你已经安装好 Elixir，未来任何时候你都能进行编译及合并文件！
+现在你已经安装好 Elixir，未来任何时候你都能进行编译及合并文件！ 在项目根目录下的 `gulpfile.js` 已经包含了所有的 Elixir 任务。
 
 #### 编译 Less
 
