@@ -81,9 +81,11 @@ Laravel 为各种不同的缓存系统提供一致的 API 。缓存配置文件�
 
 	Cache::forget('key');
 
+#### 获取特定的缓存存储
+
 当使用多种缓存存储时，你可以通过 `store` 方法来访问它们：
 
-	$value = Cache::store('foo')->get('foo');
+	$value = Cache::store('foo')->get('key');
 
 <a name="increments-and-decrements"></a>
 ## 递增与递减
