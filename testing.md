@@ -52,7 +52,7 @@ Laravel 在建立时就有考虑到单元测试。事实上，它支持立即使
 
 	$response = $this->call('GET', 'user/profile');
 
-	$response = $this->call($method, $uri, $parameters, $files, $server, $content);
+	$response = $this->call($method, $uri, $parameters,  $cookies, $files, $server, $content);
 
 接着你可以检查 `Illuminate\Http\Response` 对象：
 
