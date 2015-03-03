@@ -2,6 +2,7 @@
 
 - [数组](#arrays)
 - [路径](#paths)
+- [路由](#routing)
 - [字串](#strings)
 - [网址](#urls)
 - [其他](#miscellaneous)
@@ -209,6 +210,40 @@
 ### storage_path
 
 取得 `app/storage` 文件夹的完整路径。
+
+<a name="routing"></a>
+## 路由
+
+### get
+
+注册一个 GET 路由。
+
+	get('/', function() { return 'Hello World'; });
+
+### post
+
+注册一个 POST 路由。
+
+	post('foo/bar', 'FooController@action');
+
+### put
+
+注册一个 PUT 路由。
+
+	put('foo/bar', 'FooController@action');
+
+### patch
+
+注册一个 PATCH 路由。
+
+	patch('foo/bar', 'FooController@action');
+
+### delete
+
+注册一个 DELETE 路由。
+
+	delete('foo/bar', 'FooController@action');
+
 
 <a name="strings"></a>
 ## 字串
