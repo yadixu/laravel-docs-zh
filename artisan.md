@@ -124,6 +124,16 @@ Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的命令
 
 	$schedule->command('foo')->monthly();
 
+#### 特定日期的工作
+
+	$schedule->command('foo')->mondays();
+	$schedule->command('foo')->tuesdays();
+	$schedule->command('foo')->wednesdays();
+	$schedule->command('foo')->thursdays();
+	$schedule->command('foo')->fridays();
+	$schedule->command('foo')->saturdays();
+	$schedule->command('foo')->sundays();
+
 #### 限制应该执行工作的环境
 
 	$schedule->command('foo')->monthly()->environments('production');
@@ -138,3 +148,15 @@ Artisan 是 Laravel 内置的命令行接口。它提供了一些有用的命令
 	{
 		return true;
 	});
+
+#### 将预定工作的输出发送到指定的 E-mail
+
+	$schedule->command('foo')->emailOutputTo('foo@example.com');
+
+#### 将预定工作的输出发送到指定的路径
+
+	$schedule->command('foo')->sendOutputTo($filePath);
+
+#### 在预定工作执行之后 Ping 一个给定的 URL
+
+	$schedule->command('foo')->thenPing($url);
