@@ -20,7 +20,7 @@
 	composer global require "laravel/installer=~1.1"
 
 
-请确定把 `~/.composer/vendor/bin` 路径放置于您的 `PATH` 里, 这样`laravel` 可执行文件才能被命令行找到,  以后您就可以在命令行下直接使用 `laravel` 命令.
+请确定把 `~/.composer/vendor/bin` 路径放置于您的 `PATH` 里（或 `C:\%HOMEPATH%\AppData\Roaming\Composer\vendor\bin`，如果你使用 Windows）, 这样`laravel` 可执行文件才能被命令行找到,  以后您就可以在命令行下直接使用 `laravel` 命令.
 
 安装并且配置成功后, 可以使用命令 `laravel new` 在您指定的目录下创建一份全新安装的 `Laravel 应用`, 如这样的调用: `laravel new blog` 将会在当前目录下创建一个叫 `blog` 的目录, 此目录里面存放着全新安装的 Laravel 应用, 此方法跟其他方法不一样的地方在于是提前安装好所有代码依赖的, 您无需再通过 `composer install` 安装, 速度一下子提高了很多. 
 
