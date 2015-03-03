@@ -16,3 +16,6 @@
 [@NauxLiu](https://github.com/NauxLiu)  
 [@summerblue](https://github.com/summerblue)  
 [@appleboy](https://github.com/appleboy)    
+[@zhangxuanming](https://github.com/zhangxuanming)  
+[@zhuzhichao](https://github.com/zhuzhichao)  
+[@frankyang4](https://github.com/frankyang4)  
