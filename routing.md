@@ -223,7 +223,7 @@ HTML 表单没有支持 `PUT` 或 `DELETE` 请求。所以当定义 `PUT` 或 `D
 
 有时候您需要嵌套过滤器到群组的路由上。不需要为每个路由去嵌套过滤器，您只需使用路由群组：
 
-	Route::group(['before' => 'auth'], function()
+	Route::group(['middleware' => 'auth'], function()
 	{
 		Route::get('/', function()
 		{
