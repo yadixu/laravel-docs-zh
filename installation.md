@@ -33,7 +33,7 @@ Laravel 框架使用 [Composer](http://getcomposer.org)来管理其相依性。�
 
 ### 通过下载
 
-Composer 安装完成后，下载[最新版](https://github.com/laravel/laravel/archive/master.zip)的Laravel 框架并且解压缩到服务器上的一个目录中。接着，在 Laravel 应用程序的根目录下，执行 `php composer.phar install`（或者是 `composer install`）来将所有框架所需的相依扩展包安装完成。为了能够成功完成安装，您必须在服务器上安装好 Git。
+Composer 安装完成后，下载[最新版](https://github.com/laravel/laravel/archive/v4.2.11.zip)的Laravel 框架并且解压缩到服务器上的一个目录中。接着，在 Laravel 应用程序的根目录下，执行 `php composer.phar install`（或者是 `composer install`）来将所有框架所需的相依扩展包安装完成。为了能够成功完成安装，您必须在服务器上安装好 Git。
 
 如果您想要更新 Laravel 框架，您需要在命令行执行 `php composer.phar update` 来更新。
 
