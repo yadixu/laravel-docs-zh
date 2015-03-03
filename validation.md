@@ -194,6 +194,7 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 - [Required Without All](#rule-required-without-all)
 - [Same](#rule-same)
 - [Size](#rule-size)
+- [String](#rule-string)
 - [Timezone](#rule-timezone)
 - [Unique (Database)](#rule-unique)
 - [URL](#rule-url)
@@ -402,6 +403,11 @@ Laravel 通过 `Validation` 类让您可以简单、方便的验证数据正确�
 #### size:_value_
 
 字段值的尺寸需符合给定 _value_ 值。对于字串来说，_value_ 为需符合的字串长度。对于数字来说，_value_ 为需符合的整数值。对于文件来说，_value_ 为需符合的文件大小（单位 kb)。
+
+<a name="rule-string"></a>
+#### string:_value_
+
+字段值必须是一个字符串类型。
 
 <a name="rule-timezone"></a>
 #### timezone
