@@ -26,7 +26,7 @@
 
 `--table` 和 `--create` 参数可以用来指定数据表名称，以及迁移文件是否要建立新的数据表。
 
-    php artisan make:migration add_votes_to_user_table --table=users
+    php artisan make:migration add_votes_to_users_table --table=users
 
     php artisan make:migration create_users_table --create=users
 
