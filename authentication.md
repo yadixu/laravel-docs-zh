@@ -288,7 +288,7 @@ Laravel 还包含了 `Auth\PasswordController` 其中包含重设用户密码的
 <a name="social-authentication"></a>
 ## 第三方登陆认证
 
-除了传统的以表单进行的认证，Laravel 还提供了简单、易用的方式，使用 [Laravel Socialite](https://github.com/laravel/socialite) 进行 OAuth 认证。**Socialite 目前支持的认证有 Facebook、 Twitter、Google、以及GitHub。** 
+除了传统的以表单进行的认证，Laravel 还提供了简单、易用的方式，使用 [Laravel Socialite](https://github.com/laravel/socialite) 进行 OAuth 认证。**Socialite 目前支持的认证有 Facebook、 Twitter、Google、以及GitHub 和 Bitbucket 。**
 
 如果要开始使用第三方认证，请将下面的代码加入到你的 `composer.json` 文件內：
 
