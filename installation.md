@@ -29,7 +29,7 @@ Laravel 框架使用 [Composer](http://getcomposer.org)来管理其相依性。�
 
 您一样可以通过 Composer 在命令行执行 `create-project` 来安装 laravel: 
 
-	composer create-project laravel/laravel --prefer-dist
+	composer create-project laravel/laravel {directory} --prefer-dist 4.2
 
 ### 通过下载
 
