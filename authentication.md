@@ -338,6 +338,7 @@ Laravel 还包含了 `Auth\PasswordController` 其中包含重设用户密码的
 	$tokenSecret = $user->tokenSecret;
 
 	// All Providers
+	$user->getId();
 	$user->getNickname();
 	$user->getName();
 	$user->getEmail();
