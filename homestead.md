@@ -35,6 +35,7 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 - Beanstalkd
 - [Laravel Envoy](/docs/ssh#envoy-task-runner)
 - Fabric + HipChat Extension
+- [Blackfire Profiler](#blackfire-profiler)
 
 <a name="installation-and-setup"></a>
 ## 安装与配置
