@@ -1209,7 +1209,7 @@ Eloquent 提供了一种便利的方法，可以在获取或设定属性时进�
 		'is_admin' => 'boolean',
 	];
 
-现在当你获取 `is_admin` 属性时始终会是布尔类型，甚至在数据库中存储的这个值是一个整型也会被转换。其他支持的类型转换值有： `integer`, `real`, `float`, `double`, `string`, `boolean`, 和 `array` 。
+现在当你获取 `is_admin` 属性时始终会是布尔类型，甚至在数据库中存储的这个值是一个整型也会被转换。其他支持的类型转换值有： `integer`, `real`, `float`, `double`, `string`, `boolean`, `object` 和 `array` 。
 
 如果您存储的值是一个序列化的 JSON 时，那么 `array` 类型转换将会非常有用。比如，您的数据表里有一个 TEXT 类型的字段存储着序列化后的 JSON 数据， 通过增加 `array` 类型转换, 当获取这个属性的时候会自动反序列化成 PHP 的数组：
 
