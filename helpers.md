@@ -244,6 +244,11 @@
 
 	delete('foo/bar', 'FooController@action');
 
+### resource
+
+注册一个 RESTful 的资源路由。
+
+	resource('foo', 'FooController');
 
 <a name="strings"></a>
 ## 字串
