@@ -33,7 +33,7 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 - Redis
 - Memcached
 - Beanstalkd
-- [Laravel Envoy](/docs/ssh#envoy-task-runner)
+- [Laravel Envoy](/docs/5.0/envoy)
 - Fabric + HipChat Extension
 - [Blackfire Profiler](#blackfire-profiler)
 
