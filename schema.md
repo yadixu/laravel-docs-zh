@@ -127,7 +127,7 @@ Laravel 的结构生成器 (`Schema`) 提供一个与数据库无关的数据表
 		$table->renameColumn('from', 'to');
 	});
 
-> **注意:** 前暂时还不支持修改表中的结构为 `enum` 字段类型。
+> **注意:** 目前暂时还不支持修改表中的结构为 `enum` 字段类型。
 
 <a name="dropping-columns"></a>
 ## 移除字段
