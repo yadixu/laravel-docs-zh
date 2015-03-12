@@ -40,13 +40,17 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 <a name="installation-and-setup"></a>
 ## 安装与配置
 
-### 安装 VirtualBox 与 Vagrant
+### 安装 VirtualBox / VMWare 与 Vagrant
 
 在启动你的 Homestead 环境之前，你必须先安装 [VirtualBox](https://www.virtualbox.org/wiki/Downloads) 和 [Vagrant](http://www.vagrantup.com/downloads.html). 两套软件在各平台都有提供易用的可视化安装程序。
 
+#### VMware
+
+除了 VirtualBox 之外, Homestead 也支持 VMware. 如果使用 VMware 作为 provider, 你需要购买 VMware Fusion / Desktop 以及 [VMware Vagrant plug-in](http://www.vagrantup.com/vmware). VMware 提供了更快、性能更好的共享文件夹。
+
 ### 增加 Vagrant 封装包
 
-当 VirtualBox 和 Vagrant 安装完成后，你可以在终端机以下列命令将 'laravel/homestead' 封装包安装进你的 Vagrant 安装程序中。下载封装包会花你一点时间，时间长短将依据你的网络速度决定:
+当 VirtualBox / VMware 和 Vagrant 安装完成后，你可以在终端机以下列命令将 'laravel/homestead' 封装包安装进你的 Vagrant 安装程序中。下载封装包会花你一点时间，时间长短将依据你的网络速度决定:
 
 	vagrant box add laravel/homestead
 
@@ -58,7 +62,7 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 
 #### 手动通过 Git 安装（本地端没有 PHP）
 
-如果你不希望在你的本机上安装 PHP ，你可以简单地透过手动复制资源库的方式来安装 Homestead。建议可将资源库复制至你的 "home" 目录中的 `Homestead` 文件夹，如此一来 Homestead 封装包将能提供主机服务给你所有的 Laravel（及 PHP）应用:
+如果你不希望在你的本机上安装 PHP ，你可以简单地通过手动复制资源库的方式来安装 Homestead。将资源库复制至你的 "home" 目录中的 `Homestead` 文件夹，如此一来 Homestead 封装包将能提供主机服务给你所有的 Laravel（及 PHP）应用:
 
 	git clone https://github.com/laravel/homestead.git Homestead
 
@@ -70,7 +74,7 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 
 #### 通过 Composer + PHP 工具
 
-一旦封装包已经安装进你的 Vagrant 安装程序，你就可以准备透过 Composer `global` 命令来安装 Homestead CLI 工具：
+一旦封装包已经安装进你的 Vagrant 安装程序，你就可以准备通过 Composer `global` 命令来安装 Homestead CLI 工具：
 
 	composer global require "laravel/homestead=~2.0"
 
@@ -83,6 +87,12 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 此 `Homestead.yaml` 将会被放置在你的 `~/.homestead` 文件夹中。如果你是使用 Mac 或 Linux，你可以直接在终端机执行 `homestead edit` 命令来编辑 `Homestead.yaml` :
 
 	homestead edit
+
+### 配置你的 Provider
+
+在 `Homestead.yaml` 文件中的 `provider` 键表明需要使用的 Vagrant prodiver：`virtualbox` 或者 `vmware_fusion` ，你可以根据自己的喜好设定 provider 。
+
+	provider: virtualbox
 
 ### 配置你的 SSH 密钥
 
@@ -98,7 +108,7 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 
 ### 配置你的共享文件夹
 
-`Homestead.yaml` 文件中的 `folders` 属性列出了所有你想跟 Homestead 环境共享的文件夹列表。这些文件夹中的文件若有更动，他们将会同步在你的本机与 Homestead 环境里。你可以将你需要的共享文件夹都配置进去。
+`Homestead.yaml` 文件中的 `folders` 属性列出了所有你想在 Homestead 环境共享的文件夹列表。这些文件夹中的文件若有变动，他们将会同步在你的本机与 Homestead 环境里。你可以将你需要的共享文件夹都配置进去。
 
 如果要开启 [NFS](http://docs.vagrantup.com/v2/synced-folders/nfs.html)，只需要在 `folders` 中加入一个标识：
 
@@ -120,7 +130,7 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 
 ### Bash Aliases
 
-如果要增加 Bash aliases 到你的 Homestead 封装包中，只要将内容加到 `~/.homestead` 目录最上层的 `aliases` 文件中即可。
+如果要增加 Bash aliases 到你的 Homestead 封装包中，只要将内容添加到 `~/.homestead` 目录最上层的 `aliases` 文件中即可。
 
 ### 启动 Vagrant 封装包
 
@@ -128,11 +138,11 @@ Homestead 目前是构建且测试于 Vagrant 1.6 版本。
 
 Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx 站点。如果要移除虚拟机，可以使用 `vagrant destroy --force` 命令。
 
-为了你的 Nginx 站点，别忘记在你的机器的 `hosts` 文件将「域名」加进去。`hosts` 文件会将你的本地域名的站点请求重导至你的 Homestead 环境中。在 Mac 和 Linux，该文件放在 `/etc/hosts`。在 Windows 环境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。你要加进去的内容类似如下：
+为了你的 Nginx 站点，别忘记在你的机器的 `hosts` 文件将「域名」加进去。`hosts` 文件会将你的本地域名的站点请求指向你的 Homestead 环境中。在 Mac 和 Linux，该文件放在 `/etc/hosts`。在 Windows 环境中，它被放置在 `C:\Windows\System32\drivers\etc\hosts`。你要加进去的内容类似如下：
 
 	192.168.10.10  homestead.app
 
-务必确认 IP 位置与你的 `Homestead.yaml` 文件中的相同。一旦你将域名加进你的 `hosts` 文件中，你就可以通过网页浏览器 访问到你的站点。
+务必确认 IP 地址与你的 `Homestead.yaml` 文件中的相同。一旦你将域名加进你的 `hosts` 文件中，你就可以通过网页浏览器访问到你的站点。
 
 	http://homestead.app
 
@@ -145,7 +155,7 @@ Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx �
 
 要通过 SSH 连接上您的 Homestead 环境，在终端机里进入你的 Homestead 目录并执行  `vagrant ssh` 命令。
 
-因为你可能会经常需要透过 SSH 进入你的 Homestead 虚拟机，可以考虑在你的主要机器上创建一个"别名":
+因为你可能会经常需要通过 SSH 进入你的 Homestead 虚拟机，可以考虑在你的主要机器上创建一个"别名":
 
 	alias vm="ssh vagrant@127.0.0.1 -p 2222"
 
@@ -153,15 +163,15 @@ Vagrant 会将虚拟机开机，并且自动配置你的共享目录和 Nginx �
 
 ### 连接数据库
 
-在 `Homestead` 封装包中，MySQL 与 Postgres 两套数据库都已经预装。为了更简便，Laravel 的 `local` 数据库配置已经默认将其配置完成。
+在 `Homestead` 封装包中，已经预了 MySQL 与 Postgres 两种数据库。为了更简便，Laravel 的 `local` 数据库配置已经默认将其配置完成。
 
-如果想要从本机上通过 Navicat 或者是 Sequel Pro 连接 MySQL 或者 Postgres 数据库，你可以连接 `127.0.0.1` 的端口 33060 (MySQL) 或 54320 (Postgres)。而帐号密码分别是 `homestead` / `secret`。
+如果想要从本机上通过 Navicat 或者 Sequel Pro 连接 MySQL 或者 Postgres 数据库，你可以连接 `127.0.0.1` 的端口 33060 (MySQL) 或 54320 (Postgres)。而帐号密码分别是 `homestead` / `secret`。
 
 > **附注：** 从本机端你应该只能使用这些非标准的连接端口来连接数据库。因为当 Laravel 运行在虚拟机时，在 Laravel 的数据库配置文件中依然是配置使用默认的 3306 及 5432 连接端口。
 
 ### 增加更多的站点
 
-一旦 Homestead 环境上架且运行后，你可能会需要为 Laravel 应用程序增加更多的 Nginx 站点。你可以在单一个 Homestead 环境中运行非常多 Laravel 安装程序。有两种方式可以达成：第一种，在 `Homestead.yaml` 文件中增加站点然后执行 `homestead provision` 或者 `vagrant provision`。
+在 Homestead 环境上架且运行后，你可能会需要为 Laravel 应用程序增加更多的 Nginx 站点。你可以在单一个 Homestead 环境中运行非常多 Laravel 安装程序。有两种方式可以达成：第一种，在 `Homestead.yaml` 文件中增加站点然后执行 `homestead provision` 或者 `vagrant provision`。
 
 另外，也可以使用存放在 Homestead 环境中的 `serve` 命令文件。要使用 `serve` 命令文件，请先 SSH 进入 Homestead 环境中，并执行下列命令：
 
@@ -201,4 +211,4 @@ blackfire 所需的包已经安装在 Homestead box 中，你只需要在 `Homes
 	    - id: your-id
 	      token: your-token
 
-当你设定完 Blackfire 的凭证信息，使用 `homestead provision` 或者 `vagrant provision` 来使配置生效。当然，你也需要通过阅读[Blackfire 文档](https://blackfire.io/getting-started) 来学习如何在你的浏览器中安装 Blackfire 扩展。
+当你设定完 Blackfire 的凭证信息，使用 `homestead provision` 或者 `vagrant provision` 令配置生效。当然，你也需要通过阅读[Blackfire 文档](https://blackfire.io/getting-started) 来学习如何在你的浏览器中安装 Blackfire 扩展。
