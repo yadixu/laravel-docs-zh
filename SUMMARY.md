@@ -1,7 +1,5 @@
 # Summary
 
-这是 Laravel5 文档的离线pdf版本,最后更新2015年3月12日.  
-本文档由phphub社区网友合作翻译,最新版本可以访问[github仓库](https://github.com/laravel-china/docs)查看,你也可在 [laravel-china.org](http://laravel*china.org) 查看在线文档.
 
 * [前言](source/releases.md)
     * [发行说明](source/releases.md)
