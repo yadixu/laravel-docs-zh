@@ -1,14 +1,14 @@
 #Laravel5 中文文档
 
-##关于离线手册
-这是 `Laravel5` 中文文档的离线版本，提供pdf、epub、mobi版本电子书下载，最后更新于2015年3月12日。
-本文档由phphub社区网友合作翻译，由 `gantoday` 制作成离线电子书以方便网友在各种设备阅读。
-你可以 `star` 这个仓库以获得最新版本的离线电子书，我会时常同步`laravel-china`更新。
-你也可在 [laravel-china.org](http://laravel-china.org) 查看在线文档。
+##关于离线手册  
+这是 `Laravel5` 中文文档的离线版本，提供pdf、epub、mobi版本电子书下载，最后更新于2015年3月12日。  
+本文档由phphub社区网友合作翻译，由 `gantoday` 制作成离线电子书以方便网友在各种设备阅读。  
+你可以 `star` 这个仓库以获得最新版本的离线电子书，我会时常同步`laravel-china`更新。  
+你也可在 [laravel-china.org](http://laravel-china.org) 查看在线文档。  
 
-另外推荐两个学习 laravel 的社区：
-https://phphub.org
-http://wenda.golaravel.com
+另外推荐两个学习 laravel 的社区：  
+https://phphub.org  
+http://wenda.golaravel.com  
 
 ##概述
 这是 Laravel5 文档的中文仓库，由 `laravel-china` 发起并维护这个项目。  
